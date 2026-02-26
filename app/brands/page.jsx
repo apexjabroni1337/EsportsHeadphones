@@ -7,6 +7,8 @@ import {
 } from "@/components/ssr";
 import { brandMarketShare } from "@/data";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Gaming Headphone Brands — Market Analysis",
   description:

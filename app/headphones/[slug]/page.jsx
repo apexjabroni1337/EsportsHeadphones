@@ -7,6 +7,8 @@ import {
 } from "@/components/ssr";
 import { headphones } from "@/data";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return headphones.map((headphone) => ({
     slug: headphone.slug,

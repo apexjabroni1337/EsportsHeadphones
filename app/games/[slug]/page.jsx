@@ -7,15 +7,17 @@ import {
 } from "@/components/ssr";
 import { gameBreakdown } from "@/data";
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return gameBreakdown.map((game) => ({
-    slug: game.slug || game.game.toLowerCase().replace(/\s+/g, "-"),
+    slug: game.slug || (game.name || game.game || "").toLowerCase().replace(/\s+/g, "-"),
   }));
 }
 
 export async function generateMetadata({ params }) {
   const game = gameBreakdown.find(
-    (g) => (g.slug || g.game.toLowerCase().replace(/\s+/g, "-")) === params.slug
+    (g) => (g.slug || (g.name || g.game || "").toLowerCase().replace(/\s+/g, "-")) === params.slug
   );
 
   if (!game) {
@@ -25,27 +27,29 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const gameName = game.name || game.game || "Unknown";
+
   return {
-    title: `${game.game} Gaming Headphones & Equipment`,
-    description: `Discover the gaming headphones and equipment used by professional ${game.game} esports players.`,
-    keywords: `${game.game}, esports headphones, gaming audio, ${game.game} equipment, competitive gaming`,
+    title: `${gameName} Gaming Headphones & Equipment`,
+    description: `Discover the gaming headphones and equipment used by professional ${gameName} esports players.`,
+    keywords: `${gameName}, esports headphones, gaming audio, ${gameName} equipment, competitive gaming`,
     openGraph: {
-      title: `${game.game} Gaming Equipment`,
-      description: `Professional gaming headphones used in ${game.game}.`,
+      title: `${gameName} Gaming Equipment`,
+      description: `Professional gaming headphones used in ${gameName}.`,
       url: `https://esportsheadphones.com/games/${params.slug}`,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${game.game} Gaming Equipment`,
-      description: `Headphones and gear for competitive ${game.game}.`,
+      title: `${gameName} Gaming Equipment`,
+      description: `Headphones and gear for competitive ${gameName}.`,
     },
   };
 }
 
 export default function GameDetailPage({ params }) {
   const game = gameBreakdown.find(
-    (g) => (g.slug || g.game.toLowerCase().replace(/\s+/g, "-")) === params.slug
+    (g) => (g.slug || (g.name || g.game || "").toLowerCase().replace(/\s+/g, "-")) === params.slug
   );
 
   if (!game) {
@@ -59,21 +63,23 @@ export default function GameDetailPage({ params }) {
     );
   }
 
+  const gameName = game.name || game.game || "Unknown";
+
   return (
     <>
       <SSRSection>
-        <SSRTitle accent="cyan">{game.game}</SSRTitle>
+        <SSRTitle accent="cyan">{gameName}</SSRTitle>
         <SSRSub>
-          Professional gaming headphones used in competitive {game.game} esports.
+          Professional gaming headphones used in competitive {gameName} esports.
           Explore equipment trends and player preferences.
         </SSRSub>
         <SSRDivider />
       </SSRSection>
 
       <article className="hidden" itemScope itemType="https://schema.org/VideoGame">
-        <h1 itemProp="name">{game.game}</h1>
+        <h1 itemProp="name">{gameName}</h1>
         <p itemProp="description">
-          Gaming equipment and headphone preferences for competitive {game.game} esports players.
+          Gaming equipment and headphone preferences for competitive {gameName} esports players.
           Professional headphones, audio gear, and equipment analysis.
         </p>
       </article>

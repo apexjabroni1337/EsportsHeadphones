@@ -6,6 +6,8 @@ import {
   SSRDivider,
 } from "@/components/ssr";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Esports Teams Equipment Database",
   description:

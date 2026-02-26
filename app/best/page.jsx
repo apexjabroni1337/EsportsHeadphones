@@ -6,6 +6,8 @@ import {
   SSRDivider,
 } from "@/components/ssr";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Best Pro Gaming Headphones — Professional Recommendations",
   description:

@@ -96,7 +96,7 @@ export default function sitemap() {
 
   // Dynamic game routes
   const gameRoutes = gameBreakdown.map((game) => ({
-    url: `${baseUrl}/games/${game.slug || game.game.toLowerCase().replace(/\s+/g, "-")}`,
+    url: `${baseUrl}/games/${game.slug || (game.name || game.game || "").toLowerCase().replace(/\s+/g, "-")}`,
     lastModified,
     changeFrequency: "weekly",
     priority: 0.7,

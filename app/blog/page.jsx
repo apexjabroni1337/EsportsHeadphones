@@ -6,6 +6,8 @@ import {
 } from "@/components/ssr";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "EsportsHeadphones Blog",
   description:

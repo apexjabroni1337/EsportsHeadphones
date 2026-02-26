@@ -1,3 +1,4 @@
+"use client";
 /**
  * Server-Side Rendered Components for EsportsHeadphones
  * Dark cyberpunk theme with cyan, purple, and navy palette

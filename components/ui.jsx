@@ -39,7 +39,7 @@ export const StatBox = ({ label, value, color = 'cyan', icon }) => {
   return (
     <div
       className={`
-        relative bg-gradient-to-br from-slate-900/40 to-slate-950/40
+        relative bg-gradient-to-br from-slate-800/80 to-slate-900/90
         border ${border} border-opacity-30 rounded-lg p-6
         backdrop-blur-md hover:border-opacity-60 transition-all duration-300
         hover:shadow-lg ${shadow} cursor-default group
@@ -51,7 +51,7 @@ export const StatBox = ({ label, value, color = 'cyan', icon }) => {
       {/* Icon */}
       {icon && (
         <div className={`text-3xl mb-4 ${text} group-hover:scale-110 transition-transform duration-300`}>
-          {icon}
+          {React.createElement(icon, { size: 32 })}
         </div>
       )}
 
@@ -111,7 +111,7 @@ export const HeadphoneCard = ({ headphone }) => {
 
       <div
         className={`
-          relative bg-gradient-to-br from-slate-900/60 to-slate-950/60
+          relative bg-gradient-to-br from-slate-800/80 to-slate-900/90
           border border-cyan-500/20 rounded-lg p-6
           backdrop-blur-md h-full flex flex-col
           group-hover:border-cyan-500/60 transition-all duration-300

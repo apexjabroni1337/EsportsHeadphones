@@ -7,6 +7,8 @@ import {
 } from "@/components/ssr";
 import { gameBreakdown } from "@/data";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Esports Games Equipment Database",
   description:

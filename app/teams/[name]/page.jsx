@@ -1,5 +1,7 @@
 import EsportsHeadphones from "@/components/ClientApp";
 import {
+
+export const dynamic = "force-dynamic";
   SSRSection,
   SSRTitle,
   SSRSub,

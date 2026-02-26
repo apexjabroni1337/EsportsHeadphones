@@ -1,4 +1,3 @@
-import Link from "next/link";
 import EsportsHeadphones from "@/components/ClientApp";
 import {
   SSRSection,
@@ -10,6 +9,8 @@ import {
   SSRDivider,
 } from "@/components/ssr";
 import { headphones, proPlayers, gameBreakdown, brandMarketShare } from "@/data";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "EsportsHeadphones — The Definitive Guide to Pro Gaming Audio",
@@ -41,7 +42,7 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
-      <SSRSection>
+      <SSRSection className="hidden">
         <SSRTitle accent="cyan">
           EsportsHeadphones
           <span className="text-cyan-400">.</span>

@@ -214,7 +214,7 @@ function OverviewTab() {
       {/* Brand Market Share and Wireless Trend */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Brand Market Share */}
-        <div className="bg-gradient-to-br from-cyan-900/10 to-purple-900/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
+        <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Building2 className="w-5 h-5 text-purple-400" />
             <GlowText text="Brand Market Share" />
@@ -241,7 +241,7 @@ function OverviewTab() {
         </div>
 
         {/* Wireless Adoption Trend */}
-        <div className="bg-gradient-to-br from-pink-900/10 to-cyan-900/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
+        <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Wifi className="w-5 h-5 text-pink-400" />
             <GlowText text="Wireless Adoption" />
@@ -324,7 +324,7 @@ function HeadphonesTab({ onSelectHeadphone }) {
   return (
     <div className="space-y-6">
       {/* Search and Filters */}
-      <div className="bg-gradient-to-br from-cyan-900/10 to-purple-900/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
+      <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
           <Search className="w-5 h-5 text-cyan-400" />
           <GlowText text="Find Your Headphones" />
@@ -446,7 +446,7 @@ function PlayersTab() {
   return (
     <div className="space-y-6">
       {/* Filters */}
-      <div className="bg-gradient-to-br from-cyan-900/10 to-purple-900/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
+      <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
           <Users className="w-5 h-5 text-cyan-400" />
           <GlowText text="Pro Players Database" />
@@ -614,7 +614,7 @@ function BrandsTab() {
   return (
     <div className="space-y-6">
       {/* Brand Market Share Chart */}
-      <div className="bg-gradient-to-br from-cyan-900/10 to-purple-900/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
+      <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
           <Building2 className="w-5 h-5 text-cyan-400" />
           <GlowText text="Brand Market Share" />
@@ -793,7 +793,7 @@ function CompareTab() {
   return (
     <div className="space-y-6">
       {/* Selection Section */}
-      <div className="bg-gradient-to-br from-cyan-900/10 to-purple-900/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
+      <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
           <GitCompare className="w-5 h-5 text-cyan-400" />
           <GlowText text="Select Headphones to Compare" />
@@ -1091,7 +1091,7 @@ function HeadphoneDetailTab({ headphoneSlug }) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-br from-cyan-900/10 to-purple-900/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-8">
+      <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Image */}
           <div className="md:w-1/3">
@@ -1163,7 +1163,7 @@ function HeadphoneDetailTab({ headphoneSlug }) {
 
       {/* Pro Players Using */}
       {proUsers.length > 0 && (
-        <div className="bg-gradient-to-br from-pink-900/10 to-cyan-900/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
+        <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Trophy className="w-5 h-5 text-yellow-400" />
             <GlowText text="Pro Players Using This Headphone" />

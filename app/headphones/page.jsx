@@ -7,6 +7,8 @@ import {
 } from "@/components/ssr";
 import { headphones } from "@/data";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "All Pro Esports Headphones — Complete Database",
   description:

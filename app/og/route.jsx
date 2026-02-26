@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
 import { headphones } from "@/data";
 
+export const dynamic = "force-dynamic";
+
 export const runtime = "nodejs";
 export const revalidate = 86400; // 24 hours
 

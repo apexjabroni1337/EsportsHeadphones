@@ -2925,7 +2925,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="flex-1 w-full">
                     <div className="text-sm uppercase tracking-widest opacity-30 mb-1">{p.role} · {p.team}</div>
                     <h2 className="text-2xl sm:text-4xl font-black mb-1" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: gc }}>{p.name}</h2>
-                    <div className="text-sm sm:text-sm opacity-50 mb-2 sm:mb-3">{p.fullName} · Age {p.age}</div>
+                    <div className="text-sm sm:text-sm opacity-50 mb-2 sm:mb-3">{p.fullName || p.name} · {p.age ? `Age ${p.age}` : p.game}</div>
                     <p className="text-sm sm:text-sm opacity-50 leading-relaxed max-w-2xl">{(() => {
                       const headphoneName = p.headphone;
                       const desc = `${p.fullName || p.name} is a professional ${p.game} ${p.role || "player"} for ${p.team}, currently using the `;
@@ -2966,7 +2966,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 <div className="rounded-2xl p-6" style={{ background: "#141824", border: "1px solid #2a3040" }}>
                   <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#8890a0" }}><span className="inline-flex mr-1.5 align-middle">{I.trophy(14)}</span>Top Achievements</div>
                   <div className="space-y-2">
-                    {p.achievements.map((a, i) => (
+                    {(p.achievements || []).map((a, i) => (
                       <div key={i} className="flex items-start gap-3 p-4 rounded-xl border-l-4" style={{ background: i < 3 ? `${gc}08` : "#1a1f2e", borderLeftColor: "#00d4ff", border: `1px solid ${i < 3 ? `${gc}15` : "#2a3040"}`, borderLeftWidth: "4px" }}>
                         <span className="text-sm mt-0.5 flex-shrink-0">{i === 0 ? I.medal("#fbbf24", 18) : i === 1 ? I.medal("#94a3b8", 18) : i === 2 ? I.medal("#cd7f32", 18) : "▸"}</span>
                         <span className="text-sm" style={{ color: i < 3 ? gc : "#3d3530" }}>{a}</span>
@@ -3018,7 +3018,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="rounded-2xl p-6" style={{ background: "#141824", border: "1px solid #2a3040" }}>
                     <div className="text-sm uppercase tracking-widest opacity-30 mb-4"><span className="inline-flex mr-1.5 align-middle">{I.refresh(14)}</span>Headphone History</div>
                     <div className="space-y-2">
-                      {p.headphoneHistory.map((mh, i) => {
+                      {(p.headphoneHistory || []).map((mh, i) => {
                         const histHeadphone = headphones.find(m => m.name === mh.headphone);
                         const hCol = histHeadphone ? BRAND_COLORS[histHeadphone.brand] : "#8a8078";
                         const isActive = i === 0;

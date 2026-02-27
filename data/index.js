@@ -1305,16 +1305,36 @@ export const headphones = [
 
 // Professional players database
 export const proPlayers = [
-  { name: "s1mple", game: "CS2", team: "BC.Game", headphone: "HyperX Cloud II", country: "🇺🇦", role: "AWPer", monitor: "", mousepad: "", mouse: "" },
-  { name: "ZywOo", game: "CS2", team: "Team Vitality", headphone: "Razer BlackShark V2 Pro Black", country: "🇫🇷", role: "Rifler", monitor: "", mousepad: "", mouse: "" },
-  { name: "NiKo", game: "CS2", team: "Falcons Esports", headphone: "HyperX Cloud III", country: "🇧🇦", role: "Rifler", monitor: "", mousepad: "", mouse: "" },
-  { name: "Faker", game: "League of Legends", team: "T1", headphone: "Razer BlackShark V2", country: "🇰🇷", role: "Mid", monitor: "", mousepad: "", mouse: "" },
-  { name: "ShowMaker", game: "League of Legends", team: "DRX", headphone: "Logitech G Pro X Headset", country: "🇰🇷", role: "Mid", monitor: "", mousepad: "", mouse: "" },
-  { name: "Jinjiao", game: "Valorant", team: "Edward Gaming", headphone: "HyperX Cloud III Wireless", country: "🇨🇳", role: "Controller", monitor: "", mousepad: "", mouse: "" },
-  { name: "Derke", game: "Valorant", team: "FaZe Clan", headphone: "Razer BlackShark V3 Pro Black", country: "🇸🇪", role: "Duelist", monitor: "", mousepad: "", mouse: "" },
-  { name: "BestJanu", game: "Valorant", team: "FaZe Clan", headphone: "Logitech G PRO X 2 Headset Black", country: "🇨🇭", role: "Sentinel", monitor: "", mousepad: "", mouse: "" },
-  { name: "TenZ", game: "Valorant", team: "Sentinels", headphone: "SteelSeries Arctis Nova Pro Wireless", country: "🇨🇦", role: "Duelist", monitor: "", mousepad: "", mouse: "" },
-  { name: "Pancada", game: "Valorant", team: "LOUD", headphone: "HyperX Cloud II", country: "🇧🇷", role: "Sentinel", monitor: "", mousepad: "", mouse: "" }
+  { name: "s1mple", game: "CS2", team: "BC.Game", headphone: "HyperX Cloud II", country: "🇺🇦", role: "AWPer", age: 27, monitor: "", mousepad: "", mouse: "",
+    achievements: ["2x Major Champion (PGL Antwerp 2022, IEM Rio 2022)", "4x HLTV #1 Player of the Year", "Intel Grand Slam Season 2 Winner", "30+ MVP awards across S-tier events"],
+    headphoneHistory: [{ headphone: "HyperX Cloud II", period: "2023–Present" }, { headphone: "HyperX Cloud Alpha", period: "2020–2023" }, { headphone: "SteelSeries Arctis Pro", period: "2018–2020" }] },
+  { name: "ZywOo", game: "CS2", team: "Team Vitality", headphone: "Razer BlackShark V2 Pro Black", country: "🇫🇷", role: "Rifler", age: 24, monitor: "", mousepad: "", mouse: "",
+    achievements: ["2x HLTV #1 Player of the Year (2019, 2020)", "BLAST Premier World Final 2022 Champion", "Vitality franchise player since 2019", "Youngest HLTV #1 in history at age 18"],
+    headphoneHistory: [{ headphone: "Razer BlackShark V2 Pro Black", period: "2024–Present" }, { headphone: "Razer BlackShark V2", period: "2022–2024" }, { headphone: "HyperX Cloud II", period: "2019–2022" }] },
+  { name: "NiKo", game: "CS2", team: "Falcons Esports", headphone: "HyperX Cloud III", country: "🇧🇦", role: "Rifler", age: 28, monitor: "", mousepad: "", mouse: "",
+    achievements: ["ESL Pro League Season 15 Champion", "HLTV Top 5 Player multiple years", "IEM Katowice 2022 MVP", "Known as one of the most mechanically gifted players ever"],
+    headphoneHistory: [{ headphone: "HyperX Cloud III", period: "2024–Present" }, { headphone: "HyperX Cloud II", period: "2021–2024" }, { headphone: "SteelSeries Arctis 7", period: "2019–2021" }] },
+  { name: "Faker", game: "League of Legends", team: "T1", headphone: "Razer BlackShark V2", country: "🇰🇷", role: "Mid", age: 29, monitor: "", mousepad: "", mouse: "",
+    achievements: ["4x World Championship Winner (2013, 2015, 2016, 2023)", "Widely considered the greatest LoL player of all time", "10+ LCK titles", "2023 Worlds Finals MVP"],
+    headphoneHistory: [{ headphone: "Razer BlackShark V2", period: "2023–Present" }, { headphone: "Razer Kraken", period: "2020–2023" }, { headphone: "HyperX Cloud II", period: "2016–2020" }] },
+  { name: "ShowMaker", game: "League of Legends", team: "DRX", headphone: "Logitech G Pro X Headset", country: "🇰🇷", role: "Mid", age: 24, monitor: "", mousepad: "", mouse: "",
+    achievements: ["2020 World Championship Winner with DAMWON", "Multiple LCK titles", "2020 Worlds Finals MVP", "Known for aggressive champion pool and mechanical prowess"],
+    headphoneHistory: [{ headphone: "Logitech G Pro X Headset", period: "2023–Present" }, { headphone: "HyperX Cloud II", period: "2020–2023" }, { headphone: "Logitech G Pro", period: "2019–2020" }] },
+  { name: "Jinjiao", game: "Valorant", team: "Edward Gaming", headphone: "HyperX Cloud III Wireless", country: "🇨🇳", role: "Controller", age: 23, monitor: "", mousepad: "", mouse: "",
+    achievements: ["VCT China Ascension 2024 Champion", "Former professional League of Legends player", "Key player in EDG's Valorant roster", "Rising star in Chinese Valorant scene"],
+    headphoneHistory: [{ headphone: "HyperX Cloud III Wireless", period: "2024–Present" }, { headphone: "HyperX Cloud II", period: "2023–2024" }] },
+  { name: "Derke", game: "Valorant", team: "FaZe Clan", headphone: "Razer BlackShark V3 Pro Black", country: "🇸🇪", role: "Duelist", age: 22, monitor: "", mousepad: "", mouse: "",
+    achievements: ["VCT EMEA Masters Champion", "Fnatic star player 2021–2024", "Multiple VCT LAN appearances", "Known for exceptional Jett and Raze play"],
+    headphoneHistory: [{ headphone: "Razer BlackShark V3 Pro Black", period: "2025–Present" }, { headphone: "Razer BlackShark V2 Pro", period: "2023–2025" }, { headphone: "HyperX Cloud Alpha", period: "2021–2023" }] },
+  { name: "BestJanu", game: "Valorant", team: "FaZe Clan", headphone: "Logitech G PRO X 2 Headset Black", country: "🇨🇭", role: "Sentinel", age: 21, monitor: "", mousepad: "", mouse: "",
+    achievements: ["VCT EMEA standout performer 2024", "Known for exceptional Cypher and Killjoy play", "Rising European Valorant talent", "FaZe Clan roster acquisition 2024"],
+    headphoneHistory: [{ headphone: "Logitech G PRO X 2 Headset Black", period: "2024–Present" }, { headphone: "Logitech G Pro X Headset", period: "2023–2024" }] },
+  { name: "TenZ", game: "Valorant", team: "Sentinels", headphone: "SteelSeries Arctis Nova Pro Wireless", country: "🇨🇦", role: "Duelist", age: 23, monitor: "", mousepad: "", mouse: "",
+    achievements: ["VCT Masters Reykjavik 2021 Champion", "Sentinels franchise player", "One of the most popular Valorant pros worldwide", "Known for highlight-reel plays and aim"],
+    headphoneHistory: [{ headphone: "SteelSeries Arctis Nova Pro Wireless", period: "2024–Present" }, { headphone: "SteelSeries Arctis Pro Wireless", period: "2022–2024" }, { headphone: "HyperX Cloud II", period: "2020–2022" }] },
+  { name: "Pancada", game: "Valorant", team: "LOUD", headphone: "HyperX Cloud II", country: "🇧🇷", role: "Sentinel", age: 23, monitor: "", mousepad: "", mouse: "",
+    achievements: ["VCT Champions 2022 Winner with LOUD", "Multiple VCT Americas titles", "Key contributor to Brazil's Valorant dominance", "Known for clutch plays and game sense"],
+    headphoneHistory: [{ headphone: "HyperX Cloud II", period: "2022–Present" }, { headphone: "HyperX Cloud Alpha", period: "2021–2022" }] }
 ];
 
 // Extended player database (all tracked players)

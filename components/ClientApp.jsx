@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, LineChart, Line, CartesianGrid, Legend, AreaChart, Area } from "recharts";
 import { Home, Headphones, Trophy, Cpu, Users, Gamepad2, Building2, TrendingUp, GitCompare, Search, X, FlaskConical, Crosshair, Layers, Shield, ChevronDown } from "lucide-react";
-import { AMAZON_TAG, amazonLink, BRAND_COLORS, HEADPHONE_DIMS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, BRAND_IMAGE_URLS, GAME_IMAGE_URLS, GAME_DESCRIPTIONS, TEAM_DESCRIPTIONS, TEAM_LOGOS, I, icon, headphones, proPlayers, extendedPlayers, allPlayers, brandMarketShare, gameBreakdown, weightTrend, frequencyTrend, wirelessTrend, priceTrend, countryName } from "@/data";
+import { AMAZON_TAG, amazonLink, BRAND_COLORS, HEADPHONE_DIMS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, BRAND_IMAGE_URLS, GAME_IMAGE_URLS, GAME_DESCRIPTIONS, TEAM_DESCRIPTIONS, TEAM_LOGOS, I, icon, headphones, proPlayers, extendedPlayers, allPlayers, brandMarketShare, gameBreakdown, weightTrend, frequencyTrend, wirelessTrend, priceTrend, countryName, getHeadphoneImage } from "@/data";
 import { GlowText, StatBox, SectionTitle, HeadphoneCard, CustomTooltip, Flag } from "@/components/ui";
 
 const TOP250 = new Set(["s1mple","ZywOo","NiKo","donk","m0NESY","TenZ","Scump","shroud","ImperialHal","Puppey","Faker","aspas","device","coldzera","Bugha","Shotzzy","Chovy","ropz","Proper","Beaulo","yay","Simp","electronic","Crimsix","N0tail","Twistzz","Demon1","Showmaker","EliGE","FalleN","Caps","MrSavage","rain","Profit","ScreaM","Karma","Shaiiko","olofmeister","Keria","f0rest","GeT_RiGhT","Yatoro","aceu","Clix","cNed","sh1ro","Clayster","Dendi","Zeus","TGLTN","broky","Alfajer","Jjonak","Cellium","b1t","Genburten","TaySon","gla1ve","Gumayusi","Paluh","karrigan","Derke","aBeZy","Mongraal","dupreeh","Collapse","Spoit","SP9RK1E","Oner","arT","crashies","Peterbot","KuroKy","huNter","Ras","Viper","Dashy","Fleta","Boaster","EpikWhale","jstn","Xyp9x","Magisk","Pengu","ana","Leave","f0rsakeN","Ax1Le","Jeemzz","Albralelie","Brollan","Deft","Formal","shox","Jinggg","Topson","Shrimzy","Hardecki","Kaydop","Canadian","Jimpphat","Less","Jankos","Ceb","HusKerrs","aqua","CTZN","blameF","stax","Rekkles","Carpe","Pred","Kickstart","stavn","Nisha","Queasy","Dropped","Super","njr","MaKo","NAF","Ruler","fer","nAts","Kenny","iNSaNiA","Squishy","Khanada","hwinn","YEKINDAR","SpiriTz","Nesk","Stewie2K","Zekken","CoreJJ","iceiceice","nyhrox","Vadeal","HisWattson","kscerato","SlasheR","something","Gustav","Kevster","Frozen","Arcitys","dafran","GarrettG","BrokenBlade","flameZ","Sacy","Envoy","Chapix","supr","tabseN","cr1t-","Mande","Elyoya","Fexx","Perfecto","Shao","Fairy Peak","Noahreyli","Doki","Hydra","nitr0","abed","Knight","Reps","Chronicle","Pio","woxic","Attach","Bucke","Alem4o","XANTARES","leaf","miCKe","Bin","xQc","Selly","Insight","iLLeY","jawgemo","Andilex","Brehze","cameram4n","Hans Sama","Kinstaar","Skyz","mxey","KRIMZ","saadhak","emongg","Stompy","Cyber","autimatic","Crylix","Ninja","Malibuca","cadiaN","sinatraa","Suygetsu","Upset","Larssen","TimTheTatman","ibiza","Muz","Yuzus","Jame","Lou","bogur","ZmjjKK","hampus","luke12","Tfue","soulz1","BuZz","HooXi","Hiko","9impulse","Japko","jabbi","Asuna","Aleksib","aLOW","BriD","Viol2t","Subroza","benjyfishy","Necros","Seagull","lyr1c","Boombl4","pollofn","Solotov","lionkk","mezii","Spinx","t3xture","kyxsan","n0thing","mL7","Kenzo","WARDELL","Veno","Primmie","Bestoloch","ShahZaM","YukaF","rapha","vengeurR","toxjq","k1llsen","cYpheR","RAISY","Cooller","clawz","DaHanG","Av3k","serious","Xron","maxter"]);
@@ -1124,7 +1124,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {selectedHeadphone && (() => {
                   const brandCol = BRAND_COLORS[selectedHeadphone.brand];
-                  const imgUrl = HEADPHONE_IMAGE_URLS[selectedHeadphone.name];
+                  const imgUrl = getHeadphoneImage(selectedHeadphone.name);
                   return (
                   <>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -1372,7 +1372,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                         className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-all hover:scale-105 justify-between"
                                         style={{ background: `${cc}08`, border: `1px solid ${cc}15` }}>
                                         <div className="flex items-center gap-2">
-                                          {HEADPHONE_IMAGE_URLS[c.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[c.name]} alt={c.name} className="h-5 object-contain" />}
+                                          {getHeadphoneImage(c.name) && <img loading="lazy" src={getHeadphoneImage(c.name)} alt={c.name} className="h-5 object-contain" />}
                                           <span className="font-bold" style={{ color: cc }}>{c.name.replace(c.brand + " ", "")}</span>
                                         </div>
                                         <span className="opacity-60">{c.driverType}</span>
@@ -1494,7 +1494,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── HEADPHONE DETAIL PAGE ── */}
         {activeTab === "headphoneDetail" && selectedHeadphone && (() => {
           const brandCol = BRAND_COLORS[selectedHeadphone.brand];
-          const imgUrl = HEADPHONE_IMAGE_URLS[selectedHeadphone.name];
+          const imgUrl = getHeadphoneImage(selectedHeadphone.name);
           return (
           <div>
             {/* Breadcrumbs */}
@@ -1773,7 +1773,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                   className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-all hover:scale-105 justify-between"
                                   style={{ background: `${cc}08`, border: `1px solid ${cc}15` }}>
                                   <div className="flex items-center gap-2">
-                                    {HEADPHONE_IMAGE_URLS[c.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[c.name]} alt={c.name} className="h-5 object-contain" />}
+                                    {getHeadphoneImage(c.name) && <img loading="lazy" src={getHeadphoneImage(c.name)} alt={c.name} className="h-5 object-contain" />}
                                     <span className="font-bold" style={{ color: cc }}>{c.name.replace(c.brand + " ", "")}</span>
                                   </div>
                                   <span className="opacity-60">{c.driverType}</span>
@@ -1826,7 +1826,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       const bc = BRAND_COLORS[m.brand] || "#8a8078";
                       return (
                         <button key={i} onClick={() => navigateToHeadphone(m)} className="rounded-xl p-3 text-center transition-all hover:scale-[1.03]" style={{ background: `${bc}06`, border: `1px solid ${bc}12` }}>
-                          {HEADPHONE_IMAGE_URLS[m.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[m.name]} alt={m.name} className="h-10 mx-auto object-contain mb-2" />}
+                          {getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={m.name} className="h-10 mx-auto object-contain mb-2" />}
                           <div className="text-xs font-bold truncate" style={{ color: bc }}>{m.name.replace(m.brand + " ", "")}</div>
                           <div style={{ fontSize: 10 }} className="opacity-30">{m.weight}g · ${m.price}</div>
                         </button>
@@ -2023,7 +2023,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 </div>
                 {headphoneRanking[0] && (() => { const topM = headphones.find(mm => mm.name === headphoneRanking[0][0] || headphoneRanking[0][0].includes(mm.name)); return (
                   <a href={amazonLink(headphoneRanking[0][0])} target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#b8956a14", border: "1px solid #b8956a25", textDecoration: "none" }}>
-                    {HEADPHONE_IMAGE_URLS[headphoneRanking[0][0]] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[headphoneRanking[0][0]]} alt="" className="h-8 object-contain" />}
+                    {getHeadphoneImage(headphoneRanking[0][0]) && <img loading="lazy" src={getHeadphoneImage(headphoneRanking[0][0])} alt="" className="h-8 object-contain" />}
                     <div>
                       <div className="text-xs font-bold" style={{ color: "#b8956a" }}>#1 Headphone</div>
                       <div className="text-xs font-black" style={{ color: "#1a1614" }}>{headphoneRanking[0][0].replace(/(Wooting |Razer )/, "")}</div>
@@ -2175,7 +2175,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 const bc = BRAND_COLORS[bName] || "#8a8078";
                 return (
                   <a key={bi} href={amazonLink(topBM.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all hover:scale-105 no-underline" style={{ background: `${bc}08`, border: `1px solid ${bc}15`, textDecoration: "none" }}>
-                    {HEADPHONE_IMAGE_URLS[topBM.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[topBM.name]} alt={topBM.name} className="h-5 object-contain" />}
+                    {getHeadphoneImage(topBM.name) && <img loading="lazy" src={getHeadphoneImage(topBM.name)} alt={topBM.name} className="h-5 object-contain" />}
                     <div>
                       <div className="text-xs font-black" style={{ color: bc }}>{topBM.name.replace(/(Wooting |Razer )/, "")}</div>
                       <div style={{ fontSize: 10, color: "#a09890" }}>Top {bName} headphone in {gameName}</div>
@@ -2429,7 +2429,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     const pct = Math.round(count / totalPlayers * 100);
                     return (
                       <a key={mi} href={amazonLink(name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all hover:scale-105 no-underline" style={{ background: mi === 0 ? `${col}15` : "#0000000a", border: mi === 0 ? `1px solid ${col}30` : "1px solid #e8e4df", textDecoration: "none" }}>
-                        {HEADPHONE_IMAGE_URLS[name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[name]} alt={name} className="h-6 object-contain" />}
+                        {getHeadphoneImage(name) && <img loading="lazy" src={getHeadphoneImage(name)} alt={name} className="h-6 object-contain" />}
                         <div className="text-left">
                           <div className="text-xs font-black" style={{ color: mi === 0 ? col : "#1a1614" }}>{name.replace(/(Wooting |Razer )/, "")}</div>
                           <div style={{ fontSize: 10, color: "#a09890" }}>{pct}% of pros{m ? ` · ${m.weight}g` : ""}</div>
@@ -2664,7 +2664,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <tr key={`rank-${m.id}`} className="cursor-pointer transition-colors hover:bg-stone-50" onClick={() => { navigateToHeadphone(m); }}
                           style={{ borderBottom: "1px solid #00000008", background: i % 2 === 0 ? "#f5f0e8" : "#f5f2ee" }}>
                           <td className="px-4 py-3 font-black opacity-20">{i + 1}</td>
-                          <td className="px-4 py-3 font-bold" style={{ color: col }}>{HEADPHONE_IMAGE_URLS[m.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[m.name]} alt={`${m.name}`} className="inline h-5 mr-2 object-contain" />}{m.name}</td>
+                          <td className="px-4 py-3 font-bold" style={{ color: col }}>{getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={`${m.name}`} className="inline h-5 mr-2 object-contain" />}{m.name}</td>
                           <td className="px-4 py-3 opacity-50">{m.brand}</td>
                           <td className="px-4 py-3 font-bold">{m.weight}g</td>
                           <td className="px-4 py-3 opacity-50 text-sm">{m.driverType}</td>
@@ -2938,7 +2938,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     style={{ background: `linear-gradient(135deg, ${brandCol}12, ${brandCol}06)`, border: `1px solid ${brandCol}30` }}
                     onMouseEnter={e => { e.currentTarget.style.background = `linear-gradient(135deg, ${brandCol}25, ${brandCol}15)`; e.currentTarget.style.borderColor = `${brandCol}60`; }}
                     onMouseLeave={e => { e.currentTarget.style.background = `linear-gradient(135deg, ${brandCol}12, ${brandCol}06)`; e.currentTarget.style.borderColor = `${brandCol}30`; }}>
-                    {HEADPHONE_IMAGE_URLS[p.headphone] ? <img loading="lazy" src={HEADPHONE_IMAGE_URLS[p.headphone]} alt={`${p.headphone} gaming headphone`} className="h-8 w-8 object-contain flex-shrink-0" style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.06))" }} /> : <span>{I.headphone(20)}</span>}
+                    {getHeadphoneImage(p.headphone) ? <img loading="lazy" src={getHeadphoneImage(p.headphone)} alt={`${p.headphone} gaming headphone`} className="h-8 w-8 object-contain flex-shrink-0" style={{ filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.06))" }} /> : <span>{I.headphone(20)}</span>}
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-bold" style={{ color: brandCol }}>Play like {p.name}</div>
                       <div className="text-sm opacity-85 truncate">Get the {p.headphone} on Amazon</div>
@@ -2970,7 +2970,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="rounded-2xl p-6" style={{ background: `${brandCol}08`, border: `1px solid ${brandCol}20` }}>
                     <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#a09890" }}><span className="inline-flex mr-1.5 align-middle">{I.headphone(14)}</span>Current Headphone</div>
                     <div className="flex items-center gap-4 mb-4">
-                      {HEADPHONE_IMAGE_URLS[p.headphone] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[p.headphone]} alt={`${p.headphone} - headphone used by ${p.name} in ${p.game}`} className="h-14 w-14 object-contain object-center" style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.06))" }} />}
+                      {getHeadphoneImage(p.headphone) && <img loading="lazy" src={getHeadphoneImage(p.headphone)} alt={`${p.headphone} - headphone used by ${p.name} in ${p.game}`} className="h-14 w-14 object-contain object-center" style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.06))" }} />}
                       <div>
                         <div className="text-xl font-black" style={{ color: brandCol }}>{p.headphone}</div>
                         <div className="text-sm opacity-85">{currentHeadphoneData?.brand} · {currentHeadphoneData?.weight}g · {currentHeadphoneData?.formFactor} · {currentHeadphoneData?.connectivity}</div>
@@ -3275,7 +3275,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <td className="px-2 py-2.5 opacity-50 whitespace-nowrap text-sm">{p.team}</td>
                         <td className="px-2 py-2.5 whitespace-nowrap">
                           <div className="flex items-center gap-1.5">
-                            {headphoneMatch && HEADPHONE_IMAGE_URLS[headphoneMatch.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[headphoneMatch.name]} alt="" className="h-4 w-6 object-contain opacity-60 flex-shrink-0" />}
+                            {headphoneMatch && getHeadphoneImage(headphoneMatch.name) && <img loading="lazy" src={getHeadphoneImage(headphoneMatch.name)} alt="" className="h-4 w-6 object-contain opacity-60 flex-shrink-0" />}
                             <span className="text-sm truncate" style={{ color: brandCol, maxWidth: 140 }}>{p.headphone}</span>
                           </div>
                         </td>
@@ -3361,7 +3361,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             </div>
                           </div>
                           <div className="flex items-center gap-2 mb-2 px-2 py-1.5 rounded-lg" style={{ background: "#00000008" }}>
-                            {m && HEADPHONE_IMAGE_URLS[m.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[m.name]} alt="" className="h-5 w-8 object-contain opacity-70 flex-shrink-0" />}
+                            {m && getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt="" className="h-5 w-8 object-contain opacity-70 flex-shrink-0" />}
                             <span className="text-xs font-bold truncate" style={{ color: m ? (BRAND_COLORS[m.brand] || "#6b635b") : "#6b635b" }}>{p.headphone}</span>
                             {p.role && p.role !== "—" && <span className="text-xs opacity-20 ml-auto flex-shrink-0">{p.role}</span>}
                           </div>
@@ -3470,7 +3470,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             <a key={fi} href={kbd ? amazonLink(kbd.name) : "#"} target="_blank" rel="noopener noreferrer"
                               className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-bold transition-all hover:scale-105 no-underline"
                               style={{ background: `${col}08`, color: col, border: `1px solid ${col}15`, textDecoration: "none" }}>
-                              {HEADPHONE_IMAGE_URLS[f] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[f]} alt={f} className="h-4 w-5 object-contain" />}
+                              {getHeadphoneImage(f) && <img loading="lazy" src={getHeadphoneImage(f)} alt={f} className="h-4 w-5 object-contain" />}
                               {f.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer )/, "")}
                               {kbd && <span style={{ color: "#a09890" }}>${kbd.price}</span>}
                             </a>
@@ -4133,7 +4133,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <button key={mi} onClick={() => { navigateToHeadphone(m); }}
                         className="px-3 py-1.5 rounded-lg text-sm font-bold cursor-pointer transition-all hover:scale-105"
                         style={{ background: `${BRAND_COLORS[m.brand]}12`, border: `1px solid ${BRAND_COLORS[m.brand]}20`, color: BRAND_COLORS[m.brand] }}>
-                        {HEADPHONE_IMAGE_URLS[m.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[m.name]} alt={`${m.name}`} className="inline h-4 mr-1 object-contain" />} {m.name} <span className="opacity-85">({m.proUsage}%)</span>
+                        {getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={`${m.name}`} className="inline h-4 mr-1 object-contain" />} {m.name} <span className="opacity-85">({m.proUsage}%)</span>
                       </button>
                     ))}
                   </div>
@@ -4312,7 +4312,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         {s1.headphones.sort((a, b) => b.proUsage - a.proUsage).map((m, mi) => (
                           <button key={mi} onClick={() => { navigateToHeadphone(m); }}
                             className="px-2 py-1 rounded text-sm font-bold cursor-pointer transition-all hover:scale-105"
-                            style={{ background: `${c1}12`, color: c1 }}>{HEADPHONE_IMAGE_URLS[m.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[m.name]} alt={`${m.name}`} className="inline h-4 mr-1 object-contain" />} {m.name.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |HyperX |Keychron |Endgame Gear |Glorious |NuPhy |ASUS )/, "")}</button>
+                            style={{ background: `${c1}12`, color: c1 }}>{getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={`${m.name}`} className="inline h-4 mr-1 object-contain" />} {m.name.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |HyperX |Keychron |Endgame Gear |Glorious |NuPhy |ASUS )/, "")}</button>
                         ))}
                       </div>
                     </div>
@@ -4322,7 +4322,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         {s2.headphones.sort((a, b) => b.proUsage - a.proUsage).map((m, mi) => (
                           <button key={mi} onClick={() => { navigateToHeadphone(m); }}
                             className="px-2 py-1 rounded text-sm font-bold cursor-pointer transition-all hover:scale-105"
-                            style={{ background: `${c2}12`, color: c2 }}>{HEADPHONE_IMAGE_URLS[m.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[m.name]} alt={`${m.name}`} className="inline h-4 mr-1 object-contain" />} {m.name.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |HyperX |Keychron |Endgame Gear |Glorious |NuPhy |ASUS )/, "")}</button>
+                            style={{ background: `${c2}12`, color: c2 }}>{getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={`${m.name}`} className="inline h-4 mr-1 object-contain" />} {m.name.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |HyperX |Keychron |Endgame Gear |Glorious |NuPhy |ASUS )/, "")}</button>
                         ))}
                       </div>
                     </div>
@@ -4361,7 +4361,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   </select>
                   {compareList[idx] && (
                     <div className="rounded-2xl p-5 text-center" style={{ background: `${BRAND_COLORS[compareList[idx].brand]}08`, border: `1px solid ${BRAND_COLORS[compareList[idx].brand]}20` }}>
-                      {HEADPHONE_IMAGE_URLS[compareList[idx].name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[compareList[idx].name]} alt={compareList[idx].name} className="h-16 w-full mx-auto mb-3 object-contain object-center" style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.08))" }} />}
+                      {getHeadphoneImage(compareList[idx].name) && <img loading="lazy" src={getHeadphoneImage(compareList[idx].name)} alt={compareList[idx].name} className="h-16 w-full mx-auto mb-3 object-contain object-center" style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.08))" }} />}
                       <div className="text-xl font-black" style={{ color: BRAND_COLORS[compareList[idx].brand] }}>{compareList[idx].name}</div>
                       <div className="text-xs mt-1" style={{ color: "#a09890" }}>{compareList[idx].brand}</div>
                     </div>
@@ -4417,7 +4417,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <a href={amazonLink(winnerKbd.name)} target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center gap-3 px-6 py-3 rounded-xl text-sm font-black transition-all hover:scale-[1.03] no-underline"
                           style={{ background: winnerCol, color: "#f5f2ee", boxShadow: `0 0 20px ${winnerCol}30`, textDecoration: "none" }}>
-                          {HEADPHONE_IMAGE_URLS[winnerKbd.name] ? <img loading="lazy" src={HEADPHONE_IMAGE_URLS[winnerKbd.name]} alt={`${winnerKbd.name} gaming headphone`} className="h-6 object-contain" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.05))" }} /> : null}
+                          {getHeadphoneImage(winnerKbd.name) ? <img loading="lazy" src={getHeadphoneImage(winnerKbd.name)} alt={`${winnerKbd.name} gaming headphone`} className="h-6 object-contain" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.05))" }} /> : null}
                           {I.cart(14, "#fff")} 🏆 Get the Winner — {winnerKbd.name.split(" ").slice(-3).join(" ")} {"$"}{winnerKbd.price}
                         </a>
                         <a href={amazonLink(loserKbd.name)} target="_blank" rel="noopener noreferrer"
@@ -4732,7 +4732,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <span className="text-sm font-bold px-2 py-0.5 rounded-full" style={{ background: "#b8956a18", color: "#b8956a", border: "1px solid #b8956a30", fontSize: 12 }}>🚧 UNDER CONSTRUCTION</span>
                       </div>
                       <p className="text-sm opacity-85 max-w-lg mx-auto leading-relaxed mb-2">
-                        Overlay actual headphone images scaled to real dimensions — instantly see how any two headphones compare in size from all {headphones.filter(m => HEADPHONE_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]).length} headphones.
+                        Overlay actual headphone images scaled to real dimensions — instantly see how any two headphones compare in size from all {headphones.filter(m => HEADPHONE_DIMS[m.name] && getHeadphoneImage(m.name)).length} headphones.
                       </p>
                       <p className="text-sm opacity-25 mb-4">See exactly how two headphones compare in shape.</p>
                       <div className="flex-1" />
@@ -5054,8 +5054,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                           {/* Headphone image */}
                           <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center" style={{ background: `${brandCol}08`, border: `1px solid ${brandCol}12` }}>
-                            {HEADPHONE_IMAGE_URLS[m.name] ? (
-                              <img loading="lazy" src={HEADPHONE_IMAGE_URLS[m.name]} alt={m.name} className="w-full h-full object-contain p-1.5"
+                            {getHeadphoneImage(m.name) ? (
+                              <img loading="lazy" src={getHeadphoneImage(m.name)} alt={m.name} className="w-full h-full object-contain p-1.5"
                                 style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.06))" }}
                                 onError={e => { e.target.style.display = "none"; e.target.nextElementSibling && (e.target.nextElementSibling.style.display = "flex"); }} />
                             ) : null}
@@ -5149,7 +5149,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <SectionTitle color="#b8956a" sub="Select two headphones and overlay their layouts — scaled to real dimensions for true size comparison">Headphone Layout Overlay</SectionTitle>
 
             {(() => {
-                const kbdsWithDims = headphones.filter(m => HEADPHONE_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]);
+                const kbdsWithDims = headphones.filter(m => HEADPHONE_DIMS[m.name] && getHeadphoneImage(m.name));
                 const mA = shapeHeadphoneA || kbdsWithDims[0];
                 const mB = shapeHeadphoneB || kbdsWithDims[1];
                 const dA = HEADPHONE_DIMS[mA?.name];
@@ -5190,12 +5190,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       ].map(({ kbd, set, col, label }) => (
                         <div key={label} className="rounded-xl p-4" style={{ background: "#ffffff", border: `1px solid ${col}15` }}>
                           <div className="text-sm font-bold mb-2" style={{ color: col }}>{label}</div>
-                          <select value={kbd?.id || ""} onChange={e => { const m = headphones.find(x => x.id === parseInt(e.target.value)); if (m && HEADPHONE_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]) set(m); }}
+                          <select value={kbd?.id || ""} onChange={e => { const m = headphones.find(x => x.id === parseInt(e.target.value)); if (m && HEADPHONE_DIMS[m.name] && getHeadphoneImage(m.name)) set(m); }}
                             className="w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer" style={{ background: "#f8f6f3", border: `1px solid ${col}25`, color: "#1a1614" }}>
                             {sortedKbdsWithDims.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
                           </select>
                           <div className="flex items-center gap-3 mt-3">
-                            {HEADPHONE_IMAGE_URLS[kbd.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[kbd.name]} alt={`${kbd.name} layout outline`} className="h-10 object-contain" style={{ filter: `drop-shadow(0 2px 8px ${col}30)` }} />}
+                            {getHeadphoneImage(kbd.name) && <img loading="lazy" src={getHeadphoneImage(kbd.name)} alt={`${kbd.name} layout outline`} className="h-10 object-contain" style={{ filter: `drop-shadow(0 2px 8px ${col}30)` }} />}
                             <div className="flex flex-wrap gap-2 text-sm opacity-50">
                               <span>{HEADPHONE_DIMS[kbd.name]?.[0]}mm L</span>
                               <span>×</span>
@@ -5239,7 +5239,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 1, background: "#00000008" }} />
                           <div style={{ position: "absolute", top: "50%", left: 0, right: 0, height: 1, background: "#00000008" }} />
                           {/* Headphone B (behind) */}
-                          <img loading="lazy" src={HEADPHONE_IMAGE_URLS[mB.name]} alt={mB.name} width={Math.round(imgWB)} height={Math.round(imgHB)}
+                          <img loading="lazy" src={getHeadphoneImage(mB.name)} alt={mB.name} width={Math.round(imgWB)} height={Math.round(imgHB)}
                             style={{
                               position: "absolute",
                               left: "50%", top: "50%",
@@ -5250,7 +5250,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                               filter: `drop-shadow(0 0 12px ${colB}40)`,
                             }} />
                           {/* Headphone A (front) */}
-                          <img loading="lazy" src={HEADPHONE_IMAGE_URLS[mA.name]} alt={mA.name} width={Math.round(imgWA)} height={Math.round(imgHA)}
+                          <img loading="lazy" src={getHeadphoneImage(mA.name)} alt={mA.name} width={Math.round(imgWA)} height={Math.round(imgHA)}
                             style={{
                               position: "absolute",
                               left: "50%", top: "50%",
@@ -5281,7 +5281,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           ].map(({ m, d, col }, idx) => (
                             <div key={idx} style={{ position: "relative", height: containerH, borderRight: idx === 0 ? "1px solid #e8e4df" : "none", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                               <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(#0000000a 1px, transparent 1px), linear-gradient(90deg, #0000000a 1px, transparent 1px)", backgroundSize: `${10 * pxPerMm}px ${10 * pxPerMm}px` }} />
-                              <img loading="lazy" src={HEADPHONE_IMAGE_URLS[m.name]} alt={m.name}
+                              <img loading="lazy" src={getHeadphoneImage(m.name)} alt={m.name}
                                 style={{ maxWidth: "75%", maxHeight: containerH * 0.65, objectFit: "contain", position: "relative", zIndex: 1, filter: `drop-shadow(0 0 12px ${col}30)` }} />
                               <div style={{ position: "absolute", top: 10, left: 0, right: 0, textAlign: "center", zIndex: 2 }}>
                                 <div style={{ fontSize: 13, fontFamily: "monospace", fontWeight: "bold", color: col }}>{m.name.replace(m.brand + " ", "")}</div>

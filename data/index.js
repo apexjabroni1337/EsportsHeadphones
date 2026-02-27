@@ -111,8 +111,54 @@ export const HEADPHONE_IMAGE_URLS = {
   "Turtle Beach Stealth 700 Gen 2": "https://m.media-amazon.com/images/I/61cz0GEJqRL._AC_SL1500_.jpg",
   "JBL Quantum 910": "https://m.media-amazon.com/images/I/61pXSXPCWgL._AC_SL1500_.jpg",
   "Logitech G435 LIGHTSPEED": "https://m.media-amazon.com/images/I/61M9PXNQ2SL._AC_SL1500_.jpg",
+  "Sennheiser GAME ZERO": "https://m.media-amazon.com/images/I/71c+YOxfTGL._AC_SL1500_.jpg",
+  "JBL Quantum One": "https://m.media-amazon.com/images/I/61ZI7WhnQqL._AC_SL1500_.jpg",
+  "Sennheiser GSP 600": "https://m.media-amazon.com/images/I/51ylQTFcweL._AC_SL1500_.jpg",
+  "JBL Quantum 400": "https://m.media-amazon.com/images/I/61GjlALH-gL._AC_SL1500_.jpg",
+  "ASUS ROG Pelta": "https://m.media-amazon.com/images/I/71noSdO0XjL._AC_SL1500_.jpg",
+  "SONY INZONE H9 II": "https://m.media-amazon.com/images/I/61NLdd9h1KL._AC_SL1500_.jpg",
+  "Sennheiser HD 600": "https://m.media-amazon.com/images/I/81op1KfxDBL._AC_SL1500_.jpg",
+  "Sennheiser HD800 S": "https://m.media-amazon.com/images/I/71sLOtsK2UL._AC_SL1500_.jpg",
+  "EPOS GSP 500": "https://m.media-amazon.com/images/I/41YuPc+oopL._AC_SL1500_.jpg",
+  "EPOS H6PRO White": "https://m.media-amazon.com/images/I/51hjQRReqaL._AC_SL1500_.jpg",
+  "Sennheiser PC38X": "https://m.media-amazon.com/images/I/41NTPzwmh0L._AC_SL1500_.jpg",
+  "EPOS H3": "https://m.media-amazon.com/images/I/61cxHIWB3dL._AC_SL1500_.jpg",
+  "Logitech G Pro X Wireless Headset": "https://m.media-amazon.com/images/I/61sDKQr0sYL._AC_SL1500_.jpg",
+  "SteelSeries Arctis Pro": "https://m.media-amazon.com/images/I/61RRHLNm4aL._AC_SL1500_.jpg",
+  "SteelSeries Arctis 5": "https://m.media-amazon.com/images/I/61dh5CSDYJL._AC_SL1500_.jpg",
+  "Razer Kraken V3 Pro": "https://m.media-amazon.com/images/I/71K0V1RM3bL._AC_SL1500_.jpg",
+  "Razer Kraken TE": "https://m.media-amazon.com/images/I/71i3yEcRITL._AC_SL1500_.jpg",
+  "Razer Kraken Kitty": "https://m.media-amazon.com/images/I/71MSFZ3HhEL._AC_SL1500_.jpg",
+  "Razer BlackShark V2 X": "https://m.media-amazon.com/images/I/71-Q3IDLG9L._AC_SL1500_.jpg",
+  "Razer BlackShark V2 HyperSpeed": "https://m.media-amazon.com/images/I/71-Q3IDLG9L._AC_SL1500_.jpg",
+  "Razer Atlas": "https://m.media-amazon.com/images/I/61TJGaHe2KL._AC_SL1500_.jpg",
+  "Corsair HS80 MAX": "https://m.media-amazon.com/images/I/61jNQ6ATFGL._AC_SL1500_.jpg",
+  "Corsair Void Pro": "https://m.media-amazon.com/images/I/61E4A6DQd4L._AC_SL1500_.jpg",
+  "Corsair VOID Wireless V2": "https://m.media-amazon.com/images/I/61E4A6DQd4L._AC_SL1500_.jpg",
+  "Corsair Void RGB Elite": "https://m.media-amazon.com/images/I/61E4A6DQd4L._AC_SL1500_.jpg",
+  "Corsair Virtuoso Pro": "https://m.media-amazon.com/images/I/61pnIbE8oIL._AC_SL1500_.jpg",
+  "Corsair Virtuoso MAX": "https://m.media-amazon.com/images/I/61pnIbE8oIL._AC_SL1500_.jpg",
+  "Corsair Virtuoso RGB Wireless XT": "https://m.media-amazon.com/images/I/61pnIbE8oIL._AC_SL1500_.jpg",
+  "beyerdynamic DT 900 Pro X": "https://m.media-amazon.com/images/I/61tSqwHBzNL._AC_SL1500_.jpg",
+  "ASTRO A40": "https://m.media-amazon.com/images/I/61sCpAC4C-L._AC_SL1500_.jpg",
+  "Logitech G Pro Headset": "https://m.media-amazon.com/images/I/61sDKQr0sYL._AC_SL1500_.jpg",
 };
 
+// Fuzzy image lookup: handles color variants and partial name matches
+export function getHeadphoneImage(name) {
+  if (!name) return null;
+  // Exact match first
+  if (HEADPHONE_IMAGE_URLS[name]) return HEADPHONE_IMAGE_URLS[name];
+  // Try stripping color suffixes (Black, White, Green, etc.)
+  const stripped = name.replace(/\s+(Black|White|Green|Blue|Red|Pink|Lilac|Magenta|Dragon Lore)$/i, "");
+  if (HEADPHONE_IMAGE_URLS[stripped]) return HEADPHONE_IMAGE_URLS[stripped];
+  // Try finding a key that is contained in the name (longest match first)
+  const keys = Object.keys(HEADPHONE_IMAGE_URLS).sort((a, b) => b.length - a.length);
+  for (const key of keys) {
+    if (name.includes(key) || key.includes(name)) return HEADPHONE_IMAGE_URLS[key];
+  }
+  return null;
+}
 
 export const HEADPHONE_DESCRIPTIONS = {
   "Razer BlackShark V2 Pro": {

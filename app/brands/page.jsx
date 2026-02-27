@@ -33,7 +33,7 @@ export default function BrandsPage() {
     const priceRange = `$${Math.min(...brandHeadphones.map((m) => m?.price))}-$${Math.max(...brandHeadphones.map((m) => m?.price))}`;
     const weightRange = `${Math.min(...brandHeadphones.map((m) => m?.weight))}g-${Math.max(...brandHeadphones.map((m) => m?.weight))}g`;
     const brandPros = proPlayers.filter((p) => {
-      const pm = p.headphone.toLowerCase();
+      const pm = (p.headphone || "").toLowerCase();
       return brandHeadphones.some((m) => pm.includes(m.name.toLowerCase()) || m.name.toLowerCase().includes(pm));
     });
     return { brand, headphones: brandHeadphones, avgWeight, avgPrice, avgRating, totalProUsage, lightest, mostPopular, driveres, shapes, priceRange, weightRange, pros: brandPros };

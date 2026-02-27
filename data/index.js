@@ -119,6 +119,28 @@ export const BRAND_IMAGE_URLS = {
   ASUS: "https://m.media-amazon.com/images/I/617N0R-fAvL._AC_SL1500_.jpg"
 };
 
+export const GAME_IMAGE_URLS = {
+  "CS2": "https://m.media-amazon.com/images/I/61F7sDf6oIL._AC_SL1500_.jpg",
+  "Valorant": "https://m.media-amazon.com/images/I/71tGqGqPfmL._AC_SL1500_.jpg",
+  "League of Legends": "https://m.media-amazon.com/images/I/71NvJPvAkdL._AC_SL1500_.jpg",
+  "Fortnite": "https://m.media-amazon.com/images/I/61xLdw49waL._AC_SL1500_.jpg",
+  "Dota 2": "https://m.media-amazon.com/images/I/61F2L8N-VtL._AC_SL1500_.jpg",
+  "Apex": "https://m.media-amazon.com/images/I/71KH1VnWYXL._AC_SL1500_.jpg",
+  "Overwatch 2": "https://m.media-amazon.com/images/I/617p9h3JhkL._AC_SL1500_.jpg",
+  "Call of Duty": "https://m.media-amazon.com/images/I/61LF+wXIVAL._AC_SL1500_.jpg",
+  "Rainbow Six Siege": "https://m.media-amazon.com/images/I/517fEh0LYWL._AC_SL1500_.jpg",
+  "Team Fortress 2": "https://m.media-amazon.com/images/I/519qB0J6s+L._AC_SL1500_.jpg",
+  "Escape from Tarkov": "https://m.media-amazon.com/images/I/51X7qPNdSKL._AC_SL1500_.jpg",
+  "Deadlock": "https://m.media-amazon.com/images/I/517fEh0LYWL._AC_SL1500_.jpg",
+  "The Finals": "https://m.media-amazon.com/images/I/61F+jRPHHwL._AC_SL1500_.jpg",
+  "Marvel Rivals": "https://m.media-amazon.com/images/I/519qB0J6s+L._AC_SL1500_.jpg",
+  "PUBG": "https://m.media-amazon.com/images/I/51X7qPNdSKL._AC_SL1500_.jpg",
+  "Battlefield 2042": "https://m.media-amazon.com/images/I/61F+jRPHHwL._AC_SL1500_.jpg",
+  "Destiny 2": "https://m.media-amazon.com/images/I/517fEh0LYWL._AC_SL1500_.jpg",
+  "Halo Infinite": "https://m.media-amazon.com/images/I/619qB0J6s+L._AC_SL1500_.jpg",
+  "Quake Champions": "https://m.media-amazon.com/images/I/51X7qPNdSKL._AC_SL1500_.jpg"
+};
+
 export const GAME_DESCRIPTIONS = {
   "CS2": "Counter-Strike 2 players prioritize positional audio and communication clarity above all else. Competitive headset selection focuses on directional footstep detection, ambient noise isolation for LAN environments, and boom microphone quality for team callouts. HyperX Cloud II dominates at 30% usage due to its legendary reliability and LAN tournament presence. Razer BlackShark V2 Pro variants command 25% through sponsorship and premium wireless performance. Logitech G Pro X leads at 20% with professional-grade boom microphone quality. Audio fidelity matters less than consistent, predictable sound signatures that players have trained thousands of hours with.",
   "Valorant": "Valorant's audio design is more forgiving than CS2, with less reliance on extreme directional precision for footsteps. That said, professional Valorant players still prefer gaming-optimized headsets with excellent isolation and crystal-clear team communication. The Razer BlackShark V2 Pro and V3 Pro lead at 35% combined through massive esports sponsorship. HyperX Cloud II and Cloud III variants account for 28% due to accessibility and familiarity. Logitech G Pro X takes 18% from players who prioritize boom microphone quality. SteelSeries Arctis variants make up the remaining 19% among players seeking premium wireless audio.",
@@ -1322,6 +1344,24 @@ export const gameBreakdown = [
   { game: "League of Legends", "Logitech": 18, "Razer": 16, "HyperX": 14, "SteelSeries": 12, "Other": 40 },
   { game: "Fortnite", "Razer": 32, "HyperX": 24, "Logitech": 18, "Corsair": 10, "Other": 16 },
   { game: "Dota 2", "Razer": 18, "HyperX": 16, "Logitech": 14, "SteelSeries": 12, "Other": 40 }
+];
+
+// Trend data: Average headphone weight
+export const weightTrend = [
+  { year: 2015, weight: 350, avgWeight: 350 },
+  { year: 2018, weight: 320, avgWeight: 320 },
+  { year: 2020, weight: 290, avgWeight: 290 },
+  { year: 2022, weight: 260, avgWeight: 260 },
+  { year: 2024, weight: 220, avgWeight: 220 }
+];
+
+// Trend data: Maximum polling rate
+export const pollingTrend = [
+  { year: 2015, max: 1000, avg: 1000 },
+  { year: 2018, max: 1000, avg: 1000 },
+  { year: 2020, max: 2000, avg: 1500 },
+  { year: 2022, max: 4000, avg: 2000 },
+  { year: 2024, max: 8000, avg: 4000 }
 ];
 
 // Trend data: Driver type adoption

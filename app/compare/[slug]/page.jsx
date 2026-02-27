@@ -1,6 +1,6 @@
 import EsportsHeadphones from "@/components/ClientApp";
 import { SSRSection, SSRTitle, SSRSub, SSRGrid, SSRStat, SSRLink, SSRDivider } from "@/components/ssr";
-import { headphones, allPlayers, BRAND_COLORS, headphone_IMAGE_URLS, amazonLink } from "@/data";
+import { headphones, allPlayers, BRAND_COLORS, HEADPHONE_IMAGE_URLS, amazonLink } from "@/data";
 
 const slug = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
 
@@ -73,12 +73,12 @@ export default function ComparisonPage({ params }) {
   const [a, b] = pair;
 
   const aPlayers = allPlayers.filter(p => {
-    const pm = p.headphone.toLowerCase();
+    const pm = (p.headphone || "").toLowerCase();
     const mn = a.name.toLowerCase();
     return pm === mn || pm.includes(mn) || mn.includes(pm);
   }).slice(0, 10);
   const bPlayers = allPlayers.filter(p => {
-    const pm = p.headphone.toLowerCase();
+    const pm = (p.headphone || "").toLowerCase();
     const mn = b.name.toLowerCase();
     return pm === mn || pm.includes(mn) || mn.includes(pm);
   }).slice(0, 10);

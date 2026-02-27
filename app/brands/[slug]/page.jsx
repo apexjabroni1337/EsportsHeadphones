@@ -1,6 +1,6 @@
 import EsportsHeadphones from "@/components/ClientApp";
 import { SSRSection, SSRTitle, SSRSub, SSRGrid, SSRStat, SSRLink, SSRDivider } from "@/components/ssr";
-import { headphones, allPlayers, proPlayers, BRAND_COLORS, headphone_IMAGE_URLS, headphone_DESCRIPTIONS, amazonLink } from "@/data";
+import { headphones, allPlayers, proPlayers, BRAND_COLORS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, amazonLink } from "@/data";
 
 const slug = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
 
@@ -86,7 +86,7 @@ export default function BrandDetailPage({ params }) {
   const weightRange = `${Math.min(...brandheadphones.map((m) => m?.weight))}g-${Math.max(...brandheadphones.map((m) => m?.weight))}g`;
 
   const brandPros = proPlayers.filter((p) => {
-    const pm = p.headphone.toLowerCase();
+    const pm = (p.headphone || "").toLowerCase();
     return brandheadphones.some((m) => pm.includes(m.name.toLowerCase()) || m.name.toLowerCase().includes(pm));
   });
 

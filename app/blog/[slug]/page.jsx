@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { headphones, allPlayers, proPlayers, BRAND_COLORS, headphone_IMAGE_URLS, amazonLink } from "@/data";
+import { headphones, allPlayers, proPlayers, BRAND_COLORS, HEADPHONE_IMAGE_URLS, amazonLink } from "@/data";
 
 const slug = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
 
@@ -174,7 +174,7 @@ export default function BlogArticlePage({ params }) {
                   {block.data.map((m, j) => (
                     <a key={j} href={m.headphone ? `/headphones/${slug(m.headphone.name)}` : "#"} className="flex items-center gap-4 p-4 rounded-lg border-l-4 no-underline transition-all hover:scale-[1.01]" style={{ background: "#ffffff", border: "1px solid #e8e4df", borderLeftColor: m.headphone ? BRAND_COLORS[m.headphone.brand] || article.color : article.color, borderLeftWidth: "4px", textDecoration: "none" }}>
                       <span className="text-lg font-black opacity-20 w-6 text-center" style={{ color: "#1a1614" }}>#{j + 1}</span>
-                      {m.headphone && headphone_IMAGE_URLS[m.headphone.name] && <img src={headphone_IMAGE_URLS[m.headphone.name]} alt={m.name} className="h-10 w-16 object-contain" />}
+                      {m.headphone && HEADPHONE_IMAGE_URLS[m.headphone.name] && <img src={HEADPHONE_IMAGE_URLS[m.headphone.name]} alt={m.name} className="h-10 w-16 object-contain" />}
                       <div className="flex-1">
                         <div className="font-bold text-sm" style={{ color: m.headphone ? (BRAND_COLORS[m.headphone.brand] || "#fff") : "#fff" }}>{m.name}</div>
                         <div className="text-xs opacity-40" style={{ color: "#1a1614" }}>{m.pct}% of pros · {m.count} players{m.headphone ? ` · ${m.headphone?.weight}g · $${m.headphone?.price}` : ""}</div>

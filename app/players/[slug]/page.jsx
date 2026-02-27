@@ -1,6 +1,6 @@
 import EsportsHeadphones from "@/components/ClientApp";
 import { SSRSection, SSRTitle, SSRSub, SSRGrid, SSRStat, SSRLink, SSRDivider } from "@/components/ssr";
-import { proPlayers, headphones, allPlayers, headphone_DESCRIPTIONS, BRAND_COLORS, amazonLink, countryName } from "@/data";
+import { proPlayers, headphones, allPlayers, HEADPHONE_DESCRIPTIONS, BRAND_COLORS, amazonLink, countryName } from "@/data";
 import { PLAYER_BIOS } from "@/data/bios";
 
 const slug = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
@@ -94,7 +94,7 @@ export default function PlayerProfilePage({ params }) {
 
   const headphoneData = findHeadphone(player.headphone);
   const headphoneSlugVal = headphoneData ? slug(headphoneData.name) : null;
-  const mouseDesc = headphoneData ? headphone_DESCRIPTIONS[headphoneData.name] : null;
+  const mouseDesc = headphoneData ? HEADPHONE_DESCRIPTIONS[headphoneData.name] : null;
 
   // Game players for context
   const allGamePlayers = allPlayers.filter((p) => p.game === player.game);
@@ -260,7 +260,7 @@ export default function PlayerProfilePage({ params }) {
         {(() => {
           const sameMousePlayers = proPlayers.filter((p) => {
             if (p.name === player.name || !p.headphone || !player.headphone) return false;
-            const pm = p.headphone.toLowerCase(), cm = player.headphone.toLowerCase();
+            const pm = (p.headphone || "").toLowerCase(), cm = (player.headphone || "").toLowerCase();
             return pm === cm || pm.includes(cm) || cm.includes(pm);
           }).slice(0, 20);
           if (!sameMousePlayers.length) return null;

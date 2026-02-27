@@ -52,7 +52,7 @@ export default function HeadphoneDetailPage({ params }) {
   const desc = HEADPHONE_DESCRIPTIONS[hp.name];
   const usedBy = allPlayers.filter((p) => {
     const mn = hp.name.toLowerCase();
-    const pm = p.headphone.toLowerCase();
+    const pm = (p.headphone || "").toLowerCase();
     return pm === mn || pm.includes(mn) || mn.includes(pm);
   }).slice(0, 30);
   const imgUrl = HEADPHONE_IMAGE_URLS[hp.name];

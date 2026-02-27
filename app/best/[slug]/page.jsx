@@ -1,6 +1,6 @@
 import EsportsHeadphones from "@/components/ClientApp";
 import { SSRSection, SSRTitle, SSRSub, SSRGrid, SSRStat, SSRLink, SSRDivider } from "@/components/ssr";
-import { headphones, allPlayers, proPlayers, BRAND_COLORS, headphone_IMAGE_URLS, amazonLink } from "@/data";
+import { headphones, allPlayers, proPlayers, BRAND_COLORS, HEADPHONE_IMAGE_URLS, amazonLink } from "@/data";
 
 const sl = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
 
@@ -69,7 +69,7 @@ export default function BestForPage({ params }) {
     players = allPlayers.filter(p => p.game === page.game);
     const headphoneCounts = {};
     players.forEach(p => {
-      const matched = headphones.find(m => m.name.toLowerCase() === p.headphone.toLowerCase());
+      const matched = p.headphone ? headphones.find(m => m.name.toLowerCase() === (p.headphone || "").toLowerCase()) : null;
       if (matched) headphoneCounts[matched.name] = (headphoneCounts[matched.name] || 0) + 1;
     });
     topHeadphonesForPage = Object.entries(headphoneCounts)

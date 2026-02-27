@@ -142,6 +142,11 @@ export const HEADPHONE_IMAGE_URLS = {
   "beyerdynamic DT 900 Pro X": "/images/headphones/beyerdynamic-DT-900-Pro-X.jpg",
   "ASTRO A40": "/images/headphones/ASTRO-A40.jpg",
   "Logitech G Pro Headset": "/images/headphones/Logitech-G-Pro-Headset.jpg",
+  "Razer BlackShark V2 Pro White": "/images/headphones/Razer-BlackShark-V2-Pro-White.jpg",
+  "Logitech G PRO X 2 Headset White": "/images/headphones/Logitech-G-PRO-X-2-White.jpg",
+  "Razer BlackShark V3 Pro White": "/images/headphones/Razer-BlackShark-V3-Pro-White.jpg",
+  "Corsair Void RGB Elite White": "/images/headphones/Corsair-Void-RGB-Elite-White.jpg",
+  "SteelSeries Arctis Nova Pro Wireless White": "/images/headphones/SteelSeries-Arctis-Nova-Pro-Wireless-White.jpg",
 };
 
 // Fuzzy image lookup: handles color variants and partial name matches

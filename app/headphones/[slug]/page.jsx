@@ -1,6 +1,6 @@
 import EsportsHeadphones from "@/components/ClientApp";
 import { SSRSection, SSRTitle, SSRSub, SSRGrid, SSRStat, SSRLink, SSRDivider } from "@/components/ssr";
-import { headphones, HEADPHONE_DESCRIPTIONS, BRAND_COLORS, HEADPHONE_IMAGE_URLS, allPlayers, amazonLink } from "@/data";
+import { headphones, HEADPHONE_DESCRIPTIONS, BRAND_COLORS, HEADPHONE_IMAGE_URLS, allPlayers, amazonLink, getHeadphoneImage } from "@/data";
 
 export function generateStaticParams() {
   return headphones.map((kb) => ({
@@ -55,7 +55,7 @@ export default function MouseDetailPage({ params }) {
     const pm = (p.headphone || "").toLowerCase();
     return pm && (pm === mn || pm.includes(mn) || mn.includes(pm));
   }).slice(0, 30);
-  const imgUrl = HEADPHONE_IMAGE_URLS[kb.name];
+  const imgUrl = getHeadphoneImage(kb.name);
 
   return (
     <>

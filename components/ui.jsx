@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { BRAND_COLORS, HEADPHONE_IMAGE_URLS, headphones, icon, I, amazonLink, flagUrl } from "@/data";
+import { BRAND_COLORS, HEADPHONE_IMAGE_URLS, headphones, icon, I, amazonLink, flagUrl, getHeadphoneImage } from "@/data";
 
 export const Flag = ({ country, size = 20, className = "" }) => {
   const url = flagUrl(country, size * 2);
@@ -79,8 +79,8 @@ export const HeadphoneCard = ({ headphone, onClick, isSelected, rank }) => {
     >
       {/* ── Top Panel: Image Area ── */}
       <div className="relative flex items-center justify-center overflow-hidden" style={{ height: 160, background: "linear-gradient(135deg, #f5f0e8, #ede8df)" }}>
-        {HEADPHONE_IMAGE_URLS[k.name] ? (
-          <img loading="lazy" src={HEADPHONE_IMAGE_URLS[k.name]}
+        {getHeadphoneImage(k.name) ? (
+          <img loading="lazy" src={getHeadphoneImage(k.name)}
             alt={`${k.name} ${k.brand} esports gaming headphone`}
             className="w-full h-full object-contain object-center p-4"
             style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.08))" }} />

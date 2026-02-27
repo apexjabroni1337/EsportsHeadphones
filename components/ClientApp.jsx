@@ -428,12 +428,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
   });
 
   const radarData = selectedHeadphone ? [
-    { stat: "Lightness", value: Math.max(0, 100 - selectedHeadphone.weight), fullMark: 100 },
-    { stat: "Driver", value: Math.min(100, selectedHeadphone.anc ? 95 : 60), fullMark: 100 },
-    { stat: "Freq. Response", value: (selectedHeadphone.frequencyResponse / 8000) * 100, fullMark: 100 },
-    { stat: "Pro Usage", value: selectedHeadphone.proUsage * 4, fullMark: 100 },
+    { stat: "Comfort", value: Math.max(0, 100 - Math.max(0, (selectedHeadphone.weight - 200) / 2)), fullMark: 100 },
+    { stat: "Sound", value: Math.min(100, selectedHeadphone.planarMagnetic ? 95 : (selectedHeadphone.driverType === "Dynamic" ? 75 : 85)), fullMark: 100 },
+    { stat: "Isolation", value: selectedHeadphone.anc ? 95 : (selectedHeadphone.formFactor === "Over-Ear" ? 70 : 50), fullMark: 100 },
+    { stat: "Pro Pick", value: Math.min(100, selectedHeadphone.proUsage * 4), fullMark: 100 },
     { stat: "Rating", value: selectedHeadphone.rating * 10, fullMark: 100 },
-    { stat: "Value", value: Math.max(0, 100 - (selectedHeadphone.price / 2)), fullMark: 100 },
+    { stat: "Value", value: Math.max(0, 100 - (selectedHeadphone.price / 4)), fullMark: 100 },
   ] : [];
 
   const PRO_FAME = {
@@ -1117,7 +1117,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         border: selectedHeadphone?.id === m.id ? `1px solid ${BRAND_COLORS[m.brand]}40` : "1px solid #e8e4df",
                         fontSize: 12,
                       }}>
-                      {m.name.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |Endgame Gear |ASUS |Keychron |Glorious )/, "")}
+                      {m.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |Sony |JBL |ASUS |Audio-Technica |Turtle Beach |Audeze |EPOS |Cooler Master )/, "")}
                     </button>
                   ))}
                 </div>
@@ -1153,7 +1153,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       </ResponsiveContainer>
                       <div className="grid grid-cols-4 gap-1.5 sm:gap-2 w-full mt-2">
                         <StatBox label="Weight" value={selectedHeadphone.weight} unit="g" color={brandCol} />
-                        <StatBox label="Impedance" value={`${selectedHeadphone.impedancePoint}mm`} color={brandCol} />
+                        <StatBox label="Impedance" value={selectedHeadphone.impedance || "32"} unit="Ω" color={brandCol} />
                         <StatBox label="Freq. Response" value={selectedHeadphone.frequencyResponse >= 1000 ? `${selectedHeadphone.frequencyResponse / 1000}K` : selectedHeadphone.frequencyResponse} unit="Hz" color={brandCol} />
                         <StatBox label="Price" value={`$${selectedHeadphone.price}`} color={brandCol} />
                       </div>
@@ -1324,7 +1324,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="opacity-60">Impedance</span>
-                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.impedancePoint}mm</span>
+                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.impedance || 32}Ω</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="opacity-60">Driver Type</span>
@@ -1335,8 +1335,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                   <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.anc ? "Yes" : "No"}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                  <span className="opacity-60">Layout</span>
+                                  <span className="opacity-60">Form Factor</span>
                                   <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.formFactor}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="opacity-60">Connectivity</span>
+                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.connectivity}</span>
                                 </div>
                               </div>
                             </div>
@@ -1391,7 +1395,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* Gear Check Callout */}
             {(() => {
-              const hotHeadphone = gameBreakdown[1]?.topHeadphones[0]?.name || "Wooting 60HE+";
+              const hotHeadphone = gameBreakdown[1]?.topHeadphones[0]?.name || "Razer BlackShark V2 Pro";
               const hotGame = gameBreakdown[1]?.game || "Valorant";
               const hotPct = gameBreakdown[1]?.topHeadphones[0]?.pct || 30;
               const hm = headphones.find(m => m.name === hotHeadphone);
@@ -1417,15 +1421,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <div className="text-xs uppercase tracking-widest opacity-25 mb-3 font-bold">Popular Comparisons</div>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { a: "Wooting 60HE+", b: "Razer Huntsman V3 Pro Mini" },
-                  { a: "Wooting 60HE", b: "Wooting 60HE+" },
-                  { a: "DrunkDeer A75", b: "Wooting 60HE" },
-                  { a: "Wooting 60HE+", b: "SteelSeries Apex Pro TKL (2024)" },
-                  { a: "Corsair K65 Plus", b: "Wooting 60HE+" },
+                  { a: "Razer BlackShark V2 Pro", b: "SteelSeries Arctis Nova Pro Wireless" },
+                  { a: "Logitech G Pro X 2 Lightspeed", b: "Razer BlackShark V2 Pro" },
+                  { a: "HyperX Cloud III Wireless", b: "SteelSeries Arctis Nova 7" },
+                  { a: "Corsair HS80 RGB Wireless", b: "Logitech G Pro X 2 Lightspeed" },
+                  { a: "beyerdynamic DT 990 Pro", b: "Sennheiser HD 560S" },
                 ].map(c => {
                   const sa = c.a.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
                   const sb = c.b.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
-                  return <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="text-xs px-3 py-1.5 rounded-full no-underline transition-all hover:scale-105" style={{ background: "#0000000a", border: "1px solid #d4cfc8", color: "#8a8078", textDecoration: "none" }}>{c.a.replace(/(Wooting |Razer )/, "")} vs {c.b.replace(/(Wooting |Razer )/, "")}</a>;
+                  return <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="text-xs px-3 py-1.5 rounded-full no-underline transition-all hover:scale-105" style={{ background: "#0000000a", border: "1px solid #d4cfc8", color: "#8a8078", textDecoration: "none" }}>{c.a.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "")} vs {c.b.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "")}</a>;
                 })}
               </div>
             </div>
@@ -1439,11 +1443,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {[
                   { title: "Tournament Favorites", sub: "The headphones winning major championships", href: "/best/cs2", accent: "#b8956a", tag: "Most Popular" },
-                  { title: "ANC Boards", sub: "Sub-0.1mm impedance for competitive FPS", href: "/best/rapid-trigger", accent: "#c02870", tag: "Trending" },
+                  { title: "Best ANC Headsets", sub: "Active noise cancellation for noisy LAN events", href: "/best/anc", accent: "#c02870", tag: "Trending" },
                   { title: "Best for Valorant", sub: "Top picks from professional Valorant players", href: "/best/valorant", accent: "#c43848", tag: "FPS" },
-                  { title: "Budget Champions", sub: "Pro-grade performance under $100", href: "/best/budget", accent: "#0a8060", tag: "Value" },
+                  { title: "Budget Champions", sub: "Pro-grade audio performance under $100", href: "/best/budget", accent: "#0a8060", tag: "Value" },
                   { title: "Wireless Freedom", sub: "Cutting the cord without cutting performance", href: "/best/wireless", accent: "#2874a6", tag: "Wireless" },
-                  { title: "The 60% Standard", sub: "Why compact layouts dominate esports", href: "/best/lightweight", accent: "#6d40c4", tag: "Compact" },
+                  { title: "Audiophile Grade", sub: "Open-back headphones for pristine sound staging", href: "/best/audiophile", accent: "#6d40c4", tag: "Hi-Fi" },
                 ].map((c, i) => (
                   <a key={i} href={c.href} className="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:shadow-lg no-underline block"
                     style={{ background: "#ffffff", border: "1px solid #e8e4df", textDecoration: "none" }}
@@ -1539,7 +1543,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   </ResponsiveContainer>
                   <div className="grid grid-cols-4 gap-2 w-full mt-2">
                     <StatBox label="Weight" value={selectedHeadphone.weight} unit="g" color={brandCol} />
-                    <StatBox label="Impedance" value={`${selectedHeadphone.impedancePoint}mm`} color={brandCol} />
+                    <StatBox label="Impedance" value={selectedHeadphone.impedance || "32"} unit="Ω" color={brandCol} />
                     <StatBox label="Freq. Response" value={selectedHeadphone.frequencyResponse >= 1000 ? `${selectedHeadphone.frequencyResponse / 1000}K` : selectedHeadphone.frequencyResponse} unit="Hz" color={brandCol} />
                     <StatBox label="Price" value={`$${selectedHeadphone.price}`} color={brandCol} />
                   </div>
@@ -1627,7 +1631,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   { label: "Connectivity", value: selectedHeadphone.connectivity },
                   { label: "Weight", value: `${selectedHeadphone.weight}g` },
                   { label: "Driver", value: selectedHeadphone.driverType },
-                  { label: "Impedance", value: `${selectedHeadphone.impedancePoint}mm` },
+                  { label: "Impedance", value: `${selectedHeadphone.impedance || 32}Ω` },
                   { label: "Freq. Response", value: `${selectedHeadphone.frequencyResponse >= 1000 ? `${selectedHeadphone.frequencyResponse / 1000}K` : selectedHeadphone.frequencyResponse}Hz` },
                   { label: "Price", value: `$${selectedHeadphone.price}` },
                   { label: "Pro Usage", value: `${selectedHeadphone.proUsage}%` },
@@ -1725,7 +1729,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           </div>
                           <div className="flex justify-between">
                             <span className="opacity-60">Impedance</span>
-                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.impedancePoint}mm</span>
+                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.impedance || 32}Ω</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="opacity-60">Driver Type</span>
@@ -3097,7 +3101,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             { key: "team", label: "Team" },
             { key: "headphone", label: "Headphone" },
             { key: "hz", label: "Hz" },
-            { key: "impedancePoint", label: "Impedance" },
+            { key: "impedance", label: "Impedance" },
             { key: "role", label: "Role" },
           ];
           return (
@@ -3809,7 +3813,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             sensor: m.driverType,
             brand: m.brand,
             name: m.name,
-            impedance: m.impedancePoint,
+            impedance: m.impedance || 32,
             frequencyResponse: m.frequencyResponse,
             weight: m.weight,
             proUsage: m.proUsage,
@@ -3831,7 +3835,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             totalUsage: Math.round(s.totalUsage * 10) / 10,
             headphoneCount: s.headphones.length,
             playerCount,
-            avgImpedance: Math.round(s.headphones.reduce((a, m) => a + m.impedancePoint, 0) / s.headphones.length),
+            avgImpedance: Math.round(s.headphones.reduce((a, m) => a + (m.impedance || 32), 0) / s.headphones.length),
             avgPolling: Math.round(s.headphones.reduce((a, m) => a + m.frequencyResponse, 0) / s.headphones.length),
             avgWeight: Math.round(s.headphones.reduce((a, m) => a + m.weight, 0) / s.headphones.length * 10) / 10,
             avgPrice: Math.round(s.headphones.reduce((a, m) => a + m.price, 0) / s.headphones.length),
@@ -4371,7 +4375,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 { label: "Weight", key: "weight", unit: "g", lower: true },
                 { label: "Price", key: "price", unit: "$", lower: true, prefix: "$" },
                 { label: "Driver", key: "driverType", unit: "" },
-                { label: "Impedance", key: "impedancePoint", unit: "mm", lower: true },
+                { label: "Impedance", key: "impedance", unit: "Ω", lower: true },
                 { label: "Freq. Response", key: "frequencyResponse", unit: " Hz" },
                 { label: "Layout", key: "layout", unit: "" },
                 { label: "Connectivity", key: "connectivity", unit: "" },

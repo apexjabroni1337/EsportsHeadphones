@@ -2,7 +2,7 @@ import EsportsHeadphones from "@/components/ClientApp";
 import { SSRSection, SSRTitle, SSRSub, SSRGrid, SSRStat, SSRLink, SSRDivider } from "@/components/ssr";
 import { allPlayers, headphones, proPlayers, GAME_DESCRIPTIONS } from "@/data";
 
-const slug = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
+const slug = (n) => (n || "").toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
 const findHeadphone = (name) => name ? headphones.find((m) => name.includes(m.name) || m.name.includes(name)) : undefined;
 const mSlug = (name) => { const m = findHeadphone(name); return m ? slug(m.name) : null; };
 
@@ -22,7 +22,7 @@ export const metadata = {
 };
 
 export default function GamesPage() {
-  const games = [...new Set(allPlayers.map((p) => p.game))].sort((a, b) =>
+  const games = [...new Set(allPlayers.map((p) => p.game).filter(Boolean))].sort((a, b) =>
     allPlayers.filter((p) => p.game === b).length - allPlayers.filter((p) => p.game === a).length
   );
   const totalPlayers = allPlayers.length;

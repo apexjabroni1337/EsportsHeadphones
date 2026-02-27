@@ -411,11 +411,11 @@ export const brandMarketShare = [
 ];
 
 export const gameBreakdown = [
-  { game: "CS2", headphoneCount: 15, topHeadphones: ["Razer BlackShark V2 Pro", "HyperX Cloud II", "Razer BlackShark V3 Pro"], avgProCount: 42 },
-  { game: "Valorant", headphoneCount: 12, topHeadphones: ["Razer BlackShark V2 Pro", "HyperX Cloud III", "Logitech G Pro X Headset"], avgProCount: 8 },
-  { game: "LoL", headphoneCount: 10, topHeadphones: ["Razer BlackShark V2", "Logitech G Pro X Headset", "SteelSeries Arctis Nova Pro"], avgProCount: 5 },
-  { game: "Fortnite", headphoneCount: 8, topHeadphones: ["SteelSeries Arctis Nova Pro", "HyperX Cloud III", "Razer Barracuda Pro"], avgProCount: 3 },
-  { game: "Apex", headphoneCount: 6, topHeadphones: ["beyerdynamic DT 990 Pro", "HyperX Cloud II", "Razer BlackShark V2 Pro"], avgProCount: 2 },
+  { game: "CS2", players: 42, headphoneCount: 15, topHeadphones: [{ name: "Razer BlackShark V2 Pro", pct: 28 }, { name: "HyperX Cloud II", pct: 22 }, { name: "Razer BlackShark V3 Pro", pct: 12 }], avgWeight: 295, wirelessPct: 54, icon: "crosshair" },
+  { game: "Valorant", players: 30, headphoneCount: 12, topHeadphones: [{ name: "Razer BlackShark V2 Pro", pct: 25 }, { name: "HyperX Cloud III", pct: 18 }, { name: "Logitech G Pro X Headset", pct: 15 }], avgWeight: 300, wirelessPct: 48, icon: "crosshair" },
+  { game: "LoL", players: 25, headphoneCount: 10, topHeadphones: [{ name: "Razer BlackShark V2", pct: 20 }, { name: "Logitech G Pro X Headset", pct: 18 }, { name: "SteelSeries Arctis Nova Pro", pct: 12 }], avgWeight: 310, wirelessPct: 40, icon: "gamepad" },
+  { game: "Fortnite", players: 18, headphoneCount: 8, topHeadphones: [{ name: "SteelSeries Arctis Nova Pro", pct: 22 }, { name: "HyperX Cloud III", pct: 16 }, { name: "Razer Barracuda Pro", pct: 12 }], avgWeight: 305, wirelessPct: 55, icon: "gamepad" },
+  { game: "Apex", players: 15, headphoneCount: 6, topHeadphones: [{ name: "beyerdynamic DT 990 Pro", pct: 20 }, { name: "HyperX Cloud II", pct: 18 }, { name: "Razer BlackShark V2 Pro", pct: 15 }], avgWeight: 290, wirelessPct: 35, icon: "crosshair" },
 ];
 
 export const weightTrend = [

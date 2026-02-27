@@ -1903,7 +1903,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div className="grid grid-cols-2 gap-2 mb-3">
                       <div className="rounded-lg px-2 py-1.5" style={{ background: `${col}10` }}>
                         <div style={{ fontSize: 10, color: "#a09890", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Top Headphone</div>
-                        <div style={{ fontSize: 12, color: "#2d2824", fontWeight: 800 }}>{g.topHeadphones[0]?.name.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |Endgame Gear |ASUS |Keychron |Glorious )/, "")}</div>
+                        <div style={{ fontSize: 12, color: "#2d2824", fontWeight: 800 }}>{(g.topHeadphones[0]?.name || "—").replace(/(Razer |HyperX |Logitech |SteelSeries |Corsair |beyerdynamic |ASUS |Sennheiser |Sony |Turtle Beach |ASTRO |JBL |Audeze )/, "")}</div>
                       </div>
                       <div className="rounded-lg px-2 py-1.5" style={{ background: `${col}10` }}>
                         <div style={{ fontSize: 11, color: "#a09890", fontWeight: 700 }}>Avg Weight</div>
@@ -1943,7 +1943,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           // Headphone usage stats
           const headphoneCounts = {};
-          gamePlayers.forEach(p => { headphoneCounts[p.headphone] = (headphoneCounts[p.headphone] || 0) + 1; });
+          gamePlayers.forEach(p => { if (p.headphone) { headphoneCounts[p.headphone] = (headphoneCounts[p.headphone] || 0) + 1; } });
           const headphoneRanking = Object.entries(headphoneCounts).sort((a, b) => b[1] - a[1]);
           const totalPlayers = gamePlayers.length;
 

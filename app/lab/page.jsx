@@ -20,8 +20,8 @@ export const metadata = {
 };
 
 export default function LabPage() {
-  const symm = headphones.filter((m) => m.layout === "Symmetrical");
-  const ergo = headphones.filter((m) => m.layout === "Ergonomic");
+  const symm = headphones.filter((m) => m.formFactor === "Symmetrical");
+  const ergo = headphones.filter((m) => m.formFactor === "Ergonomic");
   const light = headphones.filter((m) => m?.weight < 55).sort((a, b) => a?.weight - b?.weight);
   const medium = headphones.filter((m) => m?.weight >= 55 && m?.weight <= 70);
   const budget = headphones.filter((m) => m?.price < 90).sort((a, b) => a?.price - b?.price);
@@ -118,17 +118,17 @@ export default function LabPage() {
           <dt>Does headphone weight matter?</dt>
           <dd>Yes. Lighter headphones allow faster movements and reduce fatigue. Most pros now use headphones under 60g. However, some players prefer slightly heavier headphones for stability.</dd>
           <dt>Wireless or wired?</dt>
-          <dd>Modern wireless gaming headphones have no perceptible latency disadvantage. {headphones.filter((m) => m.connectivity === "Wireless").length} of {headphones.length} headphones in our database are wireless, and virtually all top pros have drivered to wireless.</dd>
+          <dd>Modern wireless gaming headphones have no perceptible latency disadvantage. {headphones.filter((m) => m.connectivity === "Wireless").length} of {headphones.length} headphones in our database are wireless, and virtually all top pros have switched to wireless.</dd>
         </dl>
 
         <nav aria-label="Related"><ul>
           <li><a href="/headphones">All Esports Headphones — Full Database</a></li>
           <li><a href="/compare">Compare Headphones Side by Side</a></li>
-          <li><a href="/best">Shape Overlay Tool</a></li>
+          <li><a href="/shapes">Shape Overlay Tool</a></li>
           <li><a href="/players">Pro Player Settings</a></li>
-          <li><a href="">Sensitivity Converter</a></li>
+          <li><a href="/sensitivity">Sensitivity Converter</a></li>
           <li><a href="/brands">Headphone Brands</a></li>
-          <li><a href="/driveres">Driver Comparison</a></li>
+          <li><a href="/drivers">Driver Comparison</a></li>
           <li><a href="/">EsportsHeadphones Home</a></li>
         </ul></nav>
       </article>
@@ -145,7 +145,7 @@ export default function LabPage() {
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones" color="#b8956a">All Headphones</SSRLink>
           <SSRLink href="/compare" color="#b8956a">Compare</SSRLink>
-          <SSRLink href="/best" color="#b8956a">Shapes</SSRLink>
+          <SSRLink href="/shapes" color="#b8956a">Shapes</SSRLink>
         </div>
       </SSRSection>
 

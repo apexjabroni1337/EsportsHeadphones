@@ -6,7 +6,7 @@ const slug = (n) => n.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 export const metadata = {
   title: "Compare Headphones — Side-by-Side Esports Headphone Comparison",
-  description: "Compare any two esports gaming headphones side by side. Weight, driver type, polling rate, price, pro usage, shape, and rating — head-to-head breakdowns for all 47+ competitive headphones.",
+  description: "Compare any two esports gaming headphones side by side. Weight, switch type, frequency response, price, pro usage, shape, and rating — head-to-head breakdowns for all 47+ competitive headphones.",
   alternates: { canonical: "https://esportsheadphones.com/compare" },
   openGraph: {
     title: "Compare Headphones — Side-by-Side Esports Headphone Comparison",
@@ -35,7 +35,7 @@ export default function ComparePage() {
         "@context": "https://schema.org", "@type": "FAQPage",
         mainEntity: [
           { "@type": "Question", name: `What is the best headphone for esports — ${top10[0].name} or ${top10[1].name}?`, acceptedAnswer: { "@type": "Answer", text: `The ${top10[0].name} has ${top10[0].proUsage}% pro usage vs ${top10[1].proUsage}% for the ${top10[1].name}. The ${top10[0].name} weighs ${top10[0].weight}g ($${top10[0].price}) while the ${top10[1].name} weighs ${top10[1].weight}g ($${top10[1].price}). Both are excellent choices — compare them side by side using our comparison tool to see which matches your preferences.` }},
-          { "@type": "Question", name: "How do I choose between two gaming headphones?", acceptedAnswer: { "@type": "Answer", text: `Compare weight (lighter = faster flicks), shape (symmetrical vs ergonomic), driver quality, polling rate (higher = less input lag), price, and pro player adoption. Our comparison tool lets you compare any two headphones from our ${headphones.length}-headphone database side by side across all these metrics.` }},
+          { "@type": "Question", name: "How do I choose between two gaming headphones?", acceptedAnswer: { "@type": "Answer", text: `Compare weight (lighter = faster flicks), shape (symmetrical vs ergonomic), switch quality, frequency response (higher = less input lag), price, and pro player adoption. Our comparison tool lets you compare any two headphones from our ${headphones.length}-headphone database side by side across all these metrics.` }},
           { "@type": "Question", name: "Does headphone weight matter for esports?", acceptedAnswer: { "@type": "Answer", text: "Yes — headphone weight significantly impacts aiming feel. Sub-50g ultralight headphones allow faster flicks with less fatigue, which most FPS pros prefer. However, some players prefer 60-80g for more controlled, stable tracking. The best weight is personal preference based on your grip style and game." }},
         ],
       }) }} />
@@ -46,7 +46,7 @@ export default function ComparePage() {
         <h1>Compare Esports Headphones — Side-by-Side Specification Comparison</h1>
         <p>
           Compare any two professional esports gaming headphones head to head. Our comparison tool shows weight,
-          driver type, polling rate, price, pro usage, shape, connectivity, driveres, battery life, and expert
+          switch type, frequency response, price, pro usage, shape, connectivity, drivers, battery life, and expert
           rating side by side across all {headphones.length} headphones in our database.
         </p>
 
@@ -70,9 +70,9 @@ export default function ComparePage() {
                 <td><a href={`/headphones/${slug(m.name)}`}>{m.name}</a></td>
                 <td><a href="/brands">{m.brand}</a></td>
                 <td>{m?.weight}g</td>
-                <td><a href="/driveres">{m.driverType}</a></td>
-                <td>{(m.pollingRate ?? 0).toLocaleString()}</td>
-                <td>{m.layout}</td>
+                <td><a href="/drivers">{m.driverType}</a></td>
+                <td>{m.frequencyResponse.toLocaleString()}</td>
+                <td>{m.formFactor}</td>
                 <td>${m?.price}</td>
                 <td>{m.proUsage}%</td>
                 <td>{m.rating}/10</td>
@@ -103,8 +103,8 @@ export default function ComparePage() {
 
         <nav aria-label="Related"><ul>
           <li><a href="/headphones">All Esports Headphones — Full Database</a></li>
-          <li><a href="/driveres">Driver Comparison</a></li>
-          <li><a href="/best">Shape Overlay Tool</a></li>
+          <li><a href="/drivers">Driver Comparison</a></li>
+          <li><a href="/shapes">Shape Overlay Tool</a></li>
           <li><a href="/players">Pro Player Settings</a></li>
           <li><a href="/brands">Headphone Brands</a></li>
           <li><a href="/trends">Industry Trends</a></li>
@@ -122,8 +122,8 @@ export default function ComparePage() {
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>
-          <SSRLink href="/best">Shape Overlay</SSRLink>
-          <SSRLink href="/driveres">Driveres</SSRLink>
+          <SSRLink href="/shapes">Shape Overlay</SSRLink>
+          <SSRLink href="/drivers">Drivers</SSRLink>
           <SSRLink href="/brands">Brands</SSRLink>
         </div>
       </SSRSection>

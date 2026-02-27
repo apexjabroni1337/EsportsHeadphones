@@ -63,7 +63,7 @@ export function generateMetadata({ params }) {
   if (!player) return { title: "Player Not Found" };
   const bio = PLAYER_BIOS[player.name] || null;
   const description = bio
-    ? (bio?.slice?.(0, 155) ?? bio) + "..."
+    ? bio.slice(0, 155) + "..."
     : `${player.name} (${player.fullName || player.name}) — ${player.game} pro for ${player.team}. Uses ${player.headphone}.`;
   const GAME_OG_COLORS = { CS2: "%23ff8c00", Valorant: "%23ff4655", Fortnite: "%234c7bd9", LoL: "%23c89b3c", "Dota 2": "%23e74c3c", "R6 Siege": "%234a86c8", "Overwatch 2": "%23f99e1a", Apex: "%23dc2626", "Call of Duty": "%235cb85c", PUBG: "%23f2a900", Deadlock: "%238b5cf6", "Quake Champions": "%23ce4a00", "Marvel Rivals": "%23ed1d24", "Rocket League": "%231a9fff" };
   const ogAccent = GAME_OG_COLORS[player.game] || "%2300ff6a";
@@ -108,7 +108,7 @@ export default function PlayerProfilePage({ params }) {
         name: player.fullName || player.name,
         alternateName: player.name,
         jobTitle: `Professional ${player.game} Player`,
-        description: bio ? (bio?.slice?.(0, 300) ?? bio) : `${player.name} is a professional ${player.game} player for ${player.team}. Uses the ${player.headphone}.`,
+        description: bio ? bio.slice(0, 300) : `${player.name} is a professional ${player.game} player for ${player.team}. Uses the ${player.headphone}.`,
         memberOf: { "@type": "SportsTeam", name: player.team },
         url: `https://esportsheadphones.com/players/${params.slug}`,
       }) }} />
@@ -145,7 +145,7 @@ export default function PlayerProfilePage({ params }) {
           <caption>Full headphone settings for {player.name} in {player.game}</caption>
           <tbody>
             <tr><th>Headphone</th><td>{headphoneSlugVal ? <a href={`/headphones/${headphoneSlugVal}`}>{player.headphone}</a> : player.headphone}</td></tr>
-            <tr><th>Polling Rate</th><td>{player.hz} Hz</td></tr>
+            <tr><th>Freq. Response</th><td>{player.hz} Hz</td></tr>
           </tbody>
         </table>
 
@@ -169,7 +169,7 @@ export default function PlayerProfilePage({ params }) {
             <h2>{player.name}&apos;s Headphone — {headphoneData.name} Details</h2>
             <p>
               {player.name} currently uses the <a href={`/headphones/${headphoneSlugVal}`}>{headphoneData.name}</a> by <a href={`/brands/${headphoneData.brand?.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-")}`}>{headphoneData.brand}</a>.
-              {mouseDesc ? ` ${(typeof mouseDesc === "string" ? mouseDesc : (mouseDesc.text || "")).slice(0, 300)}...` : ` It weighs ${headphoneData?.weight ?? 0}g, uses the ${headphoneData.driverType || "Unknown"} driver, and costs $${headphoneData?.price ?? 0}.`}
+              {mouseDesc ? ` ${mouseDesc.text.slice(0, 300)}...` : ` It weighs ${headphoneData?.weight}g, uses the ${headphoneData.driverType} switch, and costs $${headphoneData?.price}.`}
             </p>
             <table>
               <caption>{headphoneData.name} specifications — {player.name}&apos;s current headphone</caption>
@@ -178,12 +178,12 @@ export default function PlayerProfilePage({ params }) {
                 <tr><th>Brand</th><td><a href={`/brands/${headphoneData.brand?.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-")}`}>{headphoneData.brand}</a></td></tr>
                 <tr><th>Weight</th><td>{headphoneData?.weight}g</td></tr>
                 <tr><th>Driver</th><td><a href={`/sensors/${headphoneData.driverType?.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{headphoneData.driverType}</a></td></tr>
-                <tr><th>Actuation</th><td>{headphoneData.actuationPoint}mm</td></tr>
-                <tr><th>Polling Rate</th><td>{(headphoneData.pollingRate ?? 0).toLocaleString()} Hz</td></tr>
-                <tr><th>Layout</th><td><a href={`/best/${headphoneData.layout?.toLowerCase?.() ?? ""}`}>{headphoneData.layout}</a></td></tr>
+                <tr><th>Impedance</th><td>{headphoneData.impedancePoint}mm</td></tr>
+                <tr><th>Freq. Response</th><td>{headphoneData.frequencyResponse.toLocaleString()} Hz</td></tr>
+                <tr><th>Layout</th><td><a href={`/shapes/${headphoneData.formFactor?.toLowerCase()}`}>{headphoneData.formFactor}</a></td></tr>
                 <tr><th>Connectivity</th><td>{headphoneData.connectivity}</td></tr>
                 <tr><th>Price</th><td>${headphoneData?.price}</td></tr>
-                <tr><th>Switches</th><td>{headphoneData.switches}</td></tr>
+                <tr><th>Drivers</th><td>{headphoneData.drivers}</td></tr>
                 <tr><th>Pro Usage</th><td>{headphoneData?.proUsage}% of all tracked pros</td></tr>
                 <tr><th>Rating</th><td>{headphoneData.rating}/10</td></tr>
               </tbody>
@@ -260,7 +260,7 @@ export default function PlayerProfilePage({ params }) {
         {(() => {
           const sameMousePlayers = proPlayers.filter((p) => {
             if (p.name === player.name || !p.headphone || !player.headphone) return false;
-            const pm = (p.headphone || "").toLowerCase(), cm = (player.headphone || "").toLowerCase();
+            const pm = p.headphone.toLowerCase(), cm = player.headphone.toLowerCase();
             return pm === cm || pm.includes(cm) || cm.includes(pm);
           }).slice(0, 20);
           if (!sameMousePlayers.length) return null;
@@ -376,13 +376,13 @@ export default function PlayerProfilePage({ params }) {
         <h2>Frequently Asked Questions About {player.name}</h2>
         <dl>
           <dt>What headphone does {player.name} use?</dt>
-          <dd>{player.name} uses the {headphoneSlugVal ? <a href={`/headphones/${headphoneSlugVal}`}>{player.headphone}</a> : player.headphone}. {headphoneData ? `It weighs ${headphoneData?.weight}g, costs $${headphoneData?.price}, and uses the ${headphoneData.driverType} driver.` : ""}</dd>
+          <dd>{player.name} uses the {headphoneSlugVal ? <a href={`/headphones/${headphoneSlugVal}`}>{player.headphone}</a> : player.headphone}. {headphoneData ? `It weighs ${headphoneData?.weight}g, costs $${headphoneData?.price}, and uses the ${headphoneData.driverType} switch.` : ""}</dd>
 
           <dt>What team does {player.name} play for?</dt>
           <dd>{player.name} ({player.fullName || player.name}) currently plays for {player.team} as a {player.role} in {player.game}.</dd>
 
-          <dt>What polling rate does {player.name} use?</dt>
-          <dd>{player.name} uses a polling rate of {player.hz} Hz on their {player.headphone}.</dd>
+          <dt>What frequency response does {player.name} use?</dt>
+          <dd>{player.name} uses a frequency response of {player.hz} Hz on their {player.headphone}.</dd>
 
           {player.headphoneHistory && player.headphoneHistory.length > 1 && (
             <>
@@ -403,7 +403,7 @@ export default function PlayerProfilePage({ params }) {
             <li><a href="/drivers">Headphone Driver Comparison</a></li>
             <li><a href="/compare">Compare Headphones Side by Side</a></li>
             <li><a href="/trends">Esports Headphone Industry Trends</a></li>
-            <li><a href="/best">Headphone Layout Overlay Tool</a></li>
+            <li><a href="/shapes">Headphone Layout Overlay Tool</a></li>
             <li><a href="/lab">Headphone Finder Quiz</a></li>
             <li><a href="/">EsportsHeadphones Home</a></li>
           </ul>
@@ -415,13 +415,13 @@ export default function PlayerProfilePage({ params }) {
         <SSRTitle accent={player.game}>{player.name}</SSRTitle>
         <SSRSub>
           {bio
-            ? (bio?.slice?.(0, 280) ?? bio) + "..."
+            ? bio.slice(0, 280) + "..."
             : `${player.name} (${player.fullName || player.name}) is a professional ${player.game} ${player.role} for ${player.team}. Uses the ${player.headphone}.`
           }
         </SSRSub>
         <SSRGrid>
           <SSRStat label="Headphone" value={player.headphone.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |Endgame Gear |ASUS |Keychron |Glorious )/, "")} color="#00d4ff" />
-          <SSRStat label="Polling Rate" value={`${player.hz} Hz`} color="#00d4ff" />
+          <SSRStat label="Freq. Response" value={`${player.hz} Hz`} color="#00d4ff" />
           <SSRStat label="Team" value={player.team} />
           <SSRStat label="Role" value={player.role} />
         </SSRGrid>
@@ -429,7 +429,7 @@ export default function PlayerProfilePage({ params }) {
         <div className="flex flex-wrap gap-2">
           {headphoneSlugVal && <SSRLink href={`/headphones/${headphoneSlugVal}`}>{player.headphone.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |Endgame Gear |ASUS |Keychron |Glorious )/, "")} →</SSRLink>}
           <SSRLink href="/players">All Players</SSRLink>
-          <SSRLink href="/compare">Compare Headphones</SSRLink>
+          <SSRLink href="/sensitivity">Convert Sensitivity</SSRLink>
           <SSRLink href={`/games/${player.game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{player.game}</SSRLink>
         </div>
       </SSRSection>

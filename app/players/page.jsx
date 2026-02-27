@@ -4,7 +4,7 @@ import { allPlayers, proPlayers, headphones, BRAND_COLORS } from "@/data";
 
 export const metadata = {
   title: "Pro Players — Esports Headphone Settings & Gear",
-  description: "Browse 2100+ professional esports players and their headphone settings. Find audio specs, driver type, connectivity, and gear for CS2, Valorant, LoL, Fortnite, and more.",
+  description: "Browse 2100+ professional esports players and their headphone settings. Find frequency response, switch type, impedance, and gear for CS2, Valorant, LoL, Fortnite, and more.",
   alternates: { canonical: "https://esportsheadphones.com/players" },
   openGraph: {
     title: "Pro Players — Esports Headphone Settings & Gear",
@@ -19,8 +19,8 @@ export const metadata = {
 
 export default function PlayersPage() {
   const slug = (name) => name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
-  const headphoneSlug = (headphoneName) => {
-    const m = headphones.find((mm) => headphoneName.includes(mm.name) || mm.name.includes(headphoneName));
+  const headphoneSlug = (mouseName) => {
+    const m = headphones.find((mm) => mouseName.includes(mm.name) || mm.name.includes(mouseName));
     return m ? slug(m.name) : null;
   };
 
@@ -68,9 +68,9 @@ export default function PlayersPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "FAQPage",
         mainEntity: [
-          { "@type": "Question", name: "What headphones do most pro players use?", acceptedAnswer: { "@type": "Answer", text: `Among ${allPlayers.length}+ tracked pro players, the most popular headphone is the ${mostUsedHeadphone[0]} used by ${mostUsedHeadphone[1]} players. Closed-back headphones with excellent positional audio dominate the competitive scene.` }},
-          { "@type": "Question", name: "What headphone do CS2 pros use?", acceptedAnswer: { "@type": "Answer", text: `The most popular headphone among CS2 professionals is the ${mostUsedHeadphone[0]}, used by ${mostUsedHeadphone[1]} tracked players. Headphones with excellent sound staging and comfortable fit dominate the CS2 pro scene.` }},
-          { "@type": "Question", name: "What features matter most in a gaming headphone?", acceptedAnswer: { "@type": "Answer", text: `Pro players prioritize clear positional audio, comfortable fit for long sessions, noise isolation for focus, closed-back design for immersion, and low latency connectivity. Quality drivers and precise frequency response are also important for competitive advantage.` }},
+          { "@type": "Question", name: "What headphones do most pro players use?", acceptedAnswer: { "@type": "Answer", text: `Among ${allPlayers.length}+ tracked pro players, the most popular headphone is the ${mostUsedHeadphone[0]} used by ${mostUsedHeadphone[1]} players. Hall Effect and active noise cancellation headphones dominate the competitive scene.` }},
+          { "@type": "Question", name: "What headphone do CS2 pros use?", acceptedAnswer: { "@type": "Answer", text: `The most popular headphone among CS2 professionals is the ${mostUsedHeadphone[0]}, used by ${mostUsedHeadphone[1]} tracked players. Headphones with active noise cancellation and Hall Effect drivers dominate the CS2 pro scene.` }},
+          { "@type": "Question", name: "What features matter most in a gaming headphone?", acceptedAnswer: { "@type": "Answer", text: `Pro players prioritize active noise cancellation technology, low impedance points (0.1-0.2mm), high frequency responses (1000-8000Hz), and Hall Effect magnetic drivers. Lightweight headphones with detachable cablepable drivers are also increasingly popular in competitive gaming.` }},
         ],
       }) }} />
       <article
@@ -80,7 +80,7 @@ export default function PlayersPage() {
         <h1>Professional Esports Players — Headphone Settings and Gear</h1>
         <p>
           Browse the headphone settings and gear of {allPlayers.length.toLocaleString()}+ professional esports players
-          across {games.length} major competitive titles. Find driver type, impedance, connectivity,
+          across {games.length} major competitive titles. Find frequency response, switch type, impedance point,
           and the exact headphone model used by your favorite pros.
         </p>
 
@@ -105,14 +105,14 @@ export default function PlayersPage() {
           const allGamePlayers = allPlayers.filter((p) => p.game === game);
           const headphoneCounts = {};
           allGamePlayers.forEach((p) => { headphoneCounts[p.headphone] = (headphoneCounts[p.headphone] || 0) + 1; });
-          const topHeadphonesInGame = Object.entries(headphoneCounts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+          const topKbdInGame = Object.entries(headphoneCounts).sort((a, b) => b[1] - a[1]).slice(0, 3);
 
           if (!gamePlayers.length) return null;
           return (
             <section key={game}>
               <h2>{game} Pro Players</h2>
               <p>
-                {allGamePlayers.length} {game} players tracked. Most popular headphone: {topHeadphonesInGame[0]?.[0]}.
+                {allGamePlayers.length} {game} players tracked. Most popular headphone: {topKbdInGame[0]?.[0]}.
               </p>
               <h3>Top {game} Players with Full Profiles</h3>
               <table>
@@ -133,11 +133,11 @@ export default function PlayersPage() {
               </table>
               <h3>Most Used Headphones in {game}</h3>
               <ol>
-                {topHeadphonesInGame.map(([headphoneName, count]) => {
-                  const ms = headphoneSlug(headphoneName);
+                {topKbdInGame.map(([kbdName, count]) => {
+                  const ms = headphoneSlug(kbdName);
                   return (
-                    <li key={headphoneName}>
-                      {ms ? <a href={`/headphones/${ms}`}>{headphoneName}</a> : headphoneName} — {count} players ({Math.round(count / allGamePlayers.length * 100)}%)
+                    <li key={kbdName}>
+                      {ms ? <a href={`/headphones/${ms}`}>{kbdName}</a> : kbdName} — {count} players ({Math.round(count / allGamePlayers.length * 100)}%)
                     </li>
                   );
                 })}
@@ -174,11 +174,11 @@ export default function PlayersPage() {
           const topHeadphones = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 15);
           return (
             <ol>
-              {topHeadphones.map(([headphoneName, count]) => {
-                const ms = headphoneSlug(headphoneName);
+              {topHeadphones.map(([kbdName, count]) => {
+                const ms = headphoneSlug(kbdName);
                 return (
-                  <li key={headphoneName}>
-                    {ms ? <a href={`/headphones/${ms}`}>{headphoneName}</a> : headphoneName} — {count} players ({Math.round(count / allPlayers.length * 100)}%)
+                  <li key={kbdName}>
+                    {ms ? <a href={`/headphones/${ms}`}>{kbdName}</a> : kbdName} — {count} players ({Math.round(count / allPlayers.length * 100)}%)
                   </li>
                 );
               })}
@@ -205,12 +205,13 @@ export default function PlayersPage() {
           <h2>Related Pages</h2>
           <ul>
             <li><a href="/headphones">All Esports Headphones — Full Database</a></li>
+            <li><a href="/sensitivity">Sensitivity Converter — Convert Between Games</a></li>
             <li><a href="/games">Headphone Usage by Game</a></li>
             <li><a href="/brands">Headphone Brand Comparison</a></li>
             <li><a href="/compare">Compare Headphones Side by Side</a></li>
-            <li><a href="/drivers">Driver Type Comparison</a></li>
+            <li><a href="/drivers">Driver Comparison</a></li>
             <li><a href="/trends">Industry Trends</a></li>
-            <li><a href="/best">Best Headphones by Category</a></li>
+            <li><a href="/shapes">Headphone Layout Overlay</a></li>
             <li><a href="/lab">Headphone Finder Quiz</a></li>
             <li><a href="/">EsportsHeadphones Home</a></li>
           </ul>
@@ -227,9 +228,9 @@ export default function PlayersPage() {
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>
+          <SSRLink href="/sensitivity">Sensitivity</SSRLink>
           <SSRLink href="/games">Games</SSRLink>
           <SSRLink href="/brands">Brands</SSRLink>
-          <SSRLink href="/drivers">Drivers</SSRLink>
         </div>
       </SSRSection>
 

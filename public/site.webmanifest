@@ -1,7 +1,7 @@
 {
-  "name": "EsportsHeadphones — Pro Esports Keyboard Database",
+  "name": "EsportsHeadphones — Pro Esports Headphone Database",
   "short_name": "EsportsHeadphones",
-  "description": "The #1 database of professional esports keyboards. Compare keyboards, pro settings, and gear across CS2, Valorant, and more.",
+  "description": "The #1 database of professional esports headphones. Compare headphones, pro settings, and gear across CS2, Valorant, and more.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#050505",

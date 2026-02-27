@@ -6,13 +6,13 @@ const slug = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/
 
 export const metadata = {
   title: "All Esports Headphones — Complete Database & Rankings",
-  description: "Browse every headphone used by professional esports players. Filter by brand, weight, driver type, impedance, and price. Compare 150+ gaming headsets with full specs and pro usage statistics.",
+  description: "Browse every headphone used by professional esports players. Filter by brand, weight, switch type, frequency response, and price. Compare 150+ gaming headphones with full specs and pro usage statistics.",
   alternates: { canonical: "https://esportsheadphones.com/headphones" },
   openGraph: {
     title: "All Esports Headphones — Complete Database & Rankings",
-    description: "Browse every headphone used by professional esports players. 150+ gaming headsets with full specs and pro usage statistics.",
+    description: "Browse every headphone used by professional esports players. 150+ gaming headphones with full specs and pro usage statistics.",
     url: "https://esportsheadphones.com/headphones",
-    images: [{ url: "https://esportsheadphones.com/og?title=All+Esports+Headphones&subtitle=Complete+Database+%C2%B7+150%2B+Headsets+%C2%B7+Full+Specs+%C2%B7+Pro+Usage", width: 1200, height: 630 }],
+    images: [{ url: "https://esportsheadphones.com/og?title=All+Esports+Headphones&subtitle=Complete+Database+%C2%B7+150%2B+Headphones+%C2%B7+Full+Specs+%C2%B7+Pro+Usage", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -38,23 +38,23 @@ export default function HeadphonesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "ItemList",
         name: "Best Esports Headphones Ranked by Pro Usage",
-        description: `Top ${headphones.length} professional esports gaming headsets ranked by pro player adoption`,
+        description: `Top ${headphones.length} professional esports gaming headphones ranked by pro player adoption`,
         numberOfItems: sorted.length,
         itemListElement: sorted.slice(0, 20).map((m, i) => ({
           "@type": "ListItem", position: i + 1,
           url: `https://esportsheadphones.com/headphones/${slug(m.name)}`,
           name: m.name,
-          item: { "@type": "Product", name: m.name, brand: { "@type": "Brand", name: m.brand }, description: `${m.name} by ${m.brand}. ${m?.weight}g headphone with ${m.driverType} driver. ${m.proUsage}% pro usage.` },
+          item: { "@type": "Product", name: m.name, brand: { "@type": "Brand", name: m.brand }, description: `${m.name} by ${m.brand}. ${m?.weight}g ${m.formFactor.toLowerCase()} headphone with ${m.driverType} switch. ${m.proUsage}% pro usage.` },
         })),
       }) }} />
       {/* FAQ schema for headphones page */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "FAQPage",
         mainEntity: [
-          { "@type": "Question", name: "What is the best esports headphone in 2025?", acceptedAnswer: { "@type": "Answer", text: `The ${sorted[0].name} is currently the most used headphone among professional esports players with ${sorted[0].proUsage}% pro usage, followed by the ${sorted[1].name} (${sorted[1].proUsage}%) and ${sorted[2].name} (${sorted[2].proUsage}%). The best choice depends on your comfort, audio preference, and game.` }},
-          { "@type": "Question", name: "What is the lightest gaming headphone for esports?", acceptedAnswer: { "@type": "Answer", text: `The ${lightest.name} is the lightest esports headphone in our database at just ${lightest?.weight}g. Ultralight headphones (under 200g) include ${headphones.filter(m => m?.weight < 200).map(m => m.name).join(", ")}. Most pros prefer headphones between 150-250g.` }},
-          { "@type": "Question", name: "Are wireless headphones good for esports?", acceptedAnswer: { "@type": "Answer", text: `Yes — ${wirelessCount} of ${headphones.length} (${Math.round(wirelessCount/headphones.length*100)}%) headphones in our pro database are wireless. Modern wireless headphones with low latency have eliminated the connectivity concerns. The vast majority of top esports pros now use wireless headsets.` }},
-          { "@type": "Question", name: "How much does a pro esports headphone cost?", acceptedAnswer: { "@type": "Answer", text: `The average price of a pro esports headphone is $${avgPrice}. Prices range from $${cheapest?.price} (${cheapest.name}) to $${mostExpensive?.price} (${mostExpensive.name}). Most competitive headphones fall between $100-$200.` }},
+          { "@type": "Question", name: "What is the best esports headphone in 2025?", acceptedAnswer: { "@type": "Answer", text: `The ${sorted[0].name} is currently the most used headphone among professional esports players with ${sorted[0].proUsage}% pro usage, followed by the ${sorted[1].name} (${sorted[1].proUsage}%) and ${sorted[2].name} (${sorted[2].proUsage}%). The best choice depends on your hand size, grip style, and game.` }},
+          { "@type": "Question", name: "What is the lightest gaming headphone for esports?", acceptedAnswer: { "@type": "Answer", text: `The ${lightest.name} is the lightest esports headphone in our database at just ${lightest?.weight}g. Ultralight headphones (under 50g) include ${headphones.filter(m => m?.weight < 50).map(m => m.name).join(", ")}. Most pros prefer headphones between 45-65g.` }},
+          { "@type": "Question", name: "Are wireless headphones good for esports?", acceptedAnswer: { "@type": "Answer", text: `Yes — ${wirelessCount} of ${headphones.length} (${Math.round(wirelessCount/headphones.length*100)}%) headphones in our pro database are wireless. Modern wireless headphones at 4KHz polling have eliminated the latency gap. The vast majority of top esports pros now use wireless headphones.` }},
+          { "@type": "Question", name: "How much does a pro esports headphone cost?", acceptedAnswer: { "@type": "Answer", text: `The average price of a pro esports headphone is $${avgPrice}. Prices range from $${cheapest?.price} (${cheapest.name}) to $${mostExpensive?.price} (${mostExpensive.name}). Most competitive headphones fall between $100-$170.` }},
         ],
       }) }} />
       <article
@@ -80,14 +80,14 @@ export default function HeadphonesPage() {
           <li>Highest rated: <a href={`/headphones/${slug(highestRated.name)}`}>{highestRated.name}</a> ({highestRated.rating}/10)</li>
           <li>Wireless: {wirelessCount} of {headphones.length} ({Math.round(wirelessCount / headphones.length * 100)}%)</li>
           <li>Brands represented: {brands.length}</li>
-          <li>Driver types represented: {drivers.length}</li>
+          <li>Drivers represented: {drivers.length}</li>
         </ul>
 
         <h2>Esports Headphones Ranked by Pro Usage</h2>
         <table>
           <caption>All {headphones.length} esports headphones sorted by professional player usage</caption>
           <thead>
-            <tr><th>Rank</th><th>Headphone</th><th>Brand</th><th>Weight</th><th>Driver</th><th>Impedance</th><th>Frequency</th><th>Price</th><th>Pro Usage</th><th>Rating</th></tr>
+            <tr><th>Rank</th><th>Headphone</th><th>Brand</th><th>Weight</th><th>Driver</th><th>Freq. Response</th><th>Layout</th><th>Price</th><th>Pro Usage</th><th>Rating</th></tr>
           </thead>
           <tbody>
             {sorted.map((m, i) => (
@@ -97,8 +97,8 @@ export default function HeadphonesPage() {
                 <td><a href="/brands">{m.brand}</a></td>
                 <td>{m?.weight}g</td>
                 <td><a href="/drivers">{m.driverType}</a></td>
-                <td>{m.impedance} Ω</td>
-                <td>{m.frequencyResponse} Hz</td>
+                <td>{m.frequencyResponse.toLocaleString()} Hz</td>
+                <td>{m.formFactor}</td>
                 <td>${m?.price}</td>
                 <td>{m.proUsage}%</td>
                 <td>{m.rating}/10</td>
@@ -108,27 +108,27 @@ export default function HeadphonesPage() {
         </table>
 
         <h2>Headphones by Weight Category</h2>
-        <h3>Ultralight (Under 200g)</h3>
+        <h3>Ultralight (Under 50g)</h3>
         <ul>
-          {headphones.filter((m) => m?.weight < 200).sort((a, b) => a?.weight - b?.weight).map((m) => (
+          {headphones.filter((m) => m?.weight < 50).sort((a, b) => a?.weight - b?.weight).map((m) => (
             <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> — {m?.weight}g ({m.brand}), ${m?.price}</li>
           ))}
         </ul>
-        <h3>Lightweight (200-250g)</h3>
+        <h3>Lightweight (50-60g)</h3>
         <ul>
-          {headphones.filter((m) => m?.weight >= 200 && m?.weight <= 250).sort((a, b) => a?.weight - b?.weight).map((m) => (
+          {headphones.filter((m) => m?.weight >= 50 && m?.weight <= 60).sort((a, b) => a?.weight - b?.weight).map((m) => (
             <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> — {m?.weight}g ({m.brand}), ${m?.price}</li>
           ))}
         </ul>
-        <h3>Medium (251-300g)</h3>
+        <h3>Medium (61-70g)</h3>
         <ul>
-          {headphones.filter((m) => m?.weight > 250 && m?.weight <= 300).sort((a, b) => a?.weight - b?.weight).map((m) => (
+          {headphones.filter((m) => m?.weight > 60 && m?.weight <= 70).sort((a, b) => a?.weight - b?.weight).map((m) => (
             <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> — {m?.weight}g ({m.brand}), ${m?.price}</li>
           ))}
         </ul>
-        <h3>Standard (Over 300g)</h3>
+        <h3>Standard (Over 70g)</h3>
         <ul>
-          {headphones.filter((m) => m?.weight > 300).sort((a, b) => a?.weight - b?.weight).map((m) => (
+          {headphones.filter((m) => m?.weight > 70).sort((a, b) => a?.weight - b?.weight).map((m) => (
             <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> — {m?.weight}g ({m.brand}), ${m?.price}</li>
           ))}
         </ul>
@@ -148,14 +148,14 @@ export default function HeadphonesPage() {
           );
         })}
 
-        <h2>Headphones by Driver Type</h2>
-        {drivers.map((dr) => {
-          const driverHeadphones = headphones.filter((m) => m.driverType === dr);
+        <h2>Headphones by Driver</h2>
+        {drivers.map((sw) => {
+          const switchKbds = headphones.filter((m) => m.driverType === sw);
           return (
-            <section key={dr}>
-              <h3><a href="/drivers">{dr}</a> ({driverHeadphones.length} headphones)</h3>
+            <section key={sw}>
+              <h3><a href="/drivers">{sw}</a> ({switchKbds.length} headphones)</h3>
               <ul>
-                {driverHeadphones.map((m) => (
+                {switchKbds.map((m) => (
                   <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> ({m.brand})</li>
                 ))}
               </ul>
@@ -163,14 +163,14 @@ export default function HeadphonesPage() {
           );
         })}
 
-        <h2>Headphones by Connectivity</h2>
-        {[...new Set(headphones.map((m) => m.connectivity))].map((conn) => {
-          const connHeadphones = headphones.filter((m) => m.connectivity === conn);
+        <h2>Headphones by Layout</h2>
+        {[...new Set(headphones.map((m) => m.formFactor))].map((shape) => {
+          const shapeHeadphones = headphones.filter((m) => m.formFactor === shape);
           return (
-            <section key={conn}>
-              <h3>{conn} Headphones ({connHeadphones.length} headphones)</h3>
+            <section key={shape}>
+              <h3>{shape} Shape ({shapeHeadphones.length} headphones)</h3>
               <ul>
-                {connHeadphones.map((m) => (
+                {shapeHeadphones.map((m) => (
                   <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> ({m.brand}, {m?.weight}g)</li>
                 ))}
               </ul>
@@ -179,21 +179,21 @@ export default function HeadphonesPage() {
         })}
 
         <h2>Headphones by Price Range</h2>
-        <h3>Budget (Under $100)</h3>
+        <h3>Budget (Under $80)</h3>
         <ul>
-          {headphones.filter((m) => m?.price < 100).sort((a, b) => a?.price - b?.price).map((m) => (
+          {headphones.filter((m) => m?.price < 80).sort((a, b) => a?.price - b?.price).map((m) => (
             <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> — ${m?.price} ({m.brand})</li>
           ))}
         </ul>
-        <h3>Mid-Range ($100-$200)</h3>
+        <h3>Mid-Range ($80-$150)</h3>
         <ul>
-          {headphones.filter((m) => m?.price >= 100 && m?.price <= 200).sort((a, b) => a?.price - b?.price).map((m) => (
+          {headphones.filter((m) => m?.price >= 80 && m?.price <= 150).sort((a, b) => a?.price - b?.price).map((m) => (
             <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> — ${m?.price} ({m.brand})</li>
           ))}
         </ul>
-        <h3>Premium (Over $200)</h3>
+        <h3>Premium (Over $150)</h3>
         <ul>
-          {headphones.filter((m) => m?.price > 200).sort((a, b) => a?.price - b?.price).map((m) => (
+          {headphones.filter((m) => m?.price > 150).sort((a, b) => a?.price - b?.price).map((m) => (
             <li key={m.id}><a href={`/headphones/${slug(m.name)}`}>{m.name}</a> — ${m?.price} ({m.brand})</li>
           ))}
         </ul>
@@ -201,10 +201,12 @@ export default function HeadphonesPage() {
         <nav aria-label="Related"><ul>
           <li><a href="/players">Pro Player Settings and Gear</a></li>
           <li><a href="/brands">Brand Comparison and Analysis</a></li>
-          <li><a href="/drivers">Driver Type Analytics and Comparison</a></li>
+          <li><a href="/drivers">Driver Analytics and Comparison</a></li>
           <li><a href="/compare">Compare Any Two Headphones Side by Side</a></li>
+          <li><a href="/shapes">Headphone Layout Overlay Tool</a></li>
           <li><a href="/games">Headphone Usage by Esports Game</a></li>
           <li><a href="/trends">Headphone Industry Trends 2019-2025</a></li>
+          <li><a href="/sensitivity">Sensitivity Converter</a></li>
           <li><a href="/lab">Headphone Finder Quiz</a></li>
           <li><a href="/">EsportsHeadphones Home</a></li>
         </ul></nav>
@@ -224,6 +226,7 @@ export default function HeadphonesPage() {
           <SSRLink href="/compare">Compare</SSRLink>
           <SSRLink href="/brands">Brands</SSRLink>
           <SSRLink href="/drivers">Drivers</SSRLink>
+          <SSRLink href="/shapes">Shapes</SSRLink>
         </div>
       </SSRSection>
 

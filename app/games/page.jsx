@@ -59,12 +59,12 @@ export default function GamesPage() {
               const players = allPlayers.filter((p) => p.game === game);
               const counts = {};
               players.forEach((p) => { counts[p.headphone] = (counts[p.headphone] || 0) + 1; });
-              const topHeadphone = Object.entries(counts).sort((a, b) => b[1] - a[1])?.[0];
+              const topMouse = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
               return (
                 <tr key={game}>
                   <td><a href={`/games/${slug(game)}`}>{game}</a></td>
                   <td>{players.length}</td>
-                  <td>{topHeadphone ? topHeadphone[0] : "—"}</td>
+                  <td>{topMouse ? topMouse[0] : "—"}</td>
                 </tr>
               );
             })}
@@ -98,11 +98,11 @@ export default function GamesPage() {
 
               <h3>Most Popular Headphones in {game}</h3>
               <ol>
-                {topHeadphones.map(([headphoneName, count]) => {
-                  const ms = mSlug(headphoneName);
+                {topHeadphones.map(([kbdName, count]) => {
+                  const ms = mSlug(kbdName);
                   return (
-                    <li key={headphoneName}>
-                      {ms ? <a href={`/headphones/${ms}`}>{headphoneName}</a> : headphoneName} — {count} players ({Math.round(count/players.length*100)}%)
+                    <li key={kbdName}>
+                      {ms ? <a href={`/headphones/${ms}`}>{kbdName}</a> : kbdName} — {count} players ({Math.round(count/players.length*100)}%)
                     </li>
                   );
                 })}
@@ -143,9 +143,9 @@ export default function GamesPage() {
         <nav aria-label="Related"><ul>
           <li><a href="/headphones">All Esports Headphones</a></li>
           <li><a href="/players">Pro Player Settings</a></li>
-          <li><a href="">Sensitivity Converter</a></li>
+          <li><a href="/sensitivity">Sensitivity Converter</a></li>
           <li><a href="/brands">Headphone Brands</a></li>
-          <li><a href="/driveres">Driver Analytics</a></li>
+          <li><a href="/drivers">Driver Analytics</a></li>
           <li><a href="/trends">Industry Trends</a></li>
           <li><a href="/compare">Compare Headphones</a></li>
           <li><a href="/">EsportsHeadphones Home</a></li>
@@ -203,7 +203,7 @@ export default function GamesPage() {
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/players">Pro Settings</SSRLink>
           <SSRLink href="/headphones">All Headphones</SSRLink>
-          <SSRLink href="">Sensitivity</SSRLink>
+          <SSRLink href="/sensitivity">Sensitivity</SSRLink>
           <SSRLink href="/brands">Brands</SSRLink>
         </div>
       </SSRSection>

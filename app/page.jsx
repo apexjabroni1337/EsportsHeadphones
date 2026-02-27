@@ -4,18 +4,18 @@ import { headphones, allPlayers, proPlayers, BRAND_COLORS } from "@/data";
 
 export const metadata = {
   title: "EsportsHeadphones — The Definitive Guide to Pro Esports Headphones",
-  description: "The #1 database of professional esports headphones. Compare headsets used by 2100+ pro players across CS2, Valorant, League of Legends, Fortnite, and 10+ major competitive titles. Full specs, rankings, and pro settings.",
+  description: "The #1 database of professional esports headphones. Compare headphones used by 2100+ pro players across CS2, Valorant, League of Legends, Fortnite, and 10+ major competitive titles. Full specs, rankings, and pro settings.",
   alternates: { canonical: "https://esportsheadphones.com" },
   openGraph: {
     title: "EsportsHeadphones — The Definitive Guide to Pro Esports Headphones",
-    description: "The #1 database of professional esports headphones. Compare headsets used by 2100+ pro players across 13 major games.",
+    description: "The #1 database of professional esports headphones. Compare headphones used by 2100+ pro players across 13 major games.",
     url: "https://esportsheadphones.com",
-    images: [{ url: "https://esportsheadphones.com/og?title=The+Definitive+Guide+to+Pro+Esports+Headphones&subtitle=2100%2B+Pro+Players+%C2%B7+150%2B+Headsets+%C2%B7+13+Games", width: 1200, height: 630 }],
+    images: [{ url: "https://esportsheadphones.com/og?title=The+Definitive+Guide+to+Pro+Esports+Headphones&subtitle=2100%2B+Pro+Players+%C2%B7+150%2B+Headphones+%C2%B7+13+Games", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "EsportsHeadphones — The Definitive Guide to Pro Esports Headphones",
-    description: "The #1 database of professional esports headphones. Compare headsets used by 2100+ pro players across 13 major games.",
+    description: "The #1 database of professional esports headphones. Compare headphones used by 2100+ pro players across 13 major games.",
   },
 };
 
@@ -42,8 +42,8 @@ export default function HomePage() {
           Apex Legends, Call of Duty, Overwatch 2, Rainbow Six Siege, and more.
         </p>
         <p>
-          Our database covers {totalHeadphones} gaming headsets from brands including SteelSeries, HyperX, ASUS, Audio-Technica,
-          Sennheiser, Corsair, Turtle Beach, and more. Every headphone includes full specifications, pro usage
+          Our database covers {totalHeadphones} gaming headphones from brands including Razer, Logitech, Wooting, Cherry,
+          Pulsar, Lamzu, SteelSeries, Corsair, and more. Every headphone includes full specifications, pro usage
           statistics, expert ratings, and direct purchase links.
         </p>
 
@@ -67,7 +67,7 @@ export default function HomePage() {
         <h2>Featured Pro Players</h2>
         <ul>
           {proPlayers.slice(0, 20).map((p) => {
-            const pm = headphones.find((m) => (p.headphone || "").includes(m.name) || m.name.includes(p.headphone || ""));
+            const pm = headphones.find((m) => p.headphone.includes(m.name) || m.name.includes(p.headphone));
             const mSlug = pm ? pm.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") : null;
             return (
               <li key={`${p.name}-${p.game}`}>
@@ -92,8 +92,8 @@ export default function HomePage() {
 
         <h2>Headphone Drivers</h2>
         <ul>
-          {[...new Set(headphones.map((m) => m.driverType))].slice(0, 8).map((driverName) => (
-            <li key={driverName}><a href="/drivers">{driverName}</a> — used in {headphones.filter((m) => m.driverType === driverName).length} headphones</li>
+          {[...new Set(headphones.map((m) => m.driverType))].slice(0, 8).map((switchName) => (
+            <li key={switchName}><a href="/drivers">{switchName}</a> — used in {headphones.filter((m) => m.driverType === switchName).length} headphones</li>
           ))}
         </ul>
 
@@ -101,14 +101,15 @@ export default function HomePage() {
           <h2>Explore EsportsHeadphones</h2>
           <ul>
             <li><a href="/headphones">All Esports Headphones — Complete database with specs and rankings</a></li>
-            <li><a href="/players">Pro Player Settings — Audio settings and gear for {totalPlayers.toLocaleString()}+ players</a></li>
-            <li><a href="/games">Games — Headphone choices by esports title</a></li>
-            <li><a href="/brands">Brands — Compare SteelSeries, HyperX, ASUS, and more</a></li>
-            <li><a href="/drivers">Drivers — Dynamic, neodymium, and other driver types</a></li>
-            <li><a href="/trends">Trends — Weight, connectivity, audio frequency data</a></li>
+            <li><a href="/players">Pro Player Settings — DPI, sensitivity, and gear for {totalPlayers.toLocaleString()}+ players</a></li>
+            <li><a href="/games">Games — Headphone DNA by esports title</a></li>
+            <li><a href="/brands">Brands — Compare Wooting, Razer, Logitech, and more</a></li>
+            <li><a href="/drivers">Drivers — Hall Effect, Cherry MX, Razer Optical comparison</a></li>
+            <li><a href="/trends">Trends — Weight, frequency response, wireless adoption data</a></li>
             <li><a href="/compare">Compare — Side-by-side headphone comparison tool</a></li>
+            <li><a href="/sensitivity">Sensitivity Converter — Convert settings between games</a></li>
             <li><a href="/lab">Lab — Find your perfect headphone with our quiz</a></li>
-            <li><a href="/best">Best Headphones — Curated rankings by use case</a></li>
+            <li><a href="/shapes">Shape Overlay — Compare headphone dimensions visually</a></li>
           </ul>
         </nav>
       </article>
@@ -133,8 +134,9 @@ export default function HomePage() {
           <SSRLink href="/drivers">Drivers</SSRLink>
           <SSRLink href="/trends">Trends</SSRLink>
           <SSRLink href="/compare">Compare</SSRLink>
-          <SSRLink href="/best">Best</SSRLink>
+          <SSRLink href="/sensitivity">Sensitivity</SSRLink>
           <SSRLink href="/lab">Lab</SSRLink>
+          <SSRLink href="/shapes">Shapes</SSRLink>
         </div>
       </SSRSection>
 

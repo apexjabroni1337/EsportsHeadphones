@@ -38,7 +38,7 @@ export function generateMetadata({ params }) {
   const [a, b] = pair;
 
   const title = `${a.name} vs ${b.name} — Side-by-Side Comparison`;
-  const description = `Compare the ${a.name} (${a?.weight}g, $${a?.price}, ${a?.proUsage}% pro usage) vs ${b.name} (${b?.weight}g, $${b?.price}, ${b?.proUsage}% pro usage). Full specs, driver, shape, polling rate, and pro player data head-to-head.`;
+  const description = `Compare the ${a.name} (${a?.weight}g, $${a?.price}, ${a?.proUsage}% pro usage) vs ${b.name} (${b?.weight}g, $${b?.price}, ${b?.proUsage}% pro usage). Full specs, switch, shape, frequency response, and pro player data head-to-head.`;
 
   return {
     title,
@@ -73,21 +73,21 @@ export default function ComparisonPage({ params }) {
   const [a, b] = pair;
 
   const aPlayers = allPlayers.filter(p => {
-    const pm = (p.headphone || "").toLowerCase();
+    const pm = p.headphone.toLowerCase();
     const mn = a.name.toLowerCase();
     return pm === mn || pm.includes(mn) || mn.includes(pm);
   }).slice(0, 10);
   const bPlayers = allPlayers.filter(p => {
-    const pm = (p.headphone || "").toLowerCase();
+    const pm = p.headphone.toLowerCase();
     const mn = b.name.toLowerCase();
     return pm === mn || pm.includes(mn) || mn.includes(pm);
   }).slice(0, 10);
 
   const specs = [
     { label: "Weight", aVal: `${a?.weight}g`, bVal: `${b?.weight}g`, winner: winner(a, b, "weight", true), detail: "Lighter headphones allow faster flicks with less fatigue" },
-    { label: "Driver Type", aVal: a.driverType, bVal: b.driverType, winner: "tie", detail: "Both switches are top-tier for competitive play" },
-    { label: "Polling Rate", aVal: `${a.pollingRate >= 1000 ? a.pollingRate/1000 + "K" : a.pollingRate}Hz`, bVal: `${b.pollingRate >= 1000 ? b.pollingRate/1000 + "K" : b.pollingRate}Hz`, winner: winner(a, b, "pollingRate"), detail: "Higher polling = less input delay" },
-    { label: "Shape", aVal: a.layout || "—", bVal: b.layout || "—", winner: "tie", detail: "Shape preference is subjective" },
+    { label: "Driver Type", aVal: a.driverType, bVal: b.driverType, winner: "tie", detail: "Both drivers are top-tier for competitive play" },
+    { label: "Freq. Response", aVal: `${a.frequencyResponse >= 1000 ? a.frequencyResponse/1000 + "K" : a.frequencyResponse}Hz`, bVal: `${b.frequencyResponse >= 1000 ? b.frequencyResponse/1000 + "K" : b.frequencyResponse}Hz`, winner: winner(a, b, "frequencyResponse"), detail: "Higher polling = less input delay" },
+    { label: "Shape", aVal: a.formFactor || "—", bVal: b.formFactor || "—", winner: "tie", detail: "Shape preference is subjective" },
     { label: "Connectivity", aVal: a.connectivity, bVal: b.connectivity, winner: "tie" },
     { label: "Price", aVal: `$${a?.price}`, bVal: `$${b?.price}`, winner: winner(a, b, "price", true), detail: "Lower price = better value" },
     { label: "Pro Usage", aVal: `${a?.proUsage}%`, bVal: `${b?.proUsage}%`, winner: winner(a, b, "proUsage"), detail: "Higher adoption among professional players" },
@@ -134,7 +134,7 @@ export default function ComparisonPage({ params }) {
         style={{ width: 1, height: 1, padding: 0, margin: -1, clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0 }}
       >
         <h1>{a.name} vs {b.name} — Head-to-Head Esports Headphone Comparison</h1>
-        <p>Detailed side-by-side comparison of the {a.name} and {b.name}. Compare weight, driver type, polling rate, shape, price, pro usage, and rating.</p>
+        <p>Detailed side-by-side comparison of the {a.name} and {b.name}. Compare weight, switch type, frequency response, shape, price, pro usage, and rating.</p>
 
         <h2>Specification Comparison</h2>
         <table>

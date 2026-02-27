@@ -56,7 +56,7 @@ export function generateMetadata({ params }) {
   const games = gameEntries.map(([g]) => g).join(", ");
   const description = desc?.bio
     ? desc.bio.slice(0, 155) + "..."
-    : `${teamName} esports team — ${uniquePlayers.length} tracked pro players across ${games}. Headphone preferences, driver types, and complete gear setups.`;
+    : `${teamName} esports team — ${uniquePlayers.length} tracked pro players across ${games}. Headphone preferences, switch types, and complete gear setups.`;
 
   return {
     title: `${teamName} — Pro Player Settings, Headphones & Gear`,

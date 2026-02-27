@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 Step 3: Transform player data in data/index.js
-- Rename `mouse` field → `keyboard`
-- Rename `mouseHistory` → `keyboardHistory`
-- Map mouse product names → keyboard product names (brand-aware, game-aware)
+- Rename `mouse` field → `headphone`
+- Rename `mouseHistory` → `headphoneHistory`
+- Map mouse product names → headphone product names (brand-aware, game-aware)
 - Keep dpi/sens/edpi/hz intact (those are mouse settings, still relevant)
 """
 
@@ -12,12 +12,12 @@ import re, random
 random.seed(42)  # Reproducible
 
 # ═══════════════════════════════════════════════════════════════
-# Mouse → Keyboard mapping by brand
+# Mouse → Headphone mapping by brand
 # ═══════════════════════════════════════════════════════════════
 
-# Current-gen mice → current keyboards (for recent periods)
+# Current-gen mice → current headphones (for recent periods)
 CURRENT_MAP = {
-    # Razer mice → Razer keyboards
+    # Razer mice → Razer headphones
     "Razer Viper V3 Pro": "Razer Huntsman V3 Pro Mini",
     "Razer Viper V4 Pro": "Razer Huntsman V3 Pro Mini",
     "Razer DeathAdder V4 Pro": "Razer Huntsman V3 Pro Mini",
@@ -49,7 +49,7 @@ CURRENT_MAP = {
     "Logitech G305": "Logitech G Pro X 60",
     "Logitech G402": "Logitech G Pro X TKL",
     
-    # Zowie mice → Wooting/Ducky (Zowie doesn't make keyboards)
+    # Zowie mice → Wooting/Ducky (Zowie doesn't make headphones)
     "Zowie EC2-CW": "Wooting 60HE",
     "Zowie EC2-DW": "Wooting 60HE",
     "Zowie EC2-A": "Ducky One 3 SF",
@@ -153,7 +153,7 @@ CURRENT_MAP = {
     "Sony INZONE M10": "Wooting 60HE",
 }
 
-# Historical mice → historical keyboards (for keyboardHistory older periods)
+# Historical mice → historical headphones (for headphoneHistory older periods)
 HISTORICAL_MAP = {
     "Zowie EC2-A": "Ducky One 2 Mini",
     "Zowie EC2-B": "Ducky One 2 SF",
@@ -187,7 +187,7 @@ HISTORICAL_MAP = {
     "HyperX Pulsefire Haste": "HyperX Alloy Origins Core",
 }
 
-# MOBA-specific overrides (LoL, Dota 2 players use different keyboards)
+# MOBA-specific overrides (LoL, Dota 2 players use different headphones)
 MOBA_OVERRIDES = {
     "Logitech G Pro X Superlight 2": "Logitech G Pro X TKL",
     "Logitech G Pro X Superlight": "Logitech G Pro X TKL",
@@ -202,8 +202,8 @@ MOBA_OVERRIDES = {
 MOBA_GAMES = {"LoL", "League of Legends", "Dota 2"}
 FPS_GAMES = {"CS2", "Valorant", "Fortnite", "Apex", "R6 Siege", "PUBG", "Call of Duty", "Overwatch 2", "Deadlock", "Marvel Rivals", "Quake Champions"}
 
-def map_mouse_to_keyboard(mouse_name, game="", is_historical=False):
-    """Map a mouse product name to a keyboard product name."""
+def map_mouse_to_headphone(mouse_name, game="", is_historical=False):
+    """Map a mouse product name to a headphone product name."""
     if not mouse_name or mouse_name in ("Unknown", ""):
         return "Unknown"
     
@@ -287,17 +287,17 @@ for i, line in enumerate(lines):
         if game_match:
             current_game = game_match.group(1)
         
-        # Replace mouse field in player objects: mouse: "X" → keyboard: "X_mapped"
+        # Replace mouse field in player objects: mouse: "X" → headphone: "X_mapped"
         mouse_match = re.search(r'(\s+)mouse:\s*"([^"]*)"', line)
         if mouse_match and "mouseHistory" not in line and "{ mouse:" not in line.split("mouse:")[0][-5:]:
             # This is the top-level mouse field
             indent = mouse_match.group(1)
             mouse_name = mouse_match.group(2)
-            keyboard_name = map_mouse_to_keyboard(mouse_name, current_game)
-            line = line.replace(f'mouse: "{mouse_name}"', f'keyboard: "{keyboard_name}"', 1)
+            headphone_name = map_mouse_to_headphone(mouse_name, current_game)
+            line = line.replace(f'mouse: "{mouse_name}"', f'headphone: "{headphone_name}"', 1)
         
-        # Replace mouseHistory → keyboardHistory
-        line = line.replace("mouseHistory:", "keyboardHistory:")
+        # Replace mouseHistory → headphoneHistory
+        line = line.replace("mouseHistory:", "headphoneHistory:")
         
         # Replace { mouse: "X", period: "Y" } inside history arrays
         history_matches = re.finditer(r'\{\s*mouse:\s*"([^"]*)",\s*period:\s*"([^"]*)"', line)
@@ -306,9 +306,9 @@ for i, line in enumerate(lines):
             period = hm.group(2)
             # Check if historical (not "Present" in period end)
             is_hist = "Present" not in period
-            kb = map_mouse_to_keyboard(old_mouse, current_game, is_historical=is_hist)
+            kb = map_mouse_to_headphone(old_mouse, current_game, is_historical=is_hist)
             old_str = f'{{ mouse: "{old_mouse}", period: "{period}"'
-            new_str = f'{{ keyboard: "{kb}", period: "{period}"'
+            new_str = f'{{ headphone: "{kb}", period: "{period}"'
             line = line.replace(old_str, new_str, 1)
     
     output_lines.append(line)
@@ -326,17 +326,17 @@ import subprocess
 result = subprocess.run(["grep", "-c", 'mouse:', DATA_FILE], capture_output=True, text=True)
 remaining_mouse = int(result.stdout.strip()) if result.stdout.strip() else 0
 
-result2 = subprocess.run(["grep", "-c", 'keyboard:', DATA_FILE], capture_output=True, text=True)
-keyboard_count = int(result2.stdout.strip()) if result2.stdout.strip() else 0
+result2 = subprocess.run(["grep", "-c", 'headphone:', DATA_FILE], capture_output=True, text=True)
+headphone_count = int(result2.stdout.strip()) if result2.stdout.strip() else 0
 
-result3 = subprocess.run(["grep", "-c", 'keyboardHistory:', DATA_FILE], capture_output=True, text=True)
+result3 = subprocess.run(["grep", "-c", 'headphoneHistory:', DATA_FILE], capture_output=True, text=True)
 history_count = int(result3.stdout.strip()) if result3.stdout.strip() else 0
 
 result4 = subprocess.run(["grep", "-c", 'mouseHistory:', DATA_FILE], capture_output=True, text=True)
 remaining_history = int(result4.stdout.strip()) if result4.stdout.strip() else 0
 
 print(f"✅ Player data transformation complete!")
-print(f"   keyboard: fields = {keyboard_count}")
-print(f"   keyboardHistory: fields = {history_count}")
+print(f"   headphone: fields = {headphone_count}")
+print(f"   headphoneHistory: fields = {history_count}")
 print(f"   Remaining mouse: fields = {remaining_mouse} (should be 0 in player data)")
 print(f"   Remaining mouseHistory: fields = {remaining_history} (should be 0)")

@@ -46,7 +46,7 @@ export default function AboutPage() {
         <p>Player settings data is aggregated from multiple sources including official team websites, player social media accounts, tournament broadcasts where gear is visible, player interviews and streams, community-maintained databases like prosettings.net and liquipedia, and direct submissions from professional players and team managers.</p>
 
         <h2>Headphone Specifications</h2>
-        <p>Headphone specifications (weight, driver type, polling rate, dimensions, price) are sourced from official manufacturer product pages and verified against hands-on reviews. Prices reflect current retail pricing at time of last update. Pro usage percentages are calculated from our tracked player database.</p>
+        <p>Headphone specifications (weight, switch type, frequency response, dimensions, price) are sourced from official manufacturer product pages and verified against hands-on reviews. Prices reflect current retail pricing at time of last update. Pro usage percentages are calculated from our tracked player database.</p>
 
         <h2>Update Frequency</h2>
         <p>The database is updated regularly as professional players change their equipment. Major updates typically coincide with tournament seasons when new gear setups are visible on broadcast. The data was last comprehensively updated in February 2026.</p>

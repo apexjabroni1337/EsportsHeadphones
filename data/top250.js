@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════════
-// ESPORTSheadphoneS.COM — INTERNAL TOP 250 PLAYER POWER RANKING
+// ESPORTSHEADPHONES.COM — INTERNAL TOP 250 PLAYER POWER RANKING
 // ═══════════════════════════════════════════════════════════════════
 // Last updated: 2026-02-22
 // 

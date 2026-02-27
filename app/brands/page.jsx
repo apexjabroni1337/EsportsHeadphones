@@ -28,15 +28,15 @@ export default function BrandsPage() {
     const totalProUsage = brandHeadphones.reduce((a, m) => a + m.proUsage, 0);
     const lightest = [...brandHeadphones].sort((a, b) => a?.weight - b?.weight)[0];
     const mostPopular = [...brandHeadphones].sort((a, b) => b?.proUsage - a?.proUsage)[0];
-    const driveres = [...new Set(brandHeadphones.map((m) => m.driverType))];
-    const shapes = [...new Set(brandHeadphones.map((m) => m.layout))];
+    const drivers = [...new Set(brandHeadphones.map((m) => m.driverType))];
+    const shapes = [...new Set(brandHeadphones.map((m) => m.formFactor))];
     const priceRange = `$${Math.min(...brandHeadphones.map((m) => m?.price))}-$${Math.max(...brandHeadphones.map((m) => m?.price))}`;
     const weightRange = `${Math.min(...brandHeadphones.map((m) => m?.weight))}g-${Math.max(...brandHeadphones.map((m) => m?.weight))}g`;
     const brandPros = proPlayers.filter((p) => {
-      const pm = (p.headphone || "").toLowerCase();
+      const pm = p.headphone.toLowerCase();
       return brandHeadphones.some((m) => pm.includes(m.name.toLowerCase()) || m.name.toLowerCase().includes(pm));
     });
-    return { brand, headphones: brandHeadphones, avgWeight, avgPrice, avgRating, totalProUsage, lightest, mostPopular, driveres, shapes, priceRange, weightRange, pros: brandPros };
+    return { brand, headphones: brandHeadphones, avgWeight, avgPrice, avgRating, totalProUsage, lightest, mostPopular, drivers, shapes, priceRange, weightRange, pros: brandPros };
   }).sort((a, b) => b.totalProUsage - a.totalProUsage);
 
   return (
@@ -88,7 +88,7 @@ export default function BrandsPage() {
             <p>
               {b.brand} has {b.headphones.length} esports headphones with a combined {b.totalProUsage}% pro usage.
               Weight range: {b?.weightRange}. Price range: {b?.priceRange}. Average rating: {b.avgRating}/10.
-              Driveres used: {b.driveres.join(", ")}. Shapes offered: {b.shapes.join(", ")}.
+              Drivers used: {b.drivers.join(", ")}. Shapes offered: {b.shapes.join(", ")}.
               <a href={`/brands/${slug(b.brand)}`}> View full {b.brand} page →</a>
             </p>
 
@@ -100,8 +100,8 @@ export default function BrandsPage() {
                   <tr key={m.id}>
                     <td><a href={`/headphones/${slug(m.name)}`}>{m.name}</a></td>
                     <td>{m?.weight}g</td>
-                    <td><a href="/driveres">{m.driverType}</a></td>
-                    <td>{m.layout}</td>
+                    <td><a href="/drivers">{m.driverType}</a></td>
+                    <td>{m.formFactor}</td>
                     <td><a href={amazonLink(m.name)}>${m?.price}</a></td>
                     <td>{m.proUsage}%</td>
                     <td>{m.rating}/10</td>
@@ -145,7 +145,7 @@ export default function BrandsPage() {
           <ul>
             <li><a href="/headphones">All Esports Headphones</a></li>
             <li><a href="/players">Pro Player Settings</a></li>
-            <li><a href="/driveres">Driver Comparison</a></li>
+            <li><a href="/drivers">Driver Comparison</a></li>
             <li><a href="/trends">Industry Trends</a></li>
             <li><a href="/compare">Compare Headphones</a></li>
             <li><a href="/games">Headphone Usage by Game</a></li>
@@ -213,7 +213,7 @@ export default function BrandsPage() {
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>
           <SSRLink href="/players">Pro Settings</SSRLink>
-          <SSRLink href="/driveres">Driveres</SSRLink>
+          <SSRLink href="/drivers">Drivers</SSRLink>
           <SSRLink href="/trends">Trends</SSRLink>
         </div>
       </SSRSection>

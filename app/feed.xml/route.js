@@ -2,19 +2,19 @@ const BLOG_ARTICLES = [
   {
     slug: "how-to-choose-gaming-headphone",
     title: "How to Choose the Right Gaming Headphone in 2026",
-    description: "Shape, weight, driver, wireless vs wired — the complete guide to finding your perfect headphone based on what the pros actually use.",
+    description: "Shape, weight, switch, wireless vs wired — the complete guide to finding your perfect headphone based on what the pros actually use.",
     date: "2026-02-23",
   },
   {
-    slug: "hall-effect-vs-mechanical-driveres",
+    slug: "hall-effect-vs-mechanical-drivers",
     title: "Hall Effect vs Mechanical Drivers: Which Is Best for Competitive Gaming?",
-    description: "We analyzed driver preferences across 2,000+ pro players to find which driver technology dominates each game — and why Hall Effect is taking over.",
+    description: "We analyzed switch preferences across 2,000+ pro players to find which switch technology dominates each game — and why Hall Effect is taking over.",
     date: "2026-02-23",
   },
   {
-    slug: "headphone-driver-trend-2024-2026",
-    title: "The Rapid Trigger Revolution: How Driver Tech Changed Competitive Gaming",
-    description: "A data-driven look at how rapid trigger and Hall Effect driveres went from niche to dominant in professional esports.",
+    slug: "headphone-switch-trend-2024-2026",
+    title: "The ANC Revolution: How Driver Tech Changed Competitive Gaming",
+    description: "A data-driven look at how active noise cancellation and Hall Effect drivers went from niche to dominant in professional esports.",
     date: "2026-02-23",
   },
   {
@@ -24,9 +24,9 @@ const BLOG_ARTICLES = [
     date: "2026-02-23",
   },
   {
-    slug: "rapid-trigger-actuation-explained",
-    title: "Rapid Trigger & Actuation Explained: A Complete Guide",
-    description: "What is rapid trigger? What actuation distance should you use? We break down every headphone tech concept with real pro player data.",
+    slug: "rapid-trigger-impedance-explained",
+    title: "ANC & Impedance Explained: A Complete Guide",
+    description: "What is active noise cancellation? What impedance distance should you use? We break down every headphone tech concept with real pro player data.",
     date: "2026-02-23",
   },
 ];

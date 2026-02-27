@@ -7,17 +7,17 @@ const slug = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/
 const BRANDS = [...new Set(headphones.map((m) => m.brand))].filter(Boolean);
 
 const BRAND_DESCRIPTIONS = {
-  Razer: "Razer is one of the world's largest gaming peripherals companies and a dominant force in esports headphones. Founded in 2005, Razer has built its reputation on aggressive innovation and cutting-edge technology. The Viper V3 Pro currently leads the professional scene with its symmetrical low-profile shape and optical analog switches. Razer headphones are known for their HyperPolling wireless technology, lightweight construction, and the distinctive green-and-black branding that is instantly recognizable in any gaming setup. The Huntsman series has become the company's flagship rapid trigger offering. Razer's extensive investment in professional esports sponsorships has made their headphones the most commonly seen brand on tournament stages worldwide.",
-  Logitech: "Logitech G has been the gold standard in esports headphones for over a decade, with the G Pro Wireless and its successors becoming the default choice for professional players across nearly every competitive game. The G Pro X Superlight changed the industry in 2020 by proving that a mainstream headphone could weigh under 63 grams without sacrificing build quality or battery life. Logitech's HERO and LIGHTSPEED technologies are considered the benchmark for driver accuracy and wireless latency respectively. Their dominance in the pro scene is unmatched — at any given tournament, a significant percentage of players will be using a Logitech headphone. The brand's consistency, reliability, and the safe shape of the G Pro series have made it the peripheral equivalent of a reliable tool that just works.",
-  Zowie: "Zowie, a division of BenQ, built its legendary reputation in esports by focusing entirely on what competitive players need: perfect shapes, reliable switches, and no unnecessary features. Zowie headphones are known for their ergonomic contours and mechanical reliability. While Zowie has since been surpassed in market share by brands like Wooting and Razer in the rapid trigger era, their legacy remains strong among players who prefer traditional mechanical switches and proven designs.",
-  Finalmouse: "Finalmouse was a gaming peripherals brand that focused on lightweight designs. While they are no longer actively producing headphones for esports competition, their influence on the industry's pursuit of lighter weight peripherals helped inspire modern headphone innovation. Contemporary rapid trigger headphones from Wooting, Razer, and others continue this legacy of pushing engineering boundaries.",
-  Lamzu: "Lamzu burst onto the enthusiast headphone scene in 2023 and immediately disrupted the market with premium lightweight wireless headphones at competitive prices. Founded by industry veterans who understood what the competitive community wanted, Lamzu delivered exceptional shape design, top-tier switches, and build quality that rivaled brands with decades of heritage. The Atlantis Mini became an instant hit among pro players looking for a small, lightweight option, while the Thorn and Maya expanded their lineup to cover different hand sizes and grip styles. Lamzu represents the new wave of boutique headphone brands that are challenging the established giants by moving faster, listening more closely to the community, and delivering enthusiast-grade quality.",
+  Razer: "Razer is one of the world's largest gaming peripherals companies and a dominant force in esports headphones. Founded in 2005, Razer has built its reputation on aggressive innovation and cutting-edge technology. The Viper V3 Pro currently leads the professional scene with its symmetrical low-profile shape and optical analog drivers. Razer headphones are known for their HyperPolling wireless technology, lightweight construction, and the distinctive green-and-black branding that is instantly recognizable in any gaming setup. The Huntsman series has become the company's flagship active noise cancellation offering. Razer's extensive investment in professional esports sponsorships has made their headphones the most commonly seen brand on tournament stages worldwide.",
+  Logitech: "Logitech G has been the gold standard in esports headphones for over a decade, with the G Pro Wireless and its successors becoming the default choice for professional players across nearly every competitive game. The G Pro X Superlight changed the industry in 2020 by proving that a mainstream headphone could weigh under 63 grams without sacrificing build quality or battery life. Logitech's HERO and LIGHTSPEED technologies are considered the benchmark for switch accuracy and wireless latency respectively. Their dominance in the pro scene is unmatched — at any given tournament, a significant percentage of players will be using a Logitech headphone. The brand's consistency, reliability, and the safe shape of the G Pro series have made it the peripheral equivalent of a reliable tool that just works.",
+  Zowie: "Zowie, a division of BenQ, built its legendary reputation in esports by focusing entirely on what competitive players need: perfect shapes, reliable drivers, and no unnecessary features. Zowie headphones are known for their ergonomic contours and mechanical reliability. While Zowie has since been surpassed in market share by brands like Wooting and Razer in the active noise cancellation era, their legacy remains strong among players who prefer traditional mechanical drivers and proven designs.",
+  Finalmouse: "Finalmouse was a gaming peripherals brand that focused on lightweight designs. While they are no longer actively producing headphones for esports competition, their influence on the industry's pursuit of lighter weight peripherals helped inspire modern headphone innovation. Contemporary active noise cancellation headphones from Wooting, Razer, and others continue this legacy of pushing engineering boundaries.",
+  Lamzu: "Lamzu burst onto the enthusiast headphone scene in 2023 and immediately disrupted the market with premium lightweight wireless headphones at competitive prices. Founded by industry veterans who understood what the competitive community wanted, Lamzu delivered exceptional shape design, top-tier drivers, and build quality that rivaled brands with decades of heritage. The Atlantis Mini became an instant hit among pro players looking for a small, lightweight option, while the Thorn and Maya expanded their lineup to cover different hand sizes and grip styles. Lamzu represents the new wave of boutique headphone brands that are challenging the established giants by moving faster, listening more closely to the community, and delivering enthusiast-grade quality.",
   Pulsar: "Pulsar has rapidly established itself as a serious contender in the competitive headphone market, earning significant pro adoption through excellent shape design and competitive pricing. The X2 series became a breakout hit, offering a symmetrical shape that many players found more comfortable than the Logitech G Pro X Superlight. Pulsar's collaboration with ZywOo on a signature headphone demonstrates the brand's growing credibility in professional esports. Their Xlite series offers ergonomic options, while the X2V2 and specialized models like the CrazyLight show their commitment to pushing performance boundaries. Pulsar's approach of offering many size variants and colorways gives players unusual freedom to find their perfect fit.",
   SteelSeries: "SteelSeries is one of the original esports peripherals brands, with a heritage stretching back to the earliest days of competitive Counter-Strike. The original Rival, Sensei, and Kana headphones were staples of professional CS for years, and the brand's early investment in esports sponsorships helped establish the modern pro gaming ecosystem. While SteelSeries has lost some market share to lighter wireless competitors, their headphones remain popular among veteran players who value the proven shapes and the brand's legendary reliability. The Prime series and Aerox lightweight line represent SteelSeries' adaptation to modern demands, and their headphones continue to be used by professional players across multiple titles.",
   Corsair: "Corsair is a major player in the broader PC gaming peripherals market, with their headphone lineup offering solid options for both casual and competitive gamers. The M75 Air brought Corsair into the ultralight wireless conversation, while the Sabre Pro and M65 series have loyal followings among players who prefer Corsair's ergonomic designs. While not as dominant in pro esports as some competitors, Corsair's headphones benefit from the company's massive scale, excellent build quality, and comprehensive iCUE software ecosystem. Their entry into the competitive lightweight segment shows Corsair taking the esports market more seriously.",
   Endgame: "Endgame Gear (also known as Endgame) has carved out a respected niche in the competitive headphone market with the XM1 series, which became a cult favorite among CS players for its unique shape and exceptional build quality. The XM1r and its wireless successor brought German engineering sensibility to headphone design — clean shapes, no-nonsense features, and a focus on competitive performance above all else. The OP1 series expanded their lineup with a versatile egg-shaped design. Endgame Gear headphones are particularly popular among European CS players and represent the growing influence of boutique European brands in competitive gaming peripherals.",
-  ASUS: "ASUS ROG (Republic of Gamers) brings its extensive hardware engineering experience to the gaming headphone market with the Harpe Ace series. The ROG Harpe Ace and its successors feature cutting-edge specifications including some of the lowest wireless latency measurements in the industry. ASUS's expertise in driver tuning and wireless technology, developed through years of networking and component manufacturing, gives their headphones a technical edge. While newer to the dedicated esports headphone space, ASUS ROG's engineering resources and growing presence in professional gaming make them an increasingly important brand.",
-  WLMouse: "WLMouse is a newer Chinese gaming peripherals brand that has gained attention with the Beast X, which offers aggressive specifications including extremely high polling rates and ultra-lightweight construction at competitive prices. The brand represents the growing influence of Chinese headphone manufacturers who are pushing the boundaries of what's technically possible while keeping prices accessible. WLMouse headphones have started appearing in professional players' setups, particularly those who prioritize cutting-edge polling rates for the lowest possible input delay.",
+  ASUS: "ASUS ROG (Republic of Gamers) brings its extensive hardware engineering experience to the gaming headphone market with the Harpe Ace series. The ROG Harpe Ace and its successors feature cutting-edge specifications including some of the lowest wireless latency measurements in the industry. ASUS's expertise in switch tuning and wireless technology, developed through years of networking and component manufacturing, gives their headphones a technical edge. While newer to the dedicated esports headphone space, ASUS ROG's engineering resources and growing presence in professional gaming make them an increasingly important brand.",
+  WLMouse: "WLMouse is a newer Chinese gaming peripherals brand that has gained attention with the Beast X, which offers aggressive specifications including extremely high frequency responses and ultra-lightweight construction at competitive prices. The brand represents the growing influence of Chinese headphone manufacturers who are pushing the boundaries of what's technically possible while keeping prices accessible. WLMouse headphones have started appearing in professional players' setups, particularly those who prioritize cutting-edge frequency responses for the lowest possible input delay.",
   Vaxee: "Vaxee was founded by former Zowie designers who brought their deep understanding of competitive headphone layouts to a new brand. Their NP-01, Outset AX, and XE series are considered some of the best-shaped headphones ever made for competitive FPS gaming, with ergonomic refinements that only years of professional-level shape research can produce. Vaxee headphones have earned a devoted following among CS professionals, with many top players choosing Vaxee over mainstream alternatives for the superior shape comfort during long tournament sessions. The brand represents the pinnacle of shape-first headphone design philosophy.",
   Ninjutso: "Ninjutso is a boutique gaming peripherals brand that has gained recognition in the competitive scene through thoughtful designs and collaborations. Their headphones offer unique shape options that fill gaps left by larger brands, appealing to players with specific grip style requirements. The Sora series, including the Vaxee collaboration, shows Ninjutso's commitment to serving the competitive community with well-engineered alternatives.",
   HyperX: "HyperX, now owned by HP, has been a fixture in gaming peripherals for years. Their Pulsefire headphone series offers competitive options at accessible price points, and the brand's extensive esports sponsorships have kept HyperX headphones visible on tournament stages. The Pulsefire Haste was particularly well-received as an affordable lightweight option.",
@@ -41,10 +41,10 @@ export function generateMetadata({ params }) {
   const brand = findBrand(params.slug);
   if (!brand) return { title: "Brand Not Found" };
 
-  const brandheadphones = headphones.filter((m) => m.brand === brand);
-  const totalProUsage = brandheadphones.reduce((a, m) => a + m.proUsage, 0);
+  const brandHeadphones = headphones.filter((m) => m.brand === brand);
+  const totalProUsage = brandHeadphones.reduce((a, m) => a + m.proUsage, 0);
 
-  const description = `${brand} esports headphones — ${brandheadphones.length} headphones, ${totalProUsage}% combined pro usage. Compare specs, weights, sensors, prices, and see which pros use ${brand} headphones across CS2, Valorant, and more.`;
+  const description = `${brand} esports headphones — ${brandHeadphones.length} headphones, ${totalProUsage}% combined pro usage. Compare specs, weights, sensors, prices, and see which pros use ${brand} headphones across CS2, Valorant, and more.`;
 
   return {
     title: `${brand} Esports Headphones — All Models, Pro Usage & Reviews`,
@@ -55,7 +55,7 @@ export function generateMetadata({ params }) {
       description,
       url: `https://esportsheadphones.com/brands/${params.slug}`,
       images: [{
-        url: `https://esportsheadphones.com/og?title=${encodeURIComponent(brand + " Esports Headphones")}&subtitle=${encodeURIComponent(`${brandheadphones.length} Headphones · ${totalProUsage}% Pro Share · Complete Lineup`)}`,
+        url: `https://esportsheadphones.com/og?title=${encodeURIComponent(brand + " Esports Headphones")}&subtitle=${encodeURIComponent(`${brandHeadphones.length} Headphones · ${totalProUsage}% Pro Share · Complete Lineup`)}`,
         width: 1200, height: 630,
         alt: `${brand} esports gaming headphones lineup`,
       }],
@@ -64,7 +64,7 @@ export function generateMetadata({ params }) {
       card: "summary_large_image",
       title: `${brand} Esports Headphones — All Models, Pro Usage & Reviews`,
       description,
-      images: [`https://esportsheadphones.com/og?title=${encodeURIComponent(brand + " Esports Headphones")}&subtitle=${encodeURIComponent(`${brandheadphones.length} Headphones · ${totalProUsage}% Pro Share · Complete Lineup`)}`],
+      images: [`https://esportsheadphones.com/og?title=${encodeURIComponent(brand + " Esports Headphones")}&subtitle=${encodeURIComponent(`${brandHeadphones.length} Headphones · ${totalProUsage}% Pro Share · Complete Lineup`)}`],
     },
   };
 }
@@ -73,26 +73,25 @@ export default function BrandDetailPage({ params }) {
   const brand = findBrand(params.slug);
   if (!brand) return <EsportsHeadphones initialTab="brands" />;
 
-  const brandheadphones = headphones.filter((m) => m.brand === brand);
-  if (!brandheadphones.length) return <EsportsHeadphones initialTab="brands" />;
-  const avgWeight = Math.round(brandheadphones.reduce((a, m) => a + (m?.weight || 0), 0) / brandheadphones.length);
-  const avgPrice = Math.round(brandheadphones.reduce((a, m) => a + (m?.price || 0), 0) / brandheadphones.length);
-  const avgRating = (brandheadphones.reduce((a, m) => a + (m?.rating || 0), 0) / brandheadphones.length).toFixed(1);
-  const totalProUsage = brandheadphones.reduce((a, m) => a + (m?.proUsage || 0), 0);
-  const lightest = [...brandheadphones].sort((a, b) => (a?.weight || 0) - (b?.weight || 0))[0] || {};
-  const mostPopular = [...brandheadphones].sort((a, b) => (b?.proUsage || 0) - (a?.proUsage || 0))[0] || {};
-  const switches = [...new Set(brandheadphones.map((m) => m.driverType).filter(Boolean))];
-  const shapes = [...new Set(brandheadphones.map((m) => m.layout).filter(Boolean))];
-  const priceRange = `$${Math.min(...brandheadphones.map((m) => m?.price || 0))}-$${Math.max(...brandheadphones.map((m) => m?.price || 0))}`;
-  const weightRange = `${Math.min(...brandheadphones.map((m) => m?.weight || 0))}g-${Math.max(...brandheadphones.map((m) => m?.weight || 0))}g`;
+  const brandHeadphones = headphones.filter((m) => m.brand === brand);
+  const avgWeight = Math.round(brandHeadphones.reduce((a, m) => a + m?.weight, 0) / brandHeadphones.length);
+  const avgPrice = Math.round(brandHeadphones.reduce((a, m) => a + m?.price, 0) / brandHeadphones.length);
+  const avgRating = (brandHeadphones.reduce((a, m) => a + m.rating, 0) / brandHeadphones.length).toFixed(1);
+  const totalProUsage = brandHeadphones.reduce((a, m) => a + m.proUsage, 0);
+  const lightest = [...brandHeadphones].sort((a, b) => a?.weight - b?.weight)[0];
+  const mostPopular = [...brandHeadphones].sort((a, b) => b?.proUsage - a?.proUsage)[0];
+  const drivers = [...new Set(brandHeadphones.map((m) => m.driverType))];
+  const shapes = [...new Set(brandHeadphones.map((m) => m.formFactor))];
+  const priceRange = `$${Math.min(...brandHeadphones.map((m) => m?.price))}-$${Math.max(...brandHeadphones.map((m) => m?.price))}`;
+  const weightRange = `${Math.min(...brandHeadphones.map((m) => m?.weight))}g-${Math.max(...brandHeadphones.map((m) => m?.weight))}g`;
 
   const brandPros = proPlayers.filter((p) => {
-    const pm = (p.headphone || "")?.toLowerCase?.() ?? "";
-    return brandheadphones.some((m) => pm.includes(m.name?.toLowerCase?.() ?? "") || (m.name?.toLowerCase?.()?.includes?.(pm) ?? false));
+    const pm = p.headphone.toLowerCase();
+    return brandHeadphones.some((m) => pm.includes(m.name.toLowerCase()) || m.name.toLowerCase().includes(pm));
   });
 
   const brandGames = [...new Set(brandPros.map((p) => p.game))].sort();
-  const brandDesc = BRAND_DESCRIPTIONS[brand] || `${brand} is a gaming headphone manufacturer with ${brandheadphones.length} headphones in the esports database.`;
+  const brandDesc = BRAND_DESCRIPTIONS[brand] || `${brand} is a gaming headphone manufacturer with ${brandHeadphones.length} headphones in the esports database.`;
 
   return (
     <>
@@ -118,16 +117,16 @@ export default function BrandDetailPage({ params }) {
 
         <h2>{brand} at a Glance</h2>
         <ul>
-          <li>Total headphones in database: {brandheadphones.length}</li>
+          <li>Total headphones in database: {brandHeadphones.length}</li>
           <li>Combined pro usage: {totalProUsage}%</li>
           <li>Average weight: {avgWeight}g</li>
           <li>Weight range: {weightRange}</li>
           <li>Average price: ${avgPrice}</li>
           <li>Price range: {priceRange}</li>
           <li>Average rating: {avgRating}/10</li>
-          <li>Lightest headphone: {lightest.name || "—"} ({lightest?.weight || 0}g)</li>
-          <li>Most popular: {mostPopular.name || "—"} ({mostPopular.proUsage || 0}% pro usage)</li>
-          <li>Sensors used: {switches.join(", ")}</li>
+          <li>Lightest headphone: {lightest.name} ({lightest?.weight}g)</li>
+          <li>Most popular: {mostPopular.name} ({mostPopular.proUsage}% pro usage)</li>
+          <li>Sensors used: {drivers.join(", ")}</li>
           <li>Shape types: {shapes.join(", ")}</li>
         </ul>
 
@@ -138,12 +137,12 @@ export default function BrandDetailPage({ params }) {
             <tr><th>Headphone</th><th>Weight</th><th>Driver</th><th>Layout</th><th>Connectivity</th><th>Price</th><th>Pro Usage</th><th>Rating</th></tr>
           </thead>
           <tbody>
-            {[...brandheadphones].sort((a, b) => b?.proUsage - a?.proUsage).map((m) => (
+            {[...brandHeadphones].sort((a, b) => b?.proUsage - a?.proUsage).map((m) => (
               <tr key={m.id}>
                 <td><a href={`/headphones/${slug(m.name)}`}>{m.name}</a></td>
                 <td>{m?.weight}g</td>
-                <td>{m.driverType ? <a href={`/sensors/${m.driverType.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{m.driverType}</a> : "—"}</td>
-                <td>{m.layout ? <a href={`/best/${m.layout.toLowerCase()}`}>{m.layout}</a> : "—"}</td>
+                <td><a href={`/sensors/${m.driverType.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{m.driverType}</a></td>
+                <td><a href={`/shapes/${m.formFactor.toLowerCase()}`}>{m.formFactor}</a></td>
                 <td>{m.connectivity}</td>
                 <td>${m?.price}</td>
                 <td>{m.proUsage}%</td>
@@ -183,7 +182,7 @@ export default function BrandDetailPage({ params }) {
             ? ` The lightest option is the ${lightest.name} at ${lightest?.weight}g, while the most popular among pros is the ${mostPopular.name} at ${mostPopular.proUsage}% usage.`
             : ` The ${mostPopular.name} is both the lightest at ${lightest?.weight}g and the most popular at ${mostPopular.proUsage}% pro usage.`
           }
-          {" "}All {brand} headphones use {switches.length === 1 ? `the ${switches[0]} driver` : `switches including ${switches.join(", ")}`}.
+          {" "}All {brand} headphones use {drivers.length === 1 ? `the ${drivers[0]} switch` : `drivers including ${drivers.join(", ")}`}.
         </p>
 
         <nav>
@@ -218,11 +217,11 @@ export default function BrandDetailPage({ params }) {
           <SSRTitle accent="Headphones">{brand}</SSRTitle>
         </div>
         <SSRSub>
-          {brandheadphones.length} esports headphones · {totalProUsage}% combined pro usage · {weightRange} · {priceRange} · {avgRating}/10 avg rating
+          {brandHeadphones.length} esports headphones · {totalProUsage}% combined pro usage · {weightRange} · {priceRange} · {avgRating}/10 avg rating
         </SSRSub>
         <SSRGrid>
           <SSRStat label="Pro Usage" value={`${totalProUsage}%`} color={BRAND_COLORS[brand]} />
-          <SSRStat label="Headphones" value={brandheadphones.length} />
+          <SSRStat label="Headphones" value={brandHeadphones.length} />
           <SSRStat label="Avg Weight" value={`${avgWeight}g`} />
           <SSRStat label="Most Popular" value={mostPopular.name} />
         </SSRGrid>
@@ -245,7 +244,7 @@ export default function BrandDetailPage({ params }) {
             }}>
               Top Headphones
             </div>
-            {[...brandheadphones].sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 4).map((m, i) => (
+            {[...brandHeadphones].sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 4).map((m, i) => (
               <div key={m.id} style={{
                 padding: "12px 16px",
                 background: i % 2 === 0 ? "#ffffff" : "#f5f2ee",
@@ -269,7 +268,7 @@ export default function BrandDetailPage({ params }) {
           <SSRLink href="/brands">← All Brands</SSRLink>
           <SSRLink href="/headphones">All Headphones</SSRLink>
           <SSRLink href="/players">Pro Settings</SSRLink>
-          {brandheadphones.slice(0, 3).map((m) => (
+          {brandHeadphones.slice(0, 3).map((m) => (
             <SSRLink key={m.id} href={`/headphones/${slug(m.name)}`}>{m.name}</SSRLink>
           ))}
         </div>

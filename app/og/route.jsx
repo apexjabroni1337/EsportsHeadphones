@@ -24,7 +24,7 @@ export async function GET(request) {
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "4px", background: "linear-gradient(to right, transparent, " + accent + ", transparent)", display: "flex" }} />
         <div style={{ fontSize: 22, fontWeight: 900, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: "24px", display: "flex", alignItems: "center", gap: "8px" }}>
           <span style={{ color: "#b8956a" }}>ESPORTS</span>
-          <span style={{ color: "#1a1614" }}>headphoneS</span>
+          <span style={{ color: "#1a1614" }}>HEADPHONES</span>
           <span style={{ color: "#a09890", fontSize: 16 }}>.com</span>
         </div>
         {badge ? (

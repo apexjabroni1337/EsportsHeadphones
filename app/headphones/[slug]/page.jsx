@@ -17,7 +17,7 @@ export function generateMetadata({ params }) {
   }
   const desc = HEADPHONE_DESCRIPTIONS[hp.name];
   const description = desc
-    ? desc.text.slice(0, 155) + "..."
+    ? (desc.text?.slice(0, 155) ?? "") + "..."
     : `${hp.name} by ${hp.brand} — ${hp?.weight}g, ${hp.driverType} driver, ${hp.impedance}Ω impedance, $${hp?.price}. Used by ${hp?.proUsage}% of tracked pro esports players.`;
 
   return {

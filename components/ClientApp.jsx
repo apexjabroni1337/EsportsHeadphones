@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, LineChart, Line, CartesianGrid, Legend, AreaChart, Area } from "recharts";
 import { Home, Headphones, Trophy, Cpu, Users, Gamepad2, Building2, TrendingUp, GitCompare, Search, X, FlaskConical, Crosshair, Layers, Shield, ChevronDown } from "lucide-react";
-import { AMAZON_TAG, amazonLink, BRAND_COLORS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, BRAND_IMAGE_URLS, GAME_IMAGE_URLS, GAME_DESCRIPTIONS, TEAM_DESCRIPTIONS, TEAM_LOGOS, I, icon, headphones, proPlayers, extendedPlayers, allPlayers, brandMarketShare, gameBreakdown, driverTypeTrend, wirelessTrend, priceTrend, noiseCancTrend, weightTrend, pollingTrend, countryName } from "@/data";
+import { AMAZON_TAG, amazonLink, BRAND_COLORS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, BRAND_IMAGE_URLS, GAME_IMAGE_URLS, GAME_DESCRIPTIONS, TEAM_DESCRIPTIONS, TEAM_LOGOS, I, icon, headphones, proPlayers, extendedPlayers, allPlayers, brandMarketShare, gameBreakdown, driverTypeTrend, wirelessTrend, priceTrend, noiseCancTrend, weightTrend, pollingTrend, countryName, HEADPHONE_DIMS } from "@/data";
 import { GlowText, StatBox, SectionTitle, HeadphoneCard, CustomTooltip, Flag } from "@/components/ui";
 
 const TOP250 = new Set(["s1mple","ZywOo","NiKo","donk","m0NESY","TenZ","Scump","shroud","ImperialHal","Puppey","Faker","aspas","device","coldzera","Bugha","Shotzzy","Chovy","ropz","Proper","Beaulo","yay","Simp","electronic","Crimsix","N0tail","Twistzz","Demon1","Showmaker","EliGE","FalleN","Caps","MrSavage","rain","Profit","ScreaM","Karma","Shaiiko","olofmeister","Keria","f0rest","GeT_RiGhT","Yatoro","aceu","Clix","cNed","sh1ro","Clayster","Dendi","Zeus","TGLTN","broky","Alfajer","Jjonak","Cellium","b1t","Genburten","TaySon","gla1ve","Gumayusi","Paluh","karrigan","Derke","aBeZy","Mongraal","dupreeh","Collapse","Spoit","SP9RK1E","Oner","arT","crashies","Peterbot","KuroKy","huNter","Ras","Viper","Dashy","Fleta","Boaster","EpikWhale","jstn","Xyp9x","Magisk","Pengu","ana","Leave","f0rsakeN","Ax1Le","Jeemzz","Albralelie","Brollan","Deft","Formal","shox","Jinggg","Topson","Shrimzy","Hardecki","Kaydop","Canadian","Jimpphat","Less","Jankos","Ceb","HusKerrs","aqua","CTZN","blameF","stax","Rekkles","Carpe","Pred","Kickstart","stavn","Nisha","Queasy","Dropped","Super","njr","MaKo","NAF","Ruler","fer","nAts","Kenny","iNSaNiA","Squishy","Khanada","hwinn","YEKINDAR","SpiriTz","Nesk","Stewie2K","Zekken","CoreJJ","iceiceice","nyhrox","Vadeal","HisWattson","kscerato","SlasheR","something","Gustav","Kevster","Frozen","Arcitys","dafran","GarrettG","BrokenBlade","flameZ","Sacy","Envoy","Chapix","supr","tabseN","cr1t-","Mande","Elyoya","Fexx","Perfecto","Shao","Fairy Peak","Noahreyli","Doki","Hydra","nitr0","abed","Knight","Reps","Chronicle","Pio","woxic","Attach","Bucke","Alem4o","XANTARES","leaf","miCKe","Bin","xQc","Selly","Insight","iLLeY","jawgemo","Andilex","Brehze","cameram4n","Hans Sama","Kinstaar","Skyz","mxey","KRIMZ","saadhak","emongg","Stompy","Cyber","autimatic","Crylix","Ninja","Malibuca","cadiaN","sinatraa","Suygetsu","Upset","Larssen","TimTheTatman","ibiza","Muz","Yuzus","Jame","Lou","bogur","ZmjjKK","hampus","luke12","Tfue","soulz1","BuZz","HooXi","Hiko","9impulse","Japko","jabbi","Asuna","Aleksib","aLOW","BriD","Viol2t","Subroza","benjyfishy","Necros","Seagull","lyr1c","Boombl4","pollofn","Solotov","lionkk","mezii","Spinx","t3xture","kyxsan","n0thing","mL7","Kenzo","WARDELL","Veno","Primmie","Bestoloch","ShahZaM","YukaF","rapha","vengeurR","toxjq","k1llsen","cYpheR","RAISY","Cooller","clawz","DaHanG","Av3k","serious","Xron","maxter"]);
@@ -1064,8 +1064,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {(() => {
               const headphoneCounts = {};
               allPlayers.forEach(p => { headphoneCounts[p.headphone] = (headphoneCounts[p.headphone] || 0) + 1; });
-              const topHeadphoneEntry = Object.entries(headphoneCounts).sort((a,b) => b[1]-a[1])[0];
-              const lightest = [...headphones].sort((a,b) => a.weight - b.weight)[0];
+              const topHeadphoneEntry = Object.entries(headphoneCounts).sort((a,b) => b[1]-a[1])?.[0];
+              const lightest = [...headphones].sort((a,b) => a.weight - b.weight)?.[0];
               const uniqueBrands = new Set(allPlayers.map(p => { const m = headphones.find(mm => mm.name === p.headphone || (p.headphone && p.headphone.includes(mm.name))); return m?.brand; }).filter(Boolean));
               const playerWeights = allPlayers.map(p => { const m = headphones.find(mm => mm.name === p.headphone || (p.headphone && p.headphone.includes(mm.name))); return m?.weight; }).filter(Boolean);
               const avgProWeight = playerWeights.length ? Math.round(playerWeights.reduce((a,b) => a+b, 0) / playerWeights.length) : 0;
@@ -1074,9 +1074,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               return (
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 my-4 sm:my-6 text-center">
                 {[
-                  { label: "Most Used Headphone", value: topHeadphoneEntry[0].replace(/(Wooting |Razer )/, ""), sub: `${Math.round(topHeadphoneEntry[1]/allPlayers.length*100)}% of pros`, color: "#00d4ff", icon: "crown", numeric: false },
+                  ...(topHeadphoneEntry ? [{ label: "Most Used Headphone", value: (topHeadphoneEntry[0] ?? "N/A").replace(/(Wooting |Razer )/, ""), sub: `${Math.round((topHeadphoneEntry[1] ?? 0)/allPlayers.length*100)}% of pros`, color: "#00d4ff", icon: "crown", numeric: false }] : []),
                   { label: "Brands in Pro Use", value: uniqueBrands.size, sub: "competing for pros", color: "#6b8cad", icon: "signal", numeric: true, numVal: uniqueBrands.size, numSuffix: "" },
-                  { label: "Lightest Headphone", value: `${lightest.weight}g`, sub: lightest.name.replace(/(Wooting |DrunkDeer )/, ""), color: "#c4508a", icon: "wind", numeric: true, numVal: lightest.weight, numSuffix: "g" },
+                  ...(lightest ? [{ label: "Lightest Headphone", value: `${lightest.weight}g`, sub: (lightest.name ?? "N/A").replace(/(Wooting |DrunkDeer )/, ""), color: "#c4508a", icon: "wind", numeric: true, numVal: lightest.weight, numSuffix: "g" }] : []),
                   { label: "Avg Headphone Weight", value: `${avgProWeight}g`, sub: "across all pros", color: "#00d4ff", icon: "gear", numeric: true, numVal: avgProWeight, numSuffix: "g" },
                   { label: "Rapid Trigger", value: `${rtPct}%`, sub: `${rtCount} of ${headphones.length} headphones`, color: "#9060c4", icon: "bolt", numeric: true, numVal: rtPct, numSuffix: "%" },
                 ].map((card, i) => (
@@ -1109,8 +1109,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </div>
                     <div className="text-xs font-semibold uppercase tracking-wider mt-0.5" style={{ color: "#8890a0" }}>{card.label}</div>
                     <div style={{ fontSize: 11, color: "#c4bfb8" }} className="mt-1">{card.sub}</div>
-                    {i === 0 && <a href={amazonLink(topHeadphoneEntry[0])} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#00d4ff18", color: "#00d4ff", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
-                    {i === 3 && <a href={amazonLink(lightest.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#00d4ff18", color: "#00d4ff", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
+                    {card.label === "Most Used Headphone" && topHeadphoneEntry && <a href={amazonLink(topHeadphoneEntry[0] ?? "")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#00d4ff18", color: "#00d4ff", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
+                    {card.label === "Lightest Headphone" && lightest && <a href={amazonLink(lightest.name ?? "")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#00d4ff18", color: "#00d4ff", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
                   </div>
                 ))}
               </div>
@@ -1341,7 +1341,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="opacity-60">Switch Type</span>
-                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.switchType}</span>
+                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.driverType}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="opacity-60">Rapid Trigger</span>
@@ -1384,7 +1384,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                           {HEADPHONE_IMAGE_URLS[c.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[c.name]} alt={c.name} className="h-5 object-contain" />}
                                           <span className="font-bold" style={{ color: cc }}>{c.name.replace(c.brand + " ", "")}</span>
                                         </div>
-                                        <span className="opacity-60">{c.switchType}</span>
+                                        <span className="opacity-60">{c.driverType ?? "Driver"}</span>
                                       </button>
                                     );
                                   })}
@@ -1639,7 +1639,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   { label: "Shape", value: selectedHeadphone.layout },
                   { label: "Connectivity", value: selectedHeadphone.connectivity },
                   { label: "Weight", value: `${selectedHeadphone.weight}g` },
-                  { label: "Driver", value: selectedHeadphone.switchType },
+                  { label: "Driver", value: selectedHeadphone.driverType },
                   { label: "Actuation", value: `${selectedHeadphone.actuationPoint}mm` },
                   { label: "Impedance", value: `${selectedHeadphone.pollingRate >= 1000 ? `${selectedHeadphone.pollingRate / 1000}K` : selectedHeadphone.pollingRate}Hz` },
                   { label: "Price", value: `$${selectedHeadphone.price}` },
@@ -1742,7 +1742,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           </div>
                           <div className="flex justify-between">
                             <span className="opacity-60">Switch Type</span>
-                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.switchType}</span>
+                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.driverType}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="opacity-60">Rapid Trigger</span>
@@ -1785,7 +1785,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                     {HEADPHONE_IMAGE_URLS[c.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[c.name]} alt={c.name} className="h-5 object-contain" />}
                                     <span className="font-bold" style={{ color: cc }}>{c.name.replace(c.brand + " ", "")}</span>
                                   </div>
-                                  <span className="opacity-60">{c.switchType}</span>
+                                  <span className="opacity-60">{c.driverType ?? "Driver"}</span>
                                 </button>
                               );
                             })}
@@ -1852,7 +1852,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
               <div className="flex-1 min-w-0">
                 <div className="text-xs font-black truncate" style={{ color: brandCol }}>{selectedHeadphone.name}</div>
-                <div style={{ fontSize: 11, color: "#8890a0" }}>{selectedHeadphone.weight}g · {selectedHeadphone.switchType}</div>
+                <div style={{ fontSize: 11, color: "#8890a0" }}>{selectedHeadphone.weight}g · {selectedHeadphone.driverType}</div>
               </div>
               <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-black text-sm transition-all no-underline flex-shrink-0" style={{ background: "#00d4ff", color: "#e8eaf0", textDecoration: "none" }}>
                 {I.cart(14, "#e8eaf0")} ${selectedHeadphone.price}
@@ -2078,7 +2078,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div>
                       <div className="text-xs uppercase tracking-widest font-bold" style={{ color: "#8890a0" }}>#1 Headphone in {gameName}</div>
                       <div className="text-base font-black" style={{ color: col }}>{topName}</div>
-                      <div className="text-xs opacity-40">{topPct}% of pros{topM ? ` · ${topM.weight}g · ${topM.switchType}` : ""}</div>
+                      <div className="text-xs opacity-40">{topPct}% of pros{topM ? ` · ${topM.weight}g · ${topM?.driverType ?? "Driver"}` : ""}</div>
                     </div>
                   </div>
                   <a href={amazonLink(topName)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-bold transition-all hover:scale-105 no-underline" style={{ background: "#00d4ff", color: "#e8eaf0", textDecoration: "none", fontSize: 14 }}>
@@ -2713,7 +2713,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <span className="text-xl">🏆</span>
                   <div className="flex-1">
                     <div className="text-[10px] uppercase tracking-widest font-bold" style={{ color: "#00d4ff", letterSpacing: 2 }}>Pro Favorite</div>
-                    <div className="text-sm font-bold" style={{ color: "#e8eaf0" }}>{topHp.name} — {topHp.proUsage}% pro usage · {topHp.weight}g · {topHp.switchType}</div>
+                    <div className="text-sm font-bold" style={{ color: "#e8eaf0" }}>{topHp.name} — {topHp.proUsage}% pro usage · {topHp.weight}g · {topHp.driverType}</div>
                   </div>
                   <a href={amazonLink(topHp.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#00d4ff", color: "#e8eaf0", textDecoration: "none" }}>
                     {I.cart(14, "#e8eaf0")} ${topHp.price} on Amazon
@@ -2993,7 +2993,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         </div>
                         <div className="text-center p-2 rounded-lg" style={{ background: "#0000000a" }}>
                           <div className="text-xs font-semibold" style={{ color: "#8890a0" }}>Switch</div>
-                          <div className="text-sm font-bold" style={{ color: brandCol }}>{currentHeadphoneData.switchType}</div>
+                          <div className="text-sm font-bold" style={{ color: brandCol }}>{currentHeadphoneData.driverType ?? "Driver"}</div>
                         </div>
                         <div className="text-center p-2 rounded-lg" style={{ background: "#0000000a" }}>
                           <div className="text-xs font-semibold" style={{ color: "#8890a0" }}>Poll Rate</div>
@@ -3844,9 +3844,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             totalUsage: Math.round(s.totalUsage * 10) / 10,
             headphoneCount: s.headphones.length,
             playerCount,
-            avgActuation: Math.round(s.headphones.reduce((a, m) => a + m.actuationPoint, 0) / s.headphones.length),
-            avgPolling: Math.round(s.headphones.reduce((a, m) => a + m.impedance, 0) / s.headphones.length),
-            avgWeight: Math.round(s.headphones.reduce((a, m) => a + m.weight, 0) / s.headphones.length * 10) / 10,
+            avgActuation: Math.round(s.headphones.reduce((a, m) => a + (m.actuationPoint ?? 0), 0) / (s.headphones.length || 1)),
+            avgPolling: Math.round(s.headphones.reduce((a, m) => a + (m.impedance ?? 0), 0) / (s.headphones.length || 1)),
+            avgWeight: Math.round(s.headphones.reduce((a, m) => a + (m.weight ?? 0), 0) / (s.headphones.length || 1) * 10) / 10,
             avgPrice: Math.round(s.headphones.reduce((a, m) => a + m.price, 0) / s.headphones.length),
             brandList: [...s.brands].join(", "),
             topHp: s.headphones.sort((a, b) => b.proUsage - a.proUsage)[0]?.name || "",
@@ -4741,7 +4741,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <span className="text-sm font-bold px-2 py-0.5 rounded-full" style={{ background: "#00d4ff18", color: "#00d4ff", border: "1px solid #00d4ff30", fontSize: 12 }}>🚧 UNDER CONSTRUCTION</span>
                       </div>
                       <p className="text-sm opacity-85 max-w-lg mx-auto leading-relaxed mb-2">
-                        Overlay actual headphone images scaled to real dimensions — instantly see how any two headphones compare in size from all {headphones.filter(m => headphone_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]).length} headphones.
+                        Overlay actual headphone images scaled to real dimensions — instantly see how any two headphones compare in size from all {headphones.filter(m => HEADPHONE_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]).length} headphones.
                       </p>
                       <p className="text-sm opacity-25 mb-4">See exactly how two headphones compare in shape.</p>
                       <div className="flex-1" />
@@ -5158,11 +5158,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <SectionTitle color="#00d4ff" sub="Select two headphones and overlay their layouts — scaled to real dimensions for true size comparison">headphone Layout Overlay</SectionTitle>
 
             {(() => {
-                const kbdsWithDims = headphones.filter(m => headphone_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]);
+                const kbdsWithDims = headphones.filter(m => HEADPHONE_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]);
                 const mA = shapeHeadphoneA || kbdsWithDims[0];
                 const mB = shapeHeadphoneB || kbdsWithDims[1];
-                const dA = headphone_DIMS[mA?.name];
-                const dB = headphone_DIMS[mB?.name];
+                const dA = HEADPHONE_DIMS[mA?.name];
+                const dB = HEADPHONE_DIMS[mB?.name];
                 if (!dA || !dB) return null;
 
                 const colA = BRAND_COLORS[mA.brand] || "#00d4ff";
@@ -5199,18 +5199,18 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       ].map(({ kbd, set, col, label }) => (
                         <div key={label} className="rounded-xl p-4" style={{ background: "#141824", border: `1px solid ${col}15` }}>
                           <div className="text-sm font-bold mb-2" style={{ color: col }}>{label}</div>
-                          <select value={kbd?.id || ""} onChange={e => { const m = headphones.find(x => x.id === parseInt(e.target.value)); if (m && headphone_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]) set(m); }}
+                          <select value={kbd?.id || ""} onChange={e => { const m = headphones.find(x => x.id === parseInt(e.target.value)); if (m && HEADPHONE_DIMS[m.name] && HEADPHONE_IMAGE_URLS[m.name]) set(m); }}
                             className="w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer" style={{ background: "#f8f6f3", border: `1px solid ${col}25`, color: "#e8eaf0" }}>
                             {sortedKbdsWithDims.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
                           </select>
                           <div className="flex items-center gap-3 mt-3">
                             {HEADPHONE_IMAGE_URLS[kbd.name] && <img loading="lazy" src={HEADPHONE_IMAGE_URLS[kbd.name]} alt={`${kbd.name} layout outline`} className="h-10 object-contain" style={{ filter: `drop-shadow(0 2px 8px ${col}30)` }} />}
                             <div className="flex flex-wrap gap-2 text-sm opacity-50">
-                              <span>{headphone_DIMS[kbd.name]?.[0]}mm L</span>
+                              <span>{HEADPHONE_DIMS[kbd.name]?.[0]}mm L</span>
                               <span>×</span>
-                              <span>{headphone_DIMS[kbd.name]?.[1]}mm W</span>
+                              <span>{HEADPHONE_DIMS[kbd.name]?.[1]}mm W</span>
                               <span>×</span>
-                              <span>{headphone_DIMS[kbd.name]?.[2]}mm H</span>
+                              <span>{HEADPHONE_DIMS[kbd.name]?.[2]}mm H</span>
                               <span>·</span>
                               <span className="font-bold">{kbd.weight}g</span>
                               <span>·</span>

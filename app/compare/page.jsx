@@ -71,7 +71,7 @@ export default function ComparePage() {
                 <td><a href="/brands">{m.brand}</a></td>
                 <td>{m?.weight}g</td>
                 <td><a href="/driveres">{m.driverType}</a></td>
-                <td>{m.pollingRate.toLocaleString()}</td>
+                <td>{(m.pollingRate ?? 0).toLocaleString()}</td>
                 <td>{m.layout}</td>
                 <td>${m?.price}</td>
                 <td>{m.proUsage}%</td>

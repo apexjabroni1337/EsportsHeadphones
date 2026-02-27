@@ -86,8 +86,8 @@ export default function BrandDetailPage({ params }) {
   const weightRange = `${Math.min(...brandheadphones.map((m) => m?.weight))}g-${Math.max(...brandheadphones.map((m) => m?.weight))}g`;
 
   const brandPros = proPlayers.filter((p) => {
-    const pm = (p.headphone || "").toLowerCase();
-    return brandheadphones.some((m) => pm.includes(m.name.toLowerCase()) || m.name.toLowerCase().includes(pm));
+    const pm = (p.headphone || "")?.toLowerCase?.() ?? "";
+    return brandheadphones.some((m) => pm.includes(m.name?.toLowerCase?.() ?? "") || m.name?.toLowerCase?.()?.includes?.(pm) ?? false);
   });
 
   const brandGames = [...new Set(brandPros.map((p) => p.game))].sort();

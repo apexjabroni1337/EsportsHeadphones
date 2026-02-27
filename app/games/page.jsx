@@ -59,7 +59,7 @@ export default function GamesPage() {
               const players = allPlayers.filter((p) => p.game === game);
               const counts = {};
               players.forEach((p) => { counts[p.headphone] = (counts[p.headphone] || 0) + 1; });
-              const topHeadphone = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+              const topHeadphone = Object.entries(counts).sort((a, b) => b[1] - a[1])?.[0];
               return (
                 <tr key={game}>
                   <td><a href={`/games/${slug(game)}`}>{game}</a></td>

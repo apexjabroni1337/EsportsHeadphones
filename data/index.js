@@ -1400,6 +1400,9 @@ export const noiseCancTrend = [
   { year: 2024, active: 25, passive: 50, none: 25 }
 ];
 
+// Headphone dimensions (L x W x H in mm) - empty as headphones don't have defined dimensions like keyboards
+export const HEADPHONE_DIMS = {};
+
 // ═══════════ CUSTOM SVG ICONS ═══════════
 export const I = {
   headphone: (s=20) => { const uid = "eh" + Math.random().toString(36).slice(2,8); return <svg width={s} height={s} viewBox="0 0 200 200" fill="none"><defs><linearGradient id={`${uid}a`} x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#00d4ff"/><stop offset="100%" stopColor="#8b5cf6"/></linearGradient><linearGradient id={`${uid}b`} x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#00d4ff" stopOpacity="0.12"/><stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.06"/></linearGradient></defs><path d="M40 110 C40 60, 160 60, 160 110" stroke={`url(#${uid}a)`} strokeWidth="12" strokeLinecap="round" fill="none"/><rect x="30" y="105" width="30" height="55" rx="10" fill={`url(#${uid}b)`} stroke={`url(#${uid}a)`} strokeWidth="5"/><rect x="140" y="105" width="30" height="55" rx="10" fill={`url(#${uid}b)`} stroke={`url(#${uid}a)`} strokeWidth="5"/><rect x="38" y="115" width="14" height="35" rx="4" fill={`url(#${uid}a)`} fillOpacity="0.3"/><rect x="148" y="115" width="14" height="35" rx="4" fill={`url(#${uid}a)`} fillOpacity="0.3"/></svg>; },

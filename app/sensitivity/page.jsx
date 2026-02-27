@@ -108,7 +108,7 @@ export default function SensitivityPage() {
                   return (
                     <li key={p.name}>
                       <a href={`/players/${slug(p.name)}`}>{p.name}</a> ({p.team}) — {p.edpi} eDPI ({p.dpi} DPI × {p.sens}),
-                      uses {ms ? <a href={`/headphones/${ms}`}>{p.headphone}</a> : p.headphone}
+                      {p.headphone ? <>uses {ms ? <a href={`/headphones/${ms}`}>{p.headphone}</a> : p.headphone}</> : null}
                     </li>
                   );
                 })}
@@ -120,7 +120,7 @@ export default function SensitivityPage() {
                   return (
                     <li key={p.name}>
                       <a href={`/players/${slug(p.name)}`}>{p.name}</a> ({p.team}) — {p.edpi} eDPI ({p.dpi} DPI × {p.sens}),
-                      uses {ms ? <a href={`/headphones/${ms}`}>{p.headphone}</a> : p.headphone}
+                      {p.headphone ? <>uses {ms ? <a href={`/headphones/${ms}`}>{p.headphone}</a> : p.headphone}</> : null}
                     </li>
                   );
                 })}

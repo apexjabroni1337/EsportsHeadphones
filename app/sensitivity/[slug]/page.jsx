@@ -1,7 +1,7 @@
 import EsportsHeadphones from "@/components/ClientApp";
 import { headphones, allPlayers } from "@/data";
 
-const sl = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
+const sl = (n) => (n || "unknown").toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
 
 const GAME_SENS_INFO = {
   "CS2": { fullName: "Counter-Strike 2", sensMultiplier: 0.022, unit: "in-game sensitivity", example: "0.8-1.2 @ 800 Mouse DPI", notes: "CS2 uses the same sensitivity scale as CS:GO. The formula for cm/360 is: 360 / (Mouse DPI × sensitivity × 0.022). Most pros use 800 Mouse DPI with in-game sensitivity between 0.5 and 1.5." },
@@ -127,7 +127,7 @@ export default function SensitivityGamePage({ params }) {
               <tr key={i}>
                 <td><a href={`/players/${sl(p.name)}`}>{p.name}</a></td>
                 <td>{p.team}</td>
-                <td><a href={`/headphones/${sl(p.headphone)}`}>{p.headphone}</a></td>
+                <td>{p.headphone ? <a href={`/headphones/${sl(p.headphone)}`}>{p.headphone}</a> : <span>Unknown</span>}</td>
               </tr>
             ))}
           </tbody>

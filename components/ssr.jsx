@@ -1,118 +1,82 @@
-"use client";
-/**
- * Server-Side Rendered Components for EsportsHeadphones
- * Dark cyberpunk theme with cyan, purple, and navy palette
- */
+// Server-rendered content for SEO crawlers.
+// Visually hidden but present in HTML source for search engines.
 
-/**
- * SSRSection - Wrapper section with padding and max-width
- * Props: children, className
- */
-export function SSRSection({ children, className = "" }) {
+export function SSRSection({ children }) {
   return (
-    <section className={`max-w-7xl mx-auto px-4 py-8 ${className}`}>
+    <div className="absolute overflow-hidden" style={{ width: 1, height: 1, padding: 0, margin: -1, clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0 }}>
       {children}
-    </section>
+    </div>
   );
 }
 
-/**
- * SSRTitle - Big title with accent color word
- * Props: children (accent word), accent (word to highlight)
- * Example: <SSRTitle accent="ESPORTS">HEADPHONES</SSRTitle>
- */
 export function SSRTitle({ children, accent }) {
   return (
-    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center">
-      <span style={{ color: "#00f0ff" }}>{accent}</span>
-      {" "}
-      <span className="text-white">{children}</span>
+    <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-4" style={{ color: "#e8eaf0" }}>
+      {accent && <span style={{ color: "#00d4ff" }}>{accent} </span>}
+      {children}
     </h1>
   );
 }
 
-/**
- * SSRSub - Subtitle paragraph
- * Props: children
- */
 export function SSRSub({ children }) {
-  return (
-    <p className="text-gray-400 text-lg max-w-2xl mx-auto text-center mt-4">
-      {children}
-    </p>
-  );
+  return <p className="text-sm sm:text-base leading-relaxed mb-6" style={{ color: "#8890a0" }}>{children}</p>;
 }
 
-/**
- * SSRGrid - Responsive grid for stat cards
- * Props: children
- * 2 columns on mobile, 4 columns on desktop
- */
 export function SSRGrid({ children }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-      {children}
+    <div style={{ borderTopWidth: 1, borderTopColor: "#2a3040" }} className="pt-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-6">{children}</div>
     </div>
   );
 }
 
-/**
- * SSRStat - Static stat display
- * Props: label, value, color
- */
-export function SSRStat({ label, value, color = "#00f0ff" }) {
+export function SSRStat({ label, value, color }) {
+  const accentColor = color || "#00d4ff";
   return (
-    <div className="bg-opacity-50 p-6 rounded-lg border border-gray-800 hover:border-gray-700 transition-colors text-center"
-      style={{ backgroundColor: "rgba(10, 14, 26, 0.8)" }}>
-      <div
-        className="text-2xl md:text-3xl font-bold mb-2"
-        style={{ color: color }}
-      >
-        {value}
+    <div className="rounded-lg px-4 py-3 border-l-[3px] relative" style={{
+      background: "#141824",
+      borderColor: accentColor,
+      boxShadow: "0 2px 8px rgba(0, 212, 255, 0.1)"
+    }}>
+      <div className="flex items-center gap-2 mb-1">
+        <div style={{
+          width: 8,
+          height: 8,
+          borderRadius: 2,
+          background: accentColor
+        }} />
+        <div className="text-xs font-bold uppercase tracking-wider" style={{ color: accentColor }}>{label}</div>
       </div>
-      <div className="text-sm text-gray-400 uppercase tracking-wider">
-        {label}
-      </div>
+      <div className="text-base sm:text-lg font-black" style={{ color: "#e8eaf0" }}>{value}</div>
     </div>
   );
 }
 
-/**
- * SSRLink - Navigation pill/button link
- * Props: href, children
- */
-export function SSRLink({ href, children }) {
+export function SSRLink({ href, children, color }) {
+  const accentColor = color || "#00d4ff";
+  const shadowColor = color ? `${color}40` : "#00d4ff40";
+
   return (
-    <a
-      href={href}
-      className="inline-block px-6 py-3 rounded-full font-semibold text-white transition-all duration-300 border border-gray-700 hover:border-cyan-500 hover:text-cyan-400 hover:shadow-lg"
+    <a href={href} className="inline-block text-xs sm:text-sm font-bold px-4 py-2 rounded-lg no-underline transition-all duration-150 hover:translate-y-px active:translate-y-1"
       style={{
-        backgroundColor: "rgba(10, 14, 26, 0.9)",
-        boxShadow: "0 0 20px rgba(0, 240, 255, 0)"
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = "0 0 20px rgba(0, 240, 255, 0.5)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = "0 0 20px rgba(0, 240, 255, 0)";
-      }}
-    >
+        background: accentColor,
+        color: "#0b0f1a",
+        boxShadow: `0 2px 0 ${shadowColor}, 0 3px 6px rgba(0, 212, 255, 0.2)`,
+        cursor: "pointer"
+      }}>
       {children}
     </a>
   );
 }
 
-/**
- * SSRDivider - Horizontal line divider with subtle glow
- */
 export function SSRDivider() {
   return (
-    <div
-      className="my-12 mx-auto w-full max-w-3xl h-px"
-      style={{
-        background: "linear-gradient(to right, transparent, rgba(0, 240, 255, 0.3), transparent)",
-        boxShadow: "0 0 20px rgba(0, 240, 255, 0.1)"
-      }}
-    />
+    <div className="my-6" style={{
+      height: 2,
+      borderRadius: "1px",
+      background: "linear-gradient(to right, transparent 0%, #00d4ff 25%, #7c3aed 50%, #f59e0b 75%, transparent 100%)",
+      boxShadow: "0 2px 4px rgba(0, 212, 255, 0.2)",
+      margin: "24px 0"
+    }} />
   );
 }

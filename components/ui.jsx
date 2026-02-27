@@ -1,368 +1,190 @@
-'use client';
+"use client";
+import React from "react";
+import { BRAND_COLORS, HEADPHONE_IMAGE_URLS, headphones, icon, I, amazonLink, flagUrl } from "@/data";
 
-import React from 'react';
-
-// GlowText - Text with neon glow effect
-export const GlowText = ({ children, color = 'cyan', className = '' }) => {
-  const colorMap = {
-    cyan: '#00f0ff',
-    purple: '#b366ff',
-    pink: '#ff3366',
-    white: '#ffffff',
-  };
-
-  const glowColor = colorMap[color] || colorMap.cyan;
-
-  return (
-    <span
-      className={`font-bold ${className}`}
-      style={{
-        color: glowColor,
-        textShadow: `0 0 10px ${glowColor}, 0 0 20px ${glowColor}, 0 0 30px ${glowColor}`,
-      }}
-    >
-      {children}
-    </span>
-  );
+export const Flag = ({ country, size = 20, className = "" }) => {
+  const url = flagUrl(country, size * 2);
+  if (!url) return <span className={className}>{country}</span>;
+  return <img loading="lazy" src={url} alt={country} width={size} height={Math.round(size * 0.75)} className={className} style={{ display: "inline-block", verticalAlign: "middle", borderRadius: 2, objectFit: "cover" }} />;
 };
 
-// StatBox - Animated stat card
-export const StatBox = ({ label, value, color = 'cyan', icon }) => {
-  const colorMap = {
-    cyan: { border: 'border-cyan-500', text: 'text-cyan-400', shadow: 'shadow-cyan-500/50' },
-    purple: { border: 'border-purple-500', text: 'text-purple-400', shadow: 'shadow-purple-500/50' },
-    pink: { border: 'border-pink-500', text: 'text-pink-400', shadow: 'shadow-pink-500/50' },
-  };
+export const GlowText = ({ children, color = "#00d4ff", size = "text-5xl", className = "" }) => (
+  <span
+    className={`${size} font-black tracking-tight ${className}`}
+    style={{
+      color,
+      textShadow: `0 0 20px ${color}30, 0 0 40px ${color}15`,
+      fontFamily: "'Space Grotesk', system-ui, sans-serif",
+    }}
+  >
+    {children}
+  </span>
+);
 
-  const { border, text, shadow } = colorMap[color] || colorMap.cyan;
-
-  return (
-    <div
-      className={`
-        relative bg-gradient-to-br from-slate-800/80 to-slate-900/90
-        border ${border} border-opacity-30 rounded-lg p-6
-        backdrop-blur-md hover:border-opacity-60 transition-all duration-300
-        hover:shadow-lg ${shadow} cursor-default group
-      `}
-    >
-      {/* Top accent border */}
-      <div className={`absolute top-0 left-0 right-0 h-1 ${border} rounded-t-lg`} />
-
-      {/* Icon */}
-      {icon && (
-        <div className={`text-3xl mb-4 ${text} group-hover:scale-110 transition-transform duration-300`}>
-          {React.createElement(icon, { size: 32 })}
-        </div>
-      )}
-
-      {/* Value */}
-      <div className={`text-3xl font-bold ${text} mb-2`}>
-        {value}
-      </div>
-
-      {/* Label */}
-      <div className="text-sm text-gray-400 uppercase tracking-widest font-semibold">
-        {label}
-      </div>
+export const StatBox = ({ label, value, unit = "", color = "#00d4ff" }) => (
+  <div
+    className="glass-card flex flex-col items-center justify-center text-center p-3 sm:p-5"
+    style={{
+      background: `rgba(20,24,36,0.5)`,
+      backdropFilter: "blur(12px)",
+      WebkitBackdropFilter: "blur(12px)",
+      border: `1px solid ${color}20`,
+      boxShadow: `0 0 16px ${color}10, 0 2px 8px #00000006`,
+    }}
+  >
+    <div className="text-2xl sm:text-3xl font-black" style={{ color, fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+      {value}<span className="text-sm sm:text-lg opacity-60">{unit}</span>
     </div>
-  );
-};
+    <div className="text-xs uppercase tracking-widest mt-1.5 font-semibold" style={{ color: "#8890a0" }}>{label}</div>
+  </div>
+);
 
-// SectionTitle - Section heading with accent color
-export const SectionTitle = ({ children, accent, className = '' }) => {
-  if (!accent) {
-    return (
-      <h2 className={`text-4xl font-bold text-white uppercase tracking-tight ${className}`}>
+export const SectionTitle = ({ children, sub, color = "#00d4ff" }) => (
+  <div className="mb-6 sm:mb-10 mt-10 sm:mt-20">
+    <div className="flex items-center gap-3 sm:gap-4 mb-2">
+      <div className="h-px flex-1" style={{ background: `linear-gradient(to right, #00d4ff40, #7c3aed40, transparent)` }} />
+      <h2
+        className="text-lg sm:text-2xl lg:text-3xl tracking-tight text-center font-bold"
+        style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#e8eaf0" }}
+      >
         {children}
       </h2>
-    );
-  }
+      <div className="h-px flex-1" style={{ background: `linear-gradient(to left, #00d4ff40, #7c3aed40, transparent)` }} />
+    </div>
+    {sub && <p className="text-center text-sm tracking-wide px-2" style={{ color: "#8890a0" }}>{sub}</p>}
+  </div>
+);
 
-  // Split children by accent word
-  const text = typeof children === 'string' ? children : String(children);
-  const parts = text.split(accent);
-
+export const HeadphoneCard = ({ headphone, onClick, isSelected, rank }) => {
+  const h = headphone;
+  const brandCol = BRAND_COLORS[h.brand] || "#8890a0";
+  const [isHovered, setIsHovered] = React.useState(false);
   return (
-    <h2 className={`text-4xl font-bold uppercase tracking-tight ${className}`}>
-      {parts.map((part, idx) => (
-        <React.Fragment key={idx}>
-          <span className="text-white">{part}</span>
-          {idx < parts.length - 1 && (
-            <GlowText color="cyan" className="ml-2 mr-2">
-              {accent}
-            </GlowText>
-          )}
-        </React.Fragment>
-      ))}
-    </h2>
-  );
-};
-
-// HeadphoneCard - Product card for headphones
-export const HeadphoneCard = ({ headphone }) => {
-  if (!headphone) return null;
-
-  const { name, brand, price, rating, proUsage, type, amazonUrl } = headphone;
-
-  return (
-    <div className="relative group h-full">
-      {/* Glow effect on hover */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg opacity-0 group-hover:opacity-20 blur transition-opacity duration-300" />
-
-      <div
-        className={`
-          relative bg-gradient-to-br from-slate-800/80 to-slate-900/90
-          border border-cyan-500/20 rounded-lg p-6
-          backdrop-blur-md h-full flex flex-col
-          group-hover:border-cyan-500/60 transition-all duration-300
-        `}
-      >
-        {/* Top color accent border */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-t-lg" />
-
-        {/* Brand Badge */}
-        {brand && (
-          <div className="mb-3">
-            <BrandBadge brand={brand} />
-          </div>
+    <div
+      onClick={() => onClick?.(h)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative cursor-pointer rounded-xl overflow-hidden transition-all duration-300 group flex flex-col w-full"
+      style={{
+        background: "#141824",
+        border: isSelected ? `2px solid ${brandCol}` : "none",
+        transform: isHovered ? "translateY(-6px)" : "translateY(0)",
+        boxShadow: isSelected
+          ? `0 12px 28px ${brandCol}20, 0 4px 12px #00000008`
+          : isHovered
+          ? "0 12px 24px rgba(0,0,0,0.12)"
+          : "0 4px 12px rgba(0,0,0,0.08)",
+      }}
+    >
+      {/* ── Top Panel: Image Area ── */}
+      <div className="relative flex items-center justify-center overflow-hidden" style={{ height: 160, background: "linear-gradient(135deg, #141824, #1a1f2e)" }}>
+        {HEADPHONE_IMAGE_URLS[h.name] ? (
+          <img loading="lazy" src={HEADPHONE_IMAGE_URLS[h.name]}
+            alt={`${h.name} ${h.brand} esports gaming headphones`}
+            className="w-full h-full object-contain object-center p-4"
+            style={{ filter: "drop-shadow(0 2px 8px rgba(0,212,255,0.1))" }} />
+        ) : (
+          <span className="text-sm italic" style={{ color: "#8890a0" }}>{h.name}</span>
         )}
-
-        {/* Name */}
-        <h3 className="text-xl font-bold text-white mb-2 line-clamp-2">
-          {name}
-        </h3>
-
-        {/* Price */}
-        {price && (
-          <div className="mb-4">
-            <span className="text-2xl font-bold text-cyan-400">
-              ${price}
-            </span>
-          </div>
-        )}
-
-        {/* Rating Bar */}
-        {rating !== undefined && (
-          <div className="mb-4">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-sm text-gray-400">Rating</span>
-              <span className="text-sm font-semibold text-cyan-400">{rating.toFixed(1)}/5</span>
-            </div>
-            <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-cyan-500 to-cyan-400"
-                style={{ width: `${(rating / 5) * 100}%` }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Pro Usage */}
-        {proUsage !== undefined && (
-          <div className="mb-4">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-sm text-gray-400">Pro Usage</span>
-              <span className="text-sm font-semibold text-purple-400">{proUsage}%</span>
-            </div>
-            <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
-                style={{ width: `${proUsage}%` }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Type Badge */}
-        {type && (
-          <div className="mb-4">
-            <span className="inline-block px-3 py-1 bg-slate-800 border border-pink-500/40 text-pink-400 text-xs font-semibold uppercase rounded">
-              {type}
-            </span>
-          </div>
-        )}
-
-        {/* View Details Link */}
-        <div className="mt-auto pt-4">
-          {amazonUrl ? (
-            <a
-              href={amazonUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`
-                inline-block w-full text-center py-2 px-4
-                border border-cyan-500/40 text-cyan-400 font-semibold
-                rounded bg-cyan-500/5 hover:bg-cyan-500/20
-                hover:border-cyan-500/80 transition-all duration-300
-                uppercase text-sm tracking-wide
-              `}
-            >
-              View Details
-            </a>
-          ) : (
-            <button
-              disabled
-              className={`
-                inline-block w-full text-center py-2 px-4
-                border border-cyan-500/20 text-cyan-400/50 font-semibold
-                rounded bg-cyan-500/5 cursor-not-allowed
-                uppercase text-sm tracking-wide
-              `}
-            >
-              View Details
-            </button>
-          )}
+        {/* Brand accent bar at bottom of image panel */}
+        <div className="absolute bottom-0 left-0 right-0" style={{ height: 4, background: brandCol }} />
+        {/* Rank badge */}
+        <div className="absolute top-3 right-3 flex items-center justify-center rounded-full font-bold text-sm"
+          style={{ width: 34, height: 34, background: "#1a1f2e", color: brandCol, border: `2px solid ${brandCol}`, boxShadow: "0 2px 8px rgba(0,212,255,0.15)" }}>
+          #{rank || headphones.indexOf(h) + 1}
         </div>
+      </div>
+      {/* ── Driver Type Divider Badge ── */}
+      <div className="absolute flex justify-center w-full" style={{ top: 144, zIndex: 10 }}>
+        <span className="px-3 py-1 rounded-md text-white font-bold uppercase tracking-wide"
+          style={{ fontSize: 10, background: brandCol, boxShadow: "0 2px 8px rgba(0,0,0,0.15)", letterSpacing: "0.3px" }}>
+          {h.driverType ? (h.driverType.length > 22 ? h.driverType.slice(0, 20) + "…" : h.driverType) : "Headphones"}
+        </span>
+      </div>
+      {/* ── Bottom Panel: Data Area ── */}
+      <div className="flex flex-col flex-grow px-4 pt-5 pb-4" style={{ background: "#1a1f2e", marginTop: 0 }}>
+        {/* Name & Brand */}
+        <div className="mb-3">
+          <div className="text-sm font-bold leading-tight mb-1" style={{ color: "#e8eaf0", fontFamily: "'Space Grotesk', system-ui, sans-serif", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{h.name}</div>
+          <div className="text-xs font-bold uppercase tracking-wider" style={{ color: brandCol, letterSpacing: "0.4px" }}>{h.brand}</div>
+        </div>
+        {/* Compact Stats Row */}
+        <div className="flex justify-between gap-2 mb-3">
+          {[
+            { label: "Weight", value: `${h.weight}g` },
+            { label: "Connection", value: h.connectivity },
+            { label: "Price", value: `$${h.price}` },
+            { label: "Pro %", value: `${h.proUsage}%` },
+          ].map((s, i) => (
+            <div key={i} className="flex-1 text-center">
+              <div className="font-bold uppercase tracking-wider mb-0.5" style={{ fontSize: 9, color: "#8890a0", letterSpacing: "0.3px" }}>{s.label}</div>
+              <div className="font-bold" style={{ fontSize: 12, color: i === 3 ? brandCol : "#e8eaf0" }}>{s.value}</div>
+            </div>
+          ))}
+        </div>
+        {/* Rating Display */}
+        <div className="flex justify-between items-center px-3 py-2.5 rounded-md mb-3" style={{ background: "#141824", border: "1px solid #1f2635" }}>
+          <span className="font-bold uppercase tracking-wider" style={{ fontSize: 10, color: "#8890a0", letterSpacing: "0.3px" }}>Rating</span>
+          <span className="font-bold" style={{ fontSize: 14, color: brandCol }}>{h.rating}/10</span>
+        </div>
+        {/* Buy Button */}
+        <a href={amazonLink(h.name)} target="_blank" rel="noopener noreferrer"
+          onClick={e => e.stopPropagation()}
+          className="mt-auto flex items-center justify-center gap-1.5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all no-underline"
+          style={{ background: "#00d4ff", color: "#141824", textDecoration: "none", letterSpacing: "0.5px" }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#00e6ff"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,212,255,0.3)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "#00d4ff"; e.currentTarget.style.boxShadow = "none"; }}>
+          {I.cart(12)} ${h.price} — Buy Now
+        </a>
       </div>
     </div>
   );
 };
 
-// CustomTooltip - For recharts visualization
 export const CustomTooltip = ({ active, payload, label }) => {
-  if (!active || !payload || !payload.length) return null;
-
+  if (!active || !payload?.length) return null;
   return (
-    <div className="bg-slate-950/95 border border-cyan-500/60 rounded-lg p-3 backdrop-blur-md">
-      {label && (
-        <p className="text-cyan-400 font-semibold text-sm mb-1">
-          {label}
-        </p>
-      )}
-      {payload.map((entry, index) => (
-        <p key={index} className="text-sm font-medium" style={{ color: entry.color }}>
-          {entry.name}: {entry.value}
-        </p>
+    <div
+      className="glass-card rounded-xl p-4 text-sm"
+      style={{
+        background: "rgba(20,24,36,0.85)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid #00d4ff20",
+        borderLeft: "3px solid #00d4ff",
+        boxShadow: "0 0 16px #00d4ff10, 0 8px 32px #00000008",
+      }}
+    >
+      <div className="font-bold mb-1" style={{ color: "#e8eaf0", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{label}</div>
+      {payload.map((p, i) => (
+        <div key={i} className="flex gap-2 items-center">
+          <div className="w-2 h-2 rounded-full" style={{ background: p.color }} />
+          <span style={{ color: "#8890a0" }}>{p.name}:</span>
+          <span className="font-bold" style={{ color: p.color }}>{typeof p.value === 'number' && p.name?.toLowerCase().includes('usage') ? `${p.value}%` : p.value}</span>
+        </div>
       ))}
     </div>
   );
 };
 
-// Flag - Country flag display
-export const Flag = ({ country, size = 'md' }) => {
-  if (!country) return null;
-
-  // Convert emoji to country code
-  const getCountryCode = (emoji) => {
-    if (!emoji) return '';
-
-    // Handle emoji flag format (regional indicator symbols)
-    const codePoints = [...emoji].map((char) => char.codePointAt(0));
-
-    if (codePoints.length === 2) {
-      // Regional indicator range: 0x1F1E6 to 0x1F1FF
-      const code1 = codePoints[0] - 0x1f1e6;
-      const code2 = codePoints[1] - 0x1f1e6;
-
-      if (code1 >= 0 && code1 <= 25 && code2 >= 0 && code2 <= 25) {
-        return String.fromCharCode(65 + code1, 65 + code2).toLowerCase();
-      }
-    }
-
-    return '';
-  };
-
-  const countryCode = getCountryCode(country);
-  const flagUrl = countryCode
-    ? `https://flagcdn.com/${countryCode}.svg`
-    : null;
-
-  const sizeMap = {
-    sm: 'w-5 h-5',
-    md: 'w-7 h-7',
-    lg: 'w-10 h-10',
-  };
-
-  if (!flagUrl) {
-    return <span className={`${sizeMap[size]} flex items-center justify-center`}>{country}</span>;
-  }
-
+export const GradientButton = ({ children, onClick, className = "", size = "md" }) => {
+  const sizeClasses = size === "sm" ? "px-4 py-2 text-xs" : size === "lg" ? "px-8 py-3.5 text-base" : "px-6 py-2.5 text-sm";
   return (
-    <img
-      src={flagUrl}
-      alt={country}
-      className={`${sizeMap[size]} rounded-sm object-cover`}
-      onError={(e) => {
-        e.target.style.display = 'none';
-      }}
-    />
-  );
-};
-
-// PlayerRow - Table row for player
-export const PlayerRow = ({ player, rank, onClick }) => {
-  if (!player) return null;
-
-  const { flag, name, team, game, headphone } = player;
-
-  return (
-    <tr
+    <button
       onClick={onClick}
-      className={`
-        border-b border-slate-800/50 hover:bg-slate-800/30
-        transition-all duration-300 cursor-pointer
-        hover:shadow-lg hover:shadow-cyan-500/20
-      `}
+      className={`${sizeClasses} font-bold rounded-xl transition-all duration-300 ${className}`}
+      style={{
+        background: "linear-gradient(135deg, #00d4ff, #7c3aed)",
+        color: "#fff",
+        border: "none",
+        boxShadow: "0 2px 12px #00d4ff25",
+        fontFamily: "'Space Grotesk', system-ui, sans-serif",
+        cursor: "pointer",
+      }}
+      onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 24px #00d4ff40, 0 0 20px #7c3aed20"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+      onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 12px #00d4ff25"; e.currentTarget.style.transform = "translateY(0)"; }}
     >
-      {/* Rank */}
-      <td className="px-6 py-4">
-        <span className="text-cyan-400 font-bold text-lg">
-          #{rank}
-        </span>
-      </td>
-
-      {/* Flag & Name */}
-      <td className="px-6 py-4">
-        <div className="flex items-center gap-3">
-          <Flag country={flag} size="md" />
-          <span className="text-white font-semibold">{name}</span>
-        </div>
-      </td>
-
-      {/* Team */}
-      <td className="px-6 py-4">
-        <span className="text-gray-400">{team || '-'}</span>
-      </td>
-
-      {/* Game */}
-      <td className="px-6 py-4">
-        <span className="text-gray-400">{game || '-'}</span>
-      </td>
-
-      {/* Headphone */}
-      <td className="px-6 py-4">
-        <span className="text-purple-400 font-medium">{headphone || '-'}</span>
-      </td>
-    </tr>
-  );
-};
-
-// BrandBadge - Small colored badge with brand name
-export const BrandBadge = ({ brand, colors }) => {
-  if (!brand) return null;
-
-  const defaultColors = {
-    'SteelSeries': { bg: 'bg-blue-900/40', text: 'text-blue-400', border: 'border-blue-500/40' },
-    'HyperX': { bg: 'bg-red-900/40', text: 'text-red-400', border: 'border-red-500/40' },
-    'Corsair': { bg: 'bg-purple-900/40', text: 'text-purple-400', border: 'border-purple-500/40' },
-    'Astro': { bg: 'bg-cyan-900/40', text: 'text-cyan-400', border: 'border-cyan-500/40' },
-    'Audio-Technica': { bg: 'bg-orange-900/40', text: 'text-orange-400', border: 'border-orange-500/40' },
-    'Razer': { bg: 'bg-green-900/40', text: 'text-green-400', border: 'border-green-500/40' },
-    'SCUF': { bg: 'bg-pink-900/40', text: 'text-pink-400', border: 'border-pink-500/40' },
-  };
-
-  const colorConfig = colors?.[brand] || defaultColors[brand] || defaultColors['Corsair'];
-
-  return (
-    <span
-      className={`
-        inline-block px-3 py-1
-        ${colorConfig.bg} border ${colorConfig.border}
-        ${colorConfig.text} text-xs font-bold uppercase
-        rounded-sm tracking-widest
-      `}
-    >
-      {brand}
-    </span>
+      {children}
+    </button>
   );
 };

@@ -1,68 +1,51 @@
 import Link from "next/link";
-import {
-  SSRSection,
-  SSRTitle,
-  SSRSub,
-  SSRDivider,
-} from "@/components/ssr";
 
 export const metadata = {
-  title: "Page Not Found",
-  description: "The page you're looking for doesn't exist.",
+  title: "Page Not Found — EsportsHeadphones",
+  description: "The page you're looking for doesn't exist. Browse our database of pro esports headphones, player settings, and gear comparisons.",
 };
 
 export default function NotFound() {
+  const links = [
+    { href: "/", label: "Home", desc: "Back to the homepage" },
+    { href: "/headphones", label: "All Headphones", desc: "Browse 150+ esports headphones" },
+    { href: "/players", label: "Pro Players", desc: "2100+ player settings" },
+    { href: "/games", label: "Games", desc: "Headphone DNA by game" },
+    { href: "/compare", label: "Compare", desc: "Side-by-side comparison" },
+    { href: "/brands", label: "Brands", desc: "SteelSeries, HyperX, ASUS & more" },
+    { href: "/drivers", label: "Drivers", desc: "Dynamic, Neodymium & more" },
+    { href: "/best", label: "Best Headphones", desc: "Curated rankings by use case" },
+  ];
+
   return (
-    <>
-      <SSRSection>
-        <SSRTitle accent="pink">
-          404
-          <span className="text-cyan-400"> Not Found</span>
-        </SSRTitle>
-        <SSRSub>
-          The page you're looking for doesn't exist in our database.
-        </SSRSub>
-        <SSRDivider />
-      </SSRSection>
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "#f5f0e8" }}>
+      <div className="text-center max-w-lg">
+        <h1 className="text-7xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#b8956a" }}>404</h1>
+        <p className="text-xl opacity-60 mb-2">Page not found</p>
+        <p className="text-sm opacity-40 mb-8">The page you&apos;re looking for doesn&apos;t exist or has been moved.</p>
 
-      <div className="mx-auto max-w-2xl px-4 py-12 text-center text-white">
-        <div className="mb-8">
-          <h1 className="mb-4 text-4xl font-bold text-pink-400">
-            Page Not Found
-          </h1>
-          <p className="mb-8 text-lg text-gray-300">
-            We couldn't find what you were looking for. Let's get you back to
-            exploring esports headphones.
-          </p>
+        <div className="grid grid-cols-2 gap-3 mb-8">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-left p-3 rounded-xl transition-all hover:scale-[1.02]"
+              style={{ background: "#f5f2ee", border: "1px solid #e8e4df" }}
+            >
+              <div className="text-sm font-bold" style={{ color: "#b8956a" }}>{l.label}</div>
+              <div className="text-xs opacity-40 mt-0.5">{l.desc}</div>
+            </Link>
+          ))}
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Link
-            href="/"
-            className="rounded-lg border border-cyan-400/20 px-6 py-3 transition hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
-          >
-            Home
-          </Link>
-          <Link
-            href="/headphones"
-            className="rounded-lg border border-purple-400/20 px-6 py-3 transition hover:border-purple-400/50 hover:bg-purple-400/10 hover:text-purple-400"
-          >
-            All Headphones
-          </Link>
-          <Link
-            href="/players"
-            className="rounded-lg border border-pink-400/20 px-6 py-3 transition hover:border-pink-400/50 hover:bg-pink-400/10 hover:text-pink-400"
-          >
-            Pro Players
-          </Link>
-          <Link
-            href="/brands"
-            className="rounded-lg border border-yellow-400/20 px-6 py-3 transition hover:border-yellow-400/50 hover:bg-yellow-400/10 hover:text-yellow-400"
-          >
-            Brands
-          </Link>
-        </div>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all hover:scale-105"
+          style={{ background: "#b8956a20", color: "#b8956a", border: "1px solid #b8956a35" }}
+        >
+          ← Back to EsportsHeadphones
+        </Link>
       </div>
-    </>
+    </div>
   );
 }

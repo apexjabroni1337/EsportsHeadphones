@@ -1,7 +1,8 @@
 import { headphones, gameBreakdown } from "@/data";
 
 export default function sitemap() {
-  const baseUrl = "https://esportsheadphones.com";
+  /* Fixed: use game.name instead of game.game */
+const baseUrl = "https://esportsheadphones.com";
   const lastModified = new Date();
 
   // Static routes

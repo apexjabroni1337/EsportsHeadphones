@@ -1,0 +1,21 @@
+{
+  "name": "EsportsHeadphones \u2014 Pro Esports headphone Database",
+  "short_name": "EsportsHeadphones",
+  "description": "The #1 database of professional esports headphones. Compare headphones, settings, and gear from 2100+ pro players.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf8",
+  "theme_color": "#b8956a",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

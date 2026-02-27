@@ -1,73 +1,59 @@
 /** @type {import('tailwindcss').Config} */
-const config = {
+module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
   ],
   theme: {
     extend: {
-      colors: {
-        cyberpunk: {
-          bg: "#0a0e1a",
-          "bg-secondary": "#0d1117",
-          cyan: "#00f0ff",
-          purple: "#b366ff",
-          pink: "#ff3366",
-          "dark-navy": "#1a1f3a",
-          "dark-purple": "#2d1b4e",
-        },
-      },
       fontFamily: {
-        heading: ["var(--font-rajdhani)", "sans-serif"],
-        body: ["var(--font-inter)", "sans-serif"],
-        mono: ["var(--font-jetbrains)", "monospace"],
+        display: ['"Space Grotesk"', "system-ui", "sans-serif"],
+        body: ["Outfit", "system-ui", "sans-serif"],
+        mono: ['"Fira Code"', '"JetBrains Mono"', "monospace"],
       },
-      animation: {
-        "pulse-glow": "pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "slide-up": "slideUp 0.6s ease-out forwards",
-        "fade-in": "fadeIn 0.8s ease-out forwards",
+      colors: {
+        eh: {
+          bg: "#0b0f1a",
+          surface: "#141824",
+          surface2: "#1a1f2e",
+          surface3: "#1e2438",
+          border: "#2a3040",
+          border2: "#3a4050",
+          text: "#e8eaf0",
+          text2: "#d0d4de",
+          muted: "#8890a0",
+          faint: "#5a6070",
+          primary: "#00d4ff",
+          secondary: "#7c3aed",
+          accent: "#f59e0b",
+          copper: "#c45a3c",
+        }
       },
       keyframes: {
-        pulseGlow: {
-          "0%, 100%": {
-            opacity: "1",
-            boxShadow: "0 0 20px rgba(0, 240, 255, 0.5)",
-          },
-          "50%": {
-            opacity: "0.8",
-            boxShadow: "0 0 40px rgba(0, 240, 255, 0.8)",
-          },
+        'gradient-shift': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
         },
-        slideUp: {
-          "0%": {
-            opacity: "0",
-            transform: "translateY(20px)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateY(0)",
-          },
+        'pulse-glow': {
+          '0%, 100%': { opacity: '0.6' },
+          '50%': { opacity: '1' },
         },
-        fadeIn: {
-          "0%": {
-            opacity: "0",
-          },
-          "100%": {
-            opacity: "1",
-          },
+        'slide-in-right': {
+          '0%': { opacity: '0', transform: 'translateX(12px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'stagger-in': {
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
-      backdropBlur: {
-        xs: "2px",
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      animation: {
+        'gradient-shift': 'gradient-shift 6s ease infinite',
+        'pulse-glow': 'pulse-glow 2s ease infinite',
+        'slide-in-right': 'slide-in-right 0.3s ease-out',
+        'stagger-in': 'stagger-in 0.4s ease-out both',
       },
     },
   },
   plugins: [],
 };
-
-module.exports = config;

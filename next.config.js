@@ -2,9 +2,12 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "**" }
+      { protocol: "https", hostname: "flagcdn.com" },
+      { protocol: "https", hostname: "img.icons8.com" },
+      { protocol: "https", hostname: "upload.wikimedia.org" },
     ],
-    unoptimized: true,
   },
+  compress: true,
 };
+
 module.exports = nextConfig;

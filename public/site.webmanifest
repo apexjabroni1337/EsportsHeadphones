@@ -1,0 +1,16 @@
+{
+  "name": "EsportsHeadphones — Pro Esports Keyboard Database",
+  "short_name": "EsportsHeadphones",
+  "description": "The #1 database of professional esports keyboards. Compare keyboards, pro settings, and gear across CS2, Valorant, and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

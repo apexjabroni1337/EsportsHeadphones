@@ -1,0 +1,300 @@
+import EsportsHeadphones from "@/components/ClientApp";
+import { SSRSection, SSRTitle, SSRSub, SSRGrid, SSRStat, SSRLink, SSRDivider } from "@/components/ssr";
+import { headphones, allPlayers, BRAND_COLORS, headphone_IMAGE_URLS, amazonLink } from "@/data";
+
+const slug = (n) => n.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
+
+// Generate top 15 headphones pairs = 105 comparison pages
+const TOP_N = 15;
+const topHeadphones = [...headphones].sort((a, b) => b?.proUsage - a?.proUsage).slice(0, TOP_N);
+
+function getPair(pairSlug) {
+  // Try all combinations to find the matching pair
+  for (let i = 0; i < headphones.length; i++) {
+    for (let j = i + 1; j < headphones.length; j++) {
+      const combo = slug(headphones[i].name) + "-vs-" + slug(headphones[j].name);
+      const comboRev = slug(headphones[j].name) + "-vs-" + slug(headphones[i].name);
+      if (pairSlug === combo || pairSlug === comboRev) {
+        return [headphones[i], headphones[j]];
+      }
+    }
+  }
+  return null;
+}
+
+export function generateStaticParams() {
+  const params = [];
+  for (let i = 0; i < topHeadphones.length; i++) {
+    for (let j = i + 1; j < topHeadphones.length; j++) {
+      params.push({ slug: slug(topHeadphones[i].name) + "-vs-" + slug(topHeadphones[j].name) });
+    }
+  }
+  return params;
+}
+
+export function generateMetadata({ params }) {
+  const pair = getPair(params.slug);
+  if (!pair) return { title: "Headphone Comparison" };
+  const [a, b] = pair;
+
+  const title = `${a.name} vs ${b.name} — Side-by-Side Comparison`;
+  const description = `Compare the ${a.name} (${a?.weight}g, $${a?.price}, ${a?.proUsage}% pro usage) vs ${b.name} (${b?.weight}g, $${b?.price}, ${b?.proUsage}% pro usage). Full specs, driver, shape, polling rate, and pro player data head-to-head.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `https://esportsheadphones.com/compare/${params.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://esportsheadphones.com/compare/${params.slug}`,
+      images: [{
+        url: `https://esportsheadphones.com/og?title=${encodeURIComponent(a.name + " vs " + b.name)}&subtitle=${encodeURIComponent("Head-to-Head Comparison")}&stat1=${encodeURIComponent(a?.weight + "g vs " + b?.weight + "g")}&s1Label=Weight&stat2=${encodeURIComponent(a?.proUsage + "% vs " + b?.proUsage + "%")}&s2Label=Pro+Usage&stat3=${encodeURIComponent("$" + a?.price + " vs $" + b?.price)}&s3Label=Price`,
+        width: 1200, height: 630,
+      }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
+
+function winner(a, b, key, lower = false) {
+  if (a[key] === b[key]) return "tie";
+  if (lower) return a[key] < b[key] ? "a" : "b";
+  return a[key] > b[key] ? "a" : "b";
+}
+
+export default function ComparisonPage({ params }) {
+  const pair = getPair(params.slug);
+  if (!pair) return <EsportsHeadphones initialTab="compare" />;
+  const [a, b] = pair;
+
+  const aPlayers = allPlayers.filter(p => {
+    const pm = p.headphone.toLowerCase();
+    const mn = a.name.toLowerCase();
+    return pm === mn || pm.includes(mn) || mn.includes(pm);
+  }).slice(0, 10);
+  const bPlayers = allPlayers.filter(p => {
+    const pm = p.headphone.toLowerCase();
+    const mn = b.name.toLowerCase();
+    return pm === mn || pm.includes(mn) || mn.includes(pm);
+  }).slice(0, 10);
+
+  const specs = [
+    { label: "Weight", aVal: `${a?.weight}g`, bVal: `${b?.weight}g`, winner: winner(a, b, "weight", true), detail: "Lighter headphones allow faster flicks with less fatigue" },
+    { label: "Driver Type", aVal: a.driverType, bVal: b.driverType, winner: "tie", detail: "Both switches are top-tier for competitive play" },
+    { label: "Polling Rate", aVal: `${a.pollingRate >= 1000 ? a.pollingRate/1000 + "K" : a.pollingRate}Hz`, bVal: `${b.pollingRate >= 1000 ? b.pollingRate/1000 + "K" : b.pollingRate}Hz`, winner: winner(a, b, "pollingRate"), detail: "Higher polling = less input delay" },
+    { label: "Shape", aVal: a.layout || "—", bVal: b.layout || "—", winner: "tie", detail: "Shape preference is subjective" },
+    { label: "Connectivity", aVal: a.connectivity, bVal: b.connectivity, winner: "tie" },
+    { label: "Price", aVal: `$${a?.price}`, bVal: `$${b?.price}`, winner: winner(a, b, "price", true), detail: "Lower price = better value" },
+    { label: "Pro Usage", aVal: `${a?.proUsage}%`, bVal: `${b?.proUsage}%`, winner: winner(a, b, "proUsage"), detail: "Higher adoption among professional players" },
+    { label: "Rating", aVal: `${a.rating}/10`, bVal: `${b.rating}/10`, winner: winner(a, b, "rating"), detail: "Expert review score" },
+  ];
+
+  const aWins = specs.filter(s => s.winner === "a").length;
+  const bWins = specs.filter(s => s.winner === "b").length;
+
+  // Other popular comparisons
+  const otherComparisons = [];
+  for (let i = 0; i < topHeadphones.length && otherComparisons.length < 8; i++) {
+    for (let j = i + 1; j < topHeadphones.length && otherComparisons.length < 8; j++) {
+      const s = slug(topHeadphones[i].name) + "-vs-" + slug(topHeadphones[j].name);
+      if (s !== params.slug) {
+        otherComparisons.push({ slug: s, a: topHeadphones[i].name, b: topHeadphones[j].name });
+      }
+    }
+  }
+
+  return (
+    <>
+      {/* Comparison JSON-LD */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org", "@type": "FAQPage",
+        mainEntity: [
+          { "@type": "Question", name: `Is the ${a.name} or ${b.name} better for esports?`, acceptedAnswer: { "@type": "Answer", text: `The ${a.name} has ${a?.proUsage}% pro usage vs ${b?.proUsage}% for the ${b.name}. The ${a.name} weighs ${a?.weight}g and costs $${a?.price}, while the ${b.name} weighs ${b?.weight}g at $${b?.price}. ${aWins > bWins ? `The ${a.name} wins in ${aWins} categories` : bWins > aWins ? `The ${b.name} wins in ${bWins} categories` : "They tie overall"} in our head-to-head comparison. The best choice depends on hand size, grip style, and personal preference.` }},
+          { "@type": "Question", name: `${a.name} vs ${b.name} — which is lighter?`, acceptedAnswer: { "@type": "Answer", text: `The ${a?.weight < b?.weight ? a.name + " is lighter at " + a?.weight + "g vs " + b?.weight + "g" : b?.weight < a?.weight ? b.name + " is lighter at " + b?.weight + "g vs " + a?.weight + "g" : "both weigh the same at " + a?.weight + "g"}. ${a?.weight < b?.weight ? "That's " + (b?.weight - a?.weight) + "g lighter" : b?.weight < a?.weight ? "That's " + (a?.weight - b?.weight) + "g lighter" : ""}.` }},
+          { "@type": "Question", name: `Which headphone do more pros use — ${a.name} or ${b.name}?`, acceptedAnswer: { "@type": "Answer", text: `The ${a?.proUsage > b?.proUsage ? a.name + " is more popular among pros with " + a?.proUsage + "% usage vs " + b?.proUsage + "%" : b.name + " is more popular among pros with " + b?.proUsage + "% usage vs " + a?.proUsage + "%"}. Pro usage is tracked across ${allPlayers.length}+ players in our database.` }},
+        ],
+      }) }} />
+      {/* Breadcrumb */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "EsportsHeadphones", item: "https://esportsheadphones.com" },
+          { "@type": "ListItem", position: 2, name: "Compare", item: "https://esportsheadphones.com/compare" },
+          { "@type": "ListItem", position: 3, name: `${a.name} vs ${b.name}`, item: `https://esportsheadphones.com/compare/${params.slug}` },
+        ],
+      }) }} />
+
+      <article
+        className="absolute overflow-hidden"
+        style={{ width: 1, height: 1, padding: 0, margin: -1, clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0 }}
+      >
+        <h1>{a.name} vs {b.name} — Head-to-Head Esports Headphone Comparison</h1>
+        <p>Detailed side-by-side comparison of the {a.name} and {b.name}. Compare weight, driver type, polling rate, shape, price, pro usage, and rating.</p>
+
+        <h2>Specification Comparison</h2>
+        <table>
+          <caption>{a.name} vs {b.name} — Full Specs</caption>
+          <thead><tr><th>Spec</th><th>{a.name}</th><th>{b.name}</th><th>Winner</th></tr></thead>
+          <tbody>
+            {specs.map(s => (
+              <tr key={s.label}>
+                <td>{s.label}</td>
+                <td>{s.aVal}</td>
+                <td>{s.bVal}</td>
+                <td>{s.winner === "a" ? a.name : s.winner === "b" ? b.name : "Tie"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <h2>Verdict</h2>
+        <p>
+          {aWins > bWins
+            ? `The ${a.name} wins ${aWins} out of ${specs.length} categories. It is the better choice for players who prioritize ${specs.filter(s => s.winner === "a").map(s => s.label.toLowerCase()).join(", ")}.`
+            : bWins > aWins
+            ? `The ${b.name} wins ${bWins} out of ${specs.length} categories. It is the better choice for players who prioritize ${specs.filter(s => s.winner === "b").map(s => s.label.toLowerCase()).join(", ")}.`
+            : `Both headphones are evenly matched with ${aWins} wins each. The best choice comes down to personal shape preference and grip style.`}
+        </p>
+
+        <h2>Pro Players Using {a.name}</h2>
+        <ul>
+          {aPlayers.map(p => (
+            <li key={p.name}><a href={`/players/${slug(p.name)}`}>{p.name}</a> ({p.game}, {p.team})</li>
+          ))}
+        </ul>
+
+        <h2>Pro Players Using {b.name}</h2>
+        <ul>
+          {bPlayers.map(p => (
+            <li key={p.name}><a href={`/players/${slug(p.name)}`}>{p.name}</a> ({p.game}, {p.team})</li>
+          ))}
+        </ul>
+
+        <h2>Buy</h2>
+        <ul>
+          <li><a href={amazonLink(a.name)}>Buy {a.name} on Amazon</a> — ${a?.price}</li>
+          <li><a href={amazonLink(b.name)}>Buy {b.name} on Amazon</a> — ${b?.price}</li>
+        </ul>
+
+        <h2>More Comparisons</h2>
+        <ul>
+          {otherComparisons.map(c => (
+            <li key={c.slug}><a href={`/compare/${c.slug}`}>{c.a} vs {c.b}</a></li>
+          ))}
+        </ul>
+
+        <nav aria-label="Related"><ul>
+          <li><a href={`/headphones/${slug(a.name)}`}>{a.name} Full Review</a></li>
+          <li><a href={`/headphones/${slug(b.name)}`}>{b.name} Full Review</a></li>
+          <li><a href="/headphones">All Esports Headphones</a></li>
+          <li><a href="/compare">Compare Tool</a></li>
+          <li><a href="/players">Pro Player Settings</a></li>
+        </ul></nav>
+      </article>
+
+      <SSRSection>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", marginBottom: "2rem", marginTop: "1rem" }}>
+          <div style={{ textAlign: "center", flex: 1 }}>
+            <div style={{ fontSize: "20px", fontWeight: "700", color: "#1a1614" }}>{a.name}</div>
+            <div style={{ fontSize: "12px", color: "#a09890", marginTop: "0.5rem" }}>{a.brand}</div>
+          </div>
+          <div style={{
+            fontSize: "32px",
+            fontWeight: "700",
+            color: BRAND_COLORS[a.brand] || "#b8956a",
+            textTransform: "uppercase",
+            letterSpacing: "1px"
+          }}>
+            VS
+          </div>
+          <div style={{ textAlign: "center", flex: 1 }}>
+            <div style={{ fontSize: "20px", fontWeight: "700", color: "#1a1614" }}>{b.name}</div>
+            <div style={{ fontSize: "12px", color: "#a09890", marginTop: "0.5rem" }}>{b.brand}</div>
+          </div>
+        </div>
+
+        <SSRSub>Head-to-head comparison of two popular esports headphones. {aWins > bWins ? `${a.name} wins ${aWins}/${specs.length} categories.` : bWins > aWins ? `${b.name} wins ${bWins}/${specs.length} categories.` : "Evenly matched."}</SSRSub>
+
+        {/* Spec Comparison with Winners */}
+        <div style={{ marginTop: "2rem", marginBottom: "2rem" }}>
+          {specs.map((spec, idx) => (
+            <div key={idx} style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gap: "1.5rem",
+              padding: "1.25rem",
+              borderBottom: idx < specs.length - 1 ? "1px solid #f0e9e0" : "none",
+              alignItems: "center"
+            }}>
+              <div style={{ fontSize: "12px", fontWeight: "700", color: "#a09890", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                {spec.label}
+              </div>
+              <div style={{
+                padding: "0.75rem",
+                backgroundColor: spec.winner === "a" ? "rgba(184, 149, 106, 0.1)" : "#f5f0e8",
+                borderRadius: "4px",
+                textAlign: "center",
+                fontWeight: spec.winner === "a" ? "700" : "500",
+                color: "#1a1614",
+                fontSize: "13px"
+              }}>
+                {spec.aVal}
+                {spec.winner === "a" && <div style={{ fontSize: "11px", color: BRAND_COLORS[a.brand] || "#b8956a", marginTop: "4px" }}>★</div>}
+              </div>
+              <div style={{
+                padding: "0.75rem",
+                backgroundColor: spec.winner === "b" ? "rgba(184, 149, 106, 0.1)" : "#f5f0e8",
+                borderRadius: "4px",
+                textAlign: "center",
+                fontWeight: spec.winner === "b" ? "700" : "500",
+                color: "#1a1614",
+                fontSize: "13px"
+              }}>
+                {spec.bVal}
+                {spec.winner === "b" && <div style={{ fontSize: "11px", color: BRAND_COLORS[b.brand] || "#6b8cad", marginTop: "4px" }}>★</div>}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Winner Summary */}
+        <div style={{
+          padding: "1.5rem",
+          backgroundColor: aWins > bWins ? "rgba(184, 149, 106, 0.08)" : bWins > aWins ? "rgba(107, 140, 173, 0.08)" : "rgba(160, 152, 144, 0.08)",
+          borderLeft: `4px solid ${aWins > bWins ? BRAND_COLORS[a.brand] || "#b8956a" : bWins > aWins ? BRAND_COLORS[b.brand] || "#6b8cad" : "#a09890"}`,
+          borderRadius: "0 4px 4px 0",
+          marginBottom: "2rem"
+        }}>
+          <div style={{ fontWeight: "700", color: "#1a1614", marginBottom: "0.5rem", fontSize: "13px" }}>
+            {aWins > bWins
+              ? `${a.name} wins with ${aWins}/${specs.length} categories`
+              : bWins > aWins
+              ? `${b.name} wins with ${bWins}/${specs.length} categories`
+              : `Evenly matched with ${aWins} wins each`}
+          </div>
+          <div style={{ fontSize: "12px", color: "#1a1614", lineHeight: "1.5" }}>
+            {aWins > bWins
+              ? `The ${a.name} excels in ${specs.filter(s => s.winner === "a").map(s => s.label.toLowerCase()).join(", ")}.`
+              : bWins > aWins
+              ? `The ${b.name} excels in ${specs.filter(s => s.winner === "b").map(s => s.label.toLowerCase()).join(", ")}.`
+              : "Both headphones offer distinct advantages based on your priorities."}
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <SSRLink href={`/headphones/${slug(a.name)}`}>{a.name}</SSRLink>
+          <SSRLink href={`/headphones/${slug(b.name)}`}>{b.name}</SSRLink>
+          <SSRLink href="/compare">Compare Tool</SSRLink>
+          <SSRLink href="/headphones">All Headphones</SSRLink>
+        </div>
+      </SSRSection>
+
+      <EsportsHeadphones initialTab="compare" />
+    </>
+  );
+}

@@ -7,8 +7,6 @@ import {
 } from "@/components/ssr";
 import { gameBreakdown } from "@/data";
 
-export const dynamic = "force-dynamic";
-
 export async function generateStaticParams() {
   return gameBreakdown.map((game) => ({
     slug: game.slug || (game.name || game.game || "").toLowerCase().replace(/\s+/g, "-"),
@@ -23,26 +21,26 @@ export async function generateMetadata({ params }) {
   if (!game) {
     return {
       title: "Game Not Found",
-      description: "The game data you're looking for doesn't exist in our database.",
+      description: "The game data you are looking for does not exist in our database.",
     };
   }
 
   const gameName = game.name || game.game || "Unknown";
 
   return {
-    title: `${gameName} Gaming Headphones & Equipment`,
-    description: `Discover the gaming headphones and equipment used by professional ${gameName} esports players.`,
-    keywords: `${gameName}, esports headphones, gaming audio, ${gameName} equipment, competitive gaming`,
+    title: gameName + " Gaming Headphones & Equipment",
+    description: "Discover the gaming headphones and equipment used by professional " + gameName + " esports players.",
+    keywords: gameName + ", esports headphones, gaming audio, " + gameName + " equipment, competitive gaming",
     openGraph: {
-      title: `${gameName} Gaming Equipment`,
-      description: `Professional gaming headphones used in ${gameName}.`,
-      url: `https://esportsheadphones.com/games/${params.slug}`,
+      title: gameName + " Gaming Equipment",
+      description: "Professional gaming headphones used in " + gameName + ".",
+      url: "https://esportsheadphones.com/games/" + params.slug,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${gameName} Gaming Equipment`,
-      description: `Headphones and gear for competitive ${gameName}.`,
+      title: gameName + " Gaming Equipment",
+      description: "Headphones and gear for competitive " + gameName + ".",
     },
   };
 }
@@ -57,7 +55,7 @@ export default function GameDetailPage({ params }) {
       <SSRSection>
         <SSRTitle accent="pink">Game Not Found</SSRTitle>
         <SSRSub>
-          The game data you're looking for doesn't exist in our database.
+          The game data you are looking for does not exist in our database.
         </SSRSub>
       </SSRSection>
     );

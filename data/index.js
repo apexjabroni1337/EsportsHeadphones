@@ -147,6 +147,13 @@ export const HEADPHONE_IMAGE_URLS = {
   "Razer BlackShark V3 Pro White": "/images/headphones/Razer-BlackShark-V3-Pro-White.jpg",
   "Corsair Void RGB Elite White": "/images/headphones/Corsair-Void-RGB-Elite-White.jpg",
   "SteelSeries Arctis Nova Pro Wireless White": "/images/headphones/SteelSeries-Arctis-Nova-Pro-Wireless-White.jpg",
+  "Logitech G733 Lilac": "/images/headphones/Logitech-G733-Lilac.jpg",
+  "Logitech G733 Black": "/images/headphones/Logitech-G733-Black.jpg",
+  "Logitech G PRO X 2 Headset Magenta": "/images/headphones/Logitech-G-PRO-X-2-Magenta.jpg",
+  "Razer BlackShark V3 Pro Dragon Lore": "/images/headphones/Razer-BlackShark-V3-Pro-Dragon-Lore.jpg",
+  "Razer BlackShark V3 Pro Green": "/images/headphones/Razer-BlackShark-V3-Pro-Green.jpg",
+  "Corsair HS80 RGB USB": "/images/headphones/Corsair-HS80-RGB-USB.jpg",
+  "Logitech G Pro X Headset League of Legends Edition": "/images/headphones/Logitech-G-Pro-X-Headset-League-of-Legends-Edition.jpg",
 };
 
 // Fuzzy image lookup: handles color variants and partial name matches

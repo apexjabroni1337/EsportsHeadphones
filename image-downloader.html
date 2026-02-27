@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Headphone Image Downloader</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #1a1a2e; color: #eee; }
+h1 { color: #00d4ff; }
+#status { white-space: pre-wrap; background: #16213e; padding: 15px; border-radius: 8px; max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 13px; }
+button { background: #00d4ff; color: #000; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; margin: 10px 5px; }
+button:disabled { background: #555; cursor: not-allowed; }
+.ok { color: #4caf50; }
+.fail { color: #f44336; }
+.info { color: #00d4ff; }
+#progress { width: 100%; height: 20px; background: #16213e; border-radius: 10px; margin: 10px 0; }
+#progressBar { height: 100%; background: #00d4ff; border-radius: 10px; transition: width 0.3s; width: 0%; }
+</style>
+</head>
+<body>
+<h1>Headphone Image Downloader</h1>
+<p>Downloads all headphone product images and bundles them into a ZIP file.</p>
+<button id="startBtn" onclick="startDownload()">Download All Images</button>
+<div id="progress"><div id="progressBar"></div></div>
+<div id="status">Ready. Click the button to start downloading.</div>
+
+<script>
+const images = {
+  "Razer-BlackShark-V2-Pro": "https://m.media-amazon.com/images/I/71-Q3IDLG9L._AC_SL1500_.jpg",
+  "HyperX-Cloud-II": "https://m.media-amazon.com/images/I/71Z1E2cVBxL._AC_SL1500_.jpg",
+  "Razer-BlackShark-V3-Pro": "https://m.media-amazon.com/images/I/71qFc0VwpfL._AC_SL1500_.jpg",
+  "Logitech-G-Pro-X-Headset": "https://m.media-amazon.com/images/I/61sDKQr0sYL._AC_SL1500_.jpg",
+  "HyperX-Cloud-III": "https://m.media-amazon.com/images/I/61XK1fj0ELL._AC_SL1500_.jpg",
+  "beyerdynamic-DT-990-Pro": "https://m.media-amazon.com/images/I/61tSqwHBzNL._AC_SL1500_.jpg",
+  "Logitech-G-PRO-X-2": "https://m.media-amazon.com/images/I/61v5kJ2f6DL._AC_SL1500_.jpg",
+  "HyperX-Cloud-Alpha-S": "https://m.media-amazon.com/images/I/61F23CdVbSL._AC_SL1500_.jpg",
+  "beyerdynamic-MMX-300": "https://m.media-amazon.com/images/I/61jHHNn1nnL._AC_SL1500_.jpg",
+  "ASUS-ROG-Delta-II": "https://m.media-amazon.com/images/I/61DRrC0S5LL._AC_SL1500_.jpg",
+  "Logitech-G733": "https://m.media-amazon.com/images/I/61LmZvR1K1L._AC_SL1500_.jpg",
+  "Sennheiser-GAME-ONE": "https://m.media-amazon.com/images/I/61h1wCH+daL._AC_SL1500_.jpg",
+  "Corsair-HS80": "https://m.media-amazon.com/images/I/61jNQ6ATFGL._AC_SL1500_.jpg",
+  "SteelSeries-Arctis-Nova-Pro": "https://m.media-amazon.com/images/I/71H0p+y+LQL._AC_SL1500_.jpg",
+  "SteelSeries-Arctis-7": "https://m.media-amazon.com/images/I/61jvlZSq+LL._AC_SL1500_.jpg",
+  "SteelSeries-Arctis-Pro-Wireless": "https://m.media-amazon.com/images/I/61RRHLNm4aL._AC_SL1500_.jpg",
+  "Sony-INZONE-H9": "https://m.media-amazon.com/images/I/61e2L9g0FrL._AC_SL1500_.jpg",
+  "Corsair-HS80-RGB": "https://m.media-amazon.com/images/I/61Yb9CNPJ3L._AC_SL1500_.jpg",
+  "HyperX-Cloud-Flight-S": "https://m.media-amazon.com/images/I/61g5a-NQBCL._AC_SL1500_.jpg",
+  "SteelSeries-Arctis-Nova-7": "https://m.media-amazon.com/images/I/61aT+EHb9dL._AC_SL1500_.jpg",
+  "Corsair-Virtuoso-RGB-XT": "https://m.media-amazon.com/images/I/61pnIbE8oIL._AC_SL1500_.jpg",
+  "Logitech-G435": "https://m.media-amazon.com/images/I/61M9PXNQ2SL._AC_SL1500_.jpg",
+  "Razer-Kraken-V4": "https://m.media-amazon.com/images/I/71BM8YU-YGL._AC_SL1500_.jpg",
+  "Razer-Barracuda-Pro": "https://m.media-amazon.com/images/I/71K0V1RM3bL._AC_SL1500_.jpg",
+  "Audeze-Maxwell": "https://m.media-amazon.com/images/I/61HF1nN8LeL._AC_SL1500_.jpg",
+  "HyperX-Cloud-Alpha": "https://m.media-amazon.com/images/I/61G7R4Y2zEL._AC_SL1500_.jpg",
+  "SteelSeries-Arctis-Nova-Pro-Wireless": "https://m.media-amazon.com/images/I/71m4YNxzHyL._AC_SL1500_.jpg",
+  "beyerdynamic-DT-770-Pro": "https://m.media-amazon.com/images/I/61N1oTuQVwL._AC_SL1500_.jpg",
+  "Sennheiser-HD-560S": "https://m.media-amazon.com/images/I/61VWL7Mq66L._AC_SL1500_.jpg",
+  "ASTRO-A50": "https://m.media-amazon.com/images/I/61hPzJNkBzL._AC_SL1500_.jpg",
+  "ASTRO-A40-TR": "https://m.media-amazon.com/images/I/61sCpAC4C-L._AC_SL1500_.jpg",
+  "Corsair-Virtuoso-SE": "https://m.media-amazon.com/images/I/61HmFTQzx3L._AC_SL1500_.jpg",
+  "Turtle-Beach-Stealth-700-Gen-2": "https://m.media-amazon.com/images/I/61cz0GEJqRL._AC_SL1500_.jpg",
+  "JBL-Quantum-910": "https://m.media-amazon.com/images/I/61pXSXPCWgL._AC_SL1500_.jpg",
+  "Sennheiser-GAME-ZERO": "https://m.media-amazon.com/images/I/71c+YOxfTGL._AC_SL1500_.jpg",
+  "JBL-Quantum-One": "https://m.media-amazon.com/images/I/61ZI7WhnQqL._AC_SL1500_.jpg",
+  "Sennheiser-GSP-600": "https://m.media-amazon.com/images/I/51ylQTFcweL._AC_SL1500_.jpg",
+  "JBL-Quantum-400": "https://m.media-amazon.com/images/I/61GjlALH-gL._AC_SL1500_.jpg",
+  "ASUS-ROG-Pelta": "https://m.media-amazon.com/images/I/71noSdO0XjL._AC_SL1500_.jpg",
+  "SONY-INZONE-H9-II": "https://m.media-amazon.com/images/I/61NLdd9h1KL._AC_SL1500_.jpg",
+  "Sennheiser-HD-600": "https://m.media-amazon.com/images/I/81op1KfxDBL._AC_SL1500_.jpg",
+  "Sennheiser-HD800-S": "https://m.media-amazon.com/images/I/71sLOtsK2UL._AC_SL1500_.jpg",
+  "EPOS-GSP-500": "https://m.media-amazon.com/images/I/41YuPc+oopL._AC_SL1500_.jpg",
+  "EPOS-H6PRO-White": "https://m.media-amazon.com/images/I/51hjQRReqaL._AC_SL1500_.jpg",
+  "Sennheiser-PC38X": "https://m.media-amazon.com/images/I/41NTPzwmh0L._AC_SL1500_.jpg",
+  "EPOS-H3": "https://m.media-amazon.com/images/I/61cxHIWB3dL._AC_SL1500_.jpg",
+  "SteelSeries-Arctis-5": "https://m.media-amazon.com/images/I/61dh5CSDYJL._AC_SL1500_.jpg",
+  "Razer-Kraken-TE": "https://m.media-amazon.com/images/I/71i3yEcRITL._AC_SL1500_.jpg",
+  "Razer-Kraken-Kitty": "https://m.media-amazon.com/images/I/71MSFZ3HhEL._AC_SL1500_.jpg",
+  "Razer-Atlas": "https://m.media-amazon.com/images/I/61TJGaHe2KL._AC_SL1500_.jpg",
+  "Corsair-Void-Pro": "https://m.media-amazon.com/images/I/61E4A6DQd4L._AC_SL1500_.jpg",
+  "Logitech-G435-LIGHTSPEED": "https://m.media-amazon.com/images/I/61M9PXNQ2SL._AC_SL1500_.jpg",
+  "Razer-BlackShark-V2": "https://m.media-amazon.com/images/I/71-Q3IDLG9L._AC_SL1500_.jpg",
+  "Razer-BlackShark-V2-X": "https://m.media-amazon.com/images/I/71-Q3IDLG9L._AC_SL1500_.jpg",
+  "Razer-BlackShark-V2-HyperSpeed": "https://m.media-amazon.com/images/I/71-Q3IDLG9L._AC_SL1500_.jpg",
+  "Corsair-HS80-MAX": "https://m.media-amazon.com/images/I/61jNQ6ATFGL._AC_SL1500_.jpg",
+  "Corsair-VOID-Wireless-V2": "https://m.media-amazon.com/images/I/61E4A6DQd4L._AC_SL1500_.jpg",
+  "Corsair-Void-RGB-Elite": "https://m.media-amazon.com/images/I/61E4A6DQd4L._AC_SL1500_.jpg",
+  "Corsair-Virtuoso-Pro": "https://m.media-amazon.com/images/I/61pnIbE8oIL._AC_SL1500_.jpg",
+  "Corsair-Virtuoso-MAX": "https://m.media-amazon.com/images/I/61pnIbE8oIL._AC_SL1500_.jpg",
+  "Corsair-Virtuoso-RGB-Wireless-XT": "https://m.media-amazon.com/images/I/61pnIbE8oIL._AC_SL1500_.jpg",
+  "beyerdynamic-DT-900-Pro-X": "https://m.media-amazon.com/images/I/61tSqwHBzNL._AC_SL1500_.jpg",
+  "ASTRO-A40": "https://m.media-amazon.com/images/I/61sCpAC4C-L._AC_SL1500_.jpg",
+  "Razer-Kraken-V3-Pro": "https://m.media-amazon.com/images/I/71K0V1RM3bL._AC_SL1500_.jpg",
+  "SteelSeries-Arctis-Pro": "https://m.media-amazon.com/images/I/61RRHLNm4aL._AC_SL1500_.jpg",
+  "Logitech-G-Pro-Headset": "https://m.media-amazon.com/images/I/61sDKQr0sYL._AC_SL1500_.jpg"
+};
+
+async function startDownload() {
+  const btn = document.getElementById('startBtn');
+  const status = document.getElementById('status');
+  const progressBar = document.getElementById('progressBar');
+  btn.disabled = true;
+  status.innerHTML = '';
+
+  const zip = new JSZip();
+  const entries = Object.entries(images);
+  let success = 0, failed = 0;
+
+  function log(msg, cls) {
+    status.innerHTML += `<span class="${cls}">${msg}</span>\n`;
+    status.scrollTop = status.scrollHeight;
+  }
+
+  log(`Starting download of ${entries.length} images...`, 'info');
+
+  for (let i = 0; i < entries.length; i++) {
+    const [name, url] = entries[i];
+    const pct = Math.round(((i + 1) / entries.length) * 100);
+    progressBar.style.width = pct + '%';
+
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const blob = await resp.blob();
+      zip.file(`${name}.jpg`, blob);
+      log(`✓ ${name}.jpg (${Math.round(blob.size/1024)}KB)`, 'ok');
+      success++;
+    } catch(e) {
+      log(`✗ ${name}.jpg - ${e.message}`, 'fail');
+      failed++;
+    }
+
+    // Small delay to avoid hammering
+    await new Promise(r => setTimeout(r, 100));
+  }
+
+  log(`\nDownloaded: ${success} OK, ${failed} failed`, 'info');
+  log('Generating ZIP file...', 'info');
+
+  try {
+    const zipBlob = await zip.generateAsync({type: 'blob'}, (meta) => {
+      progressBar.style.width = Math.round(meta.percent) + '%';
+    });
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(zipBlob);
+    a.download = 'headphone-images.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    log(`\n✓ ZIP file ready! (${Math.round(zipBlob.size/1024/1024*10)/10}MB) - downloading now...`, 'info');
+    log('\nAfter downloading, extract the ZIP contents into:', 'info');
+    log('EsportsHeadphones\\public\\images\\headphones\\', 'info');
+  } catch(e) {
+    log(`\n✗ ZIP generation failed: ${e.message}`, 'fail');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Download Again';
+}
+</script>
+</body>
+</html>

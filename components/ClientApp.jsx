@@ -531,12 +531,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #06b6d440, #8b5cf640); border-radius: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        .ek-sidebar { width: 220px; transition: width 0.3s cubic-bezier(0.4,0,0.2,1); }
-        .ek-sidebar.collapsed { width: 64px; }
-        .ek-sidebar.collapsed:hover { width: 220px; }
-        .ek-sidebar .tab-label { opacity: 1; transition: opacity 0.2s ease; white-space: nowrap; }
-        .ek-sidebar.collapsed .tab-label { opacity: 0; }
-        .ek-sidebar.collapsed:hover .tab-label { opacity: 1; }
+        .ek-topnav-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+        .ek-topnav-tabs::-webkit-scrollbar { display: none; }
+        .ek-topnav-tab { white-space: nowrap; transition: all 0.2s ease; position: relative; }
+        .ek-topnav-tab::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; border-radius: 1px; transition: width 0.2s ease; }
+        .ek-topnav-tab.active::after { width: 60%; }
+        .ek-topnav-tab:hover { background: rgba(0,0,0,0.04); }
       `}</style>
 
       {/* Skip to content for accessibility */}
@@ -768,93 +768,80 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
            NAVIGATION — Gradient Top Bar + Vertical Sidebar
            ═══════════════════════════════════════════════════════ */}
 
-      {/* ─── SLIM GRADIENT TOP BAR ─── */}
-      <header className="sticky top-0 z-50" style={{ height: 64 }}>
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(90deg, #06b6d4, #8b5cf6, #06b6d4)",
-          backgroundSize: "200% 100%",
-          animation: "gradient-shift 6s ease infinite",
-        }} />
-        <div className="relative h-full max-w-full mx-auto px-4 sm:px-6 flex items-center justify-between md:ml-16">
-          {/* Logo */}
-          <div className="flex items-center gap-2.5 cursor-pointer group" onClick={() => { setActiveTab("overview"); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
-            <span className="inline-flex transition-transform duration-300 group-hover:scale-110" style={{ filter: "brightness(0) invert(1)" }}>{I.headphone(26)}</span>
-            <div className="flex flex-col">
-              <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 15, fontWeight: 700, letterSpacing: 3, color: "#fff", lineHeight: 1 }}>ESPORTSHEADPHONES.COM</span>
-              <span style={{ fontSize: 9, letterSpacing: 2.5, color: "rgba(255,255,255,0.7)", fontWeight: 600, textTransform: "uppercase" }}>Pro Headphone Data</span>
+      {/* ─── TOP NAVIGATION BAR ─── */}
+      <header className="sticky top-0 z-50">
+        {/* Gradient accent line */}
+        <div style={{ height: 3, background: "linear-gradient(90deg, #06b6d4, #8b5cf6, #06b6d4)", backgroundSize: "200% 100%", animation: "gradient-shift 6s ease infinite" }} />
+        {/* Main nav row */}
+        <div style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 flex items-center gap-4" style={{ height: 56 }}>
+            {/* Logo */}
+            <div className="flex items-center gap-2 cursor-pointer group flex-shrink-0" onClick={() => { setActiveTab("overview"); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+              <span className="inline-flex transition-transform duration-300 group-hover:scale-110">{I.headphone(22)}</span>
+              <div className="hidden sm:flex flex-col">
+                <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 13, fontWeight: 700, letterSpacing: 2.5, color: "#1a1614", lineHeight: 1 }}>ESPORTSHEADPHONES</span>
+                <span style={{ fontSize: 8, letterSpacing: 2, color: "#a09890", fontWeight: 600, textTransform: "uppercase" }}>Pro Headphone Data</span>
+              </div>
             </div>
-          </div>
 
-          {/* Center: Search command bar */}
-          <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
-            aria-label="Search (Ctrl+K)" className="hidden sm:flex items-center gap-3 px-5 py-2 rounded-xl text-sm transition-all duration-200 hover:shadow-lg"
-            style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.8)", minWidth: 280 }}>
-            <Search size={14} />
-            <span>Search headphones, players, games...</span>
-            <kbd className="ml-auto px-1.5 py-0.5 rounded text-[10px] font-mono" style={{ background: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>⌘K</kbd>
-          </button>
+            {/* Separator */}
+            <div className="hidden md:block" style={{ width: 1, height: 28, background: "rgba(0,0,0,0.08)" }} />
 
-          {/* Right actions */}
-          <div className="flex items-center gap-3">
-            <div className="hidden lg:flex items-center gap-3 text-xs mr-2" style={{ color: "rgba(255,255,255,0.7)" }}>
-              <span>{allPlayers.length}+ Pros</span>
-              <span style={{ color: "rgba(255,255,255,0.3)" }}>·</span>
-              <span>{headphones.length} Headphones</span>
-            </div>
-            {/* Mobile search */}
-            <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
-              aria-label="Search" className="sm:hidden p-2 rounded-lg" style={{ background: "rgba(255,255,255,0.15)" }}>
-              <Search size={16} style={{ color: "#fff" }} />
-            </button>
-            {/* Subscribe */}
-            {newsletterStatus === "success" ? (
-              <span style={{ fontSize: 11, color: "#fff" }} className="font-bold hidden sm:inline">✓ Subscribed</span>
-            ) : (
-              <button onClick={() => setNewsletterPopup(true)}
-                className="hidden sm:inline-flex px-4 py-1.5 rounded-xl font-bold text-xs transition-all hover:shadow-lg"
-                style={{ background: "rgba(255,255,255,0.2)", color: "#fff", border: "1px solid rgba(255,255,255,0.25)", letterSpacing: 1, backdropFilter: "blur(8px)" }}>
-                Subscribe
+            {/* Desktop Tab Navigation */}
+            <nav aria-label="Main navigation" className="hidden md:flex ek-topnav-tabs flex-1 items-center" style={{ minWidth: 0 }}>
+              {tabs.map(t => {
+                const isActive = activeTab === t.id;
+                const Icon = t.icon;
+                return (
+                  <button key={t.id} onClick={() => { setActiveTab(t.id); if (t.id === "players") setSelectedPlayer(null); if (t.id === "lab") { setQuizStep(0); setQuizDone(false); } window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    role="tab" aria-selected={isActive} aria-controls="main-content"
+                    className={`ek-topnav-tab flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-[11px] font-semibold${isActive ? " active" : ""}`}
+                    style={{
+                      color: isActive ? t.color : "#6b635b",
+                      background: isActive ? `${t.color}10` : "transparent",
+                    }}>
+                    <Icon size={14} strokeWidth={2} style={{ color: isActive ? t.color : "#b0a89e", flexShrink: 0 }} />
+                    <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{t.label === "All Headphones" ? "Headphones" : t.label}</span>
+                    {isActive && <style>{`.ek-topnav-tab.active[aria-selected="true"]::after { background: ${t.color}; }`}</style>}
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Right side: stats + search + subscribe */}
+            <div className="flex items-center gap-2 ml-auto flex-shrink-0">
+              {/* Stats badges */}
+              <div className="hidden xl:flex items-center gap-2 text-[10px] font-semibold mr-1" style={{ color: "#a09890" }}>
+                <span className="px-2 py-1 rounded-md" style={{ background: "rgba(0,0,0,0.03)" }}>{allPlayers.length}+ Pros</span>
+                <span className="px-2 py-1 rounded-md" style={{ background: "rgba(0,0,0,0.03)" }}>{headphones.length} Headphones</span>
+              </div>
+              {/* Search trigger */}
+              <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
+                aria-label="Search (Ctrl+K)" className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 hover:shadow-sm"
+                style={{ background: "rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.06)", color: "#8a8078", minWidth: 180 }}>
+                <Search size={13} style={{ color: "#b0a89e" }} />
+                <span style={{ fontSize: 12 }}>Search...</span>
+                <kbd className="ml-auto px-1.5 py-0.5 rounded text-[10px] font-mono" style={{ background: "rgba(0,0,0,0.04)", color: "#b0a89e", border: "1px solid rgba(0,0,0,0.06)" }}>⌘K</kbd>
               </button>
-            )}
+              {/* Mobile search */}
+              <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
+                aria-label="Search" className="sm:hidden p-2 rounded-lg" style={{ background: "rgba(0,0,0,0.04)" }}>
+                <Search size={16} style={{ color: "#8a8078" }} />
+              </button>
+              {/* Subscribe */}
+              {newsletterStatus === "success" ? (
+                <span style={{ fontSize: 11, color: "#2a8a62" }} className="font-bold hidden sm:inline">✓ Subscribed</span>
+              ) : (
+                <button onClick={() => setNewsletterPopup(true)}
+                  className="hidden lg:inline-flex px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all hover:shadow-sm"
+                  style={{ background: "linear-gradient(135deg, #06b6d4, #8b5cf6)", color: "#fff", letterSpacing: 0.5 }}>
+                  Subscribe
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </header>
-
-      {/* ─── DESKTOP SIDEBAR ─── */}
-      <nav aria-label="Main navigation" className={`ek-sidebar hidden md:flex flex-col fixed left-0 top-16 bottom-0 z-40 overflow-y-auto overflow-x-hidden${sidebarCollapsed ? " collapsed" : ""}`}
-        style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderRight: "1px solid rgba(0,0,0,0.06)" }}>
-        <div className="flex flex-col gap-1 py-4 px-2 flex-1">
-          {tabs.map(t => {
-            const isActive = activeTab === t.id;
-            const Icon = t.icon;
-            return (
-              <button key={t.id} onClick={() => { setActiveTab(t.id); if (t.id === "players") setSelectedPlayer(null); if (t.id === "lab") { setQuizStep(0); setQuizDone(false); } window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                role="tab" aria-selected={isActive} aria-controls="main-content"
-                className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 relative"
-                style={{
-                  background: isActive ? `${t.color}10` : "transparent",
-                  color: isActive ? t.color : "#6b635b",
-                  borderLeft: isActive ? `3px solid ${t.color}` : "3px solid transparent",
-                  minHeight: 40,
-                }}>
-                <Icon size={18} strokeWidth={2} style={{ color: isActive ? t.color : "#a09890", flexShrink: 0 }} />
-                <span className="tab-label" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{t.label}</span>
-                {isActive && <div className="absolute right-2 w-1.5 h-1.5 rounded-full tab-label" style={{ background: t.color }} />}
-              </button>
-            );
-          })}
-        </div>
-        <button onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-          className="flex items-center justify-center px-2 py-3 transition-all hover:bg-black/5"
-          style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}
-          title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a09890" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            style={{ transform: sidebarCollapsed ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}>
-            <polyline points="11 17 6 12 11 7" /><polyline points="18 17 13 12 18 7" />
-          </svg>
-          <span className="tab-label text-xs ml-2" style={{ color: "#a09890" }}>{sidebarCollapsed ? "Expand" : "Collapse"}</span>
-        </button>
-      </nav>
 
       {/* ─── MOBILE BOTTOM TAB BAR ─── */}
       <nav aria-label="Mobile navigation" className="md:hidden fixed bottom-0 left-0 right-0 z-50"
@@ -927,8 +914,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         </div>
       )}
 
-      {/* ─── Content wrapper with sidebar offset ─── */}
-      <div className={`pb-20 md:pb-0 transition-all duration-300 ${sidebarCollapsed ? "md:ml-16" : "md:ml-[220px]"}`}>
+      {/* ─── Content wrapper ─── */}
+      <div className="pb-20 md:pb-0">
 
       {/* ═══════════════════════════════════════════════════════
            HERO SECTION — Split Layout with Earpad Decorations
@@ -6114,7 +6101,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           </div>
         </div>
       </footer>
-      </div>{/* end sidebar-offset wrapper */}
+      </div>{/* end content wrapper */}
     </div>
   );
 }

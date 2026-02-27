@@ -1339,11 +1339,58 @@ export const brandMarketShare = [
 
 // Game-specific headphone preferences
 export const gameBreakdown = [
-  { game: "CS2", "HyperX Cloud II": 28, "Razer BlackShark V2 Pro": 24, "Logitech G Pro X": 18, "SteelSeries Arctis": 15, "Other": 15 },
-  { game: "Valorant", "Razer BlackShark V3 Pro": 26, "HyperX Cloud III": 22, "Logitech G PRO X 2": 18, "SteelSeries Arctis Nova": 16, "Other": 18 },
-  { game: "League of Legends", "Logitech": 18, "Razer": 16, "HyperX": 14, "SteelSeries": 12, "Other": 40 },
-  { game: "Fortnite", "Razer": 32, "HyperX": 24, "Logitech": 18, "Corsair": 10, "Other": 16 },
-  { game: "Dota 2", "Razer": 18, "HyperX": 16, "Logitech": 14, "SteelSeries": 12, "Other": 40 }
+  { game: "CS2", icon: "crosshair", players: 817, topHeadphones: [
+    { name: "HyperX Cloud II", pct: 28 }, { name: "Razer BlackShark V2 Pro Black", pct: 18 }, { name: "Logitech G Pro X Headset", pct: 14 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 8 }, { name: "Beyerdynamic DT 990 Pro", pct: 5 }],
+    topBrands: [{ name: "HyperX", pct: 32 }, { name: "Razer", pct: 24 }, { name: "Logitech", pct: 18 }, { name: "SteelSeries", pct: 12 }],
+    avgWeight: 310, wirelessPct: 35 },
+  { game: "Valorant", icon: "crosshair", players: 566, topHeadphones: [
+    { name: "Razer BlackShark V3 Pro Black", pct: 24 }, { name: "HyperX Cloud III Wireless", pct: 18 }, { name: "Logitech G Pro X 2 Headset Black", pct: 15 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 10 }, { name: "HyperX Cloud Alpha", pct: 6 }],
+    topBrands: [{ name: "Razer", pct: 28 }, { name: "HyperX", pct: 24 }, { name: "Logitech", pct: 20 }, { name: "SteelSeries", pct: 14 }],
+    avgWeight: 305, wirelessPct: 42 },
+  { game: "Fortnite", icon: "bolt", players: 262, topHeadphones: [
+    { name: "Razer BlackShark V2 Pro Black", pct: 22 }, { name: "HyperX Cloud II", pct: 18 }, { name: "Logitech G Pro X Headset", pct: 12 }, { name: "SteelSeries Arctis Nova 7", pct: 8 }, { name: "Corsair HS80 RGB Wireless", pct: 5 }],
+    topBrands: [{ name: "Razer", pct: 30 }, { name: "HyperX", pct: 22 }, { name: "Logitech", pct: 18 }, { name: "SteelSeries", pct: 12 }],
+    avgWeight: 320, wirelessPct: 38 },
+  { game: "LoL", icon: "crown", players: 93, topHeadphones: [
+    { name: "Logitech G Pro X Headset", pct: 20 }, { name: "HyperX Cloud II", pct: 16 }, { name: "Razer BlackShark V2 Pro Black", pct: 12 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 10 }, { name: "Sennheiser Game Zero", pct: 8 }],
+    topBrands: [{ name: "Logitech", pct: 25 }, { name: "HyperX", pct: 22 }, { name: "Razer", pct: 18 }, { name: "SteelSeries", pct: 15 }],
+    avgWeight: 330, wirelessPct: 28 },
+  { game: "R6 Siege", icon: "shield", players: 89, topHeadphones: [
+    { name: "HyperX Cloud II", pct: 22 }, { name: "Razer BlackShark V2 Pro Black", pct: 16 }, { name: "Logitech G Pro X Headset", pct: 12 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 8 }, { name: "Beyerdynamic DT 990 Pro", pct: 6 }],
+    topBrands: [{ name: "HyperX", pct: 28 }, { name: "Razer", pct: 22 }, { name: "Logitech", pct: 16 }, { name: "SteelSeries", pct: 12 }],
+    avgWeight: 315, wirelessPct: 32 },
+  { game: "PUBG", icon: "crosshair", players: 61, topHeadphones: [
+    { name: "Logitech G Pro X Headset", pct: 20 }, { name: "HyperX Cloud II", pct: 18 }, { name: "Razer BlackShark V2 Pro Black", pct: 14 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 10 }, { name: "HyperX Cloud Alpha", pct: 8 }],
+    topBrands: [{ name: "Logitech", pct: 26 }, { name: "HyperX", pct: 24 }, { name: "Razer", pct: 18 }, { name: "SteelSeries", pct: 14 }],
+    avgWeight: 325, wirelessPct: 30 },
+  { game: "Apex", icon: "fire", players: 56, topHeadphones: [
+    { name: "Razer BlackShark V3 Pro Black", pct: 20 }, { name: "HyperX Cloud II", pct: 16 }, { name: "Logitech G Pro X 2 Headset Black", pct: 14 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 10 }, { name: "HyperX Cloud Flight", pct: 6 }],
+    topBrands: [{ name: "Razer", pct: 26 }, { name: "HyperX", pct: 22 }, { name: "Logitech", pct: 18 }, { name: "SteelSeries", pct: 14 }],
+    avgWeight: 308, wirelessPct: 40 },
+  { game: "Dota 2", icon: "dragon", players: 43, topHeadphones: [
+    { name: "Logitech G Pro X Headset", pct: 18 }, { name: "HyperX Cloud II", pct: 15 }, { name: "Razer BlackShark V2 Pro Black", pct: 12 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 10 }, { name: "Sennheiser Game Zero", pct: 8 }],
+    topBrands: [{ name: "Logitech", pct: 22 }, { name: "HyperX", pct: 20 }, { name: "Razer", pct: 16 }, { name: "SteelSeries", pct: 14 }],
+    avgWeight: 335, wirelessPct: 25 },
+  { game: "Marvel Rivals", icon: "star", players: 21, topHeadphones: [
+    { name: "Razer BlackShark V3 Pro Black", pct: 24 }, { name: "HyperX Cloud II", pct: 18 }, { name: "Logitech G Pro X 2 Headset Black", pct: 14 }, { name: "SteelSeries Arctis Nova 7", pct: 10 }],
+    topBrands: [{ name: "Razer", pct: 28 }, { name: "HyperX", pct: 22 }, { name: "Logitech", pct: 18 }, { name: "SteelSeries", pct: 14 }],
+    avgWeight: 305, wirelessPct: 45 },
+  { game: "Overwatch 2", icon: "shield", players: 16, topHeadphones: [
+    { name: "Razer BlackShark V2 Pro Black", pct: 28 }, { name: "HyperX Cloud II", pct: 20 }, { name: "Logitech G Pro X Headset", pct: 16 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 12 }],
+    topBrands: [{ name: "Razer", pct: 32 }, { name: "HyperX", pct: 24 }, { name: "Logitech", pct: 20 }, { name: "SteelSeries", pct: 16 }],
+    avgWeight: 310, wirelessPct: 40 },
+  { game: "Deadlock", icon: "gear", players: 15, topHeadphones: [
+    { name: "Razer BlackShark V3 Pro Black", pct: 30 }, { name: "HyperX Cloud III Wireless", pct: 20 }, { name: "Logitech G Pro X 2 Headset Black", pct: 18 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 12 }],
+    topBrands: [{ name: "Razer", pct: 35 }, { name: "HyperX", pct: 22 }, { name: "Logitech", pct: 20 }, { name: "SteelSeries", pct: 15 }],
+    avgWeight: 300, wirelessPct: 50 },
+  { game: "Call of Duty", icon: "crosshair", players: 8, topHeadphones: [
+    { name: "Razer BlackShark V2 Pro Black", pct: 35 }, { name: "HyperX Cloud II", pct: 25 }, { name: "SteelSeries Arctis Nova Pro Wireless", pct: 20 }],
+    topBrands: [{ name: "Razer", pct: 40 }, { name: "HyperX", pct: 30 }, { name: "SteelSeries", pct: 20 }],
+    avgWeight: 315, wirelessPct: 38 },
+  { game: "Quake Champions", icon: "fire", players: 20, topHeadphones: [
+    { name: "HyperX Cloud II", pct: 25 }, { name: "Beyerdynamic DT 990 Pro", pct: 18 }, { name: "Sennheiser Game Zero", pct: 14 }, { name: "Logitech G Pro X Headset", pct: 12 }],
+    topBrands: [{ name: "HyperX", pct: 28 }, { name: "Beyerdynamic", pct: 20 }, { name: "Sennheiser", pct: 18 }, { name: "Logitech", pct: 15 }],
+    avgWeight: 340, wirelessPct: 20 },
 ];
 
 // Trend data: Average headphone weight

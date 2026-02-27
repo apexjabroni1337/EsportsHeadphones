@@ -74,16 +74,17 @@ export default function BrandDetailPage({ params }) {
   if (!brand) return <EsportsHeadphones initialTab="brands" />;
 
   const brandheadphones = headphones.filter((m) => m.brand === brand);
-  const avgWeight = Math.round(brandheadphones.reduce((a, m) => a + m?.weight, 0) / brandheadphones.length);
-  const avgPrice = Math.round(brandheadphones.reduce((a, m) => a + m?.price, 0) / brandheadphones.length);
-  const avgRating = (brandheadphones.reduce((a, m) => a + m.rating, 0) / brandheadphones.length).toFixed(1);
-  const totalProUsage = brandheadphones.reduce((a, m) => a + m.proUsage, 0);
-  const lightest = [...brandheadphones].sort((a, b) => a?.weight - b?.weight)[0];
-  const mostPopular = [...brandheadphones].sort((a, b) => b?.proUsage - a?.proUsage)[0];
-  const switches = [...new Set(brandheadphones.map((m) => m.driverType))];
-  const shapes = [...new Set(brandheadphones.map((m) => m.layout))];
-  const priceRange = `$${Math.min(...brandheadphones.map((m) => m?.price))}-$${Math.max(...brandheadphones.map((m) => m?.price))}`;
-  const weightRange = `${Math.min(...brandheadphones.map((m) => m?.weight))}g-${Math.max(...brandheadphones.map((m) => m?.weight))}g`;
+  if (!brandheadphones.length) return <EsportsHeadphones initialTab="brands" />;
+  const avgWeight = Math.round(brandheadphones.reduce((a, m) => a + (m?.weight || 0), 0) / brandheadphones.length);
+  const avgPrice = Math.round(brandheadphones.reduce((a, m) => a + (m?.price || 0), 0) / brandheadphones.length);
+  const avgRating = (brandheadphones.reduce((a, m) => a + (m?.rating || 0), 0) / brandheadphones.length).toFixed(1);
+  const totalProUsage = brandheadphones.reduce((a, m) => a + (m?.proUsage || 0), 0);
+  const lightest = [...brandheadphones].sort((a, b) => (a?.weight || 0) - (b?.weight || 0))[0] || {};
+  const mostPopular = [...brandheadphones].sort((a, b) => (b?.proUsage || 0) - (a?.proUsage || 0))[0] || {};
+  const switches = [...new Set(brandheadphones.map((m) => m.driverType).filter(Boolean))];
+  const shapes = [...new Set(brandheadphones.map((m) => m.layout).filter(Boolean))];
+  const priceRange = `$${Math.min(...brandheadphones.map((m) => m?.price || 0))}-$${Math.max(...brandheadphones.map((m) => m?.price || 0))}`;
+  const weightRange = `${Math.min(...brandheadphones.map((m) => m?.weight || 0))}g-${Math.max(...brandheadphones.map((m) => m?.weight || 0))}g`;
 
   const brandPros = proPlayers.filter((p) => {
     const pm = (p.headphone || "")?.toLowerCase?.() ?? "";
@@ -124,8 +125,8 @@ export default function BrandDetailPage({ params }) {
           <li>Average price: ${avgPrice}</li>
           <li>Price range: {priceRange}</li>
           <li>Average rating: {avgRating}/10</li>
-          <li>Lightest headphone: {lightest.name} ({lightest?.weight}g)</li>
-          <li>Most popular: {mostPopular.name} ({mostPopular.proUsage}% pro usage)</li>
+          <li>Lightest headphone: {lightest.name || "—"} ({lightest?.weight || 0}g)</li>
+          <li>Most popular: {mostPopular.name || "—"} ({mostPopular.proUsage || 0}% pro usage)</li>
           <li>Sensors used: {switches.join(", ")}</li>
           <li>Shape types: {shapes.join(", ")}</li>
         </ul>
@@ -141,8 +142,8 @@ export default function BrandDetailPage({ params }) {
               <tr key={m.id}>
                 <td><a href={`/headphones/${slug(m.name)}`}>{m.name}</a></td>
                 <td>{m?.weight}g</td>
-                <td><a href={`/sensors/${m.driverType.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{m.driverType}</a></td>
-                <td><a href={`/best/${m.layout.toLowerCase()}`}>{m.layout}</a></td>
+                <td>{m.driverType ? <a href={`/sensors/${m.driverType.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{m.driverType}</a> : "—"}</td>
+                <td>{m.layout ? <a href={`/best/${m.layout.toLowerCase()}`}>{m.layout}</a> : "—"}</td>
                 <td>{m.connectivity}</td>
                 <td>${m?.price}</td>
                 <td>{m.proUsage}%</td>

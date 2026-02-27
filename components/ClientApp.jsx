@@ -1404,9 +1404,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* Gear Check Callout */}
             {(() => {
-              const hotHeadphone = gameBreakdown[1]?.topHeadphones[0]?.name || "Wooting 60HE+";
-              const hotGame = gameBreakdown[1]?.game || "Valorant";
-              const hotPct = gameBreakdown[1]?.topHeadphones[0]?.pct || 30;
+              const gb1 = gameBreakdown[1] || {};
+              const gb1Entries = Object.entries(gb1).filter(([k]) => k !== "game").sort((a, b) => b[1] - a[1]);
+              const hotHeadphone = gb1Entries[0]?.[0] || "HyperX Cloud II";
+              const hotGame = gb1.game || "Valorant";
+              const hotPct = gb1Entries[0]?.[1] || 30;
               const hm = headphones.find(m => m.name === hotHeadphone);
               return (
                 <div className="rounded-xl p-4 my-6 flex flex-col sm:flex-row items-center gap-4" style={{ background: "linear-gradient(135deg, #00d4ff08, #00d4ff03)", border: "1px solid #00d4ff25" }}>
@@ -1902,8 +1904,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </div>
                     <div className="grid grid-cols-2 gap-2 mb-3">
                       <div className="rounded-lg px-2 py-1.5" style={{ background: `${col}10` }}>
-                        <div style={{ fontSize: 10, color: "#8890a0", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Top Headpard</div>
-                        <div style={{ fontSize: 12, color: "#d0d4de", fontWeight: 800 }}>{g.topHeadphones[0]?.name.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |Endgame Gear |ASUS |Keychron |Glorious )/, "")}</div>
+                        <div style={{ fontSize: 10, color: "#8890a0", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Top Headphone</div>
+                        <div style={{ fontSize: 12, color: "#d0d4de", fontWeight: 800 }}>{(g.topHeadphones?.[0]?.name || "—").replace(/(HyperX |Razer |Logitech |SteelSeries |Corsair |Beyerdynamic |Sennheiser |Sony |ASUS |Bose )/, "")}</div>
                       </div>
                       <div className="rounded-lg px-2 py-1.5" style={{ background: `${col}10` }}>
                         <div style={{ fontSize: 11, color: "#8890a0", fontWeight: 700 }}>Avg Weight</div>

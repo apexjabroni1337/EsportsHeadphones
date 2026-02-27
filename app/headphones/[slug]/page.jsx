@@ -17,8 +17,8 @@ export function generateMetadata({ params }) {
   }
   const desc = HEADPHONE_DESCRIPTIONS[hp.name];
   const description = desc
-    ? (desc.text?.slice(0, 155) ?? "") + "..."
-    : `${hp.name} by ${hp.brand} — ${hp?.weight}g, ${hp.driverType} driver, ${hp.impedance}Ω impedance, $${hp?.price}. Used by ${hp?.proUsage}% of tracked pro esports players.`;
+    ? (desc?.text?.slice(0, 155) ?? "") + "..."
+    : `${hp.name} by ${hp.brand} — ${hp?.weight ?? 0}g, ${hp.driverType || "Unknown"} driver, ${hp.impedance ?? 0}Ω impedance, $${hp?.price ?? 0}. Used by ${hp?.proUsage ?? 0}% of tracked pro esports players.`;
 
   return {
     title: `${hp.name} — Pro Esports Headphone Review & Stats`,
@@ -65,7 +65,7 @@ export default function HeadphoneDetailPage({ params }) {
         "@type": "Product",
         name: hp.name,
         brand: { "@type": "Brand", name: hp.brand },
-        description: desc ? desc.text.slice(0, 300) : `${hp.name} by ${hp.brand}. ${hp?.weight}g gaming headphone with ${hp.driverType} driver, ${hp.impedance}Ω impedance. Used by ${hp?.proUsage}% of pro esports players.`,
+        description: desc ? (typeof desc === "string" ? desc : (desc.text || "")).slice(0, 300) : `${hp.name} by ${hp.brand}. ${hp?.weight ?? 0}g gaming headphone with ${hp.driverType || "Unknown"} driver. Used by ${hp?.proUsage ?? 0}% of pro esports players.`,
         ...(imgUrl ? { image: `https://esportsheadphones.com${imgUrl}` } : {}),
         offers: {
           "@type": "Offer",
@@ -110,7 +110,7 @@ export default function HeadphoneDetailPage({ params }) {
           <meta itemProp="name" content={hp.brand} />
         </div>
         {imgUrl && <meta itemProp="image" content={`https://esportsheadphones.com${imgUrl}`} />}
-        <meta itemProp="description" content={desc ? desc.text : `${hp.name} by ${hp.brand}. ${hp?.weight}g, ${hp.driverType} driver, ${hp.impedance}Ω impedance.`} />
+        <meta itemProp="description" content={desc ? (typeof desc === "string" ? desc : (desc.text || "")) : `${hp.name} by ${hp.brand}. ${hp?.weight ?? 0}g, ${hp.driverType || "Unknown"} driver.`} />
         <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
           <meta itemProp="price" content={String(hp?.price)} />
           <meta itemProp="priceCurrency" content="USD" />
@@ -124,7 +124,7 @@ export default function HeadphoneDetailPage({ params }) {
         </div>
 
         <h2>About the {hp.name}</h2>
-        {desc ? <p>{desc.text}</p> : (
+        {desc ? <p>{typeof desc === "string" ? desc : (desc.text || "")}</p> : (
           <p>
             The {hp.name} is a {hp.connectivity.toLowerCase()} gaming headphone
             made by {hp.brand}. It weighs {hp?.weight} grams and features the {hp.driverType} driver
@@ -138,7 +138,7 @@ export default function HeadphoneDetailPage({ params }) {
           <tbody>
             <tr><th>Brand</th><td><a href={`/brands/${hp.brand.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-")}`}>{hp.brand}</a></td></tr>
             <tr><th>Weight</th><td>{hp?.weight} grams</td></tr>
-            <tr><th>Driver Type</th><td><a href={`/drivers/${hp.driverType.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{hp.driverType}</a></td></tr>
+            <tr><th>Driver Type</th><td>{hp.driverType ? <a href={`/drivers/${hp.driverType.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{hp.driverType}</a> : "—"}</td></tr>
             <tr><th>Impedance</th><td>{hp.impedance} Ω</td></tr>
             <tr><th>Frequency Response</th><td>{hp.frequencyResponse} Hz</td></tr>
             <tr><th>Connectivity</th><td>{hp.connectivity}</td></tr>
@@ -167,7 +167,7 @@ export default function HeadphoneDetailPage({ params }) {
           </>
         )}
 
-        {desc?.highlights && (
+        {desc && typeof desc !== "string" && desc.highlights && (
           <><h2>Key Highlights</h2><ul>{desc.highlights.map((h, i) => <li key={i}>{h}</li>)}</ul></>
         )}
 
@@ -299,7 +299,7 @@ export default function HeadphoneDetailPage({ params }) {
 
         <SSRSub>
           {desc
-            ? desc.text.slice(0, 280) + "..."
+            ? (typeof desc === "string" ? desc : (desc.text || "")).slice(0, 280) + "..."
             : `The ${hp.name} is a ${hp?.weight}g ${hp.connectivity.toLowerCase()} gaming headphone by ${hp.brand}, featuring the ${hp.driverType} driver with ${hp.impedance}Ω impedance. Used by ${hp?.proUsage}% of tracked professional esports players.`
           }
         </SSRSub>

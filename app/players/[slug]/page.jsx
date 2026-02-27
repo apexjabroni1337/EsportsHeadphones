@@ -169,7 +169,7 @@ export default function PlayerProfilePage({ params }) {
             <h2>{player.name}&apos;s Headphone — {headphoneData.name} Details</h2>
             <p>
               {player.name} currently uses the <a href={`/headphones/${headphoneSlugVal}`}>{headphoneData.name}</a> by <a href={`/brands/${headphoneData.brand?.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-")}`}>{headphoneData.brand}</a>.
-              {mouseDesc ? ` ${(mouseDesc.text?.slice?.(0, 300) ?? mouseDesc.text ?? "").slice(0, 300)}...` : ` It weighs ${headphoneData?.weight}g, uses the ${headphoneData.driverType} driver, and costs $${headphoneData?.price}.`}
+              {mouseDesc ? ` ${(typeof mouseDesc === "string" ? mouseDesc : (mouseDesc.text || "")).slice(0, 300)}...` : ` It weighs ${headphoneData?.weight ?? 0}g, uses the ${headphoneData.driverType || "Unknown"} driver, and costs $${headphoneData?.price ?? 0}.`}
             </p>
             <table>
               <caption>{headphoneData.name} specifications — {player.name}&apos;s current headphone</caption>

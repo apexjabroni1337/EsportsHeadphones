@@ -106,7 +106,6 @@ export default function HomePage() {
             <li><a href="/drivers">Drivers — Hall Effect, Cherry MX, Razer Optical comparison</a></li>
             <li><a href="/trends">Trends — Weight, frequency response, wireless adoption data</a></li>
             <li><a href="/compare">Compare — Side-by-side headphone comparison tool</a></li>
-            <li><a href="/sensitivity">Sensitivity Converter — Convert settings between games</a></li>
             <li><a href="/lab">Lab — Find your perfect headphone with our quiz</a></li>
             <li><a href="/shapes">Shape Overlay — Compare headphone dimensions visually</a></li>
           </ul>
@@ -133,7 +132,6 @@ export default function HomePage() {
           <SSRLink href="/drivers">Drivers</SSRLink>
           <SSRLink href="/trends">Trends</SSRLink>
           <SSRLink href="/compare">Compare</SSRLink>
-          <SSRLink href="/sensitivity">Sensitivity</SSRLink>
           <SSRLink href="/lab">Lab</SSRLink>
           <SSRLink href="/shapes">Shapes</SSRLink>
         </div>

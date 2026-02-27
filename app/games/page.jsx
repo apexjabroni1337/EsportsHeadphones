@@ -143,7 +143,6 @@ export default function GamesPage() {
         <nav aria-label="Related"><ul>
           <li><a href="/headphones">All Esports Headphones</a></li>
           <li><a href="/players">Pro Player Settings</a></li>
-          <li><a href="/sensitivity">Sensitivity Converter</a></li>
           <li><a href="/brands">Headphone Brands</a></li>
           <li><a href="/drivers">Driver Analytics</a></li>
           <li><a href="/trends">Industry Trends</a></li>
@@ -203,7 +202,6 @@ export default function GamesPage() {
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/players">Pro Settings</SSRLink>
           <SSRLink href="/headphones">All Headphones</SSRLink>
-          <SSRLink href="/sensitivity">Sensitivity</SSRLink>
           <SSRLink href="/brands">Brands</SSRLink>
         </div>
       </SSRSection>

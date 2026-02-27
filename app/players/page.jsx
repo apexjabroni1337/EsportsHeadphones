@@ -205,7 +205,6 @@ export default function PlayersPage() {
           <h2>Related Pages</h2>
           <ul>
             <li><a href="/headphones">All Esports Headphones — Full Database</a></li>
-            <li><a href="/sensitivity">Sensitivity Converter — Convert Between Games</a></li>
             <li><a href="/games">Headphone Usage by Game</a></li>
             <li><a href="/brands">Headphone Brand Comparison</a></li>
             <li><a href="/compare">Compare Headphones Side by Side</a></li>
@@ -228,7 +227,6 @@ export default function PlayersPage() {
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>
-          <SSRLink href="/sensitivity">Sensitivity</SSRLink>
           <SSRLink href="/games">Games</SSRLink>
           <SSRLink href="/brands">Brands</SSRLink>
         </div>

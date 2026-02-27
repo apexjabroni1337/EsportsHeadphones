@@ -12,7 +12,6 @@ export default function NotFound() {
     { href: "/players", label: "Pro Players", desc: "2100+ player settings" },
     { href: "/games", label: "Games", desc: "Headphone DNA by game" },
     { href: "/compare", label: "Compare", desc: "Side-by-side comparison" },
-    { href: "/sensitivity", label: "Sensitivity Converter", desc: "Convert between games" },
     { href: "/brands", label: "Brands", desc: "Wooting, Razer, Cherry & more" },
     { href: "/drivers", label: "Drivers", desc: "Hall Effect, Cherry MX & more" },
   ];

@@ -265,7 +265,6 @@ export default function MouseDetailPage({ params }) {
             <li><a href="/games">Headphone Usage by Game</a></li>
             <li><a href="/trends">Headphone Industry Trends</a></li>
             <li><a href="/shapes">{kb.name} Shape Dimensions</a></li>
-            <li><a href="/sensitivity">Sensitivity Converter</a></li>
             <li><a href="/lab">Headphone Finder Quiz</a></li>
             <li><a href="/">EsportsHeadphones Home</a></li>
           </ul>

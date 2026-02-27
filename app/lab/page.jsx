@@ -126,7 +126,6 @@ export default function LabPage() {
           <li><a href="/compare">Compare Headphones Side by Side</a></li>
           <li><a href="/shapes">Shape Overlay Tool</a></li>
           <li><a href="/players">Pro Player Settings</a></li>
-          <li><a href="/sensitivity">Sensitivity Converter</a></li>
           <li><a href="/brands">Headphone Brands</a></li>
           <li><a href="/drivers">Driver Comparison</a></li>
           <li><a href="/">EsportsHeadphones Home</a></li>

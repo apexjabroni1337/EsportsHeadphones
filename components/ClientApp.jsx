@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, LineChart, Line, CartesianGrid, Legend, AreaChart, Area } from "recharts";
 import { Home, Headphones, Trophy, Cpu, Users, Gamepad2, Building2, TrendingUp, GitCompare, Search, X, FlaskConical, Crosshair, Layers, Shield, ChevronDown } from "lucide-react";
-import { AMAZON_TAG, amazonLink, BRAND_COLORS, HEADPHONE_DIMS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, BRAND_IMAGE_URLS, GAME_IMAGE_URLS, GAME_DESCRIPTIONS, TEAM_DESCRIPTIONS, TEAM_LOGOS, I, icon, headphones, proPlayers, extendedPlayers, allPlayers, brandMarketShare, gameBreakdown, weightTrend, frequencyTrend, wirelessTrend, priceTrend, countryName, getHeadphoneImage } from "@/data";
+import { AMAZON_TAG, amazonLink, BRAND_COLORS, HEADPHONE_DIMS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, BRAND_IMAGE_URLS, GAME_IMAGE_URLS, GAME_DESCRIPTIONS, TEAM_DESCRIPTIONS, TEAM_LOGOS, I, icon, headphones, proPlayers, extendedPlayers, allPlayers, brandMarketShare, gameBreakdown, weightTrend, frequencyTrend, wirelessTrend, priceTrend, countryName, getHeadphoneImage, getTeamLogo, getBrandLogo, getGameImage } from "@/data";
 import { GlowText, StatBox, SectionTitle, HeadphoneCard, CustomTooltip, Flag } from "@/components/ui";
 
 const TOP250 = new Set(["s1mple","ZywOo","NiKo","donk","m0NESY","TenZ","Scump","shroud","ImperialHal","Puppey","Faker","aspas","device","coldzera","Bugha","Shotzzy","Chovy","ropz","Proper","Beaulo","yay","Simp","electronic","Crimsix","N0tail","Twistzz","Demon1","Showmaker","EliGE","FalleN","Caps","MrSavage","rain","Profit","ScreaM","Karma","Shaiiko","olofmeister","Keria","f0rest","GeT_RiGhT","Yatoro","aceu","Clix","cNed","sh1ro","Clayster","Dendi","Zeus","TGLTN","broky","Alfajer","Jjonak","Cellium","b1t","Genburten","TaySon","gla1ve","Gumayusi","Paluh","karrigan","Derke","aBeZy","Mongraal","dupreeh","Collapse","Spoit","SP9RK1E","Oner","arT","crashies","Peterbot","KuroKy","huNter","Ras","Viper","Dashy","Fleta","Boaster","EpikWhale","jstn","Xyp9x","Magisk","Pengu","ana","Leave","f0rsakeN","Ax1Le","Jeemzz","Albralelie","Brollan","Deft","Formal","shox","Jinggg","Topson","Shrimzy","Hardecki","Kaydop","Canadian","Jimpphat","Less","Jankos","Ceb","HusKerrs","aqua","CTZN","blameF","stax","Rekkles","Carpe","Pred","Kickstart","stavn","Nisha","Queasy","Dropped","Super","njr","MaKo","NAF","Ruler","fer","nAts","Kenny","iNSaNiA","Squishy","Khanada","hwinn","YEKINDAR","SpiriTz","Nesk","Stewie2K","Zekken","CoreJJ","iceiceice","nyhrox","Vadeal","HisWattson","kscerato","SlasheR","something","Gustav","Kevster","Frozen","Arcitys","dafran","GarrettG","BrokenBlade","flameZ","Sacy","Envoy","Chapix","supr","tabseN","cr1t-","Mande","Elyoya","Fexx","Perfecto","Shao","Fairy Peak","Noahreyli","Doki","Hydra","nitr0","abed","Knight","Reps","Chronicle","Pio","woxic","Attach","Bucke","Alem4o","XANTARES","leaf","miCKe","Bin","xQc","Selly","Insight","iLLeY","jawgemo","Andilex","Brehze","cameram4n","Hans Sama","Kinstaar","Skyz","mxey","KRIMZ","saadhak","emongg","Stompy","Cyber","autimatic","Crylix","Ninja","Malibuca","cadiaN","sinatraa","Suygetsu","Upset","Larssen","TimTheTatman","ibiza","Muz","Yuzus","Jame","Lou","bogur","ZmjjKK","hampus","luke12","Tfue","soulz1","BuZz","HooXi","Hiko","9impulse","Japko","jabbi","Asuna","Aleksib","aLOW","BriD","Viol2t","Subroza","benjyfishy","Necros","Seagull","lyr1c","Boombl4","pollofn","Solotov","lionkk","mezii","Spinx","t3xture","kyxsan","n0thing","mL7","Kenzo","WARDELL","Veno","Primmie","Bestoloch","ShahZaM","YukaF","rapha","vengeurR","toxjq","k1llsen","cYpheR","RAISY","Cooller","clawz","DaHanG","Av3k","serious","Xron","maxter"]);
@@ -87,7 +87,6 @@ const TAB_ROUTES = {
   compare: "/compare",
   lab: "/lab",
   shapes: "/shapes",
-  sensitivity: "/sensitivity",
   headphoneDetail: "/headphones",
   teams: "/teams",
   teamDetail: "/teams",
@@ -503,7 +502,6 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
     { id: "sensors", label: "Drivers", icon: Cpu, color: "#6b635b" },
     { id: "players", label: "Pro Players", icon: Users, color: "#8a7460" },
     { id: "lab", label: "Lab", icon: FlaskConical, color: "#b8956a" },
-    { id: "sensitivity", label: "Sensitivity", icon: Crosshair, color: "#4a4340" },
     { id: "games", label: "Games", icon: Gamepad2, color: "#2d2824" },
     { id: "brands", label: "Brands", icon: Building2, color: "#6b635b" },
     { id: "teams", label: "Teams", icon: Shield, color: "#8a7460" },
@@ -669,8 +667,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {globalSearchResults.teams.map((t, i) => (
                         <button key={`${t.name}-${i}`} onClick={() => handleSearchResultClick("team", t)}
                           className="w-full flex items-center gap-3 px-5 py-2.5 text-left hover:bg-stone-100 transition-all group">
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#b8956a18", border: "1px solid #b8956a30" }}>
-                            <Building2 size={14} style={{ color: "#b8956a" }} />
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden" style={{ background: "#b8956a18", border: "1px solid #b8956a30" }}>
+                            {getTeamLogo(t.name) ? <><img loading="lazy" src={getTeamLogo(t.name)} alt={t.name} className="w-5 h-5 object-contain" onError={e => { e.target.style.display = "none"; e.target.parentElement.querySelector('.team-fb') && (e.target.parentElement.querySelector('.team-fb').style.display = ""); }} /><Building2 size={14} className="team-fb" style={{ color: "#b8956a", display: "none" }} /></> : <Building2 size={14} style={{ color: "#b8956a" }} />}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold truncate">{t.name}</div>
@@ -691,8 +689,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {globalSearchResults.games.map((g, i) => (
                         <button key={`${g.id}-${i}`} onClick={() => handleSearchResultClick("game", g)}
                           className="w-full flex items-center gap-3 px-5 py-2.5 text-left hover:bg-stone-100 transition-all group">
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${g.color}15`, border: `1px solid ${g.color}20` }}>
-                            <Gamepad2 size={14} style={{ color: g.color }} />
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden" style={{ background: `${g.color}15`, border: `1px solid ${g.color}20` }}>
+                            {getGameImage(g.name) ? <img loading="lazy" src={getGameImage(g.name)} alt={g.name} className="w-5 h-5 object-contain" /> : <Gamepad2 size={14} style={{ color: g.color }} />}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold truncate" style={{ color: g.color }}>{g.name}</div>
@@ -713,8 +711,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {globalSearchResults.brands.map((b, i) => (
                         <button key={`${b.name}-${i}`} onClick={() => handleSearchResultClick("brand", b)}
                           className="w-full flex items-center gap-3 px-5 py-2.5 text-left hover:bg-stone-100 transition-all group">
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${b.color}15`, border: `1px solid ${b.color}20` }}>
-                            <span className="text-sm font-black" style={{ color: b.color }}>{b.name[0]}</span>
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden" style={{ background: `${b.color}15`, border: `1px solid ${b.color}20` }}>
+                            {getBrandLogo(b.name) ? <img loading="lazy" src={getBrandLogo(b.name)} alt={b.name} className="w-5 h-5 object-contain" /> : <span className="text-sm font-black" style={{ color: b.color }}>{b.name[0]}</span>}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold truncate" style={{ color: b.color }}>{b.name}</div>
@@ -2551,7 +2549,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8078", marginBottom: 5, paddingLeft: 2 }}>Brand</div>
                         <div className="flex flex-wrap gap-1">
                           <span style={chipStyleR(filterBrand === "All")} onClick={() => setFilterBrand("All")}>All</span>
-                          {brandListR.map(b => <span key={b} style={chipStyleR(filterBrand === b, BRAND_COLORS[b])} onClick={() => setFilterBrand(filterBrand === b ? "All" : b)}>{b}</span>)}
+                          {brandListR.map(b => <span key={b} style={{...chipStyleR(filterBrand === b, BRAND_COLORS[b]), display: "inline-flex", alignItems: "center", gap: 4}} onClick={() => setFilterBrand(filterBrand === b ? "All" : b)}>{getBrandLogo(b) && <img loading="lazy" src={getBrandLogo(b)} alt={b} style={{ width: 12, height: 12, objectFit: "contain" }} />}{b}</span>)}
                         </div>
                       </div>
                       <div>
@@ -2668,7 +2666,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           style={{ borderBottom: "1px solid #00000008", background: i % 2 === 0 ? "#f5f0e8" : "#f5f2ee" }}>
                           <td className="px-4 py-3 font-black opacity-20">{i + 1}</td>
                           <td className="px-4 py-3 font-bold" style={{ color: col }}>{getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={`${m.name}`} className="inline h-5 mr-2 object-contain" />}{m.name}</td>
-                          <td className="px-4 py-3 opacity-50">{m.brand}</td>
+                          <td className="px-4 py-3 opacity-50">{getBrandLogo(m.brand) && <img loading="lazy" src={getBrandLogo(m.brand)} alt={m.brand} className="inline w-4 h-4 object-contain mr-1.5" style={{ verticalAlign: "middle" }} />}{m.brand}</td>
                           <td className="px-4 py-3 font-bold">{m.weight}g</td>
                           <td className="px-4 py-3 opacity-50 text-sm">{m.driverType}</td>
                           <td className="px-4 py-3">{m.frequencyResponse >= 1000 ? `${m.frequencyResponse / 1000}K` : m.frequencyResponse}Hz</td>
@@ -3273,9 +3271,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           </div>
                         </td>
                         <td className="px-2 py-2.5 whitespace-nowrap">
-                          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-sm font-bold" style={{ background: `${gc}12`, color: gc, fontSize: 11 }}>{p.game}</span>
+                          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-sm font-bold" style={{ background: `${gc}12`, color: gc, fontSize: 11 }}>{getGameImage(p.game) && <img loading="lazy" src={getGameImage(p.game)} alt={p.game} className="inline w-3 h-3 object-contain" />}{p.game}</span>
                         </td>
-                        <td className="px-2 py-2.5 opacity-50 whitespace-nowrap text-sm">{p.team}</td>
+                        <td className="px-2 py-2.5 opacity-50 whitespace-nowrap text-sm">{getTeamLogo(p.team) && <img loading="lazy" src={getTeamLogo(p.team)} alt={p.team} className="inline w-3.5 h-3.5 object-contain mr-1" style={{ verticalAlign: "middle" }} />}{p.team}</td>
                         <td className="px-2 py-2.5 whitespace-nowrap">
                           <div className="flex items-center gap-1.5">
                             {headphoneMatch && getHeadphoneImage(headphoneMatch.name) && <img loading="lazy" src={getHeadphoneImage(headphoneMatch.name)} alt="" className="h-4 w-6 object-contain opacity-60 flex-shrink-0" />}
@@ -3439,6 +3437,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <div className="relative flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
+                            {getBrandLogo(brand.name) && <img loading="lazy" src={getBrandLogo(brand.name)} alt={brand.name} className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />}
                             <h3 className="text-xl sm:text-2xl" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, color: "#1a1614" }}>{brand.name}</h3>
                             <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ background: `${col}0a`, color: col, border: `1px solid ${col}18` }}>{brandKbds.length} models</span>
                           </div>
@@ -5364,8 +5363,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           </div>
         )}
 
-        {/* ── SENSITIVITY CONVERTER PAGE ── */}
-        {activeTab === "sensitivity" && (() => {
+        {/* ── SENSITIVITY CONVERTER PAGE REMOVED ── */}
+        {false && (() => {
           const accentC = "#9060c4";
           const SENS_GAMES = [
             { id: "cs2", name: "Counter-Strike 2", img: GAME_IMAGE_URLS["CS2"], yaw: 0.022, defaultSens: 1.0, step: 0.01, note: "In-game Sensitivity" },
@@ -5715,7 +5714,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </div>
                     <div className="flex flex-wrap gap-1 justify-center mb-2">
                       {team.games.slice(0, 3).map(g => (
-                        <span key={g} className="px-2 py-0.5 rounded-md text-center text-xs font-bold" style={{ background: `${gameColors[g] || "#8a8078"}18`, color: gameColors[g] || "#8a8078", fontSize: 10, border: `1px solid ${gameColors[g] || "#8a8078"}30`, boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}>{g}</span>
+                        <span key={g} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-center text-xs font-bold" style={{ background: `${gameColors[g] || "#8a8078"}18`, color: gameColors[g] || "#8a8078", fontSize: 10, border: `1px solid ${gameColors[g] || "#8a8078"}30`, boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}>{getGameImage(g) && <img loading="lazy" src={getGameImage(g)} alt={g} style={{ width: 10, height: 10, objectFit: "contain" }} />}{g}</span>
                       ))}
                       {team.games.length > 3 && <span className="px-1.5 py-0.5 rounded text-center opacity-40" style={{ fontSize: 10 }}>+{team.games.length - 3}</span>}
                     </div>
@@ -5794,9 +5793,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="text-2xl sm:text-3xl font-black" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: tc }}>{selectedTeam}</div>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {gameEntries.map(([game]) => (
-                      <span key={game} className="px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all hover:scale-105 hover:bg-stone-50"
+                      <span key={game} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all hover:scale-105 hover:bg-stone-50"
                         style={{ background: `${gameColors[game] || "#8a8078"}20`, color: gameColors[game] || "#8a8078", border: `1px solid ${gameColors[game] || "#8a8078"}30` }}
-                        onClick={() => { setGameDetailSlug(game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")); setActiveTab("games"); window.scrollTo({ top: 0, behavior: "smooth" }); }}>{game}</span>
+                        onClick={() => { setGameDetailSlug(game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")); setActiveTab("games"); window.scrollTo({ top: 0, behavior: "smooth" }); }}>{getGameImage(game) && <img loading="lazy" src={getGameImage(game)} alt={game} className="w-3 h-3 object-contain" />}{game}</span>
                     ))}
                   </div>
                 </div>
@@ -6052,7 +6051,6 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   { label: "Headphone Rankings", href: "/headphones" },
                   { label: "Pro Player Settings", href: "/players" },
                   { label: "Compare Headphones", href: "/compare" },
-                  { label: "Sensitivity Converter", href: "/sensitivity" },
                   { label: "Driver Database", href: "/sensors" },
                   { label: "Best Headphone Guides", href: "/best" },
                   { label: "Blog", href: "/blog" },

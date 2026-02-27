@@ -206,7 +206,6 @@ export default function HeadphonesPage() {
           <li><a href="/shapes">Headphone Layout Overlay Tool</a></li>
           <li><a href="/games">Headphone Usage by Esports Game</a></li>
           <li><a href="/trends">Headphone Industry Trends 2019-2025</a></li>
-          <li><a href="/sensitivity">Sensitivity Converter</a></li>
           <li><a href="/lab">Headphone Finder Quiz</a></li>
           <li><a href="/">EsportsHeadphones Home</a></li>
         </ul></nav>

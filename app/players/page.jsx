@@ -30,7 +30,7 @@ export default function PlayersPage() {
 
   const mostUsedHeadphone = (() => {
     const counts = {};
-    allPlayers.forEach((p) => { counts[p.headphone] = (counts[p.headphone] || 0) + 1; });
+    allPlayers.forEach((p) => { if (p.headphone) { counts[p.headphone] = (counts[p.headphone] || 0) + 1; } });
     return Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
   })();
 
@@ -170,7 +170,7 @@ export default function PlayersPage() {
         <h2>Most Popular Headphones Among All Pro Players</h2>
         {(() => {
           const counts = {};
-          allPlayers.forEach((p) => { counts[p.headphone] = (counts[p.headphone] || 0) + 1; });
+          allPlayers.forEach((p) => { if (p.headphone) { counts[p.headphone] = (counts[p.headphone] || 0) + 1; } });
           const topHeadphones = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 15);
           return (
             <ol>

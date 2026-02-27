@@ -132,7 +132,7 @@ export default function BlogArticlePage({ params }) {
 
   // Get top headphones for articles that need it
   const mc = {};
-  allPlayers.forEach((p) => { mc[p.headphone] = (mc[p.headphone] || 0) + 1; });
+  allPlayers.forEach((p) => { if (p.headphone) { mc[p.headphone] = (mc[p.headphone] || 0) + 1; } });
   const topHeadphones = Object.entries(mc)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5)

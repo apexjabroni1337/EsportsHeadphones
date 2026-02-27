@@ -178,12 +178,12 @@ export default function PlayerProfilePage({ params }) {
                 <tr><th>Brand</th><td><a href={`/brands/${headphoneData.brand?.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-")}`}>{headphoneData.brand}</a></td></tr>
                 <tr><th>Weight</th><td>{headphoneData?.weight}g</td></tr>
                 <tr><th>Driver</th><td><a href={`/sensors/${headphoneData.driverType?.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{headphoneData.driverType}</a></td></tr>
-                <tr><th>Impedance</th><td>{headphoneData.impedancePoint}mm</td></tr>
+                <tr><th>Impedance</th><td>{headphoneData.impedance}Ω</td></tr>
                 <tr><th>Freq. Response</th><td>{headphoneData.frequencyResponse.toLocaleString()} Hz</td></tr>
                 <tr><th>Layout</th><td><a href={`/shapes/${headphoneData.formFactor?.toLowerCase()}`}>{headphoneData.formFactor}</a></td></tr>
                 <tr><th>Connectivity</th><td>{headphoneData.connectivity}</td></tr>
                 <tr><th>Price</th><td>${headphoneData?.price}</td></tr>
-                <tr><th>Drivers</th><td>{headphoneData.drivers}</td></tr>
+                <tr><th>Driver Type</th><td>{headphoneData.driverType}</td></tr>
                 <tr><th>Pro Usage</th><td>{headphoneData?.proUsage}% of all tracked pros</td></tr>
                 <tr><th>Rating</th><td>{headphoneData.rating}/10</td></tr>
               </tbody>

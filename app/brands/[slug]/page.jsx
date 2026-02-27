@@ -25,8 +25,8 @@ const BRAND_DESCRIPTIONS = {
   LGG: "Lethal Gaming Gear (LGG) entered the headphone market as a natural extension of their popular gaming accessories business. Their headphones leverage the brand's deep understanding of what competitive players want, informed by years of selling and reviewing enthusiast peripherals.",
 };
 
-// Handle aliases (e.g. "Endgame Gear" in UI → "Endgame" in data)
-const BRAND_ALIASES = { "endgame-gear": "Endgame" };
+// Handle aliases
+const BRAND_ALIASES = {};
 const findBrand = (s) => BRANDS.find((b) => slug(b) === s) || BRAND_ALIASES[s] || null;
 
 export function generateStaticParams() {
@@ -86,8 +86,8 @@ export default function BrandDetailPage({ params }) {
   const weightRange = `${Math.min(...brandHeadphones.map((m) => m?.weight))}g-${Math.max(...brandHeadphones.map((m) => m?.weight))}g`;
 
   const brandPros = proPlayers.filter((p) => {
-    const pm = p.headphone.toLowerCase();
-    return brandHeadphones.some((m) => pm.includes(m.name.toLowerCase()) || m.name.toLowerCase().includes(pm));
+    const pm = (p.headphone || "").toLowerCase();
+    return pm && brandHeadphones.some((m) => pm.includes(m.name.toLowerCase()) || m.name.toLowerCase().includes(pm));
   });
 
   const brandGames = [...new Set(brandPros.map((p) => p.game))].sort();

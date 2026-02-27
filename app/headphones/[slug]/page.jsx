@@ -52,8 +52,8 @@ export default function MouseDetailPage({ params }) {
   const desc = HEADPHONE_DESCRIPTIONS[kb.name];
   const usedBy = allPlayers.filter((p) => {
     const mn = kb.name.toLowerCase();
-    const pm = p.headphone.toLowerCase();
-    return pm === mn || pm.includes(mn) || mn.includes(pm);
+    const pm = (p.headphone || "").toLowerCase();
+    return pm && (pm === mn || pm.includes(mn) || mn.includes(pm));
   }).slice(0, 30);
   const imgUrl = HEADPHONE_IMAGE_URLS[kb.name];
 
@@ -85,7 +85,7 @@ export default function MouseDetailPage({ params }) {
           { "@type": "PropertyValue", name: "Driver Type", value: kb.driverType },
           { "@type": "PropertyValue", name: "Freq. Response", value: `${kb.frequencyResponse}Hz` },
           { "@type": "PropertyValue", name: "Shape", value: kb.formFactor },
-          { "@type": "PropertyValue", name: "Connectivity", value: kb.connectivity },
+          { "@type": "PropertyValue", name: "Connectivity", value: kb.connectivity || kb.cable || "Wired" },
           { "@type": "PropertyValue", name: "Pro Usage", value: `${kb?.proUsage}%` },
         ],
       }) }} />
@@ -126,7 +126,7 @@ export default function MouseDetailPage({ params }) {
         <h2>About the {kb.name}</h2>
         {desc ? <p>{desc.text}</p> : (
           <p>
-            The {kb.name} is a {kb.connectivity.toLowerCase()} {kb.formFactor.toLowerCase()} gaming headphone
+            The {kb.name} is a {(kb.connectivity || kb.cable || "wired").toLowerCase()} {(kb.formFactor || "over-ear").toLowerCase()} gaming headphone
             made by {kb.brand}. It weighs {kb?.weight} grams and uses the {kb.driverType} switch
             with {kb.frequencyResponse >= 1000 ? `${kb.frequencyResponse / 1000}K` : kb.frequencyResponse}Hz
             frequency response. It is priced at ${kb?.price} USD and rated {kb.rating}/10.
@@ -142,10 +142,10 @@ export default function MouseDetailPage({ params }) {
             <tr><th>Driver</th><td><a href={`/sensors/${kb.driverType.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{kb.driverType}</a></td></tr>
             <tr><th>Freq. Response</th><td>{kb.frequencyResponse.toLocaleString()} Hz</td></tr>
             <tr><th>Layout</th><td><a href={`/shapes/${kb.formFactor.toLowerCase()}`}>{kb.formFactor}</a></td></tr>
-            <tr><th>Connectivity</th><td>{kb.connectivity}</td></tr>
+            <tr><th>Connectivity</th><td>{kb.connectivity || kb.cable || "Wired"}</td></tr>
             <tr><th>Price</th><td>${kb?.price} USD</td></tr>
             <tr><th>Drivers</th><td>{kb.driverType}</td></tr>
-            <tr><th>Battery Life</th><td>{kb.batteryLife} hours</td></tr>
+            {kb.batteryLife && <tr><th>Battery Life</th><td>{kb.batteryLife} hours</td></tr>}
             <tr><th>Release Year</th><td>{kb.releaseYear}</td></tr>
             <tr><th>Pro Usage</th><td>{kb?.proUsage}% of tracked professional players</td></tr>
             <tr><th>Rating</th><td>{kb.rating} out of 10</td></tr>
@@ -304,7 +304,7 @@ export default function MouseDetailPage({ params }) {
         <SSRSub>
           {desc
             ? desc.text.slice(0, 280) + "..."
-            : `The ${kb.name} is a ${kb?.weight}g ${kb.connectivity.toLowerCase()} ${kb.formFactor.toLowerCase()} gaming headphone by ${kb.brand}, featuring the ${kb.driverType} switch with ${kb.frequencyResponse >= 1000 ? `${kb.frequencyResponse / 1000}K` : kb.frequencyResponse}Hz polling. Used by ${kb?.proUsage}% of tracked professional esports players.`
+            : `The ${kb.name} is a ${kb?.weight}g ${(kb.connectivity || kb.cable || "wired").toLowerCase()} ${(kb.formFactor || "over-ear").toLowerCase()} gaming headphone by ${kb.brand}, featuring the ${kb.driverType} driver with ${kb.frequencyResponse >= 1000 ? `${kb.frequencyResponse / 1000}K` : kb.frequencyResponse}Hz frequency response. Used by ${kb?.proUsage}% of tracked professional esports players.`
           }
         </SSRSub>
 
@@ -330,7 +330,7 @@ export default function MouseDetailPage({ params }) {
             <SSRStat label="Price" value={`$${kb?.price}`} color={BRAND_COLORS[kb.brand]} />
             <SSRStat label="Pro Usage" value={`${kb?.proUsage}%`} color={BRAND_COLORS[kb.brand]} />
             <SSRStat label="Rating" value={`${kb.rating}/10`} color={BRAND_COLORS[kb.brand]} />
-            <SSRStat label="Connectivity" value={kb.connectivity} color={BRAND_COLORS[kb.brand]} />
+            <SSRStat label="Connectivity" value={kb.connectivity || kb.cable || "Wired"} color={BRAND_COLORS[kb.brand]} />
           </SSRGrid>
         </div>
 

@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import EsportsHeadphones from "@/components/ClientApp";
 import { SSRSection, SSRTitle, SSRSub, SSRGrid, SSRStat, SSRLink, SSRDivider } from "@/components/ssr";
-import { headphones, allPlayers, weightTrend, pollingTrend, wirelessTrend, priceTrend } from "@/data";
+import { headphones, allPlayers, weightTrend, frequencyTrend, wirelessTrend, priceTrend } from "@/data";
 
 const slug = (n) => n.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
@@ -67,7 +67,7 @@ export default function TrendsPage() {
         <table>
           <caption>Maximum available frequency response by year</caption>
           <thead><tr><th>Year</th><th>Max Hz</th><th>Latency</th></tr></thead>
-          <tbody>{pollingTrend.map((d) => (
+          <tbody>{frequencyTrend.map((d) => (
             <tr key={d.year}><td>{d.year}</td><td>{(d.max || d.avg || 0).toLocaleString()} Hz</td><td>{(1000/(d.max || d.avg || 1000)).toFixed(3)}ms</td></tr>
           ))}</tbody>
         </table>

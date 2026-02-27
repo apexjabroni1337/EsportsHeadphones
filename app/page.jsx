@@ -67,7 +67,7 @@ export default function HomePage() {
         <h2>Featured Pro Players</h2>
         <ul>
           {proPlayers.slice(0, 20).map((p) => {
-            const pm = headphones.find((m) => p.headphone.includes(m.name) || m.name.includes(p.headphone));
+            const pm = p.headphone ? headphones.find((m) => p.headphone.includes(m.name) || m.name.includes(p.headphone)) : null;
             const mSlug = pm ? pm.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") : null;
             return (
               <li key={`${p.name}-${p.game}`}>

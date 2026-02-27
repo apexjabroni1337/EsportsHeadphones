@@ -58,7 +58,7 @@ export default function GamesPage() {
             {games.map((game) => {
               const players = allPlayers.filter((p) => p.game === game);
               const counts = {};
-              players.forEach((p) => { counts[p.headphone] = (counts[p.headphone] || 0) + 1; });
+              players.forEach((p) => { if (p.headphone) { counts[p.headphone] = (counts[p.headphone] || 0) + 1; } });
               const topMouse = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
               return (
                 <tr key={game}>

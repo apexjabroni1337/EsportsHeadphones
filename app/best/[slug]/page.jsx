@@ -69,6 +69,7 @@ export default function BestForPage({ params }) {
     players = allPlayers.filter(p => p.game === page.game);
     const headphoneCounts = {};
     players.forEach(p => {
+      if (!p.headphone) return;
       const matched = headphones.find(m => m.name.toLowerCase() === p.headphone.toLowerCase());
       if (matched) headphoneCounts[matched.name] = (headphoneCounts[matched.name] || 0) + 1;
     });

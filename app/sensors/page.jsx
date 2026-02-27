@@ -28,7 +28,7 @@ export default function SensorsPage() {
     const brands = [...new Set(switchKbds.map((m) => m.brand))];
     const maxPolling = Math.max(...switchKbds.map((m) => m.frequencyResponse));
     const switchPros = proPlayers.filter((p) =>
-      switchKbds.some((m) => p.headphone.includes(m.name) || m.name.includes(p.headphone))
+      p.headphone && switchKbds.some((m) => p.headphone.includes(m.name) || m.name.includes(p.headphone))
     );
     return { switchName, headphones: switchKbds, totalProUsage, avgWeight, avgPrice, brands, maxPolling, pros: switchPros };
   }).sort((a, b) => b.totalProUsage - a.totalProUsage);

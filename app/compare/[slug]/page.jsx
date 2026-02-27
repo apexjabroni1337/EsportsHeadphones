@@ -73,14 +73,14 @@ export default function ComparisonPage({ params }) {
   const [a, b] = pair;
 
   const aPlayers = allPlayers.filter(p => {
-    const pm = p.headphone.toLowerCase();
+    const pm = (p.headphone || "").toLowerCase();
     const mn = a.name.toLowerCase();
-    return pm === mn || pm.includes(mn) || mn.includes(pm);
+    return pm && (pm === mn || pm.includes(mn) || mn.includes(pm));
   }).slice(0, 10);
   const bPlayers = allPlayers.filter(p => {
-    const pm = p.headphone.toLowerCase();
+    const pm = (p.headphone || "").toLowerCase();
     const mn = b.name.toLowerCase();
-    return pm === mn || pm.includes(mn) || mn.includes(pm);
+    return pm && (pm === mn || pm.includes(mn) || mn.includes(pm));
   }).slice(0, 10);
 
   const specs = [

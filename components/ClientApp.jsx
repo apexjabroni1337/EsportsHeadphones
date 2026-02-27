@@ -184,6 +184,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
   const [galleryTab, setGalleryTab] = useState("All");
   const [showComparison, setShowComparison] = useState(false);
   const [compareList, setCompareList] = useState([headphones[0], headphones[1]]);
+  const [spotlightImgError, setSpotlightImgError] = useState(false);
   const [heroAnim, setHeroAnim] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [gameFilter, setGameFilter] = useState("All");
@@ -1109,7 +1110,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 {/* ── Headphone Picker: Top 20 headphones by pro usage ── */}
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {[...headphones].sort((a, b) => b.proUsage - a.proUsage).slice(0, 20).map(m => (
-                    <button key={m.id} onClick={() => setSelectedHeadphone(m)}
+                    <button key={m.id} onClick={() => { setSpotlightImgError(false); setSelectedHeadphone(m); }}
                       className="px-2.5 py-1.5 rounded-lg text-sm font-bold transition-all whitespace-nowrap hover:scale-[1.03] cursor-pointer"
                       style={{
                         background: selectedHeadphone?.id === m.id ? `${BRAND_COLORS[m.brand]}15` : "#f5f2ee",
@@ -1130,13 +1131,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {/* Left: Headphone image */}
                     <div className="flex flex-col items-center justify-center rounded-xl p-4" style={{ background: `${brandCol}06`, border: `1px solid ${brandCol}12` }}>
-                      {imgUrl ? (
+                      {imgUrl && !spotlightImgError ? (
                         <img loading="lazy" src={imgUrl} alt={`${selectedHeadphone.name} by ${selectedHeadphone.brand} - ${selectedHeadphone.weight}g wireless esports gaming headphone`} className="w-full max-h-32 sm:max-h-48 object-contain object-center mb-3 rounded-lg" style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.08))" }}
-                          onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
-                      ) : null}
-                      <div className={imgUrl ? "hidden" : "flex"} style={{ width: 180, height: 160, alignItems: "center", justifyContent: "center", background: `${brandCol}10`, borderRadius: 16 }}>
-                        <span className="inline-block">{icon(selectedHeadphone.image, 80)}</span>
+                          onError={() => setSpotlightImgError(true)} />
+                      ) : (
+                      <div className="flex" style={{ width: 180, height: 160, alignItems: "center", justifyContent: "center", background: `${brandCol}10`, borderRadius: 16 }}>
+                        <span className="inline-block">{icon("headphone", 80)}</span>
                       </div>
+                      )}
                       <div className="text-xl font-black mt-2 text-center cursor-pointer hover:underline" style={{ color: brandCol }} onClick={() => navigateToHeadphone(selectedHeadphone)}>{selectedHeadphone.name}</div>
                       <div className="text-sm opacity-85 text-center">{selectedHeadphone.brand} · {selectedHeadphone.formFactor} · {selectedHeadphone.connectivity}</div>
                     </div>
@@ -1520,13 +1522,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Left: Headphone image */}
                 <div className="flex flex-col items-center justify-center rounded-xl p-6" style={{ background: `${brandCol}06`, border: `1px solid ${brandCol}12` }}>
-                  {imgUrl ? (
+                  {imgUrl && !spotlightImgError ? (
                     <img loading="lazy" src={imgUrl} alt={`${selectedHeadphone.name} by ${selectedHeadphone.brand} - professional esports gaming headphone review`} className="w-full max-h-48 sm:max-h-64 object-contain object-center mb-4 rounded-lg" style={{ filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.08))" }}
-                      onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }} />
-                  ) : null}
-                  <div className={imgUrl ? "hidden" : "flex"} style={{ width: 200, height: 180, alignItems: "center", justifyContent: "center", background: `${brandCol}10`, borderRadius: 16 }}>
-                    <span className="inline-block">{icon(selectedHeadphone.image, 100)}</span>
+                      onError={() => setSpotlightImgError(true)} />
+                  ) : (
+                  <div className="flex" style={{ width: 200, height: 180, alignItems: "center", justifyContent: "center", background: `${brandCol}10`, borderRadius: 16 }}>
+                    <span className="inline-block">{icon("headphone", 100)}</span>
                   </div>
+                  )}
                   <div className="text-2xl font-black mt-3 text-center" style={{ color: brandCol }}>{selectedHeadphone.name}</div>
                   <div className="text-sm opacity-85 text-center mt-1">{selectedHeadphone.brand} · {selectedHeadphone.formFactor} · {selectedHeadphone.connectivity}</div>
                 </div>

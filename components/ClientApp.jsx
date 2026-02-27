@@ -2996,11 +2996,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         </div>
                       </div>
                     )}
-                    <a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer"
+                    {p.headphone && <a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-black transition-all"
                       style={{ background: brandCol, color: "#fff" }}>
                       {I.cart(16, "#fff")} Buy {p.headphone.split(" ").slice(-3).join(" ")} on Amazon
-                    </a>
+                    </a>}
                   </div>
 
                   {/* Headphone History Timeline */}

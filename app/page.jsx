@@ -72,8 +72,7 @@ export default function HomePage() {
             return (
               <li key={`${p.name}-${p.game}`}>
                 <a href={`/players/${p.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{p.name}</a>
-                {" "}— {p.game} ({p.team}) — Uses{" "}
-                {mSlug ? <a href={`/headphones/${mSlug}`}>{p.headphone}</a> : p.headphone}
+                {" "}— {p.game} ({p.team}){p.headphone ? <> — Uses{" "}{mSlug ? <a href={`/headphones/${mSlug}`}>{p.headphone}</a> : p.headphone}</> : null}
               </li>
             );
           })}

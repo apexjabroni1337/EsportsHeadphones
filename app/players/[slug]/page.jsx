@@ -64,10 +64,10 @@ export function generateMetadata({ params }) {
   const bio = PLAYER_BIOS[player.name] || null;
   const description = bio
     ? bio.slice(0, 155) + "..."
-    : `${player.name} (${player.fullName || player.name}) — ${player.game} pro for ${player.team}. Uses ${player.headphone}.`;
+    : `${player.name} (${player.fullName || player.name}) — ${player.game} pro for ${player.team}.${player.headphone ? ` Uses ${player.headphone}.` : ''}`;
   const GAME_OG_COLORS = { CS2: "%23ff8c00", Valorant: "%23ff4655", Fortnite: "%234c7bd9", LoL: "%23c89b3c", "Dota 2": "%23e74c3c", "R6 Siege": "%234a86c8", "Overwatch 2": "%23f99e1a", Apex: "%23dc2626", "Call of Duty": "%235cb85c", PUBG: "%23f2a900", Deadlock: "%238b5cf6", "Quake Champions": "%23ce4a00", "Marvel Rivals": "%23ed1d24", "Rocket League": "%231a9fff" };
   const ogAccent = GAME_OG_COLORS[player.game] || "%2300ff6a";
-  const ogUrl = `https://esportsheadphones.com/og?title=${encodeURIComponent(player.name)}&subtitle=${encodeURIComponent(`${player.game} · ${player.team}`)}&badge=${encodeURIComponent(player.game + ' Pro')}&accent=${ogAccent}&stat1=${encodeURIComponent(player.headphone.replace(/(Logitech |Razer |)/, ''))}&s1Label=Headphone&stat2=${encodeURIComponent(player.team)}&s2Label=Team&stat3=${encodeURIComponent(player.role)}&s3Label=Role`;
+  const ogUrl = `https://esportsheadphones.com/og?title=${encodeURIComponent(player.name)}&subtitle=${encodeURIComponent(`${player.game} · ${player.team}`)}&badge=${encodeURIComponent(player.game + ' Pro')}&accent=${ogAccent}&stat1=${encodeURIComponent((player.headphone || 'Unknown').replace(/(Logitech |Razer |)/, ''))}&s1Label=Headphone&stat2=${encodeURIComponent(player.team)}&s2Label=Team&stat3=${encodeURIComponent(player.role)}&s3Label=Role`;
   return {
     title: `${player.name} — ${player.game} Pro Player Settings & Gear`,
     description,
@@ -416,18 +416,18 @@ export default function PlayerProfilePage({ params }) {
         <SSRSub>
           {bio
             ? bio.slice(0, 280) + "..."
-            : `${player.name} (${player.fullName || player.name}) is a professional ${player.game} ${player.role} for ${player.team}. Uses the ${player.headphone}.`
+            : `${player.name} (${player.fullName || player.name}) is a professional ${player.game} ${player.role} for ${player.team}.${player.headphone ? ` Uses the ${player.headphone}.` : ''}`
           }
         </SSRSub>
         <SSRGrid>
-          <SSRStat label="Headphone" value={player.headphone.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |Endgame Gear |ASUS |Keychron |Glorious )/, "")} color="#00d4ff" />
+          <SSRStat label="Headphone" value={player.headphone ? player.headphone.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |Sony |JBL |ASUS |Audio-Technica |Turtle Beach |Audeze |EPOS |Cooler Master )/, "") : "Unknown"} color="#00d4ff" />
           <SSRStat label="Freq. Response" value={`${player.hz} Hz`} color="#00d4ff" />
           <SSRStat label="Team" value={player.team} />
           <SSRStat label="Role" value={player.role} />
         </SSRGrid>
         <SSRDivider />
         <div className="flex flex-wrap gap-2">
-          {headphoneSlugVal && <SSRLink href={`/headphones/${headphoneSlugVal}`}>{player.headphone.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |Endgame Gear |ASUS |Keychron |Glorious )/, "")} →</SSRLink>}
+          {headphoneSlugVal && player.headphone && <SSRLink href={`/headphones/${headphoneSlugVal}`}>{player.headphone.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |Sony |JBL |ASUS |Audio-Technica |Turtle Beach |Audeze |EPOS |Cooler Master )/, "")} →</SSRLink>}
           <SSRLink href="/players">All Players</SSRLink>
           <SSRLink href="/sensitivity">Convert Sensitivity</SSRLink>
           <SSRLink href={`/games/${player.game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{player.game}</SSRLink>

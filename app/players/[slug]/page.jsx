@@ -429,7 +429,7 @@ export default function PlayerProfilePage({ params }) {
         <div className="flex flex-wrap gap-2">
           {headphoneSlugVal && <SSRLink href={`/headphones/${headphoneSlugVal}`}>{player.headphone.replace(/(Wooting |Razer |Logitech |SteelSeries |Corsair |Cherry |Ducky |DrunkDeer |Endgame Gear |ASUS |Keychron |Glorious )/, "")} →</SSRLink>}
           <SSRLink href="/players">All Players</SSRLink>
-          <SSRLink href=>Convert Sensitivity</SSRLink>
+          <SSRLink href="/compare">Compare Headphones</SSRLink>
           <SSRLink href={`/games/${player.game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}>{player.game}</SSRLink>
         </div>
       </SSRSection>

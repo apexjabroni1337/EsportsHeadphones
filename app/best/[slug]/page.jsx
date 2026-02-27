@@ -189,7 +189,7 @@ export default function BestForPage({ params }) {
           <li><a href="/headphones">All Esports Headphones</a></li>
           <li><a href="/players">Pro Player Settings</a></li>
           <li><a href="/compare">Compare Headphones</a></li>
-          <li><a href=>Sensitivity Converter</a></li>
+          <li><a href="/compare">Compare Headphones</a></li>
         </ul></nav>
       </article>
 

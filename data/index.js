@@ -2644,3 +2644,4 @@ export const priceTrend = [
   { year: "2024", avg: 170, flagship: 350, budget: 85 },
   { year: "2025", avg: 175, flagship: 350, budget: 80 },
 ];
+// sync 1772226710

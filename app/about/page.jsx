@@ -68,7 +68,7 @@ export default function AboutPage() {
           <SSRStat label="Pro Players" value={totalPlayers.toString()} color="#b8956a" />
           <SSRStat label="Gaming Headphones" value={totalHeadphones.toString()} color="#6b8cad" />
           <SSRStat label="Esports Titles" value={totalGames.toString()} color="#b8956a" />
-          <SSRStat label="Pro Teams" value={totalTeams.toString()} color="#a78bfa" />
+          <SSRStat label="Pro Teams" value={totalTeams.toString()} color="#a09890" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/contact">Submit a Correction</SSRLink>

@@ -43,7 +43,7 @@ const ARTICLES = [
     excerpt: "Over 80% of CS2 and Valorant pros now use wireless headphones. Here's the data behind the shift and why wired is disappearing from the pro scene.",
     date: "2026-02-23",
     tag: "Analysis",
-    color: "#7048c4",
+    color: "#4a4340",
   },
   {
     slug: "rapid-trigger-impedance-explained",
@@ -51,7 +51,7 @@ const ARTICLES = [
     excerpt: "What DPI should you use? What's eDPI? We break down every sensitivity concept with real pro player data and optimal ranges for each game.",
     date: "2026-02-23",
     tag: "Guide",
-    color: "#c4444f",
+    color: "#2d2824",
   },
 ];
 
@@ -63,7 +63,7 @@ export default function BlogPage() {
           ← Back to EsportsHeadphones
         </Link>
         <div className="mt-6 mb-10">
-          <div className="text-3xl sm:text-5xl font-black" style={{ color: "#1a1614", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>The Headphone <span style={{ background: "linear-gradient(135deg, #06b6d4, #a855f7)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Blog</span></div>
+          <div className="text-3xl sm:text-5xl font-black" style={{ color: "#1a1614", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>The Headphone <span style={{ background: "linear-gradient(135deg, #b8956a, #1a1614)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Blog</span></div>
           <p className="text-base opacity-40 mt-2">Esports headphone guides, pro gear analysis, and data-driven insights.</p>
         </div>
 

@@ -72,7 +72,7 @@ export default function TeamsPage() {
         <SSRTitle accent="Pro">Teams</SSRTitle>
         <SSRSub>Headphone and gear choices across {teamCount} professional esports organizations in {gameCount} major titles.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Organizations" value={teamCount} color="#38bdf8" />
+          <SSRStat label="Organizations" value={teamCount} color="#8a7460" />
           <SSRStat label="Games" value={gameCount} color="#b8956a" />
           <SSRStat label="Players Tracked" value={allPlayers.length} color="#b8956a" />
         </SSRGrid>

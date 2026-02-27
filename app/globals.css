@@ -25,10 +25,11 @@
   --ek-sage:       #7c9a6e;
   --ek-slate:      #6b8cad;
 
-  /* ── New Accents ── */
-  --ek-cyan:       #06b6d4;
-  --ek-violet:     #8b5cf6;
-  --ek-copper:     #c45a3c;
+  /* ── Accent tones (neutral) ── */
+  --ek-accent:     #b8956a;
+  --ek-accent2:    #8a7460;
+  --ek-dark:       #1a1614;
+  --ek-charcoal:   #2d2824;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,11 +55,11 @@ h1, h2, h3, .font-display {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #06b6d440, #8b5cf640);
+  background: #b8956a40;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #06b6d470, #8b5cf670);
+  background: #b8956a70;
 }
 
 /* ── Recharts ── */
@@ -95,7 +96,7 @@ img { height: auto; max-width: 100%; }
 .em-fs-12 { font-size: 12px; }
 
 /* ── Selection ── */
-::selection { background: #06b6d420; color: #1a1614; }
+::selection { background: #b8956a25; color: #1a1614; }
 
 /* ── SR Only ── */
 .sr-only {
@@ -120,10 +121,10 @@ img { height: auto; max-width: 100%; }
 
 /* ── Glow Effects ── */
 .glow-cyan {
-  box-shadow: 0 0 20px #06b6d425, 0 0 40px #06b6d410;
+  box-shadow: 0 0 20px #b8956a20, 0 0 40px #b8956a10;
 }
 .glow-violet {
-  box-shadow: 0 0 20px #8b5cf625, 0 0 40px #8b5cf610;
+  box-shadow: 0 0 20px #1a161420, 0 0 40px #1a161410;
 }
 
 /* ── Earpad Badge ── */

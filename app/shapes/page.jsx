@@ -129,13 +129,13 @@ export default function ShapesPage() {
       </article>
 
       <SSRSection>
-        <SSRTitle accent="#a855f7">Shape</SSRTitle>
+        <SSRTitle accent="#6b635b">Shape</SSRTitle>
         <SSRSub>Compare the dimensions of {headphoneNames.length} esports headphones at true scale. Overlay any two headphones to compare length, width, height, and footprint.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Headphones" value={headphoneNames.length} color="#a855f7" />
-          <SSRStat label="Avg Length" value={`${avgLength}mm`} color="#a855f7" />
-          <SSRStat label="Avg Width" value={`${avgWidth}mm`} color="#a855f7" />
-          <SSRStat label="Avg Height" value={`${avgHeight}mm`} color="#a855f7" />
+          <SSRStat label="Headphones" value={headphoneNames.length} color="#6b635b" />
+          <SSRStat label="Avg Length" value={`${avgLength}mm`} color="#6b635b" />
+          <SSRStat label="Avg Width" value={`${avgWidth}mm`} color="#6b635b" />
+          <SSRStat label="Avg Height" value={`${avgHeight}mm`} color="#6b635b" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>

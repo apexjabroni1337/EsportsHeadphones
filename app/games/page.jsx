@@ -175,7 +175,7 @@ export default function GamesPage() {
                 <div key={g} style={{
                   padding: "12px 16px",
                   background: i % 2 === 0 ? "#ffffff" : "#f5f2ee",
-                  borderLeft: "4px solid " + (["#c02870", "#2a8a40", "#2874a6", "#c47000", "#b8960a", "#c43800", "#c4508a", "#b01040"][i % 8]),
+                  borderLeft: "4px solid " + (["#c02870", "#2a8a40", "#2874a6", "#c47000", "#b8960a", "#c43800", "#4a4340", "#b01040"][i % 8]),
                   borderBottom: i < 7 ? "1px solid #e8e4df" : "none",
                   display: "flex",
                   alignItems: "center",
@@ -183,7 +183,7 @@ export default function GamesPage() {
                 }}>
                   <span style={{
                     fontWeight: "bold",
-                    color: ["#c02870", "#2a8a40", "#2874a6", "#c47000", "#b8960a", "#c43800", "#c4508a", "#b01040"][i % 8]
+                    color: ["#c02870", "#2a8a40", "#2874a6", "#c47000", "#b8960a", "#c43800", "#4a4340", "#b01040"][i % 8]
                   }}>
                     {g}
                   </span>

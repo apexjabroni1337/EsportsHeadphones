@@ -27,9 +27,9 @@ module.exports = {
           bronze: "#8a7460",
           sage: "#7c9a6e",
           slate: "#6b8cad",
-          cyan: "#06b6d4",
-          violet: "#8b5cf6",
-          copper: "#c45a3c",
+          accent: "#b8956a",
+          dark: "#1a1614",
+          charcoal: "#2d2824",
           parchment: "#f5f0e8",
         }
       },

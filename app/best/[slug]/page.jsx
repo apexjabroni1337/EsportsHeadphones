@@ -212,14 +212,14 @@ export default function BestForPage({ params }) {
               {
                 tier: "A",
                 label: "A-Tier",
-                color: "#06b6d4",
+                color: "#b8956a",
                 bgColor: "rgba(6, 182, 212, 0.08)",
                 headphones: topHeadphonesForPage.slice(1, 3)
               },
               {
                 tier: "B",
                 label: "B-Tier",
-                color: "#8b5cf6",
+                color: "#2d2824",
                 bgColor: "rgba(139, 92, 246, 0.08)",
                 headphones: topHeadphonesForPage.slice(3, 6)
               },

@@ -65,7 +65,7 @@ const ARTICLES = {
     title: "Is Wireless Finally Better Than Wired? The 2026 Data Says Yes",
     date: "2026-02-23",
     tag: "Analysis",
-    color: "#7048c4",
+    color: "#4a4340",
     content: () => [
       { type: "p", text: "For years, 'wireless has lag' was gospel in competitive gaming. In 2026, the opposite is true: wireless headphones now outsell and outperform wired in professional play." },
       { type: "h2", text: "The Numbers Don't Lie" },
@@ -81,7 +81,7 @@ const ARTICLES = {
     title: "ANC & Impedance Explained: A Complete Guide",
     date: "2026-02-23",
     tag: "Guide",
-    color: "#c4444f",
+    color: "#2d2824",
     content: () => [
       { type: "p", text: "Rapid trigger and adjustable impedance are revolutionary headphone technologies that have changed competitive gaming. Learn how they work and why pros prefer them." },
       { type: "h2", text: "What Is ANC?" },

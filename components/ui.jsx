@@ -8,7 +8,7 @@ export const Flag = ({ country, size = 20, className = "" }) => {
   return <img loading="lazy" src={url} alt={country} width={size} height={Math.round(size * 0.75)} className={className} style={{ display: "inline-block", verticalAlign: "middle", borderRadius: 2, objectFit: "cover" }} />;
 };
 
-export const GlowText = ({ children, color = "#06b6d4", size = "text-5xl", className = "" }) => (
+export const GlowText = ({ children, color = "#b8956a", size = "text-5xl", className = "" }) => (
   <span
     className={`${size} font-black tracking-tight ${className}`}
     style={{
@@ -21,7 +21,7 @@ export const GlowText = ({ children, color = "#06b6d4", size = "text-5xl", class
   </span>
 );
 
-export const StatBox = ({ label, value, unit = "", color = "#06b6d4" }) => (
+export const StatBox = ({ label, value, unit = "", color = "#b8956a" }) => (
   <div
     className="glass-card flex flex-col items-center justify-center text-center p-3 sm:p-5"
     style={{
@@ -39,17 +39,17 @@ export const StatBox = ({ label, value, unit = "", color = "#06b6d4" }) => (
   </div>
 );
 
-export const SectionTitle = ({ children, sub, color = "#06b6d4" }) => (
+export const SectionTitle = ({ children, sub, color = "#b8956a" }) => (
   <div className="mb-6 sm:mb-10 mt-10 sm:mt-20">
     <div className="flex items-center gap-3 sm:gap-4 mb-2">
-      <div className="h-px flex-1" style={{ background: `linear-gradient(to right, #06b6d440, #8b5cf640, transparent)` }} />
+      <div className="h-px flex-1" style={{ background: `linear-gradient(to right, #b8956a40, #d4cfc840, transparent)` }} />
       <h2
         className="text-lg sm:text-2xl lg:text-3xl tracking-tight text-center font-bold"
         style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}
       >
         {children}
       </h2>
-      <div className="h-px flex-1" style={{ background: `linear-gradient(to left, #06b6d440, #8b5cf640, transparent)` }} />
+      <div className="h-px flex-1" style={{ background: `linear-gradient(to left, #b8956a40, #d4cfc840, transparent)` }} />
     </div>
     {sub && <p className="text-center text-sm tracking-wide px-2" style={{ color: "#a09890" }}>{sub}</p>}
   </div>
@@ -151,9 +151,9 @@ export const CustomTooltip = ({ active, payload, label }) => {
         background: "rgba(255,255,255,0.85)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
-        border: "1px solid #06b6d420",
-        borderLeft: "3px solid #06b6d4",
-        boxShadow: "0 0 16px #06b6d410, 0 8px 32px #00000008",
+        border: "1px solid #b8956a20",
+        borderLeft: "3px solid #b8956a",
+        boxShadow: "0 0 16px #b8956a10, 0 8px 32px #00000008",
       }}
     >
       <div className="font-bold mb-1" style={{ color: "#6b635b", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{label}</div>
@@ -175,15 +175,15 @@ export const GradientButton = ({ children, onClick, className = "", size = "md" 
       onClick={onClick}
       className={`${sizeClasses} font-bold rounded-xl transition-all duration-300 ${className}`}
       style={{
-        background: "linear-gradient(135deg, #06b6d4, #8b5cf6)",
+        background: "linear-gradient(135deg, #b8956a, #8a7460)",
         color: "#fff",
         border: "none",
-        boxShadow: "0 2px 12px #06b6d425",
+        boxShadow: "0 2px 12px #b8956a25",
         fontFamily: "'Space Grotesk', system-ui, sans-serif",
         cursor: "pointer",
       }}
-      onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 24px #06b6d440, 0 0 20px #8b5cf620"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-      onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 12px #06b6d425"; e.currentTarget.style.transform = "translateY(0)"; }}
+      onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 24px #b8956a40, 0 0 20px #8a746020"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+      onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 12px #b8956a25"; e.currentTarget.style.transform = "translateY(0)"; }}
     >
       {children}
     </button>

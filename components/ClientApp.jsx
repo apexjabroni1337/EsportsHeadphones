@@ -1232,8 +1232,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <SectionTitle color="#b8956a" sub="Select any headphone to explore specs, pro users, and performance data">Featured Headphone Spotlight</SectionTitle>
               <div className="rounded-2xl p-3 sm:p-5 mb-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
                 {/* ── Headphone Picker: Top 20 headphones by pro usage ── */}
-                <div className="grid gap-1.5 mb-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))" }}>
-                  {[...headphones].sort((a, b) => b.proUsage - a.proUsage).slice(0, 20).map(m => {
+                <div className="grid gap-1.5 mb-4" style={{ gridTemplateColumns: "repeat(8, 1fr)" }}>
+                  {[...headphones].sort((a, b) => b.proUsage - a.proUsage).slice(0, 16).map(m => {
                     const bc = BRAND_COLORS[m.brand] || "#8a8078";
                     const isSelected = selectedHeadphone?.id === m.id;
                     const imgUrl = getHeadphoneImage(m.name);
@@ -2014,50 +2014,96 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {activeTab === "games" && !gameDetailSlug && (
           <div>
             <SectionTitle color="#c44040" sub="Click any game to see full headphone usage data, player settings, brand splits, and sensitivity analysis">Game Profiles</SectionTitle>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {gameBreakdown.map((g, i) => {
                 const gameColors = GAME_COLORS;
                 const col = gameColors[g.game] || "#8a8078";
                 const gSlug = g.game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
+                const topHpName = (g.topHeadphones[0]?.name || "").replace(/(Razer |HyperX |Logitech |SteelSeries |Corsair |beyerdynamic |ASUS |Sennheiser |Sony |Turtle Beach |ASTRO |JBL |Audeze |EPOS )/, "");
+                const topHpImg = getHeadphoneImage(g.topHeadphones[0]?.name || "");
+                const wiredPct = 100 - g.wirelessPct;
                 return (
                   <div key={i}
-                    className="block rounded-xl p-4 transition-all duration-200 cursor-pointer"
-                    style={{ background: `${col}08`, border: `1px solid ${col}15` }}
+                    className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300"
+                    style={{ background: "#ffffff", border: `1px solid ${col}18`, boxShadow: `0 2px 8px ${col}08` }}
                     onClick={() => { window.location.href = `/games/${gSlug}`; }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = `${col}0a`; e.currentTarget.style.borderColor = `${col}25`; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 8px 24px ${col}10`; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = `${col}06`; e.currentTarget.style.borderColor = `${col}12`; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = `0 16px 40px ${col}18, 0 0 0 1px ${col}30`; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 2px 8px ${col}08`; }}
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      {GAME_IMAGE_URLS[g.game] ? <img loading="lazy" src={GAME_IMAGE_URLS[g.game]} alt={g.game} className="h-7 w-7 object-contain" /> : <span className="inline-flex justify-center">{icon(g.icon, 28)}</span>}
-                      <div className="flex-1 min-w-0">
-                        <div className="text-base font-black" style={{ color: col }}>{g.game}</div>
-                        <div style={{ fontSize: 12, color: "#a09890" }}>{g.players} pros tracked</div>
+                    {/* Top banner with game color gradient */}
+                    <div className="relative h-28 overflow-hidden" style={{ background: `linear-gradient(135deg, ${col}20 0%, ${col}08 100%)` }}>
+                      {/* Large faded game icon background */}
+                      <div className="absolute -right-4 -top-4 opacity-[0.06]" style={{ transform: "rotate(12deg)" }}>
+                        {GAME_IMAGE_URLS[g.game] ? <img loading="lazy" src={GAME_IMAGE_URLS[g.game]} alt="" className="w-32 h-32 object-contain" /> : null}
                       </div>
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ opacity: 0.3, flexShrink: 0 }}>
-                        <path d="M6 3L11 8L6 13" stroke={col} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                      {/* Game logo + name */}
+                      <div className="absolute top-4 left-4 flex items-center gap-2.5">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(255,255,255,0.9)", boxShadow: `0 2px 8px ${col}20` }}>
+                          {GAME_IMAGE_URLS[g.game] ? <img loading="lazy" src={GAME_IMAGE_URLS[g.game]} alt={g.game} className="h-6 w-6 object-contain" /> : <span>{icon(g.icon, 22)}</span>}
+                        </div>
+                        <div>
+                          <div className="text-lg font-black leading-tight" style={{ color: col }}>{g.game}</div>
+                          <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: `${col}90` }}>{g.players} pros tracked</div>
+                        </div>
+                      </div>
+                      {/* Top headphone image floating on right */}
+                      {topHpImg && (
+                        <div className="absolute right-3 bottom-1 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1">
+                          <img loading="lazy" src={topHpImg} alt={topHpName} className="h-20 object-contain drop-shadow-lg" style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))" }} />
+                        </div>
+                      )}
                     </div>
-                    <div className="grid grid-cols-2 gap-2 mb-3">
-                      <div className="rounded-lg px-2 py-1.5" style={{ background: `${col}10` }}>
-                        <div style={{ fontSize: 10, color: "#a09890", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Top Headphone</div>
-                        <div style={{ fontSize: 12, color: "#2d2824", fontWeight: 800 }}>{(g.topHeadphones[0]?.name || "—").replace(/(Razer |HyperX |Logitech |SteelSeries |Corsair |beyerdynamic |ASUS |Sennheiser |Sony |Turtle Beach |ASTRO |JBL |Audeze )/, "")}</div>
+
+                    {/* Stats section */}
+                    <div className="px-4 py-3">
+                      {/* Top 3 headphones bar chart */}
+                      <div className="mb-3">
+                        <div className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>Top Headphones</div>
+                        <div className="space-y-1.5">
+                          {g.topHeadphones.slice(0, 3).map((hp, j) => {
+                            const hpShort = hp.name.replace(/(Razer |HyperX |Logitech |SteelSeries |Corsair |beyerdynamic |ASUS |Sennheiser |Sony |Turtle Beach |ASTRO |JBL |Audeze |EPOS )/, "");
+                            return (
+                              <div key={j} className="flex items-center gap-2">
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="text-[10px] font-black" style={{ color: j === 0 ? col : "#6b635b" }}>{hpShort}</span>
+                                  </div>
+                                  <div className="h-1.5 rounded-full overflow-hidden mt-0.5" style={{ background: `${col}10` }}>
+                                    <div className="h-full rounded-full transition-all duration-500" style={{ width: `${hp.pct * 2.5}%`, background: j === 0 ? col : `${col}60` }} />
+                                  </div>
+                                </div>
+                                <span className="text-[10px] font-black flex-shrink-0" style={{ color: j === 0 ? col : "#a09890" }}>{hp.pct}%</span>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
-                      <div className="rounded-lg px-2 py-1.5" style={{ background: `${col}10` }}>
-                        <div style={{ fontSize: 11, color: "#a09890", fontWeight: 700 }}>Avg Weight</div>
-                        <div style={{ fontSize: 12, color: "#2d2824", fontWeight: 800 }}>{g.avgWeight}g</div>
-                      </div>
-                      <div className="rounded-lg px-2 py-1.5" style={{ background: `${col}10` }}>
-                        <div style={{ fontSize: 11, color: "#a09890", fontWeight: 700 }}>Wireless</div>
-                        <div style={{ fontSize: 12, color: "#2d2824", fontWeight: 800 }}>{g.wirelessPct}%</div>
+
+                      {/* Bottom stats row */}
+                      <div className="flex items-center gap-3 pt-2" style={{ borderTop: "1px solid #f0ece6" }}>
+                        <div className="flex-1 text-center">
+                          <div className="text-sm font-black" style={{ color: "#2d2824" }}>{g.avgWeight}g</div>
+                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#a09890" }}>Avg Weight</div>
+                        </div>
+                        <div className="w-px h-6" style={{ background: "#e8e4df" }} />
+                        <div className="flex-1 text-center">
+                          <div className="text-sm font-black" style={{ color: col }}>{g.wirelessPct}%</div>
+                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#a09890" }}>Wireless</div>
+                        </div>
+                        <div className="w-px h-6" style={{ background: "#e8e4df" }} />
+                        <div className="flex-1 text-center">
+                          <div className="text-sm font-black" style={{ color: "#2d2824" }}>{g.headphoneCount}</div>
+                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#a09890" }}>Models</div>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between gap-2 mt-1">
-                      <span className="flex items-center gap-1 px-2 py-1 rounded text-xs font-bold no-underline" style={{ background: `${col}06`, color: `${col}50`, border: `1px solid ${col}10`, fontSize: 10, cursor: "default" }}>
-                        📖 Guide Coming Soon
-                      </span>
-                      <a href={`/games/${gSlug}`} onClick={(e) => e.stopPropagation()} style={{ fontSize: 12, fontWeight: 700, color: col, opacity: 0.7, textDecoration: "none" }}>
-                        View →
-                      </a>
+
+                    {/* Explore button footer */}
+                    <div className="px-4 pb-3">
+                      <div className="w-full py-2 rounded-lg text-center text-[11px] font-bold uppercase tracking-wider transition-all duration-200"
+                        style={{ background: `${col}0a`, color: col, border: `1px solid ${col}15` }}>
+                        Explore {g.game} →
+                      </div>
                     </div>
                   </div>
                 );

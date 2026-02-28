@@ -1037,31 +1037,22 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* Right: Headline + stats */}
             <div style={{ transition: "all 1s ease", opacity: heroAnim ? 1 : 0, transform: heroAnim ? "translateY(0)" : "translateY(20px)" }}>
-              {/* Eyebrow - earpad style */}
-              <div className="mb-4 sm:mb-6">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold tracking-widest uppercase"
-                  style={{
-                    background: "linear-gradient(135deg, #c9a22710, #2d282410)",
-                    color: "#c9a227",
-                    border: "1px solid #c9a22718",
-                    borderBottom: "2px solid #c9a22730",
-                    boxShadow: "0 2px 0 rgba(6, 182, 212, 0.2)"
-                  }}>
-                  The Definitive Resource
+              {/* Eyebrow */}
+              <div className="mb-3 sm:mb-4 flex items-center gap-2.5">
+                <div style={{ width: 24, height: 2, borderRadius: 1, background: "#c9a227" }} />
+                <span className="text-[11px] font-bold tracking-[0.2em] uppercase" style={{ color: "#a68b1b" }}>
+                  Esports Audio Intel
                 </span>
               </div>
-              {/* Main heading - enhanced */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 800, lineHeight: 1.05, letterSpacing: -1.5, color: "#1a1614" }}>
-                Pro Esports<br />
-                <span style={{ background: "linear-gradient(135deg, #c9a227, #1a1614)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Headphones</span>
+              {/* Main heading */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4 sm:mb-5" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 900, lineHeight: 1.1, letterSpacing: -1, color: "#1a1614" }}>
+                Every headphone.<br />
+                <span style={{ color: "#c9a227" }}>Every pro.</span><br />
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold" style={{ color: "#9e9578", letterSpacing: -0.5 }}>One source of truth.</span>
               </h1>
-              {/* Dynamic tagline subtitle */}
-              <p className="max-w-2xl text-base sm:text-lg leading-relaxed font-medium mb-3" style={{ color: "#c9a227" }}>
-                The definitive database of {headphones.length} headphones used by {allPlayers.length.toLocaleString()} professional esports players
-              </p>
-              {/* Secondary description */}
-              <p className="max-w-xl text-sm sm:text-base leading-relaxed" style={{ color: "#7d6e1e" }}>
-                Rankings, specifications, comparisons, and pro settings across {new Set(allPlayers.map(p=>p.game)).size} major esports titles.
+              {/* Tagline */}
+              <p className="max-w-lg text-sm sm:text-base leading-relaxed mb-2" style={{ color: "#5a5448" }}>
+                {headphones.length} headphones tracked across {allPlayers.length.toLocaleString()} professional players and {new Set(allPlayers.map(p=>p.game)).size} competitive titles — with full specs, rankings, and real gear data.
               </p>
             </div>
           </div>
@@ -4190,23 +4181,33 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* Top driver highlight */}
-            <div className="rounded-2xl p-5 mb-5" style={{ background: "#7d6e1e08", border: "1px solid #7d6e1e15" }}>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "#7d6e1e0a" }}>
-                  <Cpu size={24} style={{ color: "#7d6e1e" }} />
-                </div>
-                <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: "#9e9578" }}>Most Popular Driver in Esports</div>
-                  <div className="text-lg font-bold" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#7d6e1e" }}>{topSensor?.driverType}</div>
-                  <div className="text-xs" style={{ color: "#7d6e1e" }}>Used in {topSensor?.headphoneCount} headphones · {topSensor?.playerCount} pro players · {topSensor?.totalUsage}% combined pro usage</div>
-                </div>
+            <div className="rounded-xl p-4 sm:p-5 mb-5 flex items-center gap-4" style={{ background: "#fff", border: "1px solid #e8e4db", borderLeft: "4px solid #c9a227" }}>
+              <div className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#c9a22712" }}>
+                <Cpu size={22} style={{ color: "#c9a227" }} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-bold uppercase tracking-[0.15em] mb-0.5" style={{ color: "#9e9578" }}>Most popular driver in esports</div>
+                <div className="text-lg sm:text-xl font-black truncate" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}>{topSensor?.driverType}</div>
+              </div>
+              <div className="hidden sm:flex items-center gap-4 shrink-0">
+                {[
+                  { val: topSensor?.headphoneCount, label: "Headphones" },
+                  { val: topSensor?.playerCount, label: "Pro Players" },
+                  { val: `${topSensor?.totalUsage}%`, label: "Pro Usage" },
+                ].map((s, si) => (
+                  <div key={si} className="text-center px-3" style={{ borderLeft: si > 0 ? "1px solid #e8e4db" : "none" }}>
+                    <div className="text-lg font-black" style={{ color: "#c9a227", lineHeight: 1.1 }}>{s.val}</div>
+                    <div className="text-[10px]" style={{ color: "#b5ae9e" }}>{s.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Sensor overview cards */}
-            <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
+            {/* Sensor overview cards — vertical stack */}
+            <div className="space-y-3 mb-6">
               {sensorProfiles.sort((a, b) => b.totalUsage - a.totalUsage).slice(0, 4).map((s, i) => {
-                const colors = ["#c9a227", "#2d2824", "#a68b1b", "#9e9578"];
+                const accentColors = ["#c9a227", "#2d2824", "#a68b1b", "#9e9578"];
+                const ac = accentColors[i];
                 const sensorImageMap = {
                   "50mm TriForce Titanium": "/images/drivers/triforce-titanium.svg",
                   "50mm TriForce Titanium Pro": "/images/drivers/triforce-titanium-pro.svg",
@@ -4227,25 +4228,52 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 };
                 const sensorImg = sensorImageMap[s.driverType];
                 const sensorDesc = sensorDescs[s.driverType];
+                const usagePct = Math.min(s.totalUsage * 2, 100);
                 return (
-                  <div key={i} className="rounded-xl p-4" style={{ background: `${colors[i]}08`, border: `1px solid ${colors[i]}12` }}>
-                    <div className="text-sm font-black mb-1 text-center" style={{ color: colors[i], color: colors[i] }}>#{i + 1} Most Used</div>
-                    <div className="text-sm font-black mb-2 text-center" style={{ color: colors[i] }}>{s.driverType}</div>
-                    {sensorImg && <div className="flex justify-center mb-2"><img loading="lazy" src={sensorImg} alt={s.driverType} className="h-24 sm:h-32 object-contain" style={{ filter: `drop-shadow(0 4px 12px ${colors[i]}30)` }} /></div>}
-                    <div className="text-xl sm:text-2xl font-black text-center">{s.totalUsage}%</div>
-                    <div className="text-sm opacity-30 text-center mt-1">of pros use this driver</div>
-                    {sensorDesc && <p className="text-sm opacity-70 mt-3 leading-relaxed">{sensorDesc}</p>}
-                    <div className="text-sm opacity-85 mt-3">{s.headphoneCount} headphones use this driver:</div>
-                    <div className="flex flex-wrap gap-1.5 mt-1.5">
-                      {s.headphones.map(m => (
-                        <button key={m.id} onClick={() => { navigateToHeadphone(m); }}
-                          className="px-2 py-1 rounded-md text-sm transition-all hover:scale-105 cursor-pointer"
-                          style={{ background: `${colors[i]}15`, border: `1px solid ${colors[i]}20`, color: colors[i], fontSize: 12 }}>
-                          {m.name.replace(m.brand + " ", "")}
-                        </button>
-                      ))}
+                  <div key={i} className="rounded-xl overflow-hidden transition-all duration-200 hover:shadow-md" style={{ background: "#fff", border: "1px solid #e8e4db" }}>
+                    {/* Card header */}
+                    <div className="flex items-center gap-4 p-4" style={{ borderBottom: "1px solid #f0ece6" }}>
+                      <div className="flex items-center justify-center w-9 h-9 rounded-lg shrink-0" style={{ background: `${ac}12` }}>
+                        <span className="text-sm font-black" style={{ color: ac }}>#{i + 1}</span>
+                      </div>
+                      {sensorImg && (
+                        <div className="w-16 h-16 flex items-center justify-center shrink-0">
+                          <img loading="lazy" src={sensorImg} alt={s.driverType} className="h-14 object-contain" style={{ filter: `drop-shadow(0 2px 8px ${ac}25)` }} />
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="text-base font-black truncate" style={{ color: "#1a1614" }}>{s.driverType}</div>
+                        <div className="flex items-center gap-3 mt-1">
+                          <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "#f0ece6" }}>
+                            <div className="h-full rounded-full" style={{ width: `${usagePct}%`, background: `linear-gradient(90deg, ${ac}, ${ac}80)`, transition: "width 0.8s ease" }} />
+                          </div>
+                          <span className="text-sm font-black shrink-0" style={{ color: ac }}>{s.totalUsage}%</span>
+                        </div>
+                      </div>
+                      <div className="hidden sm:flex items-center gap-3 shrink-0 ml-2">
+                        <div className="text-center px-2">
+                          <div className="text-base font-black" style={{ color: "#1a1614" }}>{s.headphoneCount}</div>
+                          <div className="text-[10px]" style={{ color: "#b5ae9e" }}>Models</div>
+                        </div>
+                        <div className="text-center px-2" style={{ borderLeft: "1px solid #e8e4db" }}>
+                          <div className="text-base font-black" style={{ color: "#1a1614" }}>{s.playerCount}</div>
+                          <div className="text-[10px]" style={{ color: "#b5ae9e" }}>Players</div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-sm font-bold mt-1.5" style={{ color: colors[i] }}>{s.playerCount} pro players</div>
+                    {/* Card body */}
+                    <div className="p-4">
+                      {sensorDesc && <p className="text-xs leading-relaxed mb-3" style={{ color: "#5a5448" }}>{sensorDesc}</p>}
+                      <div className="flex flex-wrap gap-1.5">
+                        {s.headphones.map(m => (
+                          <button key={m.id} onClick={() => { navigateToHeadphone(m); }}
+                            className="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all hover:scale-105 cursor-pointer"
+                            style={{ background: "#f5f2e6", border: "1px solid #e8e4db", color: "#5a5448" }}>
+                            {m.name.replace(m.brand + " ", "")}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 );
               })}
@@ -4297,84 +4325,99 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const gameBarColors = { CS2: "#c47000", Valorant: "#c43848", LoL: "#c89b3c", Fortnite: "#3a60b0", "Dota 2": "#b83c30", "R6 Siege": "#3a6ca0", Apex: "#a82020", PUBG: "#c48a00", "Overwatch 2": "#c48018", "Call of Duty": "#3a8a3a", "Marvel Rivals": "#b81820", Deadlock: "#6d40c4", "Quake Champions": "#a83c00" };
 
               return (
-                <div className="rounded-2xl p-5 mb-6" style={{ background: "#0000000a", border: "1px solid #e6e3d6" }}>
-                  <div className="text-sm uppercase tracking-widest opacity-70 mb-4 font-bold text-center sm:text-left">Driver Popularity Across {totalMatched.toLocaleString()} Matched Pro Players</div>
-
-                  {/* Summary stat pills */}
-                  <div className="flex flex-wrap gap-2 mb-5 justify-center sm:justify-start">
-                    <div className="rounded-lg px-3 py-2" style={{ background: "#a68b1b10" }}>
-                      <span className="text-sm opacity-85">Top sensor: </span>
-                      <span className="text-sm font-black" style={{ color: "#7d6e1e" }}>{top10[0]?.[0]} ({topSensorPct}%)</span>
-                    </div>
-                    <div className="rounded-lg px-3 py-2" style={{ background: "#a68b1b12" }}>
-                      <span className="text-sm opacity-85">Top 3 concentration: </span>
-                      <span className="text-sm font-black" style={{ color: "#a68b1b" }}>{top3Pct}%</span>
-                    </div>
-                    <div className="rounded-lg px-3 py-2" style={{ background: "#c9a22712" }}>
-                      <span className="text-sm opacity-85">Unique sensors tracked: </span>
-                      <span className="text-sm font-black" style={{ color: "#c9a227" }}>{uniqueSensors}</span>
-                    </div>
-                    <div className="rounded-lg px-3 py-2" style={{ background: "#9e957810" }}>
-                      <span className="text-sm opacity-85">Players on proprietary sensors: </span>
-                      <span className="text-sm font-black" style={{ color: "#7d6e1e" }}>{sensorCounts["Custom"] || sensorCounts["Custom Sony"] || 0}</span>
-                    </div>
+                <div className="mb-8">
+                  {/* Header row with key metrics */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div style={{ width: 3, height: 16, borderRadius: 2, background: "#a68b1b" }} />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: "#a68b1b" }}>Driver adoption across {totalMatched.toLocaleString()} matched pros</span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5">
-                    {/* Left: Bar chart */}
-                    <div>
-                      <div className="text-sm opacity-30 mb-3 font-bold uppercase tracking-wider">Top 10 Sensors by Player Count</div>
-                      <div className="space-y-2">
+                  {/* Metric cards row */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
+                    {[
+                      { label: "Top Driver", val: top10[0]?.[0]?.split(" ").slice(-1)[0], sub: `${topSensorPct}% of all pros`, color: "#c9a227" },
+                      { label: "Top 3 Share", val: `${top3Pct}%`, sub: "combined adoption", color: "#a68b1b" },
+                      { label: "Drivers Tracked", val: uniqueSensors, sub: "unique types", color: "#7d6e1e" },
+                      { label: "Proprietary", val: sensorCounts["Custom"] || sensorCounts["Custom Sony"] || 0, sub: "custom drivers", color: "#9e9578" },
+                    ].map((m, mi) => (
+                      <div key={mi} className="rounded-xl p-3 sm:p-4" style={{ background: "#fff", border: "1px solid #e8e4db" }}>
+                        <div className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: "#9e9578" }}>{m.label}</div>
+                        <div className="text-xl sm:text-2xl font-black" style={{ color: m.color, lineHeight: 1.1 }}>{m.val}</div>
+                        <div className="text-[11px] mt-0.5" style={{ color: "#b5ae9e" }}>{m.sub}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Main content: leaderboard + game split */}
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                    {/* Left: Driver leaderboard (3 cols) */}
+                    <div className="lg:col-span-2 rounded-xl overflow-hidden" style={{ background: "#fff", border: "1px solid #e8e4db" }}>
+                      <div className="px-4 py-3" style={{ borderBottom: "1px solid #e8e4db" }}>
+                        <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#9e9578" }}>Driver Leaderboard</span>
+                      </div>
+                      <div>
                         {top10.map(([sensor, count], i) => {
                           const pct = Math.round(count / totalMatched * 100);
-                          const barW = Math.max(count / maxCount * 100, 4);
+                          const barW = Math.max(count / maxCount * 100, 8);
                           return (
-                            <div key={sensor} className="flex items-center gap-2">
-                              <div className="text-sm font-bold w-20 sm:w-32 truncate cursor-pointer hover:underline" style={{ color: barColors[i] }}
-                                onClick={() => document.getElementById(`sensor-group-${sensor.replace(/\s+/g, "-").toLowerCase()}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>{sensor}</div>
-                              <div className="flex-1 h-6 rounded-md overflow-hidden" style={{ background: "#0000000a" }}>
-                                <div className="h-full rounded-md flex items-center px-2 transition-all" style={{ width: `${barW}%`, background: `${barColors[i]}25`, borderRight: `2px solid ${barColors[i]}` }}>
-                                  <span className="text-sm font-black" style={{ color: barColors[i] }}>{count}</span>
+                            <div key={sensor} className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-gray-50 cursor-pointer"
+                              style={{ borderBottom: i < 9 ? "1px solid #f0ece6" : "none" }}
+                              onClick={() => document.getElementById(`sensor-group-${sensor.replace(/\s+/g, "-").toLowerCase()}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>
+                              <span className="text-xs font-black w-5 text-center" style={{ color: i < 3 ? "#c9a227" : "#b5ae9e" }}>{i + 1}</span>
+                              <div className="flex-1 min-w-0">
+                                <div className="text-xs font-bold truncate mb-1" style={{ color: "#1a1614" }}>{sensor}</div>
+                                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "#f0ece6" }}>
+                                  <div className="h-full rounded-full transition-all duration-700" style={{ width: `${barW}%`, background: i < 3 ? `linear-gradient(90deg, ${barColors[i]}, ${barColors[i]}90)` : "#d4d0be" }} />
                                 </div>
                               </div>
-                              <div className="text-sm opacity-30 w-10 text-right">{pct}%</div>
+                              <div className="text-right shrink-0 ml-1">
+                                <span className="text-sm font-black" style={{ color: "#1a1614" }}>{count}</span>
+                                <span className="text-[10px] ml-1" style={{ color: "#b5ae9e" }}>{pct}%</span>
+                              </div>
                             </div>
                           );
                         })}
                       </div>
                     </div>
 
-                    {/* Right: Game breakdown for top 5 sensors */}
-                    <div>
-                      <div className="text-sm opacity-30 mb-3 font-bold uppercase tracking-wider">Top 5 Sensors — Game Distribution</div>
-                      <div className="space-y-3">
+                    {/* Right: Game distribution per driver (2 cols) */}
+                    <div className="lg:col-span-3 rounded-xl overflow-hidden" style={{ background: "#fff", border: "1px solid #e8e4db" }}>
+                      <div className="px-4 py-3" style={{ borderBottom: "1px solid #e8e4db" }}>
+                        <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#9e9578" }}>Game Split by Driver</span>
+                      </div>
+                      <div className="divide-y" style={{ borderColor: "#f0ece6" }}>
                         {topSensorNames.map((sn, si) => {
                           const games = Object.entries(sensorGameBreakdown[sn]).sort((a, b) => b[1] - a[1]);
                           const total = games.reduce((a, g) => a + g[1], 0);
                           return (
-                            <div key={sn}>
-                              <div className="flex items-center gap-2 mb-1">
-                                <span className="text-base font-black cursor-pointer hover:underline transition-all" style={{ color: barColors[si] }}
-                                  onClick={() => document.getElementById(`sensor-group-${sn.replace(/\s+/g, "-").toLowerCase()}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>{sn}</span>
-                                <span className="text-base opacity-20">({total} players)</span>
+                            <div key={sn} className="px-4 py-3">
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-black w-5 text-center" style={{ color: "#c9a227" }}>{si + 1}</span>
+                                  <span className="text-sm font-bold cursor-pointer hover:underline" style={{ color: "#1a1614" }}
+                                    onClick={() => document.getElementById(`sensor-group-${sn.replace(/\s+/g, "-").toLowerCase()}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>{sn}</span>
+                                </div>
+                                <span className="text-[11px] font-medium" style={{ color: "#b5ae9e" }}>{total} players</span>
                               </div>
-                              {/* Stacked bar */}
-                              <div className="flex h-6 rounded-md overflow-hidden" style={{ background: "#0000000a" }}>
-                                {games.map(([game, cnt]) => {
-                                  const w = Math.max(cnt / total * 100, 2);
+                              {/* Segmented bar */}
+                              <div className="flex h-5 rounded-lg overflow-hidden mb-1.5" style={{ background: "#f5f2e6" }}>
+                                {games.map(([game, cnt], gi) => {
+                                  const w = Math.max(cnt / total * 100, 1.5);
+                                  const gc = gameBarColors[game] || "#888";
                                   return (
-                                    <div key={game} className="h-full flex items-center justify-center relative group" style={{ width: `${w}%`, background: `${gameBarColors[game] || "#666"}40` }}
+                                    <div key={game} className="h-full flex items-center justify-center transition-all duration-300 hover:brightness-110"
+                                      style={{ width: `${w}%`, background: gc, marginRight: gi < games.length - 1 ? 1 : 0 }}
                                       title={`${game}: ${cnt} players (${Math.round(cnt/total*100)}%)`}>
-                                      {w > 8 && <span style={{ fontSize: 12 }} className="font-bold opacity-70">{game}</span>}
+                                      {w > 10 && <span className="text-[10px] font-bold text-white truncate px-1" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.3)" }}>{game}</span>}
                                     </div>
                                   );
                                 })}
                               </div>
-                              {/* Legend */}
-                              <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+                              {/* Dot legend */}
+                              <div className="flex flex-wrap gap-x-3 gap-y-0.5">
                                 {games.slice(0, 5).map(([game, cnt]) => (
-                                  <span key={game} style={{ fontSize: 12 }} className="opacity-85">
-                                    <span style={{ color: gameBarColors[game] || "#666" }}>●</span> {game} {Math.round(cnt/total*100)}%
+                                  <span key={game} className="text-[11px]" style={{ color: "#5a5448" }}>
+                                    <span style={{ color: gameBarColors[game] || "#888", fontSize: 8 }}>⬤</span> {game} {Math.round(cnt/total*100)}%
                                   </span>
                                 ))}
                               </div>
@@ -4388,65 +4431,75 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               );
             })()}
 
-            {/* Sensor table */}
-            <div className="text-sm uppercase tracking-widest opacity-70 mb-3 mt-8">All Sensors  -  Click Headers to Sort</div>
-            <div className="overflow-x-auto rounded-2xl mb-8" style={{ border: "1px solid #e6e3d6" }}>
-              <table className="w-full text-sm">
-                <thead>
-                  <tr style={{ background: "#ffffff" }}>
-                    {sensorHeaders.map(h => (
-                      <th key={h.label} className="px-4 py-3 text-left text-sm uppercase tracking-wider font-bold cursor-pointer select-none hover:opacity-80"
-                        style={{ color: sensorSort.key === h.key ? "#a68b1b" : "#9e9578" }}
-                        onClick={() => setSensorSort(prev => prev.key === h.key ? { key: h.key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key: h.key, dir: typeof sensorProfiles[0]?.[h.key] === "string" ? "asc" : "desc" })}>
-                        {h.label}{sensorSort.key === h.key ? (sensorSort.dir === "asc" ? " ▲" : " ▼") : ""}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedSensors.map((s, i) => (
-                    <tr key={s.driverType} style={{ borderBottom: "1px solid #00000008", background: i % 2 === 0 ? "#f5f2e6" : "#f5f3ea" }}
-                      onMouseEnter={e => e.currentTarget.style.background = "#a68b1b08"}
-                      onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? "#f5f2e6" : "#f5f3ea"}>
-                      <td className="px-4 py-3 font-black cursor-pointer hover:underline" style={{ color: "#7d6e1e" }}
-                        onClick={() => document.getElementById(`sensor-group-${s.driverType.replace(/\s+/g, "-").toLowerCase()}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>{s.driverType}</td>
-                      <td className="px-4 py-3 font-bold">{s.headphoneCount}</td>
-                      <td className="px-4 py-3 font-black">{s.totalUsage}%</td>
-                      <td className="px-4 py-3 text-sm opacity-50">{s.brandList}</td>
-                      <td className="px-4 py-3 text-sm"><a href={amazonLink(s.topKbd)} target="_blank" rel="noopener noreferrer" className="no-underline hover:opacity-80" style={{ color: "#c9a227", textDecoration: "none" }}>{s.topKbd.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</a></td>
-                      <td className="px-4 py-3">{`${s.avgImpedance}mm`}</td>
-                      <td className="px-4 py-3">{s.avgPolling}kHz</td>
-                      <td className="px-4 py-3">{s.avgWeight}g</td>
-                      <td className="px-4 py-3">{"$"}{s.avgPrice}</td>
+            {/* Sensor table — clean card style */}
+            <div className="mb-8 mt-8 rounded-xl overflow-hidden" style={{ background: "#fff", border: "1px solid #e8e4db" }}>
+              <div className="px-4 py-3 flex items-center justify-between" style={{ borderBottom: "1px solid #e8e4db" }}>
+                <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#9e9578" }}>All Drivers — Click Headers to Sort</span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr>
+                      {sensorHeaders.map(h => (
+                        <th key={h.label} className="px-4 py-3 text-left text-[11px] uppercase tracking-wider font-bold cursor-pointer select-none transition-colors hover:bg-gray-50"
+                          style={{ color: sensorSort.key === h.key ? "#c9a227" : "#b5ae9e", borderBottom: sensorSort.key === h.key ? "2px solid #c9a227" : "2px solid transparent" }}
+                          onClick={() => setSensorSort(prev => prev.key === h.key ? { key: h.key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key: h.key, dir: typeof sensorProfiles[0]?.[h.key] === "string" ? "asc" : "desc" })}>
+                          {h.label}{sensorSort.key === h.key ? (sensorSort.dir === "asc" ? " ↑" : " ↓") : ""}
+                        </th>
+                      ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {sortedSensors.map((s, i) => (
+                      <tr key={s.driverType} className="transition-colors hover:bg-gray-50" style={{ borderBottom: "1px solid #f0ece6" }}>
+                        <td className="px-4 py-3 font-bold cursor-pointer hover:underline" style={{ color: "#1a1614" }}
+                          onClick={() => document.getElementById(`sensor-group-${s.driverType.replace(/\s+/g, "-").toLowerCase()}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>{s.driverType}</td>
+                        <td className="px-4 py-3 font-semibold" style={{ color: "#5a5448" }}>{s.headphoneCount}</td>
+                        <td className="px-4 py-3">
+                          <span className="font-black" style={{ color: "#c9a227" }}>{s.totalUsage}%</span>
+                        </td>
+                        <td className="px-4 py-3 text-xs" style={{ color: "#9e9578" }}>{s.brandList}</td>
+                        <td className="px-4 py-3 text-xs"><a href={amazonLink(s.topKbd)} target="_blank" rel="noopener noreferrer" className="no-underline font-semibold hover:opacity-80" style={{ color: "#c9a227", textDecoration: "none" }}>{s.topKbd.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</a></td>
+                        <td className="px-4 py-3" style={{ color: "#5a5448" }}>{`${s.avgImpedance}mm`}</td>
+                        <td className="px-4 py-3" style={{ color: "#5a5448" }}>{s.avgPolling}kHz</td>
+                        <td className="px-4 py-3" style={{ color: "#5a5448" }}>{s.avgWeight}g</td>
+                        <td className="px-4 py-3 font-semibold" style={{ color: "#5a5448" }}>{"$"}{s.avgPrice}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             {/* Which headphones use each sensor */}
             <SectionTitle color="#a68b1b" sub="All headphones organized by their driver technology">Sorted by Driver Type</SectionTitle>
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 mb-8">
               {sensorProfiles.sort((a, b) => b.totalUsage - a.totalUsage).map((s, si) => (
-                <div key={s.driverType} id={`sensor-group-${s.driverType.replace(/\s+/g, "-").toLowerCase()}`} className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6", scrollMarginTop: 70 }}>
-                  <div className="flex items-center justify-between mb-3">
+                <div key={s.driverType} id={`sensor-group-${s.driverType.replace(/\s+/g, "-").toLowerCase()}`} className="rounded-xl overflow-hidden" style={{ background: "#fff", border: "1px solid #e8e4db", scrollMarginTop: 70 }}>
+                  {/* Group header */}
+                  <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: "1px solid #f0ece6", borderLeft: `3px solid ${si < 3 ? "#c9a227" : "#d4d0be"}` }}>
                     <div className="flex items-center gap-3">
-                      <div className="text-sm font-black" style={{ color: "#7d6e1e" }}>{s.driverType}</div>
-                      <div className="text-sm opacity-70">{s.totalUsage}% pro usage</div>
+                      <span className="text-sm font-black" style={{ color: "#1a1614" }}>{s.driverType}</span>
+                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-full" style={{ background: "#c9a22712", color: "#c9a227" }}>{s.totalUsage}%</span>
                     </div>
-                    <div className="text-sm opacity-70">{s.headphoneCount} model{s.headphoneCount !== 1 ? "s" : ""}</div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs" style={{ color: "#b5ae9e" }}>{s.headphoneCount} model{s.headphoneCount !== 1 ? "s" : ""}</span>
+                      {s.headphones.length > 0 && (() => { const topM = s.headphones.sort((a, b) => b.proUsage - a.proUsage)[0]; return (
+                        <a href={amazonLink(topM.name)} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all hover:scale-105 no-underline" style={{ background: "linear-gradient(135deg, #c9a227, #a68b1b)", color: "#fff", textDecoration: "none" }}>
+                          {I.cart(9)} {topM.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}
+                        </a>
+                      ); })()}
+                    </div>
                   </div>
-                  {s.headphones.length > 0 && (() => { const topM = s.headphones.sort((a, b) => b.proUsage - a.proUsage)[0]; return (
-                    <a href={amazonLink(topM.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mb-3 px-3 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#c9a22714", color: "#c9a227", border: "1px solid #c9a22718", textDecoration: "none" }}>
-                      {I.cart(10)} Top pick: {topM.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")} — ${topM.price}
-                    </a>
-                  ); })()}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Headphone chips */}
+                  <div className="flex flex-wrap gap-1.5 p-3">
                     {s.headphones.sort((a, b) => b.proUsage - a.proUsage).map((m, mi) => (
                       <button key={mi} onClick={() => { navigateToHeadphone(m); }}
-                        className="px-3 py-1.5 rounded-lg text-sm font-bold cursor-pointer transition-all hover:scale-105"
-                        style={{ background: `${BRAND_COLORS[m.brand]}12`, border: `1px solid ${BRAND_COLORS[m.brand]}20`, color: BRAND_COLORS[m.brand] }}>
-                        {getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={`${m.name}`} className="inline h-4 mr-1 object-contain" />} {m.name} <span className="opacity-85">({m.proUsage}%)</span>
+                        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold cursor-pointer transition-all hover:shadow-sm hover:-translate-y-px"
+                        style={{ background: "#f9f7f2", border: "1px solid #e8e4db", color: "#5a5448" }}>
+                        {getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={`${m.name}`} className="h-5 object-contain" />}
+                        <span>{m.name}</span>
+                        <span className="font-bold" style={{ color: BRAND_COLORS[m.brand] || "#c9a227" }}>{m.proUsage}%</span>
                       </button>
                     ))}
                   </div>
@@ -6371,7 +6424,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 <span className="inline-block">{I.headphone(24)}</span>
                 <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 15, letterSpacing: 4, color: "#c9a227" }}>ESPORTSHEADPHONES.COM</span>
               </div>
-              <p className="text-sm opacity-30 leading-relaxed">{`The definitive resource for professional esports headphones. Data from ${allPlayers.length}+ pro players across ${new Set(allPlayers.map(p=>p.game)).size} major competitive titles.`}</p>
+              <p className="text-sm opacity-30 leading-relaxed">{`Your go-to source for competitive gaming audio. Gear data from ${allPlayers.length}+ pro players spanning ${new Set(allPlayers.map(p=>p.game)).size} major esports titles.`}</p>
               <p className="text-xs opacity-20 mt-2">Data last updated: February 2026</p>
             </div>
             <div>

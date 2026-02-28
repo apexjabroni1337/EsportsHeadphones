@@ -44,7 +44,7 @@ export default function ContactClient() {
     width: "100%",
     padding: "10px 14px",
     background: "#ffffff",
-    border: "1px solid #e8e4df",
+    border: "1px solid #e6e3d6",
     borderRadius: 10,
     color: "#1a1614",
     fontFamily: "inherit",
@@ -61,12 +61,12 @@ export default function ContactClient() {
   ];
 
   return (
-    <div style={{ background: "#f5f0e8", minHeight: "100vh", color: "#1a1614", fontFamily: "'Outfit', system-ui, sans-serif" }}>
+    <div style={{ background: "#f5f2e6", minHeight: "100vh", color: "#1a1614", fontFamily: "'Outfit', system-ui, sans-serif" }}>
       {/* Nav bar */}
-      <nav className="flex items-center justify-between px-4 sm:px-6 py-3" style={{ background: "#f5f2ee", borderBottom: "1px solid #e8e4df" }}>
+      <nav className="flex items-center justify-between px-4 sm:px-6 py-3" style={{ background: "#f5f3ea", borderBottom: "1px solid #e6e3d6" }}>
         <Link href="/" className="flex items-center gap-2 no-underline">
           {I.headphone(20)}
-          <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 12, letterSpacing: 4, color: "#b8956a" }}>ESPORTSHEADPHONES.COM</span>
+          <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 12, letterSpacing: 4, color: "#c9a227" }}>ESPORTSHEADPHONES.COM</span>
         </Link>
         <Link href="/" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614" }}>← Back to home</Link>
       </nav>
@@ -75,7 +75,7 @@ export default function ContactClient() {
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-3xl sm:text-4xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
-            Get in <span style={{ color: "#b8956a" }}>Touch</span>
+            Get in <span style={{ color: "#c9a227" }}>Touch</span>
           </h1>
           <p className="text-sm opacity-40 max-w-md mx-auto">
             Have a question, found incorrect data, or want to work together? We'd love to hear from you.
@@ -83,15 +83,15 @@ export default function ContactClient() {
         </div>
 
         {status === "success" ? (
-          <div className="text-center py-16 rounded-2xl" style={{ background: "#b8956a0a", border: "1px solid #b8956a20" }}>
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style={{ background: "#b8956a18" }}>
+          <div className="text-center py-16 rounded-2xl" style={{ background: "#c9a2270a", border: "1px solid #c9a22720" }}>
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style={{ background: "#c9a22718" }}>
               {I.check(32)}
             </div>
-            <h2 className="text-xl font-black mb-2" style={{ color: "#b8956a" }}>Message Sent!</h2>
+            <h2 className="text-xl font-black mb-2" style={{ color: "#c9a227" }}>Message Sent!</h2>
             <p className="text-sm opacity-40 mb-6">Thanks for reaching out. We'll get back to you as soon as we can.</p>
             <button onClick={() => setStatus("idle")}
               className="px-6 py-2.5 rounded-lg font-bold text-sm transition-all hover:scale-105"
-              style={{ background: "#b8956a18", color: "#b8956a", border: "1px solid #b8956a30" }}>
+              style={{ background: "#c9a22718", color: "#c9a227", border: "1px solid #c9a22730" }}>
               Send another message
             </button>
           </div>
@@ -99,15 +99,15 @@ export default function ContactClient() {
           <form onSubmit={handleSubmit}>
             {/* Subject chips */}
             <div className="mb-6">
-              <label className="block mb-2" style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890" }}>What's this about?</label>
+              <label className="block mb-2" style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578" }}>What's this about?</label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {subjects.map(s => (
                   <div key={s.value}
                     className="cursor-pointer rounded-xl p-3 transition-all"
                     style={{
-                      background: form.subject === s.value ? "#b8956a12" : "#ffffff",
-                      border: `1px solid ${form.subject === s.value ? "#b8956a35" : "#00000008"}`,
-                      color: form.subject === s.value ? "#b8956a" : "#ffffff60",
+                      background: form.subject === s.value ? "#c9a22712" : "#ffffff",
+                      border: `1px solid ${form.subject === s.value ? "#c9a22735" : "#00000008"}`,
+                      color: form.subject === s.value ? "#c9a227" : "#ffffff60",
                     }}
                     onClick={() => setForm({ ...form, subject: s.value })}>
                     <div className="mb-1.5">{s.icon(16)}</div>
@@ -121,35 +121,35 @@ export default function ContactClient() {
             {/* Name + Email row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
               <div>
-                <label className="block mb-1.5" style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890" }}>Name</label>
+                <label className="block mb-1.5" style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578" }}>Name</label>
                 <input type="text" required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
                   placeholder="Your name" style={inputStyle}
-                  onFocus={e => e.target.style.borderColor = "#b8956a35"}
+                  onFocus={e => e.target.style.borderColor = "#c9a22735"}
                   onBlur={e => e.target.style.borderColor = "#0000000a"} />
               </div>
               <div>
-                <label className="block mb-1.5" style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890" }}>Email</label>
+                <label className="block mb-1.5" style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578" }}>Email</label>
                 <input type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
                   placeholder="your@email.com" style={inputStyle}
-                  onFocus={e => e.target.style.borderColor = "#b8956a35"}
+                  onFocus={e => e.target.style.borderColor = "#c9a22735"}
                   onBlur={e => e.target.style.borderColor = "#0000000a"} />
               </div>
             </div>
 
             {/* Message */}
             <div className="mb-5">
-              <label className="block mb-1.5" style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890" }}>Message</label>
+              <label className="block mb-1.5" style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578" }}>Message</label>
               <textarea required rows={6} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
                 placeholder={form.subject === "correction" ? "Which player/headphone has incorrect data? What should it be?" : form.subject === "feature" ? "Describe the feature or tool you'd like to see..." : form.subject === "partnership" ? "Tell us about your brand or organization and what you have in mind..." : "What's on your mind?"}
                 style={{ ...inputStyle, resize: "vertical", minHeight: 140 }}
-                onFocus={e => e.target.style.borderColor = "#b8956a35"}
+                onFocus={e => e.target.style.borderColor = "#c9a22735"}
                 onBlur={e => e.target.style.borderColor = "#0000000a"} />
             </div>
 
             {/* Submit */}
             <button type="submit" disabled={status === "sending"}
               className="w-full py-3 rounded-xl font-black text-sm tracking-wide transition-all hover:scale-[1.01] disabled:opacity-50"
-              style={{ background: "linear-gradient(135deg, #b8956a, #8a7460)", color: "#1a1614", fontSize: 13, border: "none", cursor: status === "sending" ? "wait" : "pointer" }}>
+              style={{ background: "linear-gradient(135deg, #c9a227, #a68b1b)", color: "#1a1614", fontSize: 13, border: "none", cursor: status === "sending" ? "wait" : "pointer" }}>
               {status === "sending" ? "Sending..." : "Send Message"}
             </button>
 
@@ -162,18 +162,18 @@ export default function ContactClient() {
         )}
 
         {/* Extra info */}
-        <div className="mt-12 pt-8" style={{ borderTop: "1px solid #e8e4df" }}>
+        <div className="mt-12 pt-8" style={{ borderTop: "1px solid #e6e3d6" }}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-            <div className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-              <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890", marginBottom: 6 }}>Response Time</div>
+            <div className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+              <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578", marginBottom: 6 }}>Response Time</div>
               <div className="text-sm font-bold opacity-60">Usually within 24h</div>
             </div>
-            <div className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-              <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890", marginBottom: 6 }}>Data Issues</div>
+            <div className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+              <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578", marginBottom: 6 }}>Data Issues</div>
               <div className="text-sm font-bold opacity-60">Fixed same day</div>
             </div>
-            <div className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-              <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890", marginBottom: 6 }}>Partnerships</div>
+            <div className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+              <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578", marginBottom: 6 }}>Partnerships</div>
               <div className="text-sm font-bold opacity-60">Always open</div>
             </div>
           </div>

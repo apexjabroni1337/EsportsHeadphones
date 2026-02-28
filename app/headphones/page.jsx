@@ -215,10 +215,10 @@ export default function HeadphonesPage() {
         <SSRTitle accent="All">Esports Headphones</SSRTitle>
         <SSRSub>Complete database of {headphones.length} professional esports gaming headphones with full specs, pro usage stats, and expert ratings.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Total Headphones" value={headphones.length} color="#b8956a" />
-          <SSRStat label="Avg Weight" value={`${avgWeight}g`} color="#b8956a" />
-          <SSRStat label="Avg Price" value={`$${avgPrice}`} color="#b8956a" />
-          <SSRStat label="Wireless" value={`${Math.round(wirelessCount/headphones.length*100)}%`} color="#b8956a" />
+          <SSRStat label="Total Headphones" value={headphones.length} color="#c9a227" />
+          <SSRStat label="Avg Weight" value={`${avgWeight}g`} color="#c9a227" />
+          <SSRStat label="Avg Price" value={`$${avgPrice}`} color="#c9a227" />
+          <SSRStat label="Wireless" value={`${Math.round(wirelessCount/headphones.length*100)}%`} color="#c9a227" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/players">Pro Settings</SSRLink>

@@ -482,7 +482,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
       .slice(0, 15)
       .map(([name, count]) => {
         const m = headphones.find(mm => mm.name === name || name.includes(mm.name) || mm.name.includes(name) || mm.name.toLowerCase() === name.toLowerCase());
-        let fill = m ? (BRAND_COLORS[m.brand] || "#8a8078") : "#a09890";
+        let fill = m ? (BRAND_COLORS[m.brand] || "#8a8460") : "#9e9578";
         let brand = m?.brand || "";
         if (!m) {
           const n = name.toLowerCase();
@@ -505,28 +505,28 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
   })();
 
   const pieData = brandMarketShare.filter(b => b.name !== "Other").map(b => ({
-    name: b.name, value: b.share, fill: BRAND_COLORS[b.name] || "#8a8078"
+    name: b.name, value: b.share, fill: BRAND_COLORS[b.name] || "#8a8460"
   }));
-  pieData.push({ name: "Other", value: (brandMarketShare.find(b => b.name === "Other") || { share: 3 }).share, fill: "#a09890" });
+  pieData.push({ name: "Other", value: (brandMarketShare.find(b => b.name === "Other") || { share: 3 }).share, fill: "#9e9578" });
 
   const tabs = [
     { id: "overview", label: "Overview", icon: Home, color: "#1a1614" },
     { id: "headphones", label: "All Headphones", icon: Headphones, color: "#2d2824" },
-    { id: "rankings", label: "Rankings", icon: Trophy, color: "#b8956a" },
-    { id: "sensors", label: "Drivers", icon: Cpu, color: "#6b635b" },
-    { id: "players", label: "Pro Players", icon: Users, color: "#8a7460" },
-    { id: "lab", label: "Lab", icon: FlaskConical, color: "#b8956a" },
+    { id: "rankings", label: "Rankings", icon: Trophy, color: "#c9a227" },
+    { id: "sensors", label: "Drivers", icon: Cpu, color: "#7d6e1e" },
+    { id: "players", label: "Pro Players", icon: Users, color: "#a68b1b" },
+    { id: "lab", label: "Lab", icon: FlaskConical, color: "#c9a227" },
     { id: "games", label: "Games", icon: Gamepad2, color: "#2d2824" },
-    { id: "brands", label: "Brands", icon: Building2, color: "#6b635b" },
-    { id: "teams", label: "Teams", icon: Shield, color: "#8a7460" },
+    { id: "brands", label: "Brands", icon: Building2, color: "#7d6e1e" },
+    { id: "teams", label: "Teams", icon: Shield, color: "#a68b1b" },
     { id: "trends", label: "Trends", icon: TrendingUp, color: "#4a4340" },
-    { id: "compare", label: "Compare", icon: GitCompare, color: "#b8956a" },
+    { id: "compare", label: "Compare", icon: GitCompare, color: "#c9a227" },
   ];
 
   const allBrands = ["All", ...new Set(headphones.map(m => m.brand))];
 
   return (
-    <div className="min-h-screen text-stone-800" style={{ background: "#f5f0e8", fontFamily: "'Outfit', system-ui, -apple-system, sans-serif" }}>
+    <div className="min-h-screen text-stone-800" style={{ background: "#f5f2e6", fontFamily: "'Outfit', system-ui, -apple-system, sans-serif" }}>
       <style>{`
         * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
         @media (max-width: 640px) {
@@ -542,7 +542,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         * { -webkit-tap-highlight-color: transparent; }
         @keyframes float { 0% { transform: translateY(0px); } 100% { transform: translateY(-8px); } }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-thumb { background: #b8956a40; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: #c9a22740; border-radius: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
         .ek-topnav-tabs { display: flex; gap: 2px; overflow: visible; scrollbar-width: none; -ms-overflow-style: none; }
         .ek-topnav-tabs::-webkit-scrollbar { display: none; }
@@ -553,15 +553,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
       `}</style>
 
       {/* Skip to content for accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold" style={{ background: "#b8956a", color: "#1a1614" }}>Skip to content</a>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold" style={{ background: "#c9a227", color: "#1a1614" }}>Skip to content</a>
 
       {/* ─── GLOBAL SEARCH OVERLAY ─── */}
       {globalSearchOpen && (
         <div role="dialog" aria-label="Search" aria-modal="true" onClick={handleSearchBackdropClick} className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] sm:pt-[15vh] px-4" style={{ background: "rgba(30,26,22,0.25)", backdropFilter: "blur(8px)" }}>
           <div ref={globalSearchRef} role="search" className="w-full max-w-2xl rounded-2xl overflow-hidden glass-card" style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", border: "1px solid rgba(6,182,212,0.15)", boxShadow: "0 25px 80px rgba(0,0,0,0.08), 0 0 40px rgba(6,182,212,0.06)" }}>
             {/* Search Input */}
-            <div className="flex items-center gap-3 px-5 py-4 border-b" style={{ borderColor: "#b8956a10" }}>
-              <Search size={18} style={{ color: "#b8956a", flexShrink: 0 }} />
+            <div className="flex items-center gap-3 px-5 py-4 border-b" style={{ borderColor: "#c9a22710" }}>
+              <Search size={18} style={{ color: "#c9a227", flexShrink: 0 }} />
               <input
                 ref={globalSearchInputRef}
                 type="text"
@@ -576,10 +576,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               />
               {globalSearch && (
                 <button onClick={() => setGlobalSearch("")} className="p-1 rounded hover:bg-stone-100 transition-all">
-                  <X size={14} style={{ color: "#a09890" }} />
+                  <X size={14} style={{ color: "#9e9578" }} />
                 </button>
               )}
-              <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded text-sm" style={{ background: "#00000008", color: "#a09890", border: "1px solid #e8e4df", fontSize: 11 }}>ESC</kbd>
+              <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded text-sm" style={{ background: "#00000008", color: "#9e9578", border: "1px solid #e6e3d6", fontSize: 11 }}>ESC</kbd>
             </div>
 
             {/* Results */}
@@ -591,13 +591,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     {["BlackShark V2 Pro", "s1mple", "Valorant", "Logitech G Pro X", "SteelSeries Arctis"].map(sug => (
                       <button key={sug} onClick={() => setGlobalSearch(sug)}
                         className="px-3 py-1.5 rounded-lg text-sm transition-all hover:bg-stone-100"
-                        style={{ background: "#0000000a", color: "#8a8078", border: "1px solid #e8e4df" }}>
+                        style={{ background: "#0000000a", color: "#8a8460", border: "1px solid #e6e3d6" }}>
                         {sug}
                       </button>
                     ))}
                   </div>
                   <div className="mt-4 text-sm opacity-15">
-                    <span className="hidden sm:inline">Press <kbd className="px-1.5 py-0.5 rounded mx-1" style={{ background: "#00000008", border: "1px solid #e8e4df" }}>⌘K</kbd> anytime to search</span>
+                    <span className="hidden sm:inline">Press <kbd className="px-1.5 py-0.5 rounded mx-1" style={{ background: "#00000008", border: "1px solid #e6e3d6" }}>⌘K</kbd> anytime to search</span>
                   </div>
                 </div>
               )}
@@ -618,7 +618,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <Headphone size={11} /> Headphones
                       </div>
                       {globalSearchResults.headphones.map(m => {
-                        const brandCol = BRAND_COLORS[m.brand] || "#8a8078";
+                        const brandCol = BRAND_COLORS[m.brand] || "#8a8460";
                         return (
                           <button key={m.id} onClick={() => handleSearchResultClick("headphone", m)}
                             className="w-full flex items-center gap-3 px-5 py-2.5 text-left hover:bg-stone-100 transition-all group">
@@ -627,10 +627,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="text-sm font-bold truncate" style={{ color: brandCol }}>{m.name}</div>
-                              <div className="text-xs truncate" style={{ color: "#a09890" }}>{m.brand} · {m.weight}g · {m.driverType} · ${m.price}</div>
+                              <div className="text-xs truncate" style={{ color: "#9e9578" }}>{m.brand} · {m.weight}g · {m.driverType} · ${m.price}</div>
                             </div>
                             {m.proUsage > 0 && (
-                              <div className="flex-shrink-0 px-2 py-0.5 rounded text-sm font-bold" style={{ background: "#b8956a18", color: "#b8956a", fontSize: 11 }}>
+                              <div className="flex-shrink-0 px-2 py-0.5 rounded text-sm font-bold" style={{ background: "#c9a22718", color: "#c9a227", fontSize: 11 }}>
                                 {m.proUsage}% pro
                               </div>
                             )}
@@ -644,24 +644,24 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   {/* Players Results */}
                   {globalSearchResults.players.length > 0 && (
                     <div className="mb-1">
-                      <div className="px-5 py-2 text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#8a7460", opacity: 0.5, fontSize: 11 }}>
+                      <div className="px-5 py-2 text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#a68b1b", opacity: 0.5, fontSize: 11 }}>
                         <Users size={11} /> Players
                       </div>
                       {globalSearchResults.players.map((p, i) => {
                         const gameColors = GAME_COLORS;
-                        const gCol = gameColors[p.game] || "#8a8078";
+                        const gCol = gameColors[p.game] || "#8a8460";
                         return (
                           <button key={`${p.name}-${p.game}-${i}`} onClick={() => handleSearchResultClick("player", p)}
                             className="w-full flex items-center gap-3 px-5 py-2.5 text-left hover:bg-stone-100 transition-all group">
                             <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-sm" style={{ background: `${gCol}15`, border: `1px solid ${gCol}20` }}>
-                              {p.country ? <Flag country={p.country} size={14} /> : <Gamepad2 size={14} style={{ color: "#a09890" }} />}
+                              {p.country ? <Flag country={p.country} size={14} /> : <Gamepad2 size={14} style={{ color: "#9e9578" }} />}
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="text-sm font-bold truncate">{p.name} {p.fullName ? <span className="font-normal opacity-30 text-sm">({p.fullName})</span> : null}</div>
-                              <div className="text-xs truncate" style={{ color: "#a09890" }}>{p.team} · <span style={{ color: gCol }}>{p.game}</span> · {p.headphone}</div>
+                              <div className="text-xs truncate" style={{ color: "#9e9578" }}>{p.team} · <span style={{ color: gCol }}>{p.game}</span> · {p.headphone}</div>
                             </div>
                             {p.hasProfile && (
-                              <div className="flex-shrink-0 px-2 py-0.5 rounded text-sm font-bold" style={{ background: "#8a746018", color: "#8a7460", fontSize: 11 }}>
+                              <div className="flex-shrink-0 px-2 py-0.5 rounded text-sm font-bold" style={{ background: "#a68b1b18", color: "#a68b1b", fontSize: 11 }}>
                                 Profile
                               </div>
                             )}
@@ -675,18 +675,18 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   {/* Teams Results */}
                   {globalSearchResults.teams.length > 0 && (
                     <div className="mb-1">
-                      <div className="px-5 py-2 text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#b8956a", opacity: 0.5, fontSize: 11 }}>
+                      <div className="px-5 py-2 text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#c9a227", opacity: 0.5, fontSize: 11 }}>
                         <Building2 size={11} /> Teams
                       </div>
                       {globalSearchResults.teams.map((t, i) => (
                         <button key={`${t.name}-${i}`} onClick={() => handleSearchResultClick("team", t)}
                           className="w-full flex items-center gap-3 px-5 py-2.5 text-left hover:bg-stone-100 transition-all group">
-                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden" style={{ background: "#b8956a18", border: "1px solid #b8956a30" }}>
-                            {getTeamLogo(t.name) ? <><img loading="lazy" src={getTeamLogo(t.name)} alt={t.name} className="w-5 h-5 object-contain" onError={e => { e.target.style.display = "none"; e.target.parentElement.querySelector('.team-fb') && (e.target.parentElement.querySelector('.team-fb').style.display = ""); }} /><Building2 size={14} className="team-fb" style={{ color: "#b8956a", display: "none" }} /></> : <Building2 size={14} style={{ color: "#b8956a" }} />}
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden" style={{ background: "#c9a22718", border: "1px solid #c9a22730" }}>
+                            {getTeamLogo(t.name) ? <><img loading="lazy" src={getTeamLogo(t.name)} alt={t.name} className="w-5 h-5 object-contain" onError={e => { e.target.style.display = "none"; e.target.parentElement.querySelector('.team-fb') && (e.target.parentElement.querySelector('.team-fb').style.display = ""); }} /><Building2 size={14} className="team-fb" style={{ color: "#c9a227", display: "none" }} /></> : <Building2 size={14} style={{ color: "#c9a227" }} />}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold truncate">{t.name}</div>
-                            <div className="text-xs truncate" style={{ color: "#a09890" }}>{t.playerCount} players · {t.games.join(", ")}</div>
+                            <div className="text-xs truncate" style={{ color: "#9e9578" }}>{t.playerCount} players · {t.games.join(", ")}</div>
                           </div>
                           <span className="text-sm opacity-0 group-hover:opacity-30 transition-opacity flex-shrink-0">↗</span>
                         </button>
@@ -708,7 +708,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold truncate" style={{ color: g.color }}>{g.name}</div>
-                            <div className="text-xs truncate" style={{ color: "#a09890" }}>{g.playerCount} pros tracked</div>
+                            <div className="text-xs truncate" style={{ color: "#9e9578" }}>{g.playerCount} pros tracked</div>
                           </div>
                           <span className="text-sm opacity-0 group-hover:opacity-30 transition-opacity flex-shrink-0">↗</span>
                         </button>
@@ -719,7 +719,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   {/* Brands Results */}
                   {globalSearchResults.brands.length > 0 && (
                     <div className="mb-1">
-                      <div className="px-5 py-2 text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#b8956a", opacity: 0.5, fontSize: 11 }}>
+                      <div className="px-5 py-2 text-sm uppercase tracking-widest flex items-center gap-2" style={{ color: "#c9a227", opacity: 0.5, fontSize: 11 }}>
                         <Building2 size={11} /> Brands
                       </div>
                       {globalSearchResults.brands.map((b, i) => (
@@ -730,7 +730,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold truncate" style={{ color: b.color }}>{b.name}</div>
-                            <div className="text-xs truncate" style={{ color: "#a09890" }}>{b.headphoneCount} headphones in database</div>
+                            <div className="text-xs truncate" style={{ color: "#9e9578" }}>{b.headphoneCount} headphones in database</div>
                           </div>
                           <span className="text-sm opacity-0 group-hover:opacity-30 transition-opacity flex-shrink-0">↗</span>
                         </button>
@@ -757,17 +757,17 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
       {/* ─── NEWSLETTER MODAL ─── */}
       {newsletterPopup && newsletterStatus !== "success" && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4" style={{ background: "rgba(30,26,22,0.25)", backdropFilter: "blur(8px)" }} onClick={() => setNewsletterPopup(false)}>
-          <div className="w-full max-w-md rounded-2xl p-8 text-center" style={{ background: "#f8f6f3", border: "1px solid #b8956a18", boxShadow: "0 25px 80px rgba(0,0,0,0.06), 0 0 40px rgba(184,149,106,0.08)" }} onClick={e => e.stopPropagation()}>
+          <div className="w-full max-w-md rounded-2xl p-8 text-center" style={{ background: "#f8f6f3", border: "1px solid #c9a22718", boxShadow: "0 25px 80px rgba(0,0,0,0.06), 0 0 40px rgba(184,149,106,0.08)" }} onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-center gap-2 mb-3">
-              <span style={{ color: "#b8956a", fontSize: 22 }}>📬</span>
-              <span className="text-sm font-black uppercase tracking-widest" style={{ color: "#b8956a" }}>Newsletter</span>
+              <span style={{ color: "#c9a227", fontSize: 22 }}>📬</span>
+              <span className="text-sm font-black uppercase tracking-widest" style={{ color: "#c9a227" }}>Newsletter</span>
             </div>
             <div className="text-xl font-black text-stone-900 mb-2">Stay ahead of the meta</div>
-            <div className="text-sm mb-6" style={{ color: "#a09890" }}>Pro gear changes, new headphone releases, and data-driven insights. No spam.</div>
+            <div className="text-sm mb-6" style={{ color: "#9e9578" }}>Pro gear changes, new headphone releases, and data-driven insights. No spam.</div>
             <form className="flex gap-2" onSubmit={async e => { e.preventDefault(); setNewsletterStatus("sending"); try { const res = await fetch("https://formspree.io/f/xvzbwrzv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: newsletterEmail }) }); setNewsletterStatus(res.ok ? "success" : "error"); setNewsletterPopup(false); } catch { setNewsletterStatus("error"); } }}>
               <input type="email" required placeholder="your@email.com" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)} autoFocus
-                className="flex-1 px-4 py-3 rounded-lg text-sm outline-none" style={{ background: "#ffffff", border: "1px solid #d4cfc8", color: "#1a1614", minWidth: 0 }} />
-              <button type="submit" disabled={newsletterStatus === "sending"} className="px-6 py-3 rounded-lg text-sm font-black transition-all hover:scale-105 disabled:opacity-50 whitespace-nowrap" style={{ background: "#b8956a", color: "#1a1614" }}>
+                className="flex-1 px-4 py-3 rounded-lg text-sm outline-none" style={{ background: "#ffffff", border: "1px solid #d4d0be", color: "#1a1614", minWidth: 0 }} />
+              <button type="submit" disabled={newsletterStatus === "sending"} className="px-6 py-3 rounded-lg text-sm font-black transition-all hover:scale-105 disabled:opacity-50 whitespace-nowrap" style={{ background: "#c9a227", color: "#1a1614" }}>
                 {newsletterStatus === "sending" ? "..." : "Subscribe"}
               </button>
             </form>
@@ -784,7 +784,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
       {/* ─── TOP NAVIGATION BAR ─── */}
       <header className="sticky top-0 z-50">
         {/* Gradient accent line */}
-        <div style={{ height: 2, background: "linear-gradient(90deg, #d4cfc8, #b8956a, #2d2824, #b8956a, #d4cfc8)", backgroundSize: "200% 100%", animation: "gradient-shift 6s ease infinite" }} />
+        <div style={{ height: 2, background: "linear-gradient(90deg, #d4d0be, #c9a227, #2d2824, #c9a227, #d4d0be)", backgroundSize: "200% 100%", animation: "gradient-shift 6s ease infinite" }} />
         {/* Main nav row */}
         <div style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
           <div className="max-w-[1600px] mx-auto px-4 sm:px-6 flex items-center gap-4" style={{ height: 64 }}>
@@ -793,7 +793,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <span className="inline-flex transition-transform duration-300 group-hover:scale-110">{I.headphone(26)}</span>
               <div className="hidden sm:flex flex-col">
                 <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 15, fontWeight: 700, letterSpacing: 2.5, color: "#1a1614", lineHeight: 1 }}>ESPORTSHEADPHONES</span>
-                <span style={{ fontSize: 10, letterSpacing: 2, color: "#a09890", fontWeight: 600, textTransform: "uppercase" }}>Pro Headphone Data</span>
+                <span style={{ fontSize: 10, letterSpacing: 2, color: "#9e9578", fontWeight: 600, textTransform: "uppercase" }}>Pro Headphone Data</span>
               </div>
             </div>
 
@@ -810,7 +810,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     role="tab" aria-selected={isActive} aria-controls="main-content"
                     className={`ek-topnav-tab flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold${isActive ? " active" : ""}`}
                     style={{
-                      color: isActive ? t.color : "#6b635b",
+                      color: isActive ? t.color : "#7d6e1e",
                       background: isActive ? `${t.color}10` : "transparent",
                     }}>
                     <Icon size={16} strokeWidth={2} style={{ color: isActive ? t.color : "#b0a89e", flexShrink: 0 }} />
@@ -824,7 +824,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 <button onClick={() => setMoreDropdownOpen(prev => !prev)}
                   className={`ek-topnav-tab flex items-center gap-1 px-3 py-2 rounded-lg text-[13px] font-semibold${activeTab === "trends" || activeTab === "compare" ? " active" : ""}`}
                   style={{
-                    color: (activeTab === "trends" || activeTab === "compare") ? "#4a4340" : "#6b635b",
+                    color: (activeTab === "trends" || activeTab === "compare") ? "#4a4340" : "#7d6e1e",
                     background: (activeTab === "trends" || activeTab === "compare") ? "#4a434010" : "transparent",
                   }}>
                   <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>More</span>
@@ -832,14 +832,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   {(activeTab === "trends" || activeTab === "compare") && <style>{`.ek-topnav-tab.active[aria-selected="true"]::after { background: #4a4340; }`}</style>}
                 </button>
                 {moreDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 rounded-xl overflow-hidden z-50" style={{ background: "#ffffff", border: "1px solid #e8e4df", boxShadow: "0 8px 24px rgba(0,0,0,0.1)", minWidth: 180 }}>
+                  <div className="absolute top-full left-0 mt-1 rounded-xl overflow-hidden z-50" style={{ background: "#ffffff", border: "1px solid #e6e3d6", boxShadow: "0 8px 24px rgba(0,0,0,0.1)", minWidth: 180 }}>
                     {tabs.filter(t => t.id === "trends" || t.id === "compare").map(t => {
                       const isActive = activeTab === t.id;
                       const Icon = t.icon;
                       return (
                         <button key={t.id} onClick={() => { setActiveTab(t.id); setMoreDropdownOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                           className="w-full flex items-center gap-2 px-4 py-3 text-left text-[14px] font-semibold transition-all hover:bg-stone-50"
-                          style={{ color: isActive ? t.color : "#6b635b", background: isActive ? `${t.color}08` : "transparent" }}>
+                          style={{ color: isActive ? t.color : "#7d6e1e", background: isActive ? `${t.color}08` : "transparent" }}>
                           <Icon size={16} strokeWidth={2} style={{ color: isActive ? t.color : "#b0a89e" }} />
                           <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{t.label}</span>
                         </button>
@@ -855,24 +855,24 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               {/* Search trigger */}
               <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
                 aria-label="Search" className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full text-xs transition-all duration-300 hover:shadow-md"
-                style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)", border: "1px solid rgba(184,149,106,0.15)", color: "#8a8078", minWidth: 170 }}
+                style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)", border: "1px solid rgba(184,149,106,0.15)", color: "#8a8460", minWidth: 170 }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.95)"; e.currentTarget.style.borderColor = "rgba(184,149,106,0.35)"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.7)"; e.currentTarget.style.borderColor = "rgba(184,149,106,0.15)"; }}>
-                <Search size={16} style={{ color: "#b8956a" }} />
-                <span style={{ fontSize: 14, color: "#a09890" }}>Search...</span>
+                <Search size={16} style={{ color: "#c9a227" }} />
+                <span style={{ fontSize: 14, color: "#9e9578" }}>Search...</span>
               </button>
               {/* Mobile search */}
               <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
                 aria-label="Search" className="sm:hidden p-2 rounded-full" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(184,149,106,0.15)" }}>
-                <Search size={18} style={{ color: "#b8956a" }} />
+                <Search size={18} style={{ color: "#c9a227" }} />
               </button>
               {/* Subscribe */}
               {newsletterStatus === "success" ? (
-                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[13px] font-bold" style={{ background: "#b8956a15", color: "#b8956a", border: "1px solid #b8956a30" }}>✓ Subscribed</span>
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[13px] font-bold" style={{ background: "#c9a22715", color: "#c9a227", border: "1px solid #c9a22730" }}>✓ Subscribed</span>
               ) : (
                 <button onClick={() => setNewsletterPopup(true)}
                   className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full font-bold text-[13px] transition-all duration-300 hover:shadow-lg hover:scale-105"
-                  style={{ background: "linear-gradient(135deg, #b8956a, #9a7a54)", color: "#ffffff", letterSpacing: 0.5, boxShadow: "0 2px 8px rgba(184,149,106,0.3)" }}>
+                  style={{ background: "linear-gradient(135deg, #c9a227, #a88f1c)", color: "#ffffff", letterSpacing: 0.5, boxShadow: "0 2px 8px rgba(184,149,106,0.3)" }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                   Subscribe
                 </button>
@@ -905,7 +905,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
                 className="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all"
-                style={{ color: isActive ? t.color : "#a09890" }}>
+                style={{ color: isActive ? t.color : "#9e9578" }}>
                 <Icon size={20} strokeWidth={2} />
                 <span style={{ fontSize: 9, fontWeight: 600, fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{t.label === "All Headphones" ? "Headphones" : t.label}</span>
                 {isActive && <div className="w-1 h-1 rounded-full mt-0.5" style={{ background: t.color }} />}
@@ -915,7 +915,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           {/* More button for remaining tabs */}
           <button onClick={() => setMobileMenu(!mobileMenu)}
             className="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all"
-            style={{ color: mobileMenu ? "#2d2824" : "#a09890" }}>
+            style={{ color: mobileMenu ? "#2d2824" : "#9e9578" }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/>
             </svg>
@@ -943,8 +943,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   }}
                     className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all"
                     style={{ background: isActive ? `${t.color}10` : "rgba(0,0,0,0.03)", border: isActive ? `1px solid ${t.color}25` : "1px solid transparent" }}>
-                    <Icon size={18} strokeWidth={2} style={{ color: isActive ? t.color : "#a09890" }} />
-                    <span style={{ fontSize: 10, fontWeight: 600, color: isActive ? t.color : "#6b635b" }}>{t.label}</span>
+                    <Icon size={18} strokeWidth={2} style={{ color: isActive ? t.color : "#9e9578" }} />
+                    <span style={{ fontSize: 10, fontWeight: 600, color: isActive ? t.color : "#7d6e1e" }}>{t.label}</span>
                   </button>
                 );
               })}
@@ -960,24 +960,24 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
            HERO SECTION — Split Layout with Earpad Decorations
            ═══════════════════════════════════════════════════════ */}
       {activeTab === "overview" && (
-      <header className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f5f0e8 0%, #ece6db 100%)" }}>
+      <header className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f5f2e6 0%, #ece9d8 100%)" }}>
         {/* Decorative sound wave pattern */}
         <div className="absolute inset-0 overflow-hidden" style={{ opacity: 0.035 }}>
           <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 1200 400" preserveAspectRatio="none" fill="none">
             {/* Sound wave lines */}
-            <path d="M0 200 Q150 120 300 200 Q450 280 600 200 Q750 120 900 200 Q1050 280 1200 200" stroke="#b8956a" strokeWidth="2" opacity="0.6"/>
-            <path d="M0 200 Q150 150 300 200 Q450 250 600 200 Q750 150 900 200 Q1050 250 1200 200" stroke="#b8956a" strokeWidth="1.5" opacity="0.4"/>
-            <path d="M0 200 Q150 170 300 200 Q450 230 600 200 Q750 170 900 200 Q1050 230 1200 200" stroke="#b8956a" strokeWidth="1" opacity="0.3"/>
+            <path d="M0 200 Q150 120 300 200 Q450 280 600 200 Q750 120 900 200 Q1050 280 1200 200" stroke="#c9a227" strokeWidth="2" opacity="0.6"/>
+            <path d="M0 200 Q150 150 300 200 Q450 250 600 200 Q750 150 900 200 Q1050 250 1200 200" stroke="#c9a227" strokeWidth="1.5" opacity="0.4"/>
+            <path d="M0 200 Q150 170 300 200 Q450 230 600 200 Q750 170 900 200 Q1050 230 1200 200" stroke="#c9a227" strokeWidth="1" opacity="0.3"/>
             {/* Frequency spectrum bars */}
             {Array.from({ length: 40 }).map((_, i) => {
               const x = 30 + i * 30;
               const h = 20 + Math.sin(i * 0.7) * 40 + Math.cos(i * 1.3) * 25;
-              return <rect key={i} x={x} y={320 - h} width="4" height={h} rx="2" fill="#b8956a" opacity={0.15 + Math.sin(i * 0.5) * 0.1} />;
+              return <rect key={i} x={x} y={320 - h} width="4" height={h} rx="2" fill="#c9a227" opacity={0.15 + Math.sin(i * 0.5) * 0.1} />;
             })}
             {/* Driver circles */}
             <circle cx="100" cy="80" r="50" stroke="#2d2824" strokeWidth="1.5" opacity="0.3" fill="none"/>
             <circle cx="100" cy="80" r="35" stroke="#2d2824" strokeWidth="1" opacity="0.2" fill="none"/>
-            <circle cx="100" cy="80" r="15" stroke="#b8956a" strokeWidth="1" opacity="0.3" fill="none"/>
+            <circle cx="100" cy="80" r="15" stroke="#c9a227" strokeWidth="1" opacity="0.3" fill="none"/>
             <circle cx="1100" cy="100" r="45" stroke="#2d2824" strokeWidth="1.5" opacity="0.25" fill="none"/>
             <circle cx="1100" cy="100" r="28" stroke="#2d2824" strokeWidth="1" opacity="0.15" fill="none"/>
           </svg>
@@ -989,7 +989,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <div className="hidden md:flex justify-center items-center" style={{ transition: "all 1s ease 0.2s", opacity: heroAnim ? 1 : 0, transform: heroAnim ? "translateX(0)" : "translateX(-20px)" }}>
               <div className="relative" style={{ width: 380, height: 340 }}>
                 {/* Glowing backdrop circle */}
-                <div className="absolute" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, #b8956a12 0%, #b8956a06 50%, transparent 70%)", filter: "blur(20px)" }} />
+                <div className="absolute" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, #c9a22712 0%, #c9a22706 50%, transparent 70%)", filter: "blur(20px)" }} />
                 {/* Main featured headphone - #1 most popular */}
                 {(() => {
                   const topHP = [...headphones].sort((a, b) => b.proUsage - a.proUsage);
@@ -1009,7 +1009,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <img src={mainImg} alt={topHP[0]?.name} className="object-contain" style={{ width: 260, height: 260, filter: "drop-shadow(0 12px 40px rgba(45,40,36,0.25)) drop-shadow(0 4px 12px rgba(184,149,106,0.2))" }} />
                     </div>}
                     {/* #1 badge */}
-                    <div className="absolute px-3 py-1.5 rounded-xl text-xs font-black" style={{ top: 10, right: 30, background: "linear-gradient(135deg, #b8956a, #9a7a54)", color: "#fff", boxShadow: "0 4px 16px rgba(184,149,106,0.4)", animation: "float 3s ease-in-out 300ms infinite alternate" }}>
+                    <div className="absolute px-3 py-1.5 rounded-xl text-xs font-black" style={{ top: 10, right: 30, background: "linear-gradient(135deg, #c9a227, #a88f1c)", color: "#fff", boxShadow: "0 4px 16px rgba(184,149,106,0.4)", animation: "float 3s ease-in-out 300ms infinite alternate" }}>
                       #1 in Esports
                     </div>
                     {/* Brand badges floating */}
@@ -1021,9 +1021,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <div key={i} className="absolute px-2.5 py-1 rounded-full text-[11px] font-bold"
                         style={{
                           left: b.x, top: b.y,
-                          background: `${BRAND_COLORS[b.name] || "#8a8078"}15`,
-                          color: BRAND_COLORS[b.name] || "#8a8078",
-                          border: `1px solid ${BRAND_COLORS[b.name] || "#8a8078"}30`,
+                          background: `${BRAND_COLORS[b.name] || "#8a8460"}15`,
+                          color: BRAND_COLORS[b.name] || "#8a8460",
+                          border: `1px solid ${BRAND_COLORS[b.name] || "#8a8460"}30`,
                           backdropFilter: "blur(8px)",
                           animation: `float 3s ease-in-out ${b.delay}ms infinite alternate`,
                         }}>
@@ -1041,10 +1041,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <div className="mb-4 sm:mb-6">
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold tracking-widest uppercase"
                   style={{
-                    background: "linear-gradient(135deg, #b8956a10, #2d282410)",
-                    color: "#b8956a",
-                    border: "1px solid #b8956a18",
-                    borderBottom: "2px solid #b8956a30",
+                    background: "linear-gradient(135deg, #c9a22710, #2d282410)",
+                    color: "#c9a227",
+                    border: "1px solid #c9a22718",
+                    borderBottom: "2px solid #c9a22730",
                     boxShadow: "0 2px 0 rgba(6, 182, 212, 0.2)"
                   }}>
                   The Definitive Resource
@@ -1053,14 +1053,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               {/* Main heading - enhanced */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 800, lineHeight: 1.05, letterSpacing: -1.5, color: "#1a1614" }}>
                 Pro Esports<br />
-                <span style={{ background: "linear-gradient(135deg, #b8956a, #1a1614)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Headphones</span>
+                <span style={{ background: "linear-gradient(135deg, #c9a227, #1a1614)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Headphones</span>
               </h1>
               {/* Dynamic tagline subtitle */}
-              <p className="max-w-2xl text-base sm:text-lg leading-relaxed font-medium mb-3" style={{ color: "#b8956a" }}>
+              <p className="max-w-2xl text-base sm:text-lg leading-relaxed font-medium mb-3" style={{ color: "#c9a227" }}>
                 The definitive database of {headphones.length} headphones used by {allPlayers.length.toLocaleString()} professional esports players
               </p>
               {/* Secondary description */}
-              <p className="max-w-xl text-sm sm:text-base leading-relaxed" style={{ color: "#6b635b" }}>
+              <p className="max-w-xl text-sm sm:text-base leading-relaxed" style={{ color: "#7d6e1e" }}>
                 Rankings, specifications, comparisons, and pro settings across {new Set(allPlayers.map(p=>p.game)).size} major esports titles.
               </p>
             </div>
@@ -1070,10 +1070,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           {(() => {
             const topBrand = [...headphones].sort((a, b) => b.proUsage - a.proUsage)[0];
             const statItems = [
-              { val: allPlayers.length, label: "Pro Players", suffix: "", prefix: "", color: "#b8956a", icon: Users, sub: "tracked worldwide" },
+              { val: allPlayers.length, label: "Pro Players", suffix: "", prefix: "", color: "#c9a227", icon: Users, sub: "tracked worldwide" },
               { val: headphones.length, label: "Headphones", suffix: "", prefix: "", color: "#2d2824", icon: Headphones, sub: "in database" },
               { val: new Set(allPlayers.map(p=>p.game)).size, label: "Games", suffix: "", prefix: "", color: "#d97706", icon: Gamepad2, sub: "esports titles" },
-              { val: Math.max(...headphones.map(m => m.proUsage)), label: "Top Share", suffix: "%", prefix: "", color: "#8a7460", icon: Trophy, sub: topBrand?.brand || "" },
+              { val: Math.max(...headphones.map(m => m.proUsage)), label: "Top Share", suffix: "%", prefix: "", color: "#a68b1b", icon: Trophy, sub: topBrand?.brand || "" },
             ];
             return (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-10 sm:mt-14" style={{ transition: "all 0.8s ease 0.3s", opacity: heroAnim ? 1 : 0 }}>
@@ -1099,7 +1099,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: `${s.color}12` }}>
                       <Icon size={18} strokeWidth={2.5} style={{ color: s.color }} />
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#a09890" }}>{s.label}</span>
+                    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#9e9578" }}>{s.label}</span>
                   </div>
                   {/* Value */}
                   <div className="text-3xl sm:text-4xl font-black" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: s.color }}>
@@ -1115,7 +1115,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         </div>
 
         {/* Bottom decorative line - cyan to violet gradient */}
-        <div className="h-px" style={{ background: "linear-gradient(to right, transparent, #b8956a30, #2d282430, transparent)" }} />
+        <div className="h-px" style={{ background: "linear-gradient(to right, transparent, #c9a22730, #2d282430, transparent)" }} />
       </header>
       )}
 
@@ -1128,7 +1128,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── OVERVIEW TAB ── */}
         {activeTab === "overview" && (
           <div>
-            <SectionTitle color="#b8956a" sub={`Based on data from ${allPlayers.length} professional esports players across ${new Set(allPlayers.map(p=>p.game)).size} major titles`}>Headphone Usage by Professional Players</SectionTitle>
+            <SectionTitle color="#c9a227" sub={`Based on data from ${allPlayers.length} professional esports players across ${new Set(allPlayers.map(p=>p.game)).size} major titles`}>Headphone Usage by Professional Players</SectionTitle>
             {/* ── Podium + Grid ── */}
             <div>
               {/* Top 3 Podium */}
@@ -1150,7 +1150,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         style={{ height: heights[rank], background: `linear-gradient(180deg, ${d.fill}18 0%, ${d.fill}08 100%)`, border: `1px solid ${d.fill}20`, borderBottom: "none" }}>
                         <div className="text-2xl mb-1">{medals[rank]}</div>
                         <div className="text-xl sm:text-2xl font-black" style={{ color: d.fill, fontFamily: "'Fira Code', monospace" }}>{d.usage}%</div>
-                        <div style={{ fontSize: 10, color: "#a09890", fontWeight: 600 }}>{d.playerCount} pros</div>
+                        <div style={{ fontSize: 10, color: "#9e9578", fontWeight: 600 }}>{d.playerCount} pros</div>
                         {d.price && (
                           <a href={amazonLink(d.fullName)} target="_blank" rel="noopener noreferrer"
                             className="mt-2 px-3 py-1 rounded-full text-xs font-bold no-underline hover:scale-105 transition-all"
@@ -1173,7 +1173,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   const maxUsage = proUsageChart[0]?.usage || 1;
                   return (
                     <div key={d.name} className="rounded-xl p-3 transition-all hover:shadow-md hover:-translate-y-0.5 cursor-pointer group"
-                      style={{ background: "#fff", border: "1px solid #e8e4df" }}
+                      style={{ background: "#fff", border: "1px solid #e6e3d6" }}
                       onClick={() => { const m = headphones.find(mm => mm.name === d.fullName); if (m) navigateToHeadphone(m); }}>
                       <div className="flex items-start gap-2">
                         <span className="text-xs font-black flex-shrink-0 mt-0.5" style={{ color: "#c4bfb8", fontFamily: "'Fira Code', monospace", width: 18 }}>#{i + 4}</span>
@@ -1211,10 +1211,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               return (
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 my-4 sm:my-6 text-center">
                 {[
-                  { label: "Most Used Headphone", value: topHeadphoneEntry[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, ""), sub: `${Math.round(topHeadphoneEntry[1]/allPlayers.length*100)}% of pros`, color: "#b8956a", icon: "crown", numeric: false },
-                  { label: "Brands in Pro Use", value: uniqueBrands.size, sub: "competing for pros", color: "#8a7460", icon: "signal", numeric: true, numVal: uniqueBrands.size, numSuffix: "" },
+                  { label: "Most Used Headphone", value: topHeadphoneEntry[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, ""), sub: `${Math.round(topHeadphoneEntry[1]/allPlayers.length*100)}% of pros`, color: "#c9a227", icon: "crown", numeric: false },
+                  { label: "Brands in Pro Use", value: uniqueBrands.size, sub: "competing for pros", color: "#a68b1b", icon: "signal", numeric: true, numVal: uniqueBrands.size, numSuffix: "" },
                   { label: "Lightest Headphone", value: `${lightest.weight}g`, sub: lightest.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, ""), color: "#4a4340", icon: "wind", numeric: true, numVal: lightest.weight, numSuffix: "g" },
-                  { label: "Avg Headphone Weight", value: `${avgProWeight}g`, sub: "across all pros", color: "#b8956a", icon: "gear", numeric: true, numVal: avgProWeight, numSuffix: "g" },
+                  { label: "Avg Headphone Weight", value: `${avgProWeight}g`, sub: "across all pros", color: "#c9a227", icon: "gear", numeric: true, numVal: avgProWeight, numSuffix: "g" },
                   { label: "ANC", value: `${rtPct}%`, sub: `${rtCount} of ${headphones.length} headphones`, color: "#9060c4", icon: "bolt", numeric: true, numVal: rtPct, numSuffix: "%" },
                 ].map((card, i) => (
                   <div key={i} className="rounded-[10px] p-2 sm:p-4 text-center transition-all duration-200 hover:-translate-y-0.5" style={{
@@ -1244,22 +1244,22 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         : card.value
                       }
                     </div>
-                    <div className="text-xs font-semibold uppercase tracking-wider mt-0.5" style={{ color: "#a09890" }}>{card.label}</div>
+                    <div className="text-xs font-semibold uppercase tracking-wider mt-0.5" style={{ color: "#9e9578" }}>{card.label}</div>
                     <div style={{ fontSize: 11, color: "#c4bfb8" }} className="mt-1">{card.sub}</div>
-                    {i === 0 && <a href={amazonLink(topHeadphoneEntry[0])} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#b8956a18", color: "#b8956a", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
-                    {i === 3 && <a href={amazonLink(lightest.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#b8956a18", color: "#b8956a", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
+                    {i === 0 && <a href={amazonLink(topHeadphoneEntry[0])} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#c9a22718", color: "#c9a227", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
+                    {i === 3 && <a href={amazonLink(lightest.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#c9a22718", color: "#c9a227", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
                   </div>
                 ))}
               </div>
               );
             })()}
 
-            <SectionTitle color="#b8956a" sub="Select any headphone to explore specs, pro users, and performance data">Featured Headphone Spotlight</SectionTitle>
-              <div className="rounded-2xl p-3 sm:p-5 mb-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+            <SectionTitle color="#c9a227" sub="Select any headphone to explore specs, pro users, and performance data">Featured Headphone Spotlight</SectionTitle>
+              <div className="rounded-2xl p-3 sm:p-5 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 {/* ── Headphone Picker: Top 20 headphones by pro usage ── */}
                 <div className="grid gap-1.5 mb-4" style={{ gridTemplateColumns: "repeat(8, 1fr)" }}>
                   {[...headphones].sort((a, b) => b.proUsage - a.proUsage).slice(0, 16).map(m => {
-                    const bc = BRAND_COLORS[m.brand] || "#8a8078";
+                    const bc = BRAND_COLORS[m.brand] || "#8a8460";
                     const isSelected = selectedHeadphone?.id === m.id;
                     const imgUrl = getHeadphoneImage(m.name);
                     return (
@@ -1283,7 +1283,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           <div className="text-[10px] font-black leading-tight truncate" style={{ color: isSelected ? bc : "#4a4340" }}>
                             {m.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |Sony |JBL |ASUS |Audio-Technica |Turtle Beach |Audeze |EPOS |Cooler Master )/, "")}
                           </div>
-                          <div className="text-[9px] mt-0.5" style={{ color: "#a09890" }}>{m.proUsage}% pro use</div>
+                          <div className="text-[9px] mt-0.5" style={{ color: "#9e9578" }}>{m.proUsage}% pro use</div>
                         </div>
                         {isSelected && <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full" style={{ background: bc, boxShadow: `0 0 0 2px #ffffff` }} />}
                       </button>
@@ -1315,8 +1315,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div className="flex flex-col items-center justify-center md:col-span-2 lg:col-span-1">
                       <ResponsiveContainer width="100%" height={200}>
                         <RadarChart data={radarData}>
-                          <PolarGrid stroke="#e8e4df" />
-                          <PolarAngleAxis dataKey="stat" tick={{ fill: "#6b635b", fontSize: 13 }} />
+                          <PolarGrid stroke="#e6e3d6" />
+                          <PolarAngleAxis dataKey="stat" tick={{ fill: "#7d6e1e", fontSize: 13 }} />
                           <PolarRadiusAxis tick={false} axisLine={false} domain={[0, 100]} />
                           <Radar name={selectedHeadphone.name} dataKey="value" stroke={brandCol} fill={brandCol} fillOpacity={0.2} strokeWidth={2.5} dot={{ r: 3, fill: brandCol, strokeWidth: 0 }} />
                         </RadarChart>
@@ -1336,12 +1336,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                     {/* Right: Pro users */}
                     <div>
-                      <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Notable Pro Users</div>
+                      <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Notable Pro Users</div>
                       {usedByPros.length > 0 ? (
                         <div className="space-y-2">
                           {usedByPros.slice(0, 3).map((p, i) => {
                             const gameColors = GAME_COLORS;
-                            const gc = gameColors[p.game] || "#8a8078";
+                            const gc = gameColors[p.game] || "#8a8460";
                             return (
                               <button key={i} onClick={() => { const pp = proPlayers.find(pp => pp.name === p.name); if (pp) { navigateToPlayer(pp); } else { setActiveTab("players"); } }}
                                 className="w-full flex items-center gap-3 p-2.5 rounded-xl cursor-pointer transition-all hover:scale-[1.02] text-left"
@@ -1351,7 +1351,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="text-sm font-black">{p.name}</div>
-                                  <div className="text-sm" style={{ color: "#6b635b" }}>{p.team} · <span style={{ color: gc }}>{p.game}</span> · {p.role}</div>
+                                  <div className="text-sm" style={{ color: "#7d6e1e" }}>{p.team} · <span style={{ color: gc }}>{p.game}</span> · {p.role}</div>
                                 </div>
                                 <div className="text-right flex-shrink-0">
                                   <div className="text-sm font-bold" style={{ color: gc }}>{p.game}</div>
@@ -1393,7 +1393,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                     return (
                       <div className="rounded-xl p-5 mt-4" style={{ background: `${brandCol}05`, border: `1px solid ${brandCol}10` }}>
-                        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>About this headphone</div>
+                        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#9e9578" }}>About this headphone</div>
                         <p className="text-sm leading-relaxed opacity-60">
                           {parts.map((p, i) => p.highlight ? (
                             <span key={i} className="font-bold opacity-100" style={{ color: brandCol }}>{p.text}</span>
@@ -1439,7 +1439,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-0" style={{ background: "#ffffff" }}>
                           {/* LEFT COLUMN: Headphone Dossier */}
                           <div className="p-6 border-b md:border-b-0 md:border-r" style={{ borderColor: `${brandCol}12` }}>
-                            <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Headphone Dossier</div>
+                            <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Headphone Dossier</div>
                             <h2 className="text-4xl font-black mb-6" style={{ color: brandCol }}>
                               {selectedHeadphone.name.replace(selectedHeadphone.brand + " ", "")}
                             </h2>
@@ -1473,10 +1473,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             {/* Where It's Used - Game Pills */}
                             {topGames.length > 0 && (
                               <div>
-                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Where It's Used</div>
+                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Where It's Used</div>
                                 <div className="flex flex-wrap gap-2">
                                   {topGames.slice(0, 4).map(([game, count]) => (
-                                    <div key={game} className="px-3 py-1.5 rounded-full text-xs font-bold" style={{ background: `${gcols[game] || "#8a8078"}20`, color: gcols[game] || "#8a8078" }}>
+                                    <div key={game} className="px-3 py-1.5 rounded-full text-xs font-bold" style={{ background: `${gcols[game] || "#8a8460"}20`, color: gcols[game] || "#8a8460" }}>
                                       {game} ({((count / headphonePlayers.length) * 100).toFixed(0)}%)
                                     </div>
                                   ))}
@@ -1486,7 +1486,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                             {/* Specs DNA */}
                             <div>
-                              <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Specs DNA</div>
+                              <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Specs DNA</div>
                               <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
                                   <span className="opacity-60">Freq. Response</span>
@@ -1518,7 +1518,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             {/* Global Reach */}
                             {topCountries.length > 0 && (
                               <div>
-                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Global Reach</div>
+                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Global Reach</div>
                                 <div className="flex flex-wrap gap-2">
                                   {topCountries.map(([flag, count]) => (
                                     <span key={flag} className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs" style={{ background: `${brandCol}10` }}>
@@ -1533,10 +1533,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             {/* Rivals */}
                             {competitors.length > 0 && (
                               <div>
-                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Rivals</div>
+                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Rivals</div>
                                 <div className="space-y-2">
                                   {competitors.map(c => {
-                                    const cc = BRAND_COLORS[c.brand] || "#8a8078";
+                                    const cc = BRAND_COLORS[c.brand] || "#8a8460";
                                     return (
                                       <button key={c.id} onClick={() => { navigateToHeadphone(c); }}
                                         className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-all hover:scale-105 justify-between"
@@ -1570,16 +1570,16 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const hotPct = gameBreakdown[1]?.topHeadphones[0]?.pct || 30;
               const hm = headphones.find(m => m.name === hotHeadphone);
               return (
-                <div className="rounded-xl p-4 my-6 flex flex-col sm:flex-row items-center gap-4" style={{ background: "linear-gradient(135deg, #b8956a08, #b8956a03)", border: "1px solid #b8956a25" }}>
+                <div className="rounded-xl p-4 my-6 flex flex-col sm:flex-row items-center gap-4" style={{ background: "linear-gradient(135deg, #c9a22708, #c9a22703)", border: "1px solid #c9a22725" }}>
                   <div className="flex items-center gap-2">
                     <span className="text-xl">🔥</span>
                     <div>
-                      <div className="text-xs uppercase tracking-widest font-bold" style={{ color: "#b8956a" }}>Trending Now</div>
+                      <div className="text-xs uppercase tracking-widest font-bold" style={{ color: "#c9a227" }}>Trending Now</div>
                       <div className="text-sm font-bold" style={{ color: "#1a1614" }}>{hotHeadphone} — used by {hotPct}% of {hotGame} pros</div>
-                      {hm && <div style={{ fontSize: 11, color: "#a09890" }}>{hm.weight}g · {hm.driverType} · {hm.connectivity}</div>}
+                      {hm && <div style={{ fontSize: 11, color: "#9e9578" }}>{hm.weight}g · {hm.driverType} · {hm.connectivity}</div>}
                     </div>
                   </div>
-                  <a href={amazonLink(hotHeadphone)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#b8956a", color: "#1a1614", textDecoration: "none" }}>
+                  <a href={amazonLink(hotHeadphone)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#c9a227", color: "#1a1614", textDecoration: "none" }}>
                     {I.cart(14, "#1a1614")} Buy on Amazon{hm ? ` — $${hm.price}` : ""}
                   </a>
                 </div>
@@ -1599,7 +1599,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 ].map(c => {
                   const sa = c.a.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
                   const sb = c.b.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
-                  return <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="text-xs px-3 py-1.5 rounded-full no-underline transition-all hover:scale-105" style={{ background: "#0000000a", border: "1px solid #d4cfc8", color: "#8a8078", textDecoration: "none" }}>{c.a.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "")} vs {c.b.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "")}</a>;
+                  return <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="text-xs px-3 py-1.5 rounded-full no-underline transition-all hover:scale-105" style={{ background: "#0000000a", border: "1px solid #d4d0be", color: "#8a8460", textDecoration: "none" }}>{c.a.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "")} vs {c.b.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "")}</a>;
                 })}
               </div>
             </div>
@@ -1608,11 +1608,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <div className="mt-10 sm:mt-16 mb-8">
               <div className="text-center mb-8">
                 <h2 className="text-2xl sm:text-3xl mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, color: "#1a1614" }}>Curated Collections</h2>
-                <p className="text-sm" style={{ color: "#a09890" }}>Hand-picked guides for competitive players</p>
+                <p className="text-sm" style={{ color: "#9e9578" }}>Hand-picked guides for competitive players</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {[
-                  { title: "Tournament Favorites", sub: "The headphones winning major championships", href: "/best/tournament-favorites", accent: "#b8956a", tag: "Most Popular" },
+                  { title: "Tournament Favorites", sub: "The headphones winning major championships", href: "/best/tournament-favorites", accent: "#c9a227", tag: "Most Popular" },
                   { title: "Best ANC Headsets", sub: "Active noise cancellation for noisy LAN events", href: "/best/anc", accent: "#c02870", tag: "Trending" },
                   { title: "Best for Valorant", sub: "Top picks from professional Valorant players", href: "/best/valorant", accent: "#c43848", tag: "FPS" },
                   { title: "Budget Champions", sub: "Pro-grade audio performance under $100", href: "/best/budget", accent: "#0a8060", tag: "Value" },
@@ -1620,36 +1620,36 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   { title: "Audiophile Grade", sub: "Open-back headphones for pristine sound staging", href: "/best/audiophile", accent: "#6d40c4", tag: "Hi-Fi" },
                 ].map((c, i) => (
                   <a key={i} href={c.href} className="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:shadow-lg no-underline block"
-                    style={{ background: "#ffffff", border: "1px solid #e8e4df", textDecoration: "none" }}
+                    style={{ background: "#ffffff", border: "1px solid #e6e3d6", textDecoration: "none" }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = `${c.accent}30`; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = "#e8e4df"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "#e6e3d6"; e.currentTarget.style.transform = "translateY(0)"; }}>
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ background: `${c.accent}0a`, color: c.accent, border: `1px solid ${c.accent}18` }}>{c.tag}</span>
                       <span className="text-xs opacity-0 group-hover:opacity-60 transition-opacity" style={{ color: c.accent }}>→</span>
                     </div>
                     <h3 className="text-base sm:text-lg font-bold mb-1" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}>{c.title}</h3>
-                    <p className="text-xs" style={{ color: "#a09890" }}>{c.sub}</p>
+                    <p className="text-xs" style={{ color: "#9e9578" }}>{c.sub}</p>
                   </a>
                 ))}
               </div>
             </div>
 
             {/* Newsletter CTA */}
-            <div className="glass-card rounded-2xl p-5 sm:p-8 mt-8 mb-2 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(184,149,106,0.05), rgba(26,22,20,0.03))", border: "1px solid #b8956a15" }}>
+            <div className="glass-card rounded-2xl p-5 sm:p-8 mt-8 mb-2 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(184,149,106,0.05), rgba(26,22,20,0.03))", border: "1px solid #c9a22715" }}>
               <div className="relative z-10">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   {I.headphone(20)}
-                  <span className="text-sm font-black uppercase tracking-widest" style={{ color: "#b8956a", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Newsletter</span>
+                  <span className="text-sm font-black uppercase tracking-widest" style={{ color: "#c9a227", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Newsletter</span>
                 </div>
                 <div className="text-base sm:text-lg font-black text-stone-900 mb-1" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Stay ahead of the meta</div>
                 <div className="text-sm opacity-30 mb-4 max-w-md mx-auto">Pro gear changes, new headphone releases, and data-driven insights delivered to your inbox. No spam.</div>
                 {newsletterStatus === "success" ? (
-                  <div className="text-sm font-black" style={{ color: "#b8956a" }}>✓ You're subscribed!</div>
+                  <div className="text-sm font-black" style={{ color: "#c9a227" }}>✓ You're subscribed!</div>
                 ) : (
                   <form className="flex gap-2 max-w-sm mx-auto" onSubmit={async e => { e.preventDefault(); setNewsletterStatus("sending"); try { const res = await fetch("https://formspree.io/f/xvzbwrzv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: newsletterEmail }) }); setNewsletterStatus(res.ok ? "success" : "error"); } catch { setNewsletterStatus("error"); } }}>
                     <input type="email" required placeholder="your@email.com" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)}
-                      className="flex-1 px-4 py-2.5 rounded-xl text-sm outline-none" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid #b8956a20", color: "#1a1614" }} />
-                    <button type="submit" disabled={newsletterStatus === "sending"} className="px-5 py-2.5 rounded-xl text-sm font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "linear-gradient(135deg, #b8956a, #2d2824)", color: "#fff" }}>
+                      className="flex-1 px-4 py-2.5 rounded-xl text-sm outline-none" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid #c9a22720", color: "#1a1614" }} />
+                    <button type="submit" disabled={newsletterStatus === "sending"} className="px-5 py-2.5 rounded-xl text-sm font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "linear-gradient(135deg, #c9a227, #2d2824)", color: "#fff" }}>
                       {newsletterStatus === "sending" ? "..." : "Subscribe"}
                     </button>
                   </form>
@@ -1670,19 +1670,19 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {/* Breadcrumbs */}
             <nav aria-label="Breadcrumb" className="mt-8 mb-4 flex items-center gap-1.5 text-sm">
               <a href="/" className="opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>Home</a>
-              <span style={{ color: "#d4cfc8" }}>›</span>
+              <span style={{ color: "#d4d0be" }}>›</span>
               <a href="/headphones" className="opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>Headphones</a>
-              <span style={{ color: "#d4cfc8" }}>›</span>
+              <span style={{ color: "#d4d0be" }}>›</span>
               <span style={{ color: brandCol }} className="font-bold opacity-70">{selectedHeadphone.name}</span>
             </nav>
 
             {/* Share buttons */}
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: "#a09890" }}>Share</span>
-              <button onClick={() => { navigator.clipboard.writeText(`https://esportsheadphones.com/headphones/${selectedHeadphone.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`); }} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105" style={{ background: "#00000008", border: "1px solid #d4cfc8", color: "#1a1614" }}>📋 Copy Link</button>
-              <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(selectedHeadphone.name + " — " + selectedHeadphone.weight + "g, " + selectedHeadphone.proUsage + "% pro usage")}&url=${encodeURIComponent("https://esportsheadphones.com/headphones/" + selectedHeadphone.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, ""))}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#1da1f220", border: "1px solid #8a746030", color: "#1da1f2", textDecoration: "none" }}>𝕏 Tweet</a>
+              <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: "#9e9578" }}>Share</span>
+              <button onClick={() => { navigator.clipboard.writeText(`https://esportsheadphones.com/headphones/${selectedHeadphone.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`); }} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105" style={{ background: "#00000008", border: "1px solid #d4d0be", color: "#1a1614" }}>📋 Copy Link</button>
+              <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(selectedHeadphone.name + " — " + selectedHeadphone.weight + "g, " + selectedHeadphone.proUsage + "% pro usage")}&url=${encodeURIComponent("https://esportsheadphones.com/headphones/" + selectedHeadphone.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, ""))}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#1da1f220", border: "1px solid #a68b1b30", color: "#1da1f2", textDecoration: "none" }}>𝕏 Tweet</a>
               <a href={`https://reddit.com/submit?url=${encodeURIComponent("https://esportsheadphones.com/headphones/" + selectedHeadphone.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, ""))}&title=${encodeURIComponent(selectedHeadphone.name + " — Pro Usage, Specs & Review")}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#c4737320", border: "1px solid #c4737330", color: "#ff4499", textDecoration: "none" }}>Reddit</a>
-              <a href={`/contact?subject=correction&headphone=${encodeURIComponent(selectedHeadphone.name)}`} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline ml-auto" style={{ background: "#0000000a", border: "1px solid #d4cfc8", color: "#8a8078", textDecoration: "none" }}>⚠️ Suggest Correction</a>
+              <a href={`/contact?subject=correction&headphone=${encodeURIComponent(selectedHeadphone.name)}`} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline ml-auto" style={{ background: "#0000000a", border: "1px solid #d4d0be", color: "#8a8460", textDecoration: "none" }}>⚠️ Suggest Correction</a>
             </div>
 
             {/* Hero Section */}
@@ -1706,8 +1706,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 <div className="flex flex-col items-center justify-center md:col-span-2 lg:col-span-1">
                   <ResponsiveContainer width="100%" height={220}>
                     <RadarChart data={radarData}>
-                      <PolarGrid stroke="#e8e4df" />
-                      <PolarAngleAxis dataKey="stat" tick={{ fill: "#6b635b", fontSize: 13 }} />
+                      <PolarGrid stroke="#e6e3d6" />
+                      <PolarAngleAxis dataKey="stat" tick={{ fill: "#7d6e1e", fontSize: 13 }} />
                       <PolarRadiusAxis tick={false} axisLine={false} domain={[0, 100]} />
                       <Radar name={selectedHeadphone.name} dataKey="value" stroke={brandCol} fill={brandCol} fillOpacity={0.2} strokeWidth={2.5} dot={{ r: 3, fill: brandCol, strokeWidth: 0 }} />
                     </RadarChart>
@@ -1727,12 +1727,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {/* Right: Pro users */}
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Notable Pro Users</div>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Notable Pro Users</div>
                   {usedByPros.length > 0 ? (
                     <div className="space-y-2">
                       {usedByPros.slice(0, 5).map((p, i) => {
                         const gameColors = GAME_COLORS;
-                        const gc = gameColors[p.game] || "#8a8078";
+                        const gc = gameColors[p.game] || "#8a8460";
                         return (
                           <button key={i} onClick={() => { const pp = proPlayers.find(pp => pp.name === p.name); if (pp) { navigateToPlayer(pp); } else { setActiveTab("players"); } }}
                             className="w-full flex items-center gap-3 p-2.5 rounded-xl cursor-pointer transition-all hover:scale-[1.02] text-left"
@@ -1780,7 +1780,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               }
               return (
                 <div className="rounded-2xl p-6 mb-6" style={{ background: `${brandCol}05`, border: `1px solid ${brandCol}10` }}>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>About this headphone</div>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>About this headphone</div>
                   <p className="text-sm leading-relaxed opacity-60">
                     {parts.map((p, i) => p.highlight ? (
                       <span key={i} className="font-bold opacity-100" style={{ color: brandCol }}>{p.text}</span>
@@ -1793,7 +1793,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             })()}
 
             {/* ── Full Spec Table ── */}
-            <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+            <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
               <div className="text-sm uppercase tracking-widest opacity-30 mb-4">Full Specifications</div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {[
@@ -1845,7 +1845,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-0" style={{ background: "#ffffff" }}>
                     {/* LEFT COLUMN: Headphone Dossier */}
                     <div className="p-6 border-b md:border-b-0 md:border-r" style={{ borderColor: `${brandCol}12` }}>
-                      <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Headphone Dossier</div>
+                      <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Headphone Dossier</div>
                       <h2 className="text-4xl font-black mb-6" style={{ color: brandCol }}>
                         {selectedHeadphone.name.replace(selectedHeadphone.brand + " ", "")}
                       </h2>
@@ -1879,10 +1879,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {/* Where It's Used - Game Pills */}
                       {topGames.length > 0 && (
                         <div>
-                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Where It's Used</div>
+                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Where It's Used</div>
                           <div className="flex flex-wrap gap-2">
                             {topGames.slice(0, 4).map(([game, count]) => (
-                              <div key={game} className="px-3 py-1.5 rounded-full text-xs font-bold" style={{ background: `${gcols[game] || "#8a8078"}20`, color: gcols[game] || "#8a8078" }}>
+                              <div key={game} className="px-3 py-1.5 rounded-full text-xs font-bold" style={{ background: `${gcols[game] || "#8a8460"}20`, color: gcols[game] || "#8a8460" }}>
                                 {game} ({((count / headphonePlayers.length) * 100).toFixed(0)}%)
                               </div>
                             ))}
@@ -1892,7 +1892,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                       {/* Specs DNA */}
                       <div>
-                        <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Specs DNA</div>
+                        <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Specs DNA</div>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
                             <span className="opacity-60">Freq. Response</span>
@@ -1920,7 +1920,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {/* Global Reach */}
                       {topCountries.length > 0 && (
                         <div>
-                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Global Reach</div>
+                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Global Reach</div>
                           <div className="flex flex-wrap gap-2">
                             {topCountries.map(([flag, count]) => (
                               <span key={flag} className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs" style={{ background: `${brandCol}10` }}>
@@ -1935,10 +1935,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {/* Rivals */}
                       {competitors.length > 0 && (
                         <div>
-                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#a09890" }}>Rivals</div>
+                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Rivals</div>
                           <div className="space-y-2">
                             {competitors.map(c => {
-                              const cc = BRAND_COLORS[c.brand] || "#8a8078";
+                              const cc = BRAND_COLORS[c.brand] || "#8a8460";
                               return (
                                 <button key={c.id} onClick={() => { setSelectedHeadphone(c); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                                   className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-all hover:scale-105 justify-between"
@@ -1962,12 +1962,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* ── All Pro Players Using This Headphone ── */}
             {usedByPros.length > 5 && (
-              <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <div className="text-sm uppercase tracking-widest opacity-30 mb-4">All Pro Players Using {selectedHeadphone.name}</div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                   {usedByPros.slice(5).map((p, i) => {
                     const gameColors = GAME_COLORS;
-                    const gc = gameColors[p.game] || "#8a8078";
+                    const gc = gameColors[p.game] || "#8a8460";
                     return (
                       <button key={i} onClick={() => { const pp = proPlayers.find(pp => pp.name === p.name); if (pp) { navigateToPlayer(pp); } }}
                         className="flex items-center gap-2 p-2 rounded-lg text-left text-sm transition-all hover:scale-[1.01]"
@@ -1990,11 +1990,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const recentHeadphones = recent.map(n => headphones.find(m => m.name === n)).filter(Boolean).slice(0, 4);
               if (recentHeadphones.length === 0) return null;
               return (
-                <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                   <div className="text-sm uppercase tracking-widest opacity-30 mb-4">Recently Viewed</div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {recentHeadphones.map((m, i) => {
-                      const bc = BRAND_COLORS[m.brand] || "#8a8078";
+                      const bc = BRAND_COLORS[m.brand] || "#8a8460";
                       return (
                         <button key={i} onClick={() => navigateToHeadphone(m)} className="rounded-xl p-3 text-center transition-all hover:scale-[1.03]" style={{ background: `${bc}06`, border: `1px solid ${bc}12` }}>
                           {getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={m.name} className="h-10 mx-auto object-contain mb-2" />}
@@ -2010,13 +2010,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           })()}
 
           {/* Sticky buy bar */}
-          <div className="fixed bottom-0 left-0 right-0 z-[80] md:hidden" style={{ background: "#fffffff0", borderTop: "1px solid #d4cfc8", backdropFilter: "blur(20px)" }}>
+          <div className="fixed bottom-0 left-0 right-0 z-[80] md:hidden" style={{ background: "#fffffff0", borderTop: "1px solid #d4d0be", backdropFilter: "blur(20px)" }}>
             <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
               <div className="flex-1 min-w-0">
                 <div className="text-xs font-black truncate" style={{ color: brandCol }}>{selectedHeadphone.name}</div>
-                <div style={{ fontSize: 11, color: "#a09890" }}>{selectedHeadphone.weight}g · {selectedHeadphone.driverType}</div>
+                <div style={{ fontSize: 11, color: "#9e9578" }}>{selectedHeadphone.weight}g · {selectedHeadphone.driverType}</div>
               </div>
-              <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-black text-sm transition-all no-underline flex-shrink-0" style={{ background: "#b8956a", color: "#1a1614", textDecoration: "none" }}>
+              <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-black text-sm transition-all no-underline flex-shrink-0" style={{ background: "#c9a227", color: "#1a1614", textDecoration: "none" }}>
                 {I.cart(14, "#1a1614")} ${selectedHeadphone.price}
               </a>
             </div>
@@ -2028,8 +2028,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <a href="/best/cs2" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#c47000", textDecoration: "none" }}>Best for CS2</a>
               <a href="/best/valorant" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#2d2824", textDecoration: "none" }}>Best for Valorant</a>
               <a href="/best/fortnite" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#4c7bd9", textDecoration: "none" }}>Best for Fortnite</a>
-              <a href="/best/wireless" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#b8956a", textDecoration: "none" }}>Best Wireless</a>
-              <a href="/best/lightweight" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#6b635b", textDecoration: "none" }}>Best Lightweight</a>
+              <a href="/best/wireless" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#c9a227", textDecoration: "none" }}>Best Wireless</a>
+              <a href="/best/lightweight" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#7d6e1e", textDecoration: "none" }}>Best Lightweight</a>
             </div>
           </div>
           </div>
@@ -2042,7 +2042,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {gameBreakdown.map((g, i) => {
                 const gameColors = GAME_COLORS;
-                const col = gameColors[g.game] || "#8a8078";
+                const col = gameColors[g.game] || "#8a8460";
                 const gSlug = g.game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
                 const topHpName = (g.topHeadphones[0]?.name || "").replace(/(Razer |HyperX |Logitech |SteelSeries |Corsair |beyerdynamic |ASUS |Sennheiser |Sony |Turtle Beach |ASTRO |JBL |Audeze |EPOS )/, "");
                 const topHpImg = getHeadphoneImage(g.topHeadphones[0]?.name || "");
@@ -2083,7 +2083,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div className="px-4 py-3">
                       {/* Top 3 headphones bar chart */}
                       <div className="mb-3">
-                        <div className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>Top Headphones</div>
+                        <div className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: "#9e9578" }}>Top Headphones</div>
                         <div className="space-y-1.5">
                           {g.topHeadphones.slice(0, 3).map((hp, j) => {
                             const hpShort = hp.name.replace(/(Razer |HyperX |Logitech |SteelSeries |Corsair |beyerdynamic |ASUS |Sennheiser |Sony |Turtle Beach |ASTRO |JBL |Audeze |EPOS )/, "");
@@ -2091,13 +2091,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                               <div key={j} className="flex items-center gap-2">
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-1.5">
-                                    <span className="text-[10px] font-black" style={{ color: j === 0 ? col : "#6b635b" }}>{hpShort}</span>
+                                    <span className="text-[10px] font-black" style={{ color: j === 0 ? col : "#7d6e1e" }}>{hpShort}</span>
                                   </div>
                                   <div className="h-1.5 rounded-full overflow-hidden mt-0.5" style={{ background: `${col}10` }}>
                                     <div className="h-full rounded-full transition-all duration-500" style={{ width: `${hp.pct * 2.5}%`, background: j === 0 ? col : `${col}60` }} />
                                   </div>
                                 </div>
-                                <span className="text-[10px] font-black flex-shrink-0" style={{ color: j === 0 ? col : "#a09890" }}>{hp.pct}%</span>
+                                <span className="text-[10px] font-black flex-shrink-0" style={{ color: j === 0 ? col : "#9e9578" }}>{hp.pct}%</span>
                               </div>
                             );
                           })}
@@ -2108,17 +2108,17 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <div className="flex items-center gap-3 pt-2" style={{ borderTop: "1px solid #f0ece6" }}>
                         <div className="flex-1 text-center">
                           <div className="text-sm font-black" style={{ color: "#2d2824" }}>{g.avgWeight}g</div>
-                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#a09890" }}>Avg Weight</div>
+                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#9e9578" }}>Avg Weight</div>
                         </div>
-                        <div className="w-px h-6" style={{ background: "#e8e4df" }} />
+                        <div className="w-px h-6" style={{ background: "#e6e3d6" }} />
                         <div className="flex-1 text-center">
                           <div className="text-sm font-black" style={{ color: col }}>{g.wirelessPct}%</div>
-                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#a09890" }}>Wireless</div>
+                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#9e9578" }}>Wireless</div>
                         </div>
-                        <div className="w-px h-6" style={{ background: "#e8e4df" }} />
+                        <div className="w-px h-6" style={{ background: "#e6e3d6" }} />
                         <div className="flex-1 text-center">
                           <div className="text-sm font-black" style={{ color: "#2d2824" }}>{g.headphoneCount}</div>
-                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#a09890" }}>Models</div>
+                          <div className="text-[9px] uppercase tracking-wider" style={{ color: "#9e9578" }}>Models</div>
                         </div>
                       </div>
                     </div>
@@ -2209,7 +2209,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             name,
             usage: Math.round(count / totalBranded * 100),
             count,
-            fill: BRAND_COLORS[name] || "#8a8078",
+            fill: BRAND_COLORS[name] || "#8a8460",
           }));
 
           // Role breakdown (if roles exist)
@@ -2222,9 +2222,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {/* Breadcrumbs */}
             <nav aria-label="Breadcrumb" className="mt-4 mb-4 flex items-center gap-1.5 text-sm">
               <a href="/" className="opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>Home</a>
-              <span style={{ color: "#d4cfc8" }}>›</span>
+              <span style={{ color: "#d4d0be" }}>›</span>
               <a href="/games" className="opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>Games</a>
-              <span style={{ color: "#d4cfc8" }}>›</span>
+              <span style={{ color: "#d4d0be" }}>›</span>
               <span style={{ color: col }} className="font-bold opacity-70">{gameName}</span>
             </nav>
 
@@ -2239,13 +2239,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <span className="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-lg text-xs font-bold" style={{ background: `${col}08`, border: `1px solid ${col}15`, color: `${col}60`, cursor: "default" }}>📖 Best Headphone Guide — Coming Soon</span>
                 </div>
                 {headphoneRanking[0] && (() => { const topM = headphones.find(mm => mm.name === headphoneRanking[0][0] || headphoneRanking[0][0].includes(mm.name)); return (
-                  <a href={amazonLink(headphoneRanking[0][0])} target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#b8956a14", border: "1px solid #b8956a25", textDecoration: "none" }}>
+                  <a href={amazonLink(headphoneRanking[0][0])} target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#c9a22714", border: "1px solid #c9a22725", textDecoration: "none" }}>
                     {getHeadphoneImage(headphoneRanking[0][0]) && <img loading="lazy" src={getHeadphoneImage(headphoneRanking[0][0])} alt="" className="h-8 object-contain" />}
                     <div>
-                      <div className="text-xs font-bold" style={{ color: "#b8956a" }}>#1 Headphone</div>
+                      <div className="text-xs font-bold" style={{ color: "#c9a227" }}>#1 Headphone</div>
                       <div className="text-xs font-black" style={{ color: "#1a1614" }}>{headphoneRanking[0][0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
                     </div>
-                    <span className="text-sm font-black px-2 py-1 rounded-lg" style={{ background: "#b8956a", color: "#1a1614" }}>{topM ? `$${topM.price}` : "Buy"}</span>
+                    <span className="text-sm font-black px-2 py-1 rounded-lg" style={{ background: "#c9a227", color: "#1a1614" }}>{topM ? `$${topM.price}` : "Buy"}</span>
                   </a>
                 ); })()}
               </div>
@@ -2258,7 +2258,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 ].map((s, i) => (
                   <div key={i} className="rounded-xl px-3 py-2.5 text-center" style={{ background: `${col}10`, border: `1px solid ${col}10` }}>
                     <div className="text-lg sm:text-xl font-black" style={{ color: col }}>{s.value}</div>
-                    <div style={{ fontSize: 11, color: "#a09890", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em" }}>{s.label}</div>
+                    <div style={{ fontSize: 11, color: "#9e9578", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em" }}>{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -2266,7 +2266,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* ── GAME DESCRIPTION ── */}
             {GAME_DESCRIPTIONS[gameName] && (
-              <div className="rounded-2xl p-5 sm:p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-2xl p-5 sm:p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: col }}>Game Analysis</div>
                 <p className="text-sm leading-relaxed" style={{ color: "#3d3530" }}>{GAME_DESCRIPTIONS[gameName]}</p>
               </div>
@@ -2284,12 +2284,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="flex items-center gap-3 flex-1">
                     <span className="text-2xl">🏆</span>
                     <div>
-                      <div className="text-xs uppercase tracking-widest font-bold" style={{ color: "#a09890" }}>#1 Headphone in {gameName}</div>
+                      <div className="text-xs uppercase tracking-widest font-bold" style={{ color: "#9e9578" }}>#1 Headphone in {gameName}</div>
                       <div className="text-base font-black" style={{ color: col }}>{topName}</div>
                       <div className="text-xs opacity-40">{topPct}% of pros{topM ? ` · ${topM.weight}g · ${topM.driverType}` : ""}</div>
                     </div>
                   </div>
-                  <a href={amazonLink(topName)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-bold transition-all hover:scale-105 no-underline" style={{ background: "#b8956a", color: "#1a1614", textDecoration: "none", fontSize: 14 }}>
+                  <a href={amazonLink(topName)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-bold transition-all hover:scale-105 no-underline" style={{ background: "#c9a227", color: "#1a1614", textDecoration: "none", fontSize: 14 }}>
                     {I.cart(16, "#1a1614")} Buy on Amazon{topM ? ` — $${topM.price}` : ""}
                   </a>
                 </div>
@@ -2297,22 +2297,22 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             })()}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Bar chart */}
-              <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <ResponsiveContainer width="100%" height={320}>
                   <BarChart data={headphoneChartData} margin={{ top: 10, right: 20, left: 0, bottom: 70 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e8e4df" vertical={false} />
-                    <XAxis dataKey="name" tick={{ fill: "#a09890", fontSize: 11 }} angle={-40} textAnchor="end" interval={0} tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
-                    <YAxis tick={{ fill: "#a09890", fontSize: 11 }} unit="%" tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e6e3d6" vertical={false} />
+                    <XAxis dataKey="name" tick={{ fill: "#9e9578", fontSize: 11 }} angle={-40} textAnchor="end" interval={0} tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
+                    <YAxis tick={{ fill: "#9e9578", fontSize: 11 }} unit="%" tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
                     <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey="usage" radius={[6, 6, 0, 0]} name="Usage %" label={{ position: "top", fill: "#8a8078", fontSize: 11, formatter: (v) => `${v}%` }}>
+                    <Bar dataKey="usage" radius={[6, 6, 0, 0]} name="Usage %" label={{ position: "top", fill: "#8a8460", fontSize: 11, formatter: (v) => `${v}%` }}>
                       {headphoneChartData.map((entry, i) => <Cell key={i} fill={i === 0 ? col : `${col}${i < 3 ? "80" : "40"}`} />)}
                     </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               </div>
               {/* Full ranking table */}
-              <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#a09890" }}>Full Headphone Rankings</div>
+              <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#9e9578" }}>Full Headphone Rankings</div>
                 <div className="max-h-[320px] overflow-y-auto pr-1" style={{ scrollbarWidth: "thin", scrollbarColor: `${col}30 transparent` }}>
                   <div className="space-y-1.5">
                     {headphoneRanking.slice(0, 20).map(([name, count], i) => {
@@ -2320,18 +2320,18 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       const m = headphones.find(mm => mm.name === name || name.includes(mm.name));
                       return (
                         <div key={i} className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all hover:bg-stone-100" style={{ background: i === 0 ? `${col}08` : "transparent" }}>
-                          <span className="w-5 text-center font-black text-xs" style={{ color: i < 3 ? col : "#a09890" }}>{i + 1}</span>
+                          <span className="w-5 text-center font-black text-xs" style={{ color: i < 3 ? col : "#9e9578" }}>{i + 1}</span>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2">
                               <span className="text-xs font-bold truncate" style={{ color: i === 0 ? col : "#2d2824" }}>{name}</span>
-                              {m && <span className="text-xs px-1.5 rounded" style={{ background: `${BRAND_COLORS[m.brand] || "#8a8078"}15`, color: BRAND_COLORS[m.brand] || "#8a8078", fontSize: 10 }}>{m.weight}g</span>}
+                              {m && <span className="text-xs px-1.5 rounded" style={{ background: `${BRAND_COLORS[m.brand] || "#8a8460"}15`, color: BRAND_COLORS[m.brand] || "#8a8460", fontSize: 10 }}>{m.weight}g</span>}
                             </div>
                           </div>
                           <div className="w-24 h-2 rounded-full overflow-hidden" style={{ background: "#0000000a" }}>
                             <div className="h-full rounded-full" style={{ width: `${(pct / headphoneRanking[0][1] * totalPlayers / 100) * 100}%`, background: i === 0 ? col : `${col}50` }} />
                           </div>
-                          <span className="text-xs font-bold w-8 text-right" style={{ color: i < 3 ? col : "#a09890" }}>{pct}%</span>
-                          <a href={amazonLink(name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#b8956a18", color: "#b8956a", border: "1px solid #b8956a30", textDecoration: "none", fontSize: 10 }}>
+                          <span className="text-xs font-bold w-8 text-right" style={{ color: i < 3 ? col : "#9e9578" }}>{pct}%</span>
+                          <a href={amazonLink(name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#c9a22718", color: "#c9a227", border: "1px solid #c9a22730", textDecoration: "none", fontSize: 10 }}>
                             {I.cart(10)} {m ? `$${m.price}` : "Buy"}
                           </a>
                         </div>
@@ -2346,11 +2346,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <SectionTitle color={col} sub={`Brand loyalty and market share among ${gameName} professionals`}>Brand Dominance</SectionTitle>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Brand bars */}
-              <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <div className="space-y-3">
                   {brandRanking.slice(0, 8).map(([name, count], i) => {
                     const pct = Math.round(count / totalBranded * 100);
-                    const bc = BRAND_COLORS[name] || "#8a8078";
+                    const bc = BRAND_COLORS[name] || "#8a8460";
                     return (
                       <div key={i}>
                         <div className="flex justify-between text-xs mb-1">
@@ -2358,7 +2358,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           <div className="flex items-center gap-2">
                             <span className="font-bold" style={{ color: `${bc}cc` }}>{pct}% ({count} players)</span>
                             {(() => { const topBrandHeadphone = headphones.filter(m => m.brand === name).sort((a, b) => b.proUsage - a.proUsage)[0]; return topBrandHeadphone ? (
-                              <a href={amazonLink(topBrandHeadphone.name)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="flex items-center gap-0.5 px-1.5 py-0.5 rounded no-underline hover:scale-110 transition-all" style={{ background: "#b8956a14", color: "#b8956a", textDecoration: "none", fontSize: 9 }}>
+                              <a href={amazonLink(topBrandHeadphone.name)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="flex items-center gap-0.5 px-1.5 py-0.5 rounded no-underline hover:scale-110 transition-all" style={{ background: "#c9a22714", color: "#c9a227", textDecoration: "none", fontSize: 9 }}>
                                 {I.cart(8)} ${topBrandHeadphone.price}
                               </a>
                             ) : null; })()}
@@ -2373,7 +2373,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 </div>
               </div>
               {/* Brand pie chart */}
-              <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <ResponsiveContainer width="100%" height={280}>
                   <PieChart>
                     <Pie data={brandChartData} dataKey="usage" nameKey="name" cx="50%" cy="50%" innerRadius={55} outerRadius={100} paddingAngle={2} label={({name, usage}) => `${name} ${usage}%`}>
@@ -2389,15 +2389,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               {brandRanking.slice(0, 5).map(([bName], bi) => {
                 const topBM = headphones.filter(m => m.brand === bName).sort((a, b) => b.proUsage - a.proUsage)[0];
                 if (!topBM) return null;
-                const bc = BRAND_COLORS[bName] || "#8a8078";
+                const bc = BRAND_COLORS[bName] || "#8a8460";
                 return (
                   <a key={bi} href={amazonLink(topBM.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all hover:scale-105 no-underline" style={{ background: `${bc}08`, border: `1px solid ${bc}15`, textDecoration: "none" }}>
                     {getHeadphoneImage(topBM.name) && <img loading="lazy" src={getHeadphoneImage(topBM.name)} alt={topBM.name} className="h-5 object-contain" />}
                     <div>
                       <div className="text-xs font-black" style={{ color: bc }}>{topBM.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
-                      <div style={{ fontSize: 10, color: "#a09890" }}>Top {bName} headphone in {gameName}</div>
+                      <div style={{ fontSize: 10, color: "#9e9578" }}>Top {bName} headphone in {gameName}</div>
                     </div>
-                    <span className="text-xs font-bold" style={{ color: "#b8956a" }}>${topBM.price}</span>
+                    <span className="text-xs font-bold" style={{ color: "#c9a227" }}>${topBM.price}</span>
                   </a>
                 );
               })}
@@ -2409,19 +2409,19 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <SectionTitle color={col} sub={`Weight, layout, connectivity, and frequency response breakdown`}>Gear Deep Dive</SectionTitle>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
               {/* Weight breakdown */}
-              <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#a09890" }}>Weight</div>
+              <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#9e9578" }}>Weight</div>
                 <div className="text-2xl font-black mb-2" style={{ color: col }}>{avgWeight}g</div>
-                <div className="text-xs mb-3" style={{ color: "#a09890" }}>average headphone weight</div>
+                <div className="text-xs mb-3" style={{ color: "#9e9578" }}>average headphone weight</div>
                 <div className="space-y-1.5">
                   {[
-                    { label: "Ultralight (<250g)", pct: lightPct, color: "#b8956a" },
+                    { label: "Ultralight (<250g)", pct: lightPct, color: "#c9a227" },
                     { label: "Medium (300-350g)", pct: midPct, color: col },
                     { label: "Heavy (350g+)", pct: heavyPct, color: "#c44040" },
                   ].map((w, i) => (
                     <div key={i}>
                       <div className="flex justify-between text-xs mb-0.5">
-                        <span style={{ color: "#6b635b" }}>{w.label}</span>
+                        <span style={{ color: "#7d6e1e" }}>{w.label}</span>
                         <span className="font-bold" style={{ color: w.color }}>{w.pct}%</span>
                       </div>
                       <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "#0000000a" }}>
@@ -2433,16 +2433,16 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               </div>
 
               {/* Shape preference */}
-              <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#a09890" }}>Shape</div>
+              <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#9e9578" }}>Shape</div>
                 <div className="flex gap-3 mb-3">
                   <div className="flex-1 text-center rounded-lg px-2 py-2" style={{ background: `${col}10` }}>
                     <div className="text-xl font-black" style={{ color: col }}>{symPct}%</div>
-                    <div style={{ fontSize: 10, color: "#a09890" }}>Symmetrical</div>
+                    <div style={{ fontSize: 10, color: "#9e9578" }}>Symmetrical</div>
                   </div>
                   <div className="flex-1 text-center rounded-lg px-2 py-2" style={{ background: "#0000000a" }}>
                     <div className="text-xl font-black" style={{ color: "#3d3530" }}>{ergoPct}%</div>
-                    <div style={{ fontSize: 10, color: "#a09890" }}>Ergonomic</div>
+                    <div style={{ fontSize: 10, color: "#9e9578" }}>Ergonomic</div>
                   </div>
                 </div>
                 <div className="h-3 rounded-full overflow-hidden flex" style={{ background: "#0000000a" }}>
@@ -2452,16 +2452,16 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               </div>
 
               {/* Connectivity */}
-              <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#a09890" }}>Connectivity</div>
+              <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#9e9578" }}>Connectivity</div>
                 <div className="flex gap-3 mb-3">
                   <div className="flex-1 text-center rounded-lg px-2 py-2" style={{ background: `${col}10` }}>
                     <div className="text-xl font-black" style={{ color: col }}>{wirelessPct}%</div>
-                    <div style={{ fontSize: 10, color: "#a09890" }}>Wireless</div>
+                    <div style={{ fontSize: 10, color: "#9e9578" }}>Wireless</div>
                   </div>
                   <div className="flex-1 text-center rounded-lg px-2 py-2" style={{ background: "#0000000a" }}>
                     <div className="text-xl font-black" style={{ color: "#3d3530" }}>{100 - wirelessPct}%</div>
-                    <div style={{ fontSize: 10, color: "#a09890" }}>Wired</div>
+                    <div style={{ fontSize: 10, color: "#9e9578" }}>Wired</div>
                   </div>
                 </div>
                 <div className="h-3 rounded-full overflow-hidden flex" style={{ background: "#0000000a" }}>
@@ -2471,17 +2471,17 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               </div>
 
               {/* Frequency response */}
-              <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#a09890" }}>Freq. Response</div>
+              <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#9e9578" }}>Freq. Response</div>
                 <div className="text-2xl font-black mb-2" style={{ color: col }}>{gb ? `${gb.avgPollRate >= 1000 ? `${(gb.avgPollRate/1000).toFixed(1)}K` : gb.avgPollRate}Hz` : "—"}</div>
-                <div className="text-xs mb-3" style={{ color: "#a09890" }}>average frequency response</div>
+                <div className="text-xs mb-3" style={{ color: "#9e9578" }}>average frequency response</div>
                 <div className="space-y-1.5">
                   {hzRanking.slice(0, 4).map(([label, count], i) => {
                     const pct = Math.round(count / totalPlayers * 100);
                     return (
                       <div key={i} className="flex justify-between text-xs">
-                        <span style={{ color: "#6b635b" }}>{label}Hz</span>
-                        <span className="font-bold" style={{ color: i === 0 ? col : "#8a8078" }}>{pct}%</span>
+                        <span style={{ color: "#7d6e1e" }}>{label}Hz</span>
+                        <span className="font-bold" style={{ color: i === 0 ? col : "#8a8460" }}>{pct}%</span>
                       </div>
                     );
                   })}
@@ -2506,8 +2506,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <a key={i} href={amazonLink(item.kbd.name)} target="_blank" rel="noopener noreferrer" className="rounded-xl p-3 text-center transition-all hover:scale-[1.03] no-underline block" style={{ background: `${col}06`, border: `1px solid ${col}10`, textDecoration: "none" }}>
                     <div className="text-xs font-bold mb-1" style={{ color: col }}>{item.label}</div>
                     <div className="text-xs font-black truncate" style={{ color: "#1a1614" }}>{item.kbd.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
-                    <div style={{ fontSize: 10, color: "#a09890" }}>{item.sub}</div>
-                    <div className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold" style={{ background: "#b8956a18", color: "#b8956a", fontSize: 10 }}>
+                    <div style={{ fontSize: 10, color: "#9e9578" }}>{item.sub}</div>
+                    <div className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold" style={{ background: "#c9a22718", color: "#c9a227", fontSize: 10 }}>
                       {I.cart(8)} ${item.kbd.price}
                     </div>
                   </a>
@@ -2530,7 +2530,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           <Flag country={p.country} size={20} />
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-black truncate" style={{ color: col }}>{p.name}</div>
-                            <div style={{ fontSize: 11, color: "#a09890" }}>{p.team}{p.role && p.role !== "—" ? ` · ${p.role}` : ""}</div>
+                            <div style={{ fontSize: 11, color: "#9e9578" }}>{p.team}{p.role && p.role !== "—" ? ` · ${p.role}` : ""}</div>
                           </div>
                         </div>
                         <div className="space-y-1">
@@ -2538,7 +2538,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           <div className="flex justify-between text-xs"><span className="opacity-50">Freq. Range</span><span className="font-bold" style={{ color: "#2d2824" }}>{p.hz >= 1000 ? `${(p.hz/1000).toFixed(p.hz % 1000 === 0 ? 0 : 1)}kHz` : `${p.hz}Hz`}</span></div>
                           {m && <div className="flex justify-between text-xs"><span className="opacity-50">Weight</span><span className="font-bold" style={{ color: "#2d2824" }}>{m.weight}g</span></div>}
                         </div>
-                        <a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 mt-3 px-3 py-1.5 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline w-full" style={{ background: "#b8956a18", color: "#b8956a", border: "1px solid #b8956a30", textDecoration: "none" }}>
+                        <a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1.5 mt-3 px-3 py-1.5 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline w-full" style={{ background: "#c9a22718", color: "#c9a227", border: "1px solid #c9a22730", textDecoration: "none" }}>
                           {I.cart(12)} Buy {p.headphone.split(" ").slice(-2).join(" ")}{m ? ` — $${m.price}` : ""}
                         </a>
                       </div>
@@ -2563,10 +2563,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <div className="text-xs font-black mb-1 truncate" style={{ color: col }}>{team}</div>
                         <div className="flex items-baseline gap-1">
                           <span className="text-lg font-black" style={{ color: "#1a1614" }}>{count}</span>
-                          <span style={{ fontSize: 10, color: "#a09890" }}>players</span>
+                          <span style={{ fontSize: 10, color: "#9e9578" }}>players</span>
                         </div>
-                        {topKbd && <div className="text-xs mt-1 truncate" style={{ color: "#a09890" }}>Top: {topKbd[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>}
-                        {topKbd && <a href={amazonLink(topKbd[0])} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="inline-flex items-center gap-0.5 mt-1 px-1.5 py-0.5 rounded no-underline hover:scale-110 transition-all" style={{ background: "#b8956a12", color: "#b8956a", textDecoration: "none", fontSize: 9 }}>{I.cart(7)} Buy{(() => { const tm = headphones.find(mm => mm.name === topKbd[0]); return tm ? ` $${tm.price}` : ""; })()}</a>}
+                        {topKbd && <div className="text-xs mt-1 truncate" style={{ color: "#9e9578" }}>Top: {topKbd[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>}
+                        {topKbd && <a href={amazonLink(topKbd[0])} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="inline-flex items-center gap-0.5 mt-1 px-1.5 py-0.5 rounded no-underline hover:scale-110 transition-all" style={{ background: "#c9a22712", color: "#c9a227", textDecoration: "none", fontSize: 9 }}>{I.cart(7)} Buy{(() => { const tm = headphones.find(mm => mm.name === topKbd[0]); return tm ? ` $${tm.price}` : ""; })()}</a>}
                       </div>
                     );
                   })}
@@ -2576,7 +2576,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* ── ROLE BREAKDOWN ── */}
             {roleRanking.length > 1 && (
-              <div className="rounded-2xl p-4 sm:p-6 mb-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-2xl p-4 sm:p-6 mb-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <div className="text-xs uppercase tracking-widest font-bold mb-4" style={{ color: col }}>Role Breakdown</div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
                   {roleRanking.map(([role, count], i) => {
@@ -2589,7 +2589,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <div className="text-xs font-black mb-1" style={{ color: col }}>{role}</div>
                         <div className="text-sm font-bold" style={{ color: "#1a1614" }}>{count} pros</div>
                         {roleTopHeadphone && <div className="mt-1 truncate" style={{ fontSize: 9, color: "#b8b0a8" }}>#1: {roleTopHeadphone[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>}
-                        {roleTopHeadphone && <a href={amazonLink(roleTopHeadphone[0])} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 mt-1 px-1 py-0.5 rounded no-underline hover:scale-110 transition-all" style={{ background: "#b8956a12", color: "#b8956a", textDecoration: "none", fontSize: 8 }}>{I.cart(7)} Buy</a>}
+                        {roleTopHeadphone && <a href={amazonLink(roleTopHeadphone[0])} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 mt-1 px-1 py-0.5 rounded no-underline hover:scale-110 transition-all" style={{ background: "#c9a22712", color: "#c9a227", textDecoration: "none", fontSize: 8 }}>{I.cart(7)} Buy</a>}
                       </div>
                     );
                   })}
@@ -2599,7 +2599,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* ── FULL PLAYER ROSTER ── */}
             <SectionTitle color={col} sub={`Complete settings database for every tracked ${gameName} professional`}>Full Player Roster</SectionTitle>
-            <div className="rounded-2xl overflow-hidden mb-8" style={{ border: "1px solid #e8e4df" }}>
+            <div className="rounded-2xl overflow-hidden mb-8" style={{ border: "1px solid #e6e3d6" }}>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs" style={{ background: "#ffffff" }}>
                   <thead>
@@ -2609,7 +2609,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <th className="text-left px-3 py-2 font-black" style={{ color: col }}>Team</th>
                       <th className="text-left px-3 py-2 font-black" style={{ color: col }}>Headphone</th>
                       <th className="text-right px-3 py-2 font-black" style={{ color: col }}>Hz</th>
-                      <th className="text-center px-3 py-2 font-black" style={{ color: "#b8956a" }}>Buy</th>
+                      <th className="text-center px-3 py-2 font-black" style={{ color: "#c9a227" }}>Buy</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -2624,10 +2624,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             {p.role && p.role !== "—" && <span className="px-1 rounded" style={{ background: `${col}15`, color: `${col}aa`, fontSize: 9 }}>{p.role}</span>}
                           </span>
                         </td>
-                        <td className="px-3 py-1.5" style={{ color: "#8a8078" }}>{p.team}</td>
-                        <td className="px-3 py-1.5 font-bold truncate" style={{ maxWidth: 180 }}><a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="no-underline hover:underline" style={{ color: "#b8956a", textDecoration: "none" }}>{p.headphone}</a></td>
-                        <td className="px-3 py-1.5 text-right" style={{ color: "#8a8078" }}>{p.hz >= 1000 ? `${(p.hz/1000).toFixed(p.hz % 1000 === 0 ? 0 : 1)}K` : p.hz}</td>
-                        <td className="px-3 py-1.5 text-center"><a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="px-1.5 py-0.5 rounded no-underline hover:scale-110 transition-all inline-flex" style={{ background: "#b8956a12", color: "#b8956a", textDecoration: "none", fontSize: 9 }}>{I.cart(8)}</a></td>
+                        <td className="px-3 py-1.5" style={{ color: "#8a8460" }}>{p.team}</td>
+                        <td className="px-3 py-1.5 font-bold truncate" style={{ maxWidth: 180 }}><a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="no-underline hover:underline" style={{ color: "#c9a227", textDecoration: "none" }}>{p.headphone}</a></td>
+                        <td className="px-3 py-1.5 text-right" style={{ color: "#8a8460" }}>{p.hz >= 1000 ? `${(p.hz/1000).toFixed(p.hz % 1000 === 0 ? 0 : 1)}K` : p.hz}</td>
+                        <td className="px-3 py-1.5 text-center"><a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="px-1.5 py-0.5 rounded no-underline hover:scale-110 transition-all inline-flex" style={{ background: "#c9a22712", color: "#c9a227", textDecoration: "none", fontSize: 9 }}>{I.cart(8)}</a></td>
                       </tr>
                     ))}
                   </tbody>
@@ -2645,13 +2645,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     const m = headphones.find(mm => mm.name === name || name.includes(mm.name));
                     const pct = Math.round(count / totalPlayers * 100);
                     return (
-                      <a key={mi} href={amazonLink(name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all hover:scale-105 no-underline" style={{ background: mi === 0 ? `${col}15` : "#0000000a", border: mi === 0 ? `1px solid ${col}30` : "1px solid #e8e4df", textDecoration: "none" }}>
+                      <a key={mi} href={amazonLink(name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all hover:scale-105 no-underline" style={{ background: mi === 0 ? `${col}15` : "#0000000a", border: mi === 0 ? `1px solid ${col}30` : "1px solid #e6e3d6", textDecoration: "none" }}>
                         {getHeadphoneImage(name) && <img loading="lazy" src={getHeadphoneImage(name)} alt={name} className="h-6 object-contain" />}
                         <div className="text-left">
                           <div className="text-xs font-black" style={{ color: mi === 0 ? col : "#1a1614" }}>{name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
-                          <div style={{ fontSize: 10, color: "#a09890" }}>{pct}% of pros{m ? ` · ${m.weight}g` : ""}</div>
+                          <div style={{ fontSize: 10, color: "#9e9578" }}>{pct}% of pros{m ? ` · ${m.weight}g` : ""}</div>
                         </div>
-                        <span className="text-xs font-bold px-2 py-1 rounded" style={{ background: "#b8956a20", color: "#b8956a" }}>{m ? `$${m.price}` : "Buy"}</span>
+                        <span className="text-xs font-bold px-2 py-1 rounded" style={{ background: "#c9a22720", color: "#c9a227" }}>{m ? `$${m.price}` : "Buy"}</span>
                       </a>
                     );
                   })}
@@ -2660,11 +2660,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* ── OTHER GAMES NAV ── */}
-            <div className="rounded-2xl p-5 mb-4" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-              <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#a09890" }}>Explore Other Games</div>
+            <div className="rounded-2xl p-5 mb-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+              <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#9e9578" }}>Explore Other Games</div>
               <div className="flex flex-wrap gap-2">
                 {gameBreakdown.filter(g => g.game !== gameName).map((g, i) => {
-                  const gc = { CS2: "#c47000", Valorant: "#c43848", LoL: "#c89b3c", Fortnite: "#3a60b0", "Overwatch 2": "#c48018", Apex: "#a82020", "Dota 2": "#b83c30", "R6 Siege": "#3a6ca0", "Rocket League": "#1478c4", "Call of Duty": "#3a8a3a", "Marvel Rivals": "#b81820", PUBG: "#c48a00", Deadlock: "#6d40c4", "Quake Champions": "#a83c00" }[g.game] || "#8a8078";
+                  const gc = { CS2: "#c47000", Valorant: "#c43848", LoL: "#c89b3c", Fortnite: "#3a60b0", "Overwatch 2": "#c48018", Apex: "#a82020", "Dota 2": "#b83c30", "R6 Siege": "#3a6ca0", "Rocket League": "#1478c4", "Call of Duty": "#3a8a3a", "Marvel Rivals": "#b81820", PUBG: "#c48a00", Deadlock: "#6d40c4", "Quake Champions": "#a83c00" }[g.game] || "#8a8460";
                   return (
                     <button key={i} onClick={() => { window.location.href = `/games/${g.game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`; }}
                       className="px-3 py-1.5 rounded-full text-xs font-bold transition-all hover:scale-105"
@@ -2683,7 +2683,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── RANKINGS TAB ── */}
         {activeTab === "rankings" && (
           <div>
-            <SectionTitle color="#b8956a" sub="Sort and filter to find the perfect competitive headphone">Complete Headphone Rankings</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Sort and filter to find the perfect competitive headphone">Complete Headphone Rankings</SectionTitle>
             {/* ── UNIFIED FILTER BAR ── */}
             {(() => {
               const SORT_OPTIONS_R = [
@@ -2703,38 +2703,38 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               if (filterConn !== "All") activeFiltersR.push({ label: filterConn, clear: () => setFilterConn("All") });
               if (filterLayout !== "All") activeFiltersR.push({ label: filterLayout, clear: () => setFilterLayout("All") });
               const clearAllFiltersR = () => { setFilterBrand("All"); setFilterWeight("All"); setFilterPrice("All"); setFilterConn("All"); setFilterLayout("All"); };
-              const accentR = "#b8956a";
+              const accentR = "#c9a227";
               const chipStyleR = (active, brandColor) => ({
                 padding: "5px 10px", borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer",
                 background: active ? (brandColor ? `${brandColor}18` : `${accentR}20`) : "#ffffff",
                 border: `1px solid ${active ? (brandColor ? `${brandColor}50` : `${accentR}50`) : "#0000000a"}`,
-                color: active ? (brandColor || accentR) : "#8a8078",
+                color: active ? (brandColor || accentR) : "#8a8460",
                 transition: "all 0.15s", whiteSpace: "nowrap",
               });
 
               return (
-                <div className="mb-5" style={{ background: "#f5f2ee", border: "1px solid #e8e4df", borderRadius: 12, padding: 10, position: "relative" }}>
+                <div className="mb-5" style={{ background: "#f5f3ea", border: "1px solid #e6e3d6", borderRadius: 12, padding: 10, position: "relative" }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, borderRadius: "12px 12px 0 0", background: `linear-gradient(90deg, transparent, ${accentR}50, transparent)` }} />
 
                   <div className="flex gap-2.5 items-center" style={{ marginBottom: showFilters ? 10 : 0, transition: "margin 0.3s" }}>
                     <div className="flex-1 relative" style={{ minWidth: 0 }}>
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", opacity: 0.25 }}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                       <input type="text" placeholder={`Search ${headphones.length} headphones...`} value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                        className="w-full outline-none" style={{ padding: "7px 12px 7px 34px", background: "#ffffff", border: "1px solid #e8e4df", borderRadius: 10, color: "#1a1614", fontFamily: "inherit", fontSize: 14 }} />
+                        className="w-full outline-none" style={{ padding: "7px 12px 7px 34px", background: "#ffffff", border: "1px solid #e6e3d6", borderRadius: 10, color: "#1a1614", fontFamily: "inherit", fontSize: 14 }} />
                     </div>
 
                     <div className="relative">
                       <button className="flex items-center gap-1.5" onClick={() => setShowSortDrop(!showSortDrop)}
                         style={{ padding: "7px 12px", background: "#ffffff", border: `1px solid ${showSortDrop ? `${accentR}50` : "#0000000a"}`, borderRadius: 10, color: showSortDrop ? accentR : "#3d3530", fontFamily: "inherit", fontSize: 13, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-                        <span style={{ color: "#8a8078", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5 }}>Sort</span>
+                        <span style={{ color: "#8a8460", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5 }}>Sort</span>
                         <span style={{ color: accentR, fontWeight: 700 }}>{sortLabelR}</span>
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M6 9l6 6 6-6"/></svg>
                       </button>
                       {showSortDrop && (
                         <>
                         <div style={{ position: "fixed", inset: 0, zIndex: 99 }} onClick={() => setShowSortDrop(false)} />
-                        <div className="absolute" style={{ top: "calc(100% + 6px)", right: 0, background: "#f0ede8", border: "1px solid #d4cfc8", borderRadius: 10, padding: 4, minWidth: 180, zIndex: 100, boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}>
+                        <div className="absolute" style={{ top: "calc(100% + 6px)", right: 0, background: "#f0eee2", border: "1px solid #d4d0be", borderRadius: 10, padding: 4, minWidth: 180, zIndex: 100, boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}>
                           {SORT_OPTIONS_R.map(o => (
                             <div key={o.value} className="flex items-center justify-between cursor-pointer"
                               style={{ padding: "8px 12px", borderRadius: 7, fontSize: 13, fontWeight: 600, color: sortBy === o.value ? accentR : "#3d3530", transition: "all 0.15s" }}
@@ -2762,14 +2762,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div style={{ maxHeight: showFilters ? 500 : 0, overflow: "hidden", opacity: showFilters ? 1 : 0, transition: "max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s" }}>
                     <div className="grid gap-2.5" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))" }}>
                       <div style={{ gridColumn: "span 2" }}>
-                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8078", marginBottom: 5, paddingLeft: 2 }}>Brand</div>
+                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8460", marginBottom: 5, paddingLeft: 2 }}>Brand</div>
                         <div className="flex flex-wrap gap-1">
                           <span style={chipStyleR(filterBrand === "All")} onClick={() => setFilterBrand("All")}>All</span>
                           {brandListR.map(b => <span key={b} style={{...chipStyleR(filterBrand === b, BRAND_COLORS[b]), display: "inline-flex", alignItems: "center", gap: 4}} onClick={() => setFilterBrand(filterBrand === b ? "All" : b)}>{getBrandLogo(b) && <img loading="lazy" src={getBrandLogo(b)} alt={b} style={{ width: 12, height: 12, objectFit: "contain" }} />}{b}</span>)}
                         </div>
                       </div>
                       <div>
-                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8078", marginBottom: 5, paddingLeft: 2 }}>Weight</div>
+                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8460", marginBottom: 5, paddingLeft: 2 }}>Weight</div>
                         <div className="flex flex-wrap gap-1">
                           {[["All","All"],["Ultralight","<250g"],["Light","250-300g"],["Medium","300-350g"],["Heavy","350g+"]].map(([v,l]) => (
                             <span key={v} style={chipStyleR(filterWeight === v)} onClick={() => setFilterWeight(filterWeight === v && v !== "All" ? "All" : v)}>{l}</span>
@@ -2777,7 +2777,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         </div>
                       </div>
                       <div>
-                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8078", marginBottom: 5, paddingLeft: 2 }}>Price</div>
+                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8460", marginBottom: 5, paddingLeft: 2 }}>Price</div>
                         <div className="flex flex-wrap gap-1">
                           {[["All","All"],["Budget","Under $60"],["Mid","$60–$119"],["Premium","$120+"]].map(([v,l]) => (
                             <span key={v} style={chipStyleR(filterPrice === v)} onClick={() => setFilterPrice(filterPrice === v && v !== "All" ? "All" : v)}>{l}</span>
@@ -2785,7 +2785,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         </div>
                       </div>
                       <div>
-                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8078", marginBottom: 5, paddingLeft: 2 }}>Connection</div>
+                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8460", marginBottom: 5, paddingLeft: 2 }}>Connection</div>
                         <div className="flex flex-wrap gap-1">
                           {[["All","All"],["Wireless","Wireless"],["Wired","Wired"]].map(([v,l]) => (
                             <span key={v} style={chipStyleR(filterConn === v)} onClick={() => setFilterConn(filterConn === v && v !== "All" ? "All" : v)}>{l}</span>
@@ -2793,7 +2793,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         </div>
                       </div>
                       <div>
-                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8078", marginBottom: 5, paddingLeft: 2 }}>Form Factor</div>
+                        <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8460", marginBottom: 5, paddingLeft: 2 }}>Form Factor</div>
                         <div className="flex flex-wrap gap-1">
                           {[["All","All"],["Over-ear","Over-ear"],["On-ear","On-ear"]].map(([v,l]) => (
                             <span key={v} style={chipStyleR(filterLayout === v)} onClick={() => setFilterLayout(filterLayout === v && v !== "All" ? "All" : v)}>{l}</span>
@@ -2804,7 +2804,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   </div>
 
                   {!showFilters && activeFiltersR.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5" style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #e8e4df" }}>
+                    <div className="flex flex-wrap gap-1.5" style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #e6e3d6" }}>
                       {activeFiltersR.map((f, i) => (
                         <span key={i} className="inline-flex items-center gap-1.5" style={{ padding: "4px 10px", borderRadius: 20, fontSize: 12, fontWeight: 700, background: `${accentR}20`, color: accentR, border: `1px solid ${accentR}50` }}>
                           {f.label} <span className="cursor-pointer opacity-50 hover:opacity-100" style={{ fontSize: 11 }} onClick={f.clear}>✕</span>
@@ -2861,16 +2861,16 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 { key: "rating", label: "Rating" },
               ];
               return (
-              <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e8e4df" }}>
+              <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e6e3d6" }}>
                 {/* Sortable header bar */}
-                <div className="hidden md:flex items-center gap-1 px-3 py-2.5" style={{ background: "#f5f2ee", borderBottom: "1px solid #e8e4df" }}>
+                <div className="hidden md:flex items-center gap-1 px-3 py-2.5" style={{ background: "#f5f3ea", borderBottom: "1px solid #e6e3d6" }}>
                   <div style={{ width: 52, flexShrink: 0 }} />
                   <div style={{ width: 72, flexShrink: 0 }} />
                   {rankHeaders.map(h => (
                     <div key={h.key} className="flex-1 flex items-center gap-1 cursor-pointer select-none group" style={{ minWidth: 0 }}
                       onClick={() => setRankingSort(prev => prev.key === h.key ? { key: h.key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key: h.key, dir: ["name","brand","driverType","formFactor"].includes(h.key) ? "asc" : "desc" })}>
-                      <span className="text-[10px] font-bold uppercase tracking-wider transition-colors" style={{ color: rankingSort.key === h.key ? "#b8956a" : "#a09890" }}>{h.label}</span>
-                      {rankingSort.key === h.key && <span style={{ fontSize: 9, color: "#b8956a" }}>{rankingSort.dir === "asc" ? "▲" : "▼"}</span>}
+                      <span className="text-[10px] font-bold uppercase tracking-wider transition-colors" style={{ color: rankingSort.key === h.key ? "#c9a227" : "#9e9578" }}>{h.label}</span>
+                      {rankingSort.key === h.key && <span style={{ fontSize: 9, color: "#c9a227" }}>{rankingSort.dir === "asc" ? "▲" : "▼"}</span>}
                     </div>
                   ))}
                   <div style={{ width: 90, flexShrink: 0 }} />
@@ -2879,7 +2879,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 {/* Rows */}
                 <div style={{ background: "#faf8f5" }}>
                   {sorted.map((m, i) => {
-                    const col = BRAND_COLORS[m.brand] || "#8a8078";
+                    const col = BRAND_COLORS[m.brand] || "#8a8460";
                     const img = getHeadphoneImage(m.name);
                     const isTop3 = i < 3;
                     const medalColors = ["#d4af37", "#a8a8a8", "#cd7f32"];
@@ -2887,7 +2887,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     return (
                       <div key={`rank-${m.id}`} className="group cursor-pointer transition-all duration-200"
                         onClick={() => { navigateToHeadphone(m); }}
-                        style={{ borderBottom: "1px solid #e8e4df08", background: i % 2 === 0 ? "transparent" : "#00000003" }}
+                        style={{ borderBottom: "1px solid #e6e3d608", background: i % 2 === 0 ? "transparent" : "#00000003" }}
                         onMouseEnter={e => { e.currentTarget.style.background = `${col}08`; e.currentTarget.style.transform = "translateX(4px)"; e.currentTarget.style.boxShadow = `inset 3px 0 0 ${col}`; }}
                         onMouseLeave={e => { e.currentTarget.style.background = i % 2 === 0 ? "transparent" : "#00000003"; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}>
                         <div className="flex items-center gap-1 px-3 py-2.5 md:py-2">
@@ -2904,7 +2904,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                           {/* Headphone image */}
                           <div className="flex-shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ width: 64, height: 52 }}>
-                            {img ? <img loading="lazy" src={img} alt={m.name} className="max-w-full max-h-full object-contain" style={{ filter: `drop-shadow(0 2px 6px ${col}25)` }} /> : <Headphones size={24} style={{ color: "#d4cfc8" }} />}
+                            {img ? <img loading="lazy" src={img} alt={m.name} className="max-w-full max-h-full object-contain" style={{ filter: `drop-shadow(0 2px 6px ${col}25)` }} /> : <Headphones size={24} style={{ color: "#d4d0be" }} />}
                           </div>
 
                           {/* Name + brand (mobile: stacked, desktop: separate columns) */}
@@ -2912,7 +2912,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             {/* Headphone name */}
                             <div className="flex-1" style={{ minWidth: 0 }}>
                               <div className="font-bold text-sm truncate transition-colors" style={{ color: "#1a1614", fontFamily: "'Space Grotesk', system-ui" }}>{m.name.replace(m.brand + " ", "")}</div>
-                              <div className="md:hidden text-xs mt-0.5" style={{ color: "#a09890" }}>{m.brand} · {m.weight}g · ${m.price}</div>
+                              <div className="md:hidden text-xs mt-0.5" style={{ color: "#9e9578" }}>{m.brand} · {m.weight}g · ${m.price}</div>
                             </div>
                             {/* Brand */}
                             <div className="hidden md:flex flex-1 items-center gap-1.5" style={{ minWidth: 0 }}>
@@ -2925,7 +2925,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                               {m.weight < 270 && <span className="text-[9px] px-1.5 py-0.5 rounded font-bold" style={{ background: "#22c55e15", color: "#22c55e" }}>Light</span>}
                             </div>
                             {/* Driver */}
-                            <div className="hidden md:block flex-1 truncate text-xs" style={{ color: "#8a8078", minWidth: 0 }}>{m.driverType}</div>
+                            <div className="hidden md:block flex-1 truncate text-xs" style={{ color: "#8a8460", minWidth: 0 }}>{m.driverType}</div>
                             {/* Price */}
                             <div className="hidden md:block flex-1" style={{ minWidth: 0 }}>
                               <span className="text-xs font-bold" style={{ color: "#1a1614" }}>${m.price}</span>
@@ -2944,7 +2944,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                   <div key={star} className="rounded-sm" style={{ width: 14, height: 6, background: star <= Math.round(m.rating / 2) ? col : "#0000000a", borderRadius: 2 }} />
                                 ))}
                               </div>
-                              <span className="text-[11px] font-semibold" style={{ color: "#a09890" }}>{m.rating}</span>
+                              <span className="text-[11px] font-semibold" style={{ color: "#9e9578" }}>{m.rating}</span>
                             </div>
                           </div>
 
@@ -2970,8 +2970,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 </div>
 
                 {/* Results count footer */}
-                <div className="px-4 py-2.5 text-center" style={{ background: "#f5f2ee", borderTop: "1px solid #e8e4df" }}>
-                  <span className="text-xs font-semibold" style={{ color: "#a09890" }}>Showing {sorted.length} of {headphones.length} headphones</span>
+                <div className="px-4 py-2.5 text-center" style={{ background: "#f5f3ea", borderTop: "1px solid #e6e3d6" }}>
+                  <span className="text-xs font-semibold" style={{ color: "#9e9578" }}>Showing {sorted.length} of {headphones.length} headphones</span>
                 </div>
               </div>
               );
@@ -2980,13 +2980,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {(() => {
               const topKbd = headphones.sort((a, b) => b.proUsage - a.proUsage)[0];
               return (
-                <div className="rounded-xl p-4 mt-6 flex flex-col sm:flex-row items-center gap-4" style={{ background: "linear-gradient(135deg, #b8956a08, #b8956a04)", border: "1px solid #b8956a14" }}>
+                <div className="rounded-xl p-4 mt-6 flex flex-col sm:flex-row items-center gap-4" style={{ background: "linear-gradient(135deg, #c9a22708, #c9a22704)", border: "1px solid #c9a22714" }}>
                   <span className="text-xl">🏆</span>
                   <div className="flex-1">
-                    <div className="text-[10px] uppercase tracking-widest font-bold" style={{ color: "#b8956a", letterSpacing: 2 }}>Pro Favorite</div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold" style={{ color: "#c9a227", letterSpacing: 2 }}>Pro Favorite</div>
                     <div className="text-sm font-bold" style={{ color: "#1a1614" }}>{topKbd.name} — {topKbd.proUsage}% pro usage · {topKbd.weight}g · {topKbd.driverType}</div>
                   </div>
-                  <a href={amazonLink(topKbd.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#b8956a", color: "#1a1614", textDecoration: "none" }}>
+                  <a href={amazonLink(topKbd.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#c9a227", color: "#1a1614", textDecoration: "none" }}>
                     {I.cart(14, "#1a1614")} ${topKbd.price} on Amazon
                   </a>
                 </div>
@@ -3022,7 +3022,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               ];
 
               return (
-                <div className="mb-6" style={{ background: "#f5f2ee", border: "1px solid #e8e4df", borderRadius: 12, padding: 12, position: "relative" }}>
+                <div className="mb-6" style={{ background: "#f5f3ea", border: "1px solid #e6e3d6", borderRadius: 12, padding: 12, position: "relative" }}>
                   {/* Accent top line */}
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, borderRadius: "12px 12px 0 0", background: "linear-gradient(90deg, transparent, #9060c450, transparent)" }} />
 
@@ -3046,8 +3046,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             textTransform: "uppercase",
                             letterSpacing: 0.5,
                             cursor: "pointer",
-                            border: "1px solid #d4cfc8",
-                            background: isActive ? accentColor : "#f5f2ee",
+                            border: "1px solid #d4d0be",
+                            background: isActive ? accentColor : "#f5f3ea",
                             color: isActive ? "#ffffff" : "#1a1614",
                             transition: "all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
                             boxShadow: isActive ? "0 4px 12px rgba(144, 96, 212, 0.25), inset 0 -2px 0 rgba(0, 0, 0, 0.1)" : "0 2px 4px rgba(0, 0, 0, 0.05)",
@@ -3062,7 +3062,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           }}
                           onMouseLeave={e => {
                             if (!isActive) {
-                              e.currentTarget.style.background = "#f5f2ee";
+                              e.currentTarget.style.background = "#f5f3ea";
                               e.currentTarget.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.05)";
                             }
                           }}
@@ -3093,7 +3093,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div className="flex-1 relative" style={{ minWidth: 0 }}>
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", opacity: 0.25 }}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                       <input type="text" placeholder={`Search ${headphones.length} headphones...`} value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                        className="w-full outline-none" style={{ padding: "7px 12px 7px 34px", background: "#ffffff", border: "1px solid #e8e4df", borderRadius: 10, color: "#1a1614", fontFamily: "inherit", fontSize: 14 }} />
+                        className="w-full outline-none" style={{ padding: "7px 12px 7px 34px", background: "#ffffff", border: "1px solid #e6e3d6", borderRadius: 10, color: "#1a1614", fontFamily: "inherit", fontSize: 14 }} />
                     </div>
 
                     {/* Sort dropdown */}
@@ -3101,14 +3101,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <button className="flex items-center gap-1.5" onClick={() => setShowSortDrop(!showSortDrop)}
                         style={{ padding: "7px 12px", background: "#ffffff", border: `1px solid ${showSortDrop ? "#9060c450" : "#0000000a"}`, borderRadius: 10, color: showSortDrop ? "#9060c4" : "#3d3530", fontFamily: "inherit", fontSize: 13, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-                        <span style={{ color: "#8a8078", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5 }}>Sort</span>
+                        <span style={{ color: "#8a8460", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5 }}>Sort</span>
                         <span style={{ color: "#2d2824", fontWeight: 700 }}>{sortLabel}</span>
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M6 9l6 6 6-6"/></svg>
                       </button>
                       {showSortDrop && (
                         <>
                         <div style={{ position: "fixed", inset: 0, zIndex: 99 }} onClick={() => setShowSortDrop(false)} />
-                        <div className="absolute" style={{ top: "calc(100% + 6px)", right: 0, background: "#f0ede8", border: "1px solid #d4cfc8", borderRadius: 10, padding: 4, minWidth: 180, zIndex: 100, boxShadow: "0 12px 40px rgba(0,0,0,0.08)", animation: "fadeIn 0.15s ease" }}>
+                        <div className="absolute" style={{ top: "calc(100% + 6px)", right: 0, background: "#f0eee2", border: "1px solid #d4d0be", borderRadius: 10, padding: 4, minWidth: 180, zIndex: 100, boxShadow: "0 12px 40px rgba(0,0,0,0.08)", animation: "fadeIn 0.15s ease" }}>
                           {SORT_OPTIONS.map(o => (
                             <div key={o.value} className="flex items-center justify-between cursor-pointer"
                               style={{ padding: "8px 12px", borderRadius: 7, fontSize: 13, fontWeight: 600, color: sortBy === o.value ? "#9060c4" : "#3d3530", transition: "all 0.15s" }}
@@ -3147,26 +3147,26 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {activeTab === "players" && selectedPlayer && (() => {
           const p = selectedPlayer;
           const gameColors = GAME_COLORS;
-          const gc = gameColors[p.game] || "#8a8078";
+          const gc = gameColors[p.game] || "#8a8460";
           const currentHeadphoneData = headphones.find(m => m.name === p.headphone);
-          const brandCol = currentHeadphoneData ? BRAND_COLORS[currentHeadphoneData.brand] : "#a09890";
+          const brandCol = currentHeadphoneData ? BRAND_COLORS[currentHeadphoneData.brand] : "#9e9578";
           return (
             <div>
               {/* Breadcrumbs */}
               <nav aria-label="Breadcrumb" className="mt-8 mb-4 flex items-center gap-1.5 text-sm">
                 <a href="/" className="opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>Home</a>
-                <span style={{ color: "#d4cfc8" }}>›</span>
+                <span style={{ color: "#d4d0be" }}>›</span>
                 <a href="/players" onClick={(e) => { e.preventDefault(); const savedPos = playerListScrollPos.current; setSelectedPlayer(null); try { sessionStorage.removeItem("playerListScroll"); } catch {} router.push("/players", { scroll: false }); requestAnimationFrame(() => { requestAnimationFrame(() => { window.scrollTo({ top: savedPos, behavior: "instant" }); }); }); }} className="opacity-30 hover:opacity-60 transition-all no-underline cursor-pointer" style={{ color: "#1a1614", textDecoration: "none" }}>Players</a>
-                <span style={{ color: "#d4cfc8" }}>›</span>
+                <span style={{ color: "#d4d0be" }}>›</span>
                 <span style={{ color: gc }} className="font-bold opacity-70">{p.name}</span>
               </nav>
               {/* Share buttons */}
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: "#a09890" }}>Share</span>
-                <button onClick={() => { navigator.clipboard.writeText(`https://esportsheadphones.com/players/${p.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`); }} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105" style={{ background: "#00000008", border: "1px solid #d4cfc8", color: "#1a1614" }}>📋 Copy Link</button>
-                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(p.name + " uses " + p.headphone)}&url=${encodeURIComponent("https://esportsheadphones.com/players/" + p.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, ""))}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#1da1f220", border: "1px solid #8a746030", color: "#1da1f2", textDecoration: "none" }}>𝕏 Tweet</a>
+                <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: "#9e9578" }}>Share</span>
+                <button onClick={() => { navigator.clipboard.writeText(`https://esportsheadphones.com/players/${p.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`); }} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105" style={{ background: "#00000008", border: "1px solid #d4d0be", color: "#1a1614" }}>📋 Copy Link</button>
+                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(p.name + " uses " + p.headphone)}&url=${encodeURIComponent("https://esportsheadphones.com/players/" + p.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, ""))}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#1da1f220", border: "1px solid #a68b1b30", color: "#1da1f2", textDecoration: "none" }}>𝕏 Tweet</a>
                 <a href={`https://reddit.com/submit?url=${encodeURIComponent("https://esportsheadphones.com/players/" + p.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, ""))}&title=${encodeURIComponent(p.name + " (" + p.game + ") — Headphone, Settings & Setup")}`} target="_blank" rel="noopener noreferrer" className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#c4737320", border: "1px solid #c4737330", color: "#ff4499", textDecoration: "none" }}>Reddit</a>
-                <a href={`/contact?subject=correction&player=${encodeURIComponent(p.name)}`} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline ml-auto" style={{ background: "#0000000a", border: "1px solid #d4cfc8", color: "#8a8078", textDecoration: "none" }}>⚠️ Suggest Correction</a>
+                <a href={`/contact?subject=correction&player=${encodeURIComponent(p.name)}`} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline ml-auto" style={{ background: "#0000000a", border: "1px solid #d4d0be", color: "#8a8460", textDecoration: "none" }}>⚠️ Suggest Correction</a>
               </div>
               {/* Header */}
               <div className="rounded-2xl p-4 sm:p-8 mb-4 sm:mb-6 relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${gc}10, #ffffff)`, border: `1px solid ${gc}25` }}>
@@ -3223,18 +3223,18 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </div>
                     <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-black flex-shrink-0 transition-all"
                       style={{ background: brandCol, color: "#fff" }}>
-                      <svg width={12} height={12} viewBox="0 0 24 24" fill="none"><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" stroke="#6b635b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><circle cx="9" cy="21" r="1.5" fill="#e8e4df"/><circle cx="20" cy="21" r="1.5" fill="#e8e4df"/></svg> {currentHeadphoneData ? `$${currentHeadphoneData.price}` : "Buy"}
+                      <svg width={12} height={12} viewBox="0 0 24 24" fill="none"><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" stroke="#7d6e1e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><circle cx="9" cy="21" r="1.5" fill="#e6e3d6"/><circle cx="20" cy="21" r="1.5" fill="#e6e3d6"/></svg> {currentHeadphoneData ? `$${currentHeadphoneData.price}` : "Buy"}
                     </div>
                   </a>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#a09890" }}><span className="inline-flex mr-1.5 align-middle">{I.trophy(14)}</span>Top Achievements</div>
+                <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#9e9578" }}><span className="inline-flex mr-1.5 align-middle">{I.trophy(14)}</span>Top Achievements</div>
                   <div className="space-y-2">
                     {p.achievements.map((a, i) => (
-                      <div key={i} className="flex items-start gap-3 p-4 rounded-xl border-l-4" style={{ background: i < 3 ? `${gc}08` : "#f5f2ee", borderLeftColor: "#b8956a", border: `1px solid ${i < 3 ? `${gc}15` : "#e8e4df"}`, borderLeftWidth: "4px" }}>
+                      <div key={i} className="flex items-start gap-3 p-4 rounded-xl border-l-4" style={{ background: i < 3 ? `${gc}08` : "#f5f3ea", borderLeftColor: "#c9a227", border: `1px solid ${i < 3 ? `${gc}15` : "#e6e3d6"}`, borderLeftWidth: "4px" }}>
                         <span className="text-sm mt-0.5 flex-shrink-0">{i === 0 ? I.medal("#fbbf24", 18) : i === 1 ? I.medal("#94a3b8", 18) : i === 2 ? I.medal("#cd7f32", 18) : "▸"}</span>
                         <span className="text-sm" style={{ color: i < 3 ? gc : "#3d3530" }}>{a}</span>
                       </div>
@@ -3246,7 +3246,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 <div className="space-y-6">
                   {/* Current Headphone */}
                   <div className="rounded-2xl p-6" style={{ background: `${brandCol}08`, border: `1px solid ${brandCol}20` }}>
-                    <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#a09890" }}><span className="inline-flex mr-1.5 align-middle">{I.headphone(14)}</span>Current Headphone</div>
+                    <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#9e9578" }}><span className="inline-flex mr-1.5 align-middle">{I.headphone(14)}</span>Current Headphone</div>
                     <div className="flex items-center gap-4 mb-4">
                       {getHeadphoneImage(p.headphone) && <img loading="lazy" src={getHeadphoneImage(p.headphone)} alt={`${p.headphone} - headphone used by ${p.name} in ${p.game}`} className="h-14 w-14 object-contain object-center" style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.06))" }} />}
                       <div>
@@ -3257,19 +3257,19 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     {currentHeadphoneData && (
                       <div className="grid grid-cols-4 gap-3 mb-4">
                         <div className="text-center p-2 rounded-lg" style={{ background: "#0000000a" }}>
-                          <div className="text-xs font-semibold" style={{ color: "#a09890" }}>Weight</div>
+                          <div className="text-xs font-semibold" style={{ color: "#9e9578" }}>Weight</div>
                           <div className="text-sm font-bold" style={{ color: brandCol }}>{currentHeadphoneData.weight}g</div>
                         </div>
                         <div className="text-center p-2 rounded-lg" style={{ background: "#0000000a" }}>
-                          <div className="text-xs font-semibold" style={{ color: "#a09890" }}>Driver</div>
+                          <div className="text-xs font-semibold" style={{ color: "#9e9578" }}>Driver</div>
                           <div className="text-sm font-bold" style={{ color: brandCol }}>{currentHeadphoneData.driverType}</div>
                         </div>
                         <div className="text-center p-2 rounded-lg" style={{ background: "#0000000a" }}>
-                          <div className="text-xs font-semibold" style={{ color: "#a09890" }}>Freq. Response</div>
+                          <div className="text-xs font-semibold" style={{ color: "#9e9578" }}>Freq. Response</div>
                           <div className="text-sm font-bold" style={{ color: brandCol }}>{currentHeadphoneData.frequencyResponse >= 1000 ? `${currentHeadphoneData.frequencyResponse/1000}K` : currentHeadphoneData.frequencyResponse}Hz</div>
                         </div>
                         <div className="text-center p-2 rounded-lg" style={{ background: "#0000000a" }}>
-                          <div className="text-xs font-semibold" style={{ color: "#a09890" }}>Price</div>
+                          <div className="text-xs font-semibold" style={{ color: "#9e9578" }}>Price</div>
                           <div className="text-sm font-bold" style={{ color: brandCol }}>{"$"}{currentHeadphoneData.price}</div>
                         </div>
                       </div>
@@ -3282,18 +3282,18 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   </div>
 
                   {/* Headphone History Timeline */}
-                  <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-sm uppercase tracking-widest opacity-30 mb-4"><span className="inline-flex mr-1.5 align-middle">{I.refresh(14)}</span>Headphone History</div>
                     <div className="space-y-2">
                       {p.headphoneHistory.map((mh, i) => {
                         const histHeadphone = headphones.find(m => m.name === mh.headphone);
-                        const hCol = histHeadphone ? BRAND_COLORS[histHeadphone.brand] : "#8a8078";
+                        const hCol = histHeadphone ? BRAND_COLORS[histHeadphone.brand] : "#8a8460";
                         const isActive = i === 0;
                         return (
                           <div key={i} className="p-3 rounded-lg border-l-4 transition-all" style={{
-                            background: isActive ? `${hCol}12` : "#f5f2ee",
+                            background: isActive ? `${hCol}12` : "#f5f3ea",
                             borderLeftColor: hCol,
-                            border: `1px solid ${isActive ? `${hCol}25` : "#e8e4df"}`,
+                            border: `1px solid ${isActive ? `${hCol}25` : "#e6e3d6"}`,
                             borderLeftWidth: "4px",
                             boxShadow: isActive ? `0 4px 12px ${hCol}20` : "0 2px 4px rgba(0,0,0,0.04)"
                           }}>
@@ -3328,7 +3328,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   {proPlayers.filter(op => op.game === p.game && op.name !== p.name).map((op, i) => (
                     <a key={i} href={`/players/${op.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`}
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-[1.03] no-underline"
-                      style={{ background: "#ffffff", border: "1px solid #d4cfc8", color: "#1a1614", textDecoration: "none" }}>
+                      style={{ background: "#ffffff", border: "1px solid #d4d0be", color: "#1a1614", textDecoration: "none" }}>
                       <Flag country={op.country} size={16} />
                       <span>{op.name}</span>
                       <span className="opacity-30">({op.team})</span>
@@ -3382,7 +3382,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           ];
           return (
           <div>
-            <SectionTitle color="#8a7460" sub={`${allPlayers.length} players across ${new Set(allPlayers.map(p=>p.game)).size} games  -  click starred players for full profiles`}>Pro Player Settings Database</SectionTitle>
+            <SectionTitle color="#a68b1b" sub={`${allPlayers.length} players across ${new Set(allPlayers.map(p=>p.game)).size} games  -  click starred players for full profiles`}>Pro Player Settings Database</SectionTitle>
             {/* Player quick stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
               {(() => {
@@ -3392,9 +3392,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 const countries = new Set(fp.map(p => p.country)).size;
                 const teams = new Set(fp.filter(p => p.team !== "Content" && p.team !== "Free Agent" && p.team !== "Inactive" && p.team !== "Retired").map(p => p.team)).size;
                 return [
-                  { label: "Top Headphone", value: topM ? topM[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "") : "-", color: "#b8956a" },
-                  { label: "Countries", value: countries, color: "#8a7460" },
-                  { label: "Active Teams", value: teams, color: "#b8956a" },
+                  { label: "Top Headphone", value: topM ? topM[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "") : "-", color: "#c9a227" },
+                  { label: "Countries", value: countries, color: "#a68b1b" },
+                  { label: "Active Teams", value: teams, color: "#c9a227" },
                 ].map((s, i) => (
                   <div key={i} className="rounded-xl p-3 text-center" style={{ background: `${s.color}06`, border: `1px solid ${s.color}10` }}>
                     <div className="text-sm font-black" style={{ color: s.color }}>{s.value}</div>
@@ -3410,10 +3410,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const mc = {}; fp.forEach(p => { mc[p.headphone] = (mc[p.headphone] || 0) + 1; });
               const topHeadphones = Object.entries(mc).sort((a,b) => b[1]-a[1]).slice(0, 5);
               return (
-                <div className="rounded-xl p-4 mb-5" style={{ background: "#b8956a06", border: "1px solid #b8956a20" }}>
+                <div className="rounded-xl p-4 mb-5" style={{ background: "#c9a22706", border: "1px solid #c9a22720" }}>
                   <div className="flex items-center gap-2 mb-3">
-                    <span style={{ color: "#b8956a" }}>{I.trophy(16)}</span>
-                    <span className="text-xs uppercase tracking-widest font-bold" style={{ color: "#b8956a" }}>Most Used by {gameFilter === "All" ? "All" : gameFilter} Pros</span>
+                    <span style={{ color: "#c9a227" }}>{I.trophy(16)}</span>
+                    <span className="text-xs uppercase tracking-widest font-bold" style={{ color: "#c9a227" }}>Most Used by {gameFilter === "All" ? "All" : gameFilter} Pros</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {topHeadphones.map(([kbdName, count], i) => {
@@ -3422,13 +3422,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       return (
                         <a key={i} href={amazonLink(kbdName)} target="_blank" rel="noopener noreferrer"
                           className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all hover:scale-[1.03] no-underline"
-                          style={{ background: i === 0 ? "#b8956a14" : "#0000000a", border: i === 0 ? "1px solid #b8956a25" : "1px solid #e8e4df", textDecoration: "none" }}>
-                          <span className="text-xs font-black" style={{ color: i === 0 ? "#b8956a" : "#a09890" }}>#{i+1}</span>
+                          style={{ background: i === 0 ? "#c9a22714" : "#0000000a", border: i === 0 ? "1px solid #c9a22725" : "1px solid #e6e3d6", textDecoration: "none" }}>
+                          <span className="text-xs font-black" style={{ color: i === 0 ? "#c9a227" : "#9e9578" }}>#{i+1}</span>
                           <div>
                             <div className="text-xs font-bold text-stone-900">{kbdName.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
-                            <div style={{ fontSize: 10, color: "#a09890" }}>{pct}% of pros{m ? ` · $${m.price}` : ""}</div>
+                            <div style={{ fontSize: 10, color: "#9e9578" }}>{pct}% of pros{m ? ` · $${m.price}` : ""}</div>
                           </div>
-                          <span style={{ color: "#b8956a", opacity: 0.6 }}>{I.cart(12)}</span>
+                          <span style={{ color: "#c9a227", opacity: 0.6 }}>{I.cart(12)}</span>
                         </a>
                       );
                     })}
@@ -3440,12 +3440,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {/* Game pill filters */}
             <div className="flex flex-wrap gap-2 mb-4">
               {allGames.map(g => {
-                const gc2 = g === "All" ? "#8a7460" : (gameColors[g] || "#8a8078");
+                const gc2 = g === "All" ? "#a68b1b" : (gameColors[g] || "#8a8460");
                 const active = gameFilter === g;
                 return (
                   <button key={g} onClick={() => { setGameFilter(g); setPlayerPage(0); }}
                     className="px-3 py-1.5 rounded-lg text-sm font-bold transition-all flex items-center gap-1.5"
-                    style={{ background: active ? `${gc2}25` : "#ffffff", color: active ? gc2 : "#2d2824", border: active ? `1px solid ${gc2}50` : "1px solid #e8e4df" }}>
+                    style={{ background: active ? `${gc2}25` : "#ffffff", color: active ? gc2 : "#2d2824", border: active ? `1px solid ${gc2}50` : "1px solid #e6e3d6" }}>
                     {g !== "All" && GAME_IMAGE_URLS[g] && <img loading="lazy" src={GAME_IMAGE_URLS[g]} alt={g} className="w-4 h-4 object-contain" />}
                     {g}{g !== "All" && <span className="ml-1 opacity-50">({allPlayers.filter(p => p.game === g).length})</span>}
                   </button>
@@ -3455,15 +3455,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             <div className="flex flex-wrap gap-3 mb-3">
               <input type="text" aria-label="Search players" placeholder="Search player, team, or headphone..." value={searchQuery} onChange={e => { setSearchQuery(e.target.value); setPlayerPage(0); }}
-                className="px-4 py-2 rounded-lg text-sm outline-none flex-1 min-w-48" style={{ background: "#ffffff", border: "1px solid #d4cfc8", color: "#1a1614" }} />
+                className="px-4 py-2 rounded-lg text-sm outline-none flex-1 min-w-48" style={{ background: "#ffffff", border: "1px solid #d4d0be", color: "#1a1614" }} />
               <button onClick={() => setShowFilters(f => !f)}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all"
-                style={{ background: showFilters || activeFilterCount > 0 ? "#8a746018" : "#ffffff", border: showFilters || activeFilterCount > 0 ? "1px solid #8a746040" : "1px solid #d4cfc8", color: showFilters || activeFilterCount > 0 ? "#8a7460" : "#6b635b" }}>
-                {I.gear(14)} Filters {activeFilterCount > 0 && <span className="px-1.5 py-0.5 rounded-full text-sm font-black" style={{ background: "#8a7460", color: "#fff", fontSize: 10 }}>{activeFilterCount}</span>}
+                style={{ background: showFilters || activeFilterCount > 0 ? "#a68b1b18" : "#ffffff", border: showFilters || activeFilterCount > 0 ? "1px solid #a68b1b40" : "1px solid #d4d0be", color: showFilters || activeFilterCount > 0 ? "#a68b1b" : "#7d6e1e" }}>
+                {I.gear(14)} Filters {activeFilterCount > 0 && <span className="px-1.5 py-0.5 rounded-full text-sm font-black" style={{ background: "#a68b1b", color: "#fff", fontSize: 10 }}>{activeFilterCount}</span>}
               </button>
               <button onClick={() => { setProfileOnly(p => !p); setPlayerPage(0); }}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all"
-                style={{ background: profileOnly ? "#b8956a15" : "#ffffff", border: profileOnly ? "1px solid #b8956a40" : "1px solid #d4cfc8", color: profileOnly ? "#b8956a" : "#8a8078" }}>
+                style={{ background: profileOnly ? "#c9a22715" : "#ffffff", border: profileOnly ? "1px solid #c9a22740" : "1px solid #d4d0be", color: profileOnly ? "#c9a227" : "#8a8460" }}>
                 {I.star(14)} Full Profiles Only
               </button>
               <div className="flex items-center gap-2 text-sm opacity-70 px-3">
@@ -3473,47 +3473,47 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* Expanded filters panel */}
             {showFilters && (
-              <div className="rounded-xl p-4 mb-4 grid grid-cols-2 md:grid-cols-4 gap-4" style={{ background: "#ffffff", border: "1px solid #d4cfc8" }}>
+              <div className="rounded-xl p-4 mb-4 grid grid-cols-2 md:grid-cols-4 gap-4" style={{ background: "#ffffff", border: "1px solid #d4d0be" }}>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>Role</div>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#9e9578" }}>Role</div>
                   <select aria-label="Filter by role" value={roleFilter} onChange={e => { setRoleFilter(e.target.value); setPlayerPage(0); }}
-                    className="w-full px-3 py-2 rounded-lg text-sm cursor-pointer" style={{ background: "#f5f2ee", border: "1px solid #d4cfc8", color: "#1a1614" }}>
+                    className="w-full px-3 py-2 rounded-lg text-sm cursor-pointer" style={{ background: "#f5f3ea", border: "1px solid #d4d0be", color: "#1a1614" }}>
                     {allRoles.map(r => <option key={r} value={r}>{r}</option>)}
                   </select>
                 </div>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>Country</div>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#9e9578" }}>Country</div>
                   <select aria-label="Filter by country" value={countryFilter} onChange={e => { setCountryFilter(e.target.value); setPlayerPage(0); }}
-                    className="w-full px-3 py-2 rounded-lg text-sm cursor-pointer" style={{ background: "#f5f2ee", border: "1px solid #d4cfc8", color: "#1a1614" }}>
+                    className="w-full px-3 py-2 rounded-lg text-sm cursor-pointer" style={{ background: "#f5f3ea", border: "1px solid #d4d0be", color: "#1a1614" }}>
                     {allCountries.map(c => <option key={c} value={c}>{c === "All" ? "All" : countryName(c)}</option>)}
                   </select>
                 </div>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>Headphone</div>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#9e9578" }}>Headphone</div>
                   <input type="text" aria-label="Filter by headphone" placeholder="e.g. BlackShark, Arctis..." value={headphoneFilter} onChange={e => { setHeadphoneFilter(e.target.value); setPlayerPage(0); }}
-                    className="w-full px-3 py-2 rounded-lg text-sm outline-none" style={{ background: "#f5f2ee", border: "1px solid #d4cfc8", color: "#1a1614" }} />
+                    className="w-full px-3 py-2 rounded-lg text-sm outline-none" style={{ background: "#f5f3ea", border: "1px solid #d4d0be", color: "#1a1614" }} />
                 </div>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>Team</div>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#9e9578" }}>Team</div>
                   <input type="text" aria-label="Filter by team name" placeholder="e.g. Navi, Fnatic..." value={teamFilter} onChange={e => { setTeamFilter(e.target.value); setPlayerPage(0); }}
-                    className="w-full px-3 py-2 rounded-lg text-sm outline-none" style={{ background: "#f5f2ee", border: "1px solid #d4cfc8", color: "#1a1614" }} />
+                    className="w-full px-3 py-2 rounded-lg text-sm outline-none" style={{ background: "#f5f3ea", border: "1px solid #d4d0be", color: "#1a1614" }} />
                 </div>
                 <div className="col-span-2 flex items-end">
                   <button onClick={() => { setGameFilter("All"); setRoleFilter("All"); setCountryFilter("All"); setHeadphoneFilter(""); setTeamFilter(""); setProfileOnly(false); setSearchQuery(""); setPlayerPage(0); }}
                     className="px-4 py-2 rounded-lg text-sm font-bold transition-all"
-                    style={{ background: "#00000008", border: "1px solid #d4cfc8", color: "#8a8078" }}>
+                    style={{ background: "#00000008", border: "1px solid #d4d0be", color: "#8a8460" }}>
                     ✕ Clear All Filters
                   </button>
                 </div>
               </div>
             )}
-            <div data-player-table className="overflow-x-auto rounded-2xl" style={{ border: "1px solid #e8e4df" }}>
+            <div data-player-table className="overflow-x-auto rounded-2xl" style={{ border: "1px solid #e6e3d6" }}>
               <table className="w-full text-sm">
                 <thead className="sticky top-0 z-10">
                   <tr style={{ background: "#ffffff" }}>
                     {sortHeaders.map(h => (
                       <th key={h.label || "_star"} className={`px-3 py-3 text-left text-sm uppercase tracking-wider font-bold ${h.key ? "cursor-pointer select-none hover:opacity-80" : ""}`}
-                        style={{ color: playerSort.key === h.key ? "#8a7460" : "#8a8078" }}
+                        style={{ color: playerSort.key === h.key ? "#a68b1b" : "#8a8460" }}
                         aria-sort={playerSort.key === h.key ? (playerSort.dir === "asc" ? "ascending" : "descending") : undefined}
                         onClick={() => { if (h.key) { setPlayerSort(prev => prev.key === h.key ? { key: h.key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key: h.key, dir: "asc" }); setPlayerPage(0); } }}>
                         {h.label}{playerSort.key === h.key ? (playerSort.dir === "asc" ? " ▲" : " ▼") : ""}
@@ -3523,18 +3523,18 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 </thead>
                 <tbody>
                   {sortedPlayers.slice(playerPage * PLAYERS_PER_PAGE, (playerPage + 1) * PLAYERS_PER_PAGE).map((p, i) => {
-                    const gc = gameColors[p.game] || "#8a8078";
+                    const gc = gameColors[p.game] || "#8a8460";
                     const profilePlayer = p.hasProfile ? proPlayers.find(pp => pp.name === p.name && pp.game === (p.game)) || proPlayers.find(pp => pp.name === p.name) : null;
                     const headphoneMatch = headphones.find(mm => mm.name === p.headphone || (p.headphone && p.headphone.includes(mm.name)));
-                    const brandCol = headphoneMatch ? (BRAND_COLORS[headphoneMatch.brand] || "#8a8078") : "#a09890";
+                    const brandCol = headphoneMatch ? (BRAND_COLORS[headphoneMatch.brand] || "#8a8460") : "#9e9578";
                     const actualIndex = playerPage * PLAYERS_PER_PAGE + i;
                     return (
                       <tr key={`${p.name}-${p.game}-${actualIndex}`}
                         className={`transition-all duration-200 ${p.hasProfile ? "cursor-pointer" : ""}`}
                         onClick={() => { if (profilePlayer) { navigateToPlayer(profilePlayer); } }}
-                        style={{ borderBottom: "1px solid #e8e4df", background: actualIndex % 2 === 0 ? "#f5f0e8" : "#f5f2ee", borderLeft: `3px solid ${gc}` }}
+                        style={{ borderBottom: "1px solid #e6e3d6", background: actualIndex % 2 === 0 ? "#f5f2e6" : "#f5f3ea", borderLeft: `3px solid ${gc}` }}
                         onMouseEnter={e => { e.currentTarget.style.background = `${gc}0c`; e.currentTarget.style.boxShadow = `inset 4px 0 12px ${gc}10`; }}
-                        onMouseLeave={e => { e.currentTarget.style.background = actualIndex % 2 === 0 ? "#f5f0e8" : "#f5f2ee"; e.currentTarget.style.boxShadow = "none"; }}>
+                        onMouseLeave={e => { e.currentTarget.style.background = actualIndex % 2 === 0 ? "#f5f2e6" : "#f5f3ea"; e.currentTarget.style.boxShadow = "none"; }}>
                         <td className="pl-3 pr-1 py-2.5 text-center">{p.hasProfile ? <span title="Full profile available" className="inline-flex" style={{ filter: `drop-shadow(0 0 4px ${gc}60)` }}>{I.star(14)}</span> : <span className="opacity-10">·</span>}</td>
                         <td className="px-2 py-2.5 whitespace-nowrap">
                           <div className="flex items-center gap-2">
@@ -3584,7 +3584,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <button onClick={() => { setPlayerPage(p => Math.max(0, p - 1)); document.querySelector("[data-player-table]")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
                       disabled={playerPage === 0}
                       className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-20"
-                      style={{ background: "#00000008", border: "1px solid #d4cfc8", color: "#1a1614" }}>
+                      style={{ background: "#00000008", border: "1px solid #d4d0be", color: "#1a1614" }}>
                       ← Prev
                     </button>
                     {pages.map((p, idx) => p === -1 ? (
@@ -3592,14 +3592,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     ) : (
                       <button key={p} onClick={() => { setPlayerPage(p); document.querySelector("[data-player-table]")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
                         className="w-8 h-8 rounded-lg text-xs font-bold transition-all"
-                        style={{ background: p === playerPage ? "#8a746020" : "#0000000a", border: `1px solid ${p === playerPage ? "#8a746040" : "#00000008"}`, color: p === playerPage ? "#8a7460" : "#8a8078" }}>
+                        style={{ background: p === playerPage ? "#a68b1b20" : "#0000000a", border: `1px solid ${p === playerPage ? "#a68b1b40" : "#00000008"}`, color: p === playerPage ? "#a68b1b" : "#8a8460" }}>
                         {p + 1}
                       </button>
                     ))}
                     <button onClick={() => { setPlayerPage(p => Math.min(totalPages - 1, p + 1)); document.querySelector("[data-player-table]")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
                       disabled={playerPage >= totalPages - 1}
                       className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all disabled:opacity-20"
-                      style={{ background: "#00000008", border: "1px solid #d4cfc8", color: "#1a1614" }}>
+                      style={{ background: "#00000008", border: "1px solid #d4d0be", color: "#1a1614" }}>
                       Next →
                     </button>
                   </div>
@@ -3615,13 +3615,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               return (
                 <div className="mt-8 mb-4">
                   <div className="flex items-center gap-2 mb-3">
-                    <span style={{ color: "#b8956a" }}>{I.star(16)}</span>
-                    <span className="text-xs uppercase tracking-widest font-bold" style={{ color: "#b8956a" }}>Featured Pro Setups</span>
+                    <span style={{ color: "#c9a227" }}>{I.star(16)}</span>
+                    <span className="text-xs uppercase tracking-widest font-bold" style={{ color: "#c9a227" }}>Featured Pro Setups</span>
                     <span className="text-xs opacity-20 ml-1">refreshes on load</span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {top250Pros.map((p, i) => {
-                      const gc = gameColors[p.game] || "#8a8078";
+                      const gc = gameColors[p.game] || "#8a8460";
                       const m = headphones.find(mm => mm.name === p.headphone);
                       return (
                         <div key={i} className="rounded-xl p-4 relative overflow-hidden transition-all duration-300 hover:scale-[1.02]" style={{ background: `${gc}06`, border: `1px solid ${gc}12` }}
@@ -3637,12 +3637,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           </div>
                           <div className="flex items-center gap-2 mb-2 px-2 py-1.5 rounded-lg" style={{ background: "#00000008" }}>
                             {m && getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt="" className="h-5 w-8 object-contain opacity-70 flex-shrink-0" />}
-                            <span className="text-xs font-bold truncate" style={{ color: m ? (BRAND_COLORS[m.brand] || "#6b635b") : "#6b635b" }}>{p.headphone}</span>
+                            <span className="text-xs font-bold truncate" style={{ color: m ? (BRAND_COLORS[m.brand] || "#7d6e1e") : "#7d6e1e" }}>{p.headphone}</span>
                             {p.role && p.role !== "—" && <span className="text-xs opacity-20 ml-auto flex-shrink-0">{p.role}</span>}
                           </div>
                           <a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer"
                             className="flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg text-xs font-bold transition-all hover:scale-[1.03] no-underline"
-                            style={{ background: "#b8956a14", color: "#b8956a", border: "1px solid #b8956a30", textDecoration: "none" }}>
+                            style={{ background: "#c9a22714", color: "#c9a227", border: "1px solid #c9a22730", textDecoration: "none" }}>
                             {I.cart(11)} Get {p.name}'s Headphone{m ? ` — $${m.price}` : ""}
                           </a>
                         </div>
@@ -3660,7 +3660,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── BRANDS TAB ── */}
         {activeTab === "brands" && (
           <div>
-            <SectionTitle color="#b8956a" sub="The companies defining competitive headphone performance">Headphone Manufacturers</SectionTitle>
+            <SectionTitle color="#c9a227" sub="The companies defining competitive headphone performance">Headphone Manufacturers</SectionTitle>
 
             {/* Brand Portfolio Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -3718,7 +3718,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   achievements: ["H6PRO: dual acoustic variants (open/closed) for versatile competitive use", "Lift-to-mute magnetic boom arm for instant mute during tournament rounds", "Sennheiser audio heritage with dedicated esports engineering division"],
                   flagships: ["H6PRO", "GSP 500", "H3"] },
               ].map((brand, bi) => {
-                const col = BRAND_COLORS[brand.name] || "#8a8078";
+                const col = BRAND_COLORS[brand.name] || "#8a8460";
                 const brandKbds = headphones.filter(m => m.brand === brand.name).sort((a, b) => b.proUsage - a.proUsage);
                 const totalProUsage = brandKbds.reduce((s, m) => s + m.proUsage, 0);
                 const proCount = allPlayers.filter(p => brandKbds.some(m => m.name === p.headphone)).length;
@@ -3758,11 +3758,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                     <div className="px-5 py-4">
                       {/* Description - truncated */}
-                      <p className="text-xs leading-relaxed mb-3" style={{ color: "#6b635b", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{brand.desc}</p>
+                      <p className="text-xs leading-relaxed mb-3" style={{ color: "#7d6e1e", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{brand.desc}</p>
 
                       {/* Flagship products with images */}
                       <div className="mb-3">
-                        <div className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>Flagship Models</div>
+                        <div className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: "#9e9578" }}>Flagship Models</div>
                         <div className="flex gap-2">
                           {brand.flagships.slice(0, 3).map((f, fi) => {
                             const kbd = headphones.find(m => m.name === f || m.name.includes(f));
@@ -3774,7 +3774,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                                 style={{ background: `${col}06`, border: `1px solid ${col}10`, textDecoration: "none" }}>
                                 {fImg ? <img loading="lazy" src={fImg} alt={f} className="h-10 object-contain mb-1" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }} /> : <div className="h-10 flex items-center justify-center opacity-20">{icon("headphone", 20)}</div>}
                                 <div className="text-[9px] font-bold truncate w-full" style={{ color: col }}>{f.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
-                                {kbd && <div className="text-[9px]" style={{ color: "#a09890" }}>${kbd.price}</div>}
+                                {kbd && <div className="text-[9px]" style={{ color: "#9e9578" }}>${kbd.price}</div>}
                               </a>
                             );
                           })}
@@ -3796,11 +3796,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
         {activeTab === "trends" && (
           <div>
-            <SectionTitle color="#6b635b" sub="How esports headphones have evolved over the years">Industry Trends & Evolution</SectionTitle>
+            <SectionTitle color="#7d6e1e" sub="How esports headphones have evolved over the years">Industry Trends & Evolution</SectionTitle>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#a09890" }}>Average Headphone Weight Over Time</div>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9e9578" }}>Average Headphone Weight Over Time</div>
                 <ResponsiveContainer width="100%" height={280}>
                   <AreaChart data={weightTrend}>
                     <defs>
@@ -3809,40 +3809,40 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <stop offset="95%" stopColor="#4a4340" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="wg2" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#b8956a" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="#b8956a" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#c9a227" stopOpacity={0.2} />
+                        <stop offset="95%" stopColor="#c9a227" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e8e4df" vertical={false} />
-                    <XAxis dataKey="year" tick={{ fill: "#a09890", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
-                    <YAxis tick={{ fill: "#a09890", fontSize: 13 }} unit="g" tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e6e3d6" vertical={false} />
+                    <XAxis dataKey="year" tick={{ fill: "#9e9578", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
+                    <YAxis tick={{ fill: "#9e9578", fontSize: 13 }} unit="g" tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
                     <Tooltip content={<CustomTooltip />} />
-                    <Area type="monotone" dataKey="avgWeight" stroke="#6b635b" fill="url(#wg1)" strokeWidth={2} name="Avg Weight" />
-                    <Area type="monotone" dataKey="lightest" stroke="#b8956a" fill="url(#wg2)" strokeWidth={2} name="Lightest" strokeDasharray="5 5" />
+                    <Area type="monotone" dataKey="avgWeight" stroke="#7d6e1e" fill="url(#wg1)" strokeWidth={2} name="Avg Weight" />
+                    <Area type="monotone" dataKey="lightest" stroke="#c9a227" fill="url(#wg2)" strokeWidth={2} name="Lightest" strokeDasharray="5 5" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
 
-              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#a09890" }}>Freq. Response Evolution (Hz)</div>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9e9578" }}>Freq. Response Evolution (Hz)</div>
                 <ResponsiveContainer width="100%" height={280}>
                   <LineChart data={frequencyTrend}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e8e4df" vertical={false} />
-                    <XAxis dataKey="year" tick={{ fill: "#a09890", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
-                    <YAxis tick={{ fill: "#a09890", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e6e3d6" vertical={false} />
+                    <XAxis dataKey="year" tick={{ fill: "#9e9578", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
+                    <YAxis tick={{ fill: "#9e9578", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend wrapperStyle={{ fontSize: 13, opacity: 0.5 }} />
-                    <Line type="monotone" dataKey="max" stroke="#b8956a" strokeWidth={2} dot={{ r: 3, fill: "#b8956a" }} name="Max Available" />
-                    <Line type="monotone" dataKey="avg" stroke="#8a7460" strokeWidth={2} dot={{ r: 3, fill: "#8a7460" }} name="Average" />
+                    <Line type="monotone" dataKey="max" stroke="#c9a227" strokeWidth={2} dot={{ r: 3, fill: "#c9a227" }} name="Max Available" />
+                    <Line type="monotone" dataKey="avg" stroke="#a68b1b" strokeWidth={2} dot={{ r: 3, fill: "#a68b1b" }} name="Average" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
-            <SectionTitle color="#b8956a" sub="Which headphone form factors dominate the professional scene">Pro Headphone Form Factor Breakdown</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Which headphone form factors dominate the professional scene">Pro Headphone Form Factor Breakdown</SectionTitle>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#a09890" }}>Form Factor Distribution Among Pros</div>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9e9578" }}>Form Factor Distribution Among Pros</div>
                 {(() => {
                   const shapeCounts = {};
                   allPlayers.forEach(p => {
@@ -3852,7 +3852,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   const total = Object.values(shapeCounts).reduce((a, b) => a + b, 0);
                   const shapeData = Object.entries(shapeCounts).sort((a, b) => b[1] - a[1]).map(([name, count]) => ({
                     name, value: parseFloat((count / total * 100).toFixed(1)),
-                    fill: name === "Over-ear" ? "#b8956a" : name === "On-ear" ? "#6b635b" : name === "Open-back" ? "#d4af37" : "#8a7460"
+                    fill: name === "Over-ear" ? "#c9a227" : name === "On-ear" ? "#7d6e1e" : name === "Open-back" ? "#d4af37" : "#a68b1b"
                   }));
                   return (
                     <ResponsiveContainer width="100%" height={280}>
@@ -3870,43 +3870,43 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
-              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#a09890" }}>Wireless vs Wired Adoption in Pro Esports (%)</div>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9e9578" }}>Wireless vs Wired Adoption in Pro Esports (%)</div>
                 <ResponsiveContainer width="100%" height={280}>
                   <AreaChart data={wirelessTrend}>
                     <defs>
                       <linearGradient id="wlg1" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#b8956a" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#b8956a" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#c9a227" stopOpacity={0.3} />
+                        <stop offset="95%" stopColor="#c9a227" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="wlg2" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="#c44040" stopOpacity={0.15} />
                         <stop offset="95%" stopColor="#c44040" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e8e4df" vertical={false} />
-                    <XAxis dataKey="year" tick={{ fill: "#a09890", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
-                    <YAxis tick={{ fill: "#a09890", fontSize: 13 }} unit="%" domain={[0, 100]} tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e6e3d6" vertical={false} />
+                    <XAxis dataKey="year" tick={{ fill: "#9e9578", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
+                    <YAxis tick={{ fill: "#9e9578", fontSize: 13 }} unit="%" domain={[0, 100]} tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend wrapperStyle={{ fontSize: 13, opacity: 0.5 }} />
-                    <Area type="monotone" dataKey="wireless" stroke="#b8956a" fill="url(#wlg1)" strokeWidth={2} name="Wireless %" />
+                    <Area type="monotone" dataKey="wireless" stroke="#c9a227" fill="url(#wlg1)" strokeWidth={2} name="Wireless %" />
                     <Area type="monotone" dataKey="wired" stroke="#ff3c3c" fill="url(#wlg2)" strokeWidth={2} name="Wired %" strokeDasharray="5 5" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
 
-              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#a09890" }}>Headphone Price Evolution (USD)</div>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9e9578" }}>Headphone Price Evolution (USD)</div>
                 <ResponsiveContainer width="100%" height={280}>
                   <LineChart data={priceTrend}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e8e4df" vertical={false} />
-                    <XAxis dataKey="year" tick={{ fill: "#a09890", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
-                    <YAxis tick={{ fill: "#a09890", fontSize: 13 }} unit="$" tickLine={false} axisLine={{ stroke: '#e8e4df' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e6e3d6" vertical={false} />
+                    <XAxis dataKey="year" tick={{ fill: "#9e9578", fontSize: 13 }} tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
+                    <YAxis tick={{ fill: "#9e9578", fontSize: 13 }} unit="$" tickLine={false} axisLine={{ stroke: '#e6e3d6' }} />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend wrapperStyle={{ fontSize: 13, opacity: 0.5 }} />
-                    <Line type="monotone" dataKey="flagship" stroke="#d4af37" strokeWidth={2} dot={{ r: 3, fill: "#b8956a" }} name="Flagship" />
-                    <Line type="monotone" dataKey="avg" stroke="#8a7460" strokeWidth={2} dot={{ r: 3, fill: "#8a7460" }} name="Average" />
-                    <Line type="monotone" dataKey="budget" stroke="#8a7460" strokeWidth={2} dot={{ r: 3, fill: "#6b635b" }} name="Budget" strokeDasharray="5 5" />
+                    <Line type="monotone" dataKey="flagship" stroke="#d4af37" strokeWidth={2} dot={{ r: 3, fill: "#c9a227" }} name="Flagship" />
+                    <Line type="monotone" dataKey="avg" stroke="#a68b1b" strokeWidth={2} dot={{ r: 3, fill: "#a68b1b" }} name="Average" />
+                    <Line type="monotone" dataKey="budget" stroke="#a68b1b" strokeWidth={2} dot={{ r: 3, fill: "#7d6e1e" }} name="Budget" strokeDasharray="5 5" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -3920,8 +3920,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   const cheapest = [...headphones].sort((a, b) => a.price - b.price)[0];
                   return [
                     { label: "Lightest Headphone", value: lightest.name, sub: `${lightest.weight}g`, color: "#4a4340", kbd: lightest },
-                    { label: "Most Popular", value: mostPopular.name, sub: `${mostPopular.proUsage}% pro share`, color: "#b8956a", kbd: mostPopular },
-                    { label: "Widest Freq. Range", value: widestFreqResponse ? widestFreqResponse.name : "N/A", sub: widestFreqResponse ? `${widestFreqResponse.frequencyResponse}kHz` : "", color: "#8a7460", kbd: widestFreqResponse },
+                    { label: "Most Popular", value: mostPopular.name, sub: `${mostPopular.proUsage}% pro share`, color: "#c9a227", kbd: mostPopular },
+                    { label: "Widest Freq. Range", value: widestFreqResponse ? widestFreqResponse.name : "N/A", sub: widestFreqResponse ? `${widestFreqResponse.frequencyResponse}kHz` : "", color: "#a68b1b", kbd: widestFreqResponse },
                     { label: "Most Affordable", value: cheapest.name, sub: `$${cheapest.price}`, color: "#c4a020", kbd: cheapest },
                   ];
                 })().map((s, i) => (
@@ -3929,14 +3929,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="text-sm uppercase tracking-widest opacity-30 mb-2">{s.label}</div>
                   <div className="text-sm font-black" style={{ color: s.color }}>{s.value}</div>
                   <div className="text-sm opacity-85 mt-1">{s.sub}</div>
-                  {s.kbd && <a href={amazonLink(s.kbd.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-2 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#b8956a18", color: "#b8956a", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} ${s.kbd.price}</a>}
+                  {s.kbd && <a href={amazonLink(s.kbd.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-2 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#c9a22718", color: "#c9a227", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} ${s.kbd.price}</a>}
                 </div>
               ))}
             </div>
 
             {/* ── Brand Dominance Race ── */}
-            <SectionTitle color="#6b635b" sub="How the top brands stack up across every major metric">Brand Performance Scorecard</SectionTitle>
-            <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e8e4df" }}>
+            <SectionTitle color="#7d6e1e" sub="How the top brands stack up across every major metric">Brand Performance Scorecard</SectionTitle>
+            <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e6e3d6" }}>
               {(() => {
                 const topBrandNames = ["Razer", "Logitech", "SteelSeries", "Corsair", "HyperX", "beyerdynamic", "Sennheiser", "ASTRO", "Sony", "ASUS"];
                 const brandStats = topBrandNames.map(brand => {
@@ -3993,7 +3993,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <tr style={{ background: "#ffffff" }}>
                         {headers.map(h => (
                           <th key={h.label} className="px-4 py-3 text-sm uppercase tracking-widest font-bold text-left cursor-pointer select-none hover:opacity-80"
-                            style={{ color: brandScoreSort.key === h.key ? "#6b635b" : "#8a8078" }}
+                            style={{ color: brandScoreSort.key === h.key ? "#7d6e1e" : "#8a8460" }}
                             onClick={() => setBrandScoreSort(prev => prev.key === h.key ? { key: h.key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key: h.key, dir: h.key === "brand" ? "asc" : "desc" })}>
                             {h.label}{brandScoreSort.key === h.key ? (brandScoreSort.dir === "asc" ? " ▲" : " ▼") : ""}
                           </th>
@@ -4002,14 +4002,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </thead>
                     <tbody>
                       {sorted.map((b, i) => (
-                        <tr key={b.brand} style={{ background: i % 2 === 0 ? "#f5f0e8" : "#f5f2ee", borderBottom: "1px solid #00000008" }}>
+                        <tr key={b.brand} style={{ background: i % 2 === 0 ? "#f5f2e6" : "#f5f3ea", borderBottom: "1px solid #00000008" }}>
                           <td className="px-4 py-3 font-black" style={{ color: BRAND_COLORS[b.brand] }}>{b.brand}</td>
                           <td className="px-4 py-3 opacity-60">{b.headphoneCount}</td>
-                          <td className="px-4 py-3 font-bold" style={{ color: b.proShare >= 30 ? "#b8956a" : b.proShare >= 10 ? "#d4af37" : "#8a8078" }}>{b.proShare}%</td>
+                          <td className="px-4 py-3 font-bold" style={{ color: b.proShare >= 30 ? "#c9a227" : b.proShare >= 10 ? "#d4af37" : "#8a8460" }}>{b.proShare}%</td>
                           <td className="px-4 py-3 opacity-60">{b.avgWeight}g</td>
                           <td className="px-4 py-3 opacity-60">${b.avgPrice}</td>
                           <td className="px-4 py-3 opacity-60">{b.maxPoll}kHz</td>
-                          <td className="px-4 py-3 font-bold" style={{ color: b.avgRating >= 9 ? "#b8956a" : b.avgRating >= 8.5 ? "#d4af37" : "#8a8078" }}>{b.avgRating}/10</td>
+                          <td className="px-4 py-3 font-bold" style={{ color: b.avgRating >= 9 ? "#c9a227" : b.avgRating >= 8.5 ? "#d4af37" : "#8a8460" }}>{b.avgRating}/10</td>
                         </tr>
                       ))}
                     </tbody>
@@ -4022,12 +4022,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {/* ── Technology Adoption ── */}
             <SectionTitle color="#9060c4" sub="How quickly pros adopt new peripheral technology">Technology Adoption Snapshot</SectionTitle>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#a09890" }}>Frequency Response Range Tiers</div>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9e9578" }}>Frequency Response Range Tiers</div>
                 {(() => {
                   const tiers = [
                     { label: "Up to 8kHz (Basic)", min: 0, max: 8, color: "#c44040" },
-                    { label: "8-12kHz (Standard)", min: 8, max: 13, color: "#b8956a" },
+                    { label: "8-12kHz (Standard)", min: 8, max: 13, color: "#c9a227" },
                     { label: "12kHz+ (Extended)", min: 13, max: 999, color: "#d4af37" },
                   ];
                   return (
@@ -4052,13 +4052,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 })()}
               </div>
 
-              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#a09890" }}>Top Drivers by Headphone Count</div>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9e9578" }}>Top Drivers by Headphone Count</div>
                 {(() => {
                   const sensorCounts = {};
                   headphones.forEach(m => { sensorCounts[m.driverType] = (sensorCounts[m.driverType] || 0) + 1; });
                   const top5 = Object.entries(sensorCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
-                  const colors = ["#b8956a", "#2d2824", "#8a7460", "#a09890", "#6b635b"];
+                  const colors = ["#c9a227", "#2d2824", "#a68b1b", "#9e9578", "#7d6e1e"];
                   return (
                     <div className="space-y-3">
                       {top5.map(([sensor, count], i) => (
@@ -4077,14 +4077,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 })()}
               </div>
 
-              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#a09890" }}>Weight Class Distribution</div>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
+                <div className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9e9578" }}>Weight Class Distribution</div>
                 {(() => {
                   const classes = [
-                    { label: "Ultralight (< 200g)", min: 0, max: 200, color: "#b8956a" },
-                    { label: "Lightweight (200-250g)", min: 200, max: 250, color: "#6b635b" },
-                    { label: "Standard (250-300g)", min: 250, max: 300, color: "#8a7460" },
-                    { label: "Midweight (300-350g)", min: 300, max: 350, color: "#b8956a" },
+                    { label: "Ultralight (< 200g)", min: 0, max: 200, color: "#c9a227" },
+                    { label: "Lightweight (200-250g)", min: 200, max: 250, color: "#7d6e1e" },
+                    { label: "Standard (250-300g)", min: 250, max: 300, color: "#a68b1b" },
+                    { label: "Midweight (300-350g)", min: 300, max: 350, color: "#c9a227" },
                     { label: "Heavy (350g+)", min: 350, max: 9999, color: "#4a4340" },
                   ];
                   return (
@@ -4187,29 +4187,29 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           return (
           <div>
-            <SectionTitle color="#8a7460" sub="Comprehensive breakdown of every driver powering pro esports headphones">Headphone Driver Analytics</SectionTitle>
+            <SectionTitle color="#a68b1b" sub="Comprehensive breakdown of every driver powering pro esports headphones">Headphone Driver Analytics</SectionTitle>
 
             {/* Hero banner */}
-            <div className="rounded-2xl overflow-hidden mb-5 relative" style={{ border: "1px solid #6b635b15" }}>
+            <div className="rounded-2xl overflow-hidden mb-5 relative" style={{ border: "1px solid #7d6e1e15" }}>
               <img src="/images/drivers/driver-hero.svg" alt="Driver Analytics" className="w-full h-auto" style={{ minHeight: 120 }} />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-2xl sm:text-3xl font-black" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#d4af37", textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}>Inside the Sound</div>
-                  <div className="text-xs sm:text-sm mt-1" style={{ color: "#c4b5a0", textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}>The technology behind every click, callout, and clutch</div>
+                  <div className="text-xs sm:text-sm mt-1" style={{ color: "#d4c47a", textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}>The technology behind every click, callout, and clutch</div>
                 </div>
               </div>
             </div>
 
             {/* Top driver highlight */}
-            <div className="rounded-2xl p-5 mb-5" style={{ background: "#6b635b08", border: "1px solid #6b635b15" }}>
+            <div className="rounded-2xl p-5 mb-5" style={{ background: "#7d6e1e08", border: "1px solid #7d6e1e15" }}>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "#6b635b0a" }}>
-                  <Cpu size={24} style={{ color: "#6b635b" }} />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "#7d6e1e0a" }}>
+                  <Cpu size={24} style={{ color: "#7d6e1e" }} />
                 </div>
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: "#a09890" }}>Most Popular Driver in Esports</div>
-                  <div className="text-lg font-bold" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#6b635b" }}>{topSensor?.driverType}</div>
-                  <div className="text-xs" style={{ color: "#6b635b" }}>Used in {topSensor?.headphoneCount} headphones · {topSensor?.playerCount} pro players · {topSensor?.totalUsage}% combined pro usage</div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: "#9e9578" }}>Most Popular Driver in Esports</div>
+                  <div className="text-lg font-bold" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#7d6e1e" }}>{topSensor?.driverType}</div>
+                  <div className="text-xs" style={{ color: "#7d6e1e" }}>Used in {topSensor?.headphoneCount} headphones · {topSensor?.playerCount} pro players · {topSensor?.totalUsage}% combined pro usage</div>
                 </div>
               </div>
             </div>
@@ -4217,7 +4217,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {/* Sensor overview cards */}
             <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
               {sensorProfiles.sort((a, b) => b.totalUsage - a.totalUsage).slice(0, 4).map((s, i) => {
-                const colors = ["#b8956a", "#2d2824", "#8a7460", "#a09890"];
+                const colors = ["#c9a227", "#2d2824", "#a68b1b", "#9e9578"];
                 const sensorImageMap = {
                   "50mm TriForce Titanium": "/images/drivers/triforce-titanium.svg",
                   "50mm TriForce Titanium Pro": "/images/drivers/triforce-titanium-pro.svg",
@@ -4304,30 +4304,30 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const topSensorPct = totalMatched > 0 ? Math.round(top10[0][1] / totalMatched * 100) : 0;
               const top3Pct = totalMatched > 0 ? Math.round(top10.slice(0, 3).reduce((a, s) => a + s[1], 0) / totalMatched * 100) : 0;
 
-              const barColors = ["#b8956a", "#2d2824", "#8a7460", "#a09890", "#6b635b", "#d4cfc8", "#4a4340", "#c4b5a0", "#d4af37", "#9c8b78"];
+              const barColors = ["#c9a227", "#2d2824", "#a68b1b", "#9e9578", "#7d6e1e", "#d4d0be", "#4a4340", "#d4c47a", "#d4af37", "#8a7d3c"];
               const gameBarColors = { CS2: "#c47000", Valorant: "#c43848", LoL: "#c89b3c", Fortnite: "#3a60b0", "Dota 2": "#b83c30", "R6 Siege": "#3a6ca0", Apex: "#a82020", PUBG: "#c48a00", "Overwatch 2": "#c48018", "Call of Duty": "#3a8a3a", "Marvel Rivals": "#b81820", Deadlock: "#6d40c4", "Quake Champions": "#a83c00" };
 
               return (
-                <div className="rounded-2xl p-5 mb-6" style={{ background: "#0000000a", border: "1px solid #e8e4df" }}>
+                <div className="rounded-2xl p-5 mb-6" style={{ background: "#0000000a", border: "1px solid #e6e3d6" }}>
                   <div className="text-sm uppercase tracking-widest opacity-70 mb-4 font-bold text-center sm:text-left">Driver Popularity Across {totalMatched.toLocaleString()} Matched Pro Players</div>
 
                   {/* Summary stat pills */}
                   <div className="flex flex-wrap gap-2 mb-5 justify-center sm:justify-start">
-                    <div className="rounded-lg px-3 py-2" style={{ background: "#8a746010" }}>
+                    <div className="rounded-lg px-3 py-2" style={{ background: "#a68b1b10" }}>
                       <span className="text-sm opacity-85">Top sensor: </span>
-                      <span className="text-sm font-black" style={{ color: "#6b635b" }}>{top10[0]?.[0]} ({topSensorPct}%)</span>
+                      <span className="text-sm font-black" style={{ color: "#7d6e1e" }}>{top10[0]?.[0]} ({topSensorPct}%)</span>
                     </div>
-                    <div className="rounded-lg px-3 py-2" style={{ background: "#8a746012" }}>
+                    <div className="rounded-lg px-3 py-2" style={{ background: "#a68b1b12" }}>
                       <span className="text-sm opacity-85">Top 3 concentration: </span>
-                      <span className="text-sm font-black" style={{ color: "#8a7460" }}>{top3Pct}%</span>
+                      <span className="text-sm font-black" style={{ color: "#a68b1b" }}>{top3Pct}%</span>
                     </div>
-                    <div className="rounded-lg px-3 py-2" style={{ background: "#b8956a12" }}>
+                    <div className="rounded-lg px-3 py-2" style={{ background: "#c9a22712" }}>
                       <span className="text-sm opacity-85">Unique sensors tracked: </span>
-                      <span className="text-sm font-black" style={{ color: "#b8956a" }}>{uniqueSensors}</span>
+                      <span className="text-sm font-black" style={{ color: "#c9a227" }}>{uniqueSensors}</span>
                     </div>
-                    <div className="rounded-lg px-3 py-2" style={{ background: "#a0989010" }}>
+                    <div className="rounded-lg px-3 py-2" style={{ background: "#9e957810" }}>
                       <span className="text-sm opacity-85">Players on proprietary sensors: </span>
-                      <span className="text-sm font-black" style={{ color: "#6b635b" }}>{sensorCounts["Custom"] || sensorCounts["Custom Sony"] || 0}</span>
+                      <span className="text-sm font-black" style={{ color: "#7d6e1e" }}>{sensorCounts["Custom"] || sensorCounts["Custom Sony"] || 0}</span>
                     </div>
                   </div>
 
@@ -4401,13 +4401,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* Sensor table */}
             <div className="text-sm uppercase tracking-widest opacity-70 mb-3 mt-8">All Sensors  -  Click Headers to Sort</div>
-            <div className="overflow-x-auto rounded-2xl mb-8" style={{ border: "1px solid #e8e4df" }}>
+            <div className="overflow-x-auto rounded-2xl mb-8" style={{ border: "1px solid #e6e3d6" }}>
               <table className="w-full text-sm">
                 <thead>
                   <tr style={{ background: "#ffffff" }}>
                     {sensorHeaders.map(h => (
                       <th key={h.label} className="px-4 py-3 text-left text-sm uppercase tracking-wider font-bold cursor-pointer select-none hover:opacity-80"
-                        style={{ color: sensorSort.key === h.key ? "#8a7460" : "#a09890" }}
+                        style={{ color: sensorSort.key === h.key ? "#a68b1b" : "#9e9578" }}
                         onClick={() => setSensorSort(prev => prev.key === h.key ? { key: h.key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key: h.key, dir: typeof sensorProfiles[0]?.[h.key] === "string" ? "asc" : "desc" })}>
                         {h.label}{sensorSort.key === h.key ? (sensorSort.dir === "asc" ? " ▲" : " ▼") : ""}
                       </th>
@@ -4416,15 +4416,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 </thead>
                 <tbody>
                   {sortedSensors.map((s, i) => (
-                    <tr key={s.driverType} style={{ borderBottom: "1px solid #00000008", background: i % 2 === 0 ? "#f5f0e8" : "#f5f2ee" }}
-                      onMouseEnter={e => e.currentTarget.style.background = "#8a746008"}
-                      onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? "#f5f0e8" : "#f5f2ee"}>
-                      <td className="px-4 py-3 font-black cursor-pointer hover:underline" style={{ color: "#6b635b" }}
+                    <tr key={s.driverType} style={{ borderBottom: "1px solid #00000008", background: i % 2 === 0 ? "#f5f2e6" : "#f5f3ea" }}
+                      onMouseEnter={e => e.currentTarget.style.background = "#a68b1b08"}
+                      onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? "#f5f2e6" : "#f5f3ea"}>
+                      <td className="px-4 py-3 font-black cursor-pointer hover:underline" style={{ color: "#7d6e1e" }}
                         onClick={() => document.getElementById(`sensor-group-${s.driverType.replace(/\s+/g, "-").toLowerCase()}`)?.scrollIntoView({ behavior: "smooth", block: "start" })}>{s.driverType}</td>
                       <td className="px-4 py-3 font-bold">{s.headphoneCount}</td>
                       <td className="px-4 py-3 font-black">{s.totalUsage}%</td>
                       <td className="px-4 py-3 text-sm opacity-50">{s.brandList}</td>
-                      <td className="px-4 py-3 text-sm"><a href={amazonLink(s.topKbd)} target="_blank" rel="noopener noreferrer" className="no-underline hover:opacity-80" style={{ color: "#b8956a", textDecoration: "none" }}>{s.topKbd.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</a></td>
+                      <td className="px-4 py-3 text-sm"><a href={amazonLink(s.topKbd)} target="_blank" rel="noopener noreferrer" className="no-underline hover:opacity-80" style={{ color: "#c9a227", textDecoration: "none" }}>{s.topKbd.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</a></td>
                       <td className="px-4 py-3">{`${s.avgImpedance}mm`}</td>
                       <td className="px-4 py-3">{s.avgPolling}kHz</td>
                       <td className="px-4 py-3">{s.avgWeight}g</td>
@@ -4436,19 +4436,19 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* Which headphones use each sensor */}
-            <SectionTitle color="#8a7460" sub="Every headphone in our database grouped by switch">Headphones by Driver</SectionTitle>
+            <SectionTitle color="#a68b1b" sub="Every headphone in our database grouped by switch">Headphones by Driver</SectionTitle>
             <div className="space-y-4 mb-8">
               {sensorProfiles.sort((a, b) => b.totalUsage - a.totalUsage).map((s, si) => (
-                <div key={s.driverType} id={`sensor-group-${s.driverType.replace(/\s+/g, "-").toLowerCase()}`} className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e8e4df", scrollMarginTop: 70 }}>
+                <div key={s.driverType} id={`sensor-group-${s.driverType.replace(/\s+/g, "-").toLowerCase()}`} className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6", scrollMarginTop: 70 }}>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <div className="text-sm font-black" style={{ color: "#6b635b" }}>{s.driverType}</div>
+                      <div className="text-sm font-black" style={{ color: "#7d6e1e" }}>{s.driverType}</div>
                       <div className="text-sm opacity-70">{s.totalUsage}% pro usage</div>
                     </div>
                     <div className="text-sm opacity-70">{s.headphoneCount} model{s.headphoneCount !== 1 ? "s" : ""}</div>
                   </div>
                   {s.headphones.length > 0 && (() => { const topM = s.headphones.sort((a, b) => b.proUsage - a.proUsage)[0]; return (
-                    <a href={amazonLink(topM.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mb-3 px-3 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#b8956a14", color: "#b8956a", border: "1px solid #b8956a18", textDecoration: "none" }}>
+                    <a href={amazonLink(topM.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mb-3 px-3 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#c9a22714", color: "#c9a227", border: "1px solid #c9a22718", textDecoration: "none" }}>
                       {I.cart(10)} Top pick: {topM.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")} — ${topM.price}
                     </a>
                   ); })()}
@@ -4466,15 +4466,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* Sensor popularity by game */}
-            <SectionTitle color="#b8956a" sub="Which mechanical drivers are favored by professionals across competitive titles">Driver Popularity by Game</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Which mechanical drivers are favored by professionals across competitive titles">Driver Popularity by Game</SectionTitle>
             <div className="flex flex-wrap gap-1.5 mb-4">
               {allGamesForSensor.map(g => (
                 <button key={g} onClick={() => setSensorGameFilter(g)}
                   className="px-3 py-1 rounded-full text-sm font-bold transition-all flex items-center gap-1.5"
                   style={{
-                    background: sensorGameFilter === g ? (gameColors[g] || "#8a7460") : "#0000000a",
+                    background: sensorGameFilter === g ? (gameColors[g] || "#a68b1b") : "#0000000a",
                     color: sensorGameFilter === g ?  "#1a1614" : "#2d2824",
-                    border: sensorGameFilter === g ? "none" : "1px solid #e8e4df",
+                    border: sensorGameFilter === g ? "none" : "1px solid #e6e3d6",
                   }}>
                   {g !== "All" && GAME_IMAGE_URLS[g] && <img loading="lazy" src={GAME_IMAGE_URLS[g]} alt={g} className="w-4 h-4 object-contain" />}
                   {g}
@@ -4483,7 +4483,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {(sensorGameFilter === "All" ? Object.keys(sensorByGame) : [sensorGameFilter]).filter(g => sensorByGame[g]).map(game => {
-                const gc = gameColors[game] || "#8a8078";
+                const gc = gameColors[game] || "#8a8460";
                 const entries = Object.entries(sensorByGame[game]).sort((a, b) => b[1] - a[1]);
                 const total = entries.reduce((a, e) => a + e[1], 0);
                 return (
@@ -4492,11 +4492,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div className="space-y-2">
                       {entries.slice(0, 5).map(([sensor, count], ei) => (
                         <div key={sensor} className="flex items-center gap-2">
-                          <div className="w-28 text-sm font-bold truncate" style={{ color: ei === 0 ? gc : "#8a8078" }}>{sensor}</div>
+                          <div className="w-28 text-sm font-bold truncate" style={{ color: ei === 0 ? gc : "#8a8460" }}>{sensor}</div>
                           <div className="flex-1 h-3 rounded-full overflow-hidden" style={{ background: "#0000000a" }}>
                             <div className="h-full rounded-full transition-all duration-700" style={{ width: `${(count / entries[0][1]) * 100}%`, background: ei === 0 ? gc : `${gc}40` }} />
                           </div>
-                          <div className="text-sm font-bold w-12 text-right" style={{ color: ei === 0 ? gc : "#a09890" }}>{Math.round((count / total) * 100)}%</div>
+                          <div className="text-sm font-bold w-12 text-right" style={{ color: ei === 0 ? gc : "#9e9578" }}>{Math.round((count / total) * 100)}%</div>
                         </div>
                       ))}
                     </div>
@@ -4508,7 +4508,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {/* Sensor specs comparison */}
             <SectionTitle color="#9060c4" sub="Technical specifications compared across all drivers">Driver Spec Comparison</SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="rounded-xl p-5" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-xl p-5" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <div className="text-sm uppercase tracking-widest opacity-30 mb-4">Impedance by Driver Type</div>
                 <div className="space-y-2">
                   {sensorProfiles.sort((a, b) => b.avgImpedance - a.avgImpedance).map((s, i) => (
@@ -4517,14 +4517,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <div className="flex-1 h-4 rounded-full overflow-hidden" style={{ background: "#0000000a" }}>
                         <div className="h-full rounded-full flex items-center justify-end pr-2 transition-all duration-700"
                           style={{ width: `${(s.avgImpedance / 4) * 100}%`, background: i === 0 ? "#9060c430" : "#00000008" }}>
-                          <span className="text-sm font-bold" style={{ color: i === 0 ? "#9060c4" : "#a09890", fontSize: 11 }}>{`${s.avgImpedance}mm`}</span>
+                          <span className="text-sm font-bold" style={{ color: i === 0 ? "#9060c4" : "#9e9578", fontSize: 11 }}>{`${s.avgImpedance}mm`}</span>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="rounded-xl p-5" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-xl p-5" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <div className="text-sm uppercase tracking-widest opacity-30 mb-4">Avg Freq. Response by Sensor</div>
                 <div className="space-y-2">
                   {sensorProfiles.sort((a, b) => b.avgPolling - a.avgPolling).map((s, i) => (
@@ -4532,8 +4532,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <div className="w-28 text-sm font-bold truncate">{s.driverType}</div>
                       <div className="flex-1 h-4 rounded-full overflow-hidden" style={{ background: "#0000000a" }}>
                         <div className="h-full rounded-full flex items-center justify-end pr-2 transition-all duration-700"
-                          style={{ width: `${(s.avgPolling / 20) * 100}%`, background: i === 0 ? "#8a746030" : "#00000008" }}>
-                          <span className="text-sm font-bold" style={{ color: i === 0 ? "#8a7460" : "#a09890", fontSize: 11 }}>{s.avgPolling}kHz</span>
+                          style={{ width: `${(s.avgPolling / 20) * 100}%`, background: i === 0 ? "#a68b1b30" : "#00000008" }}>
+                          <span className="text-sm font-bold" style={{ color: i === 0 ? "#a68b1b" : "#9e9578", fontSize: 11 }}>{s.avgPolling}kHz</span>
                         </div>
                       </div>
                     </div>
@@ -4543,13 +4543,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* Sensor Comparison Tool */}
-            <SectionTitle color="#b8956a" sub="Select two drivers to compare specs, usage, and popularity head-to-head">Driver vs Driver Comparison</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Select two drivers to compare specs, usage, and popularity head-to-head">Driver vs Driver Comparison</SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div>
                 <div className="text-sm uppercase tracking-widest opacity-30 mb-2">Driver A</div>
                 <select aria-label="Select first switch to compare" value={compareSensor1 || ""} onChange={e => setCompareSensor1(e.target.value || null)}
                   className="w-full px-4 py-3 rounded-xl text-sm cursor-pointer font-bold"
-                  style={{ background: "#ffffff", border: `1px solid ${compareSensor1 ? "#b8956a30" : "#00000012"}`, color: compareSensor1 ? "#b8956a" : "#6b635b" }}>
+                  style={{ background: "#ffffff", border: `1px solid ${compareSensor1 ? "#c9a22730" : "#00000012"}`, color: compareSensor1 ? "#c9a227" : "#7d6e1e" }}>
                   <option value="">Select sensor...</option>
                   {sensorProfiles.sort((a, b) => b.totalUsage - a.totalUsage).map(s => (
                     <option key={s.driverType} value={s.driverType}>{s.driverType} ({s.totalUsage}% usage)</option>
@@ -4560,7 +4560,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 <div className="text-sm uppercase tracking-widest opacity-30 mb-2">Driver B</div>
                 <select aria-label="Select second switch to compare" value={compareSensor2 || ""} onChange={e => setCompareSensor2(e.target.value || null)}
                   className="w-full px-4 py-3 rounded-xl text-sm cursor-pointer font-bold"
-                  style={{ background: "#ffffff", border: `1px solid ${compareSensor2 ? "#8a746030" : "#00000012"}`, color: compareSensor2 ? "#8a7460" : "#6b635b" }}>
+                  style={{ background: "#ffffff", border: `1px solid ${compareSensor2 ? "#a68b1b30" : "#00000012"}`, color: compareSensor2 ? "#a68b1b" : "#7d6e1e" }}>
                   <option value="">Select sensor...</option>
                   {sensorProfiles.sort((a, b) => b.totalUsage - a.totalUsage).map(s => (
                     <option key={s.driverType} value={s.driverType}>{s.driverType} ({s.totalUsage}% usage)</option>
@@ -4573,7 +4573,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const s1 = sensorProfiles.find(s => s.driverType === compareSensor1);
               const s2 = sensorProfiles.find(s => s.driverType === compareSensor2);
               if (!s1 || !s2) return null;
-              const c1 = "#b8956a", c2 = "#8a7460";
+              const c1 = "#c9a227", c2 = "#a68b1b";
               const compareRows = [
                 { label: "Pro Usage", v1: `${s1.totalUsage}%`, v2: `${s2.totalUsage}%`, n1: s1.totalUsage, n2: s2.totalUsage, higher: "more" },
                 { label: "Headphone Models", v1: s1.headphoneCount, v2: s2.headphoneCount, n1: s1.headphoneCount, n2: s2.headphoneCount, higher: "more" },
@@ -4587,7 +4587,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const s1Wins = compareRows.filter(r => r.higher !== "none" && ((r.higher === "more" && r.n1 > r.n2) || (r.higher === "less" && r.n1 < r.n2))).length;
               const s2Wins = compareRows.filter(r => r.higher !== "none" && ((r.higher === "more" && r.n2 > r.n1) || (r.higher === "less" && r.n2 < r.n1))).length;
               return (
-                <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e8e4df" }}>
+                <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e6e3d6" }}>
                   <div className="grid grid-cols-3" style={{ background: "#ffffff" }}>
                     <div className="p-4 text-center">
                       <div className="text-base sm:text-lg font-black text-center sm:text-left" style={{ color: c1 }}>{s1.driverType}</div>
@@ -4608,9 +4608,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   {compareRows.map((row, ri) => {
                     const winner = row.higher === "none" ? "none" : row.higher === "more" ? (row.n1 > row.n2 ? "s1" : row.n2 > row.n1 ? "s2" : "tie") : (row.n1 < row.n2 ? "s1" : row.n2 < row.n1 ? "s2" : "tie");
                     return (
-                      <div key={ri} className="grid grid-cols-3" style={{ background: ri % 2 === 0 ? "#f5f0e8" : "#f5f2ee", borderTop: "1px solid #00000008" }}>
+                      <div key={ri} className="grid grid-cols-3" style={{ background: ri % 2 === 0 ? "#f5f2e6" : "#f5f3ea", borderTop: "1px solid #00000008" }}>
                         <div className="p-3 text-center">
-                          <span className="text-sm font-bold" style={{ color: winner === "s1" ? c1 : "#8a8078" }}>{row.v1}</span>
+                          <span className="text-sm font-bold" style={{ color: winner === "s1" ? c1 : "#8a8460" }}>{row.v1}</span>
                           {winner === "s1" && <span className="ml-1 text-sm" style={{ color: c1 }}><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></span>}
                         </div>
                         <div className="p-3 text-center">
@@ -4624,12 +4624,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         </div>
                         <div className="p-3 text-center">
                           {winner === "s2" && <span className="mr-1 text-sm" style={{ color: c2 }}><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></span>}
-                          <span className="text-sm font-bold" style={{ color: winner === "s2" ? c2 : "#8a8078" }}>{row.v2}</span>
+                          <span className="text-sm font-bold" style={{ color: winner === "s2" ? c2 : "#8a8460" }}>{row.v2}</span>
                         </div>
                       </div>
                     );
                   })}
-                  <div className="grid grid-cols-2" style={{ background: "#ffffff", borderTop: "1px solid #e8e4df" }}>
+                  <div className="grid grid-cols-2" style={{ background: "#ffffff", borderTop: "1px solid #e6e3d6" }}>
                     <div className="p-4">
                       <div className="text-sm uppercase tracking-widest opacity-20 mb-2">Headphones with {s1.driverType}</div>
                       <div className="flex flex-wrap gap-1.5">
@@ -4654,7 +4654,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 </div>
               );
             })() : (
-              <div className="rounded-2xl p-8 text-center" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="rounded-2xl p-8 text-center" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <div className="text-2xl sm:text-3xl mb-2 opacity-20 text-center"><span className="inline-flex gap-2">{I.lab(28)}{I.bolt(28)}{I.lab(28)}</span></div>
                 <div className="text-sm opacity-30">Select two sensors above to compare them head-to-head</div>
               </div>
@@ -4679,7 +4679,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       setCompareList(newList);
                     }}
                     className="w-full px-4 py-3 rounded-xl text-sm font-bold mb-4"
-                    style={{ background: "#ffffff", border: `1px solid ${BRAND_COLORS[compareList[idx]?.brand] || "#a09890"}40`, color: BRAND_COLORS[compareList[idx]?.brand] || "#6b635b" }}
+                    style={{ background: "#ffffff", border: `1px solid ${BRAND_COLORS[compareList[idx]?.brand] || "#9e9578"}40`, color: BRAND_COLORS[compareList[idx]?.brand] || "#7d6e1e" }}
                   >
                     {headphones.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
                   </select>
@@ -4687,7 +4687,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div className="rounded-2xl p-5 text-center" style={{ background: `${BRAND_COLORS[compareList[idx].brand]}08`, border: `1px solid ${BRAND_COLORS[compareList[idx].brand]}20` }}>
                       {getHeadphoneImage(compareList[idx].name) && <img loading="lazy" src={getHeadphoneImage(compareList[idx].name)} alt={compareList[idx].name} className="h-16 w-full mx-auto mb-3 object-contain object-center" style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.08))" }} />}
                       <div className="text-xl font-black" style={{ color: BRAND_COLORS[compareList[idx].brand] }}>{compareList[idx].name}</div>
-                      <div className="text-xs mt-1" style={{ color: "#a09890" }}>{compareList[idx].brand}</div>
+                      <div className="text-xs mt-1" style={{ color: "#9e9578" }}>{compareList[idx].brand}</div>
                     </div>
                   )}
                 </div>
@@ -4717,13 +4717,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   if (w === 0) wins0++; else if (w === 1) wins1++;
                 }
               });
-              const verdictColor = wins0 > wins1 ? c0 : wins1 > wins0 ? c1 : "#a09890";
+              const verdictColor = wins0 > wins1 ? c0 : wins1 > wins0 ? c1 : "#9e9578";
               const verdictName = wins0 > wins1 ? compareList[0].name : wins1 > wins0 ? compareList[1].name : null;
               return (
               <div>
                 {/* Verdict banner */}
                 <div className="rounded-xl p-5 mb-6 text-center" style={{ background: `${verdictColor}08`, border: `1px solid ${verdictColor}20` }}>
-                  <div className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{ color: "#a09890", letterSpacing: 2 }}>Spec Comparison Verdict</div>
+                  <div className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{ color: "#9e9578", letterSpacing: 2 }}>Spec Comparison Verdict</div>
                   <div className="text-base sm:text-lg font-black text-center" style={{ color: verdictColor }}>
                     {verdictName ? `${verdictName} wins ${Math.max(wins0, wins1)}-${Math.min(wins0, wins1)}` : `Tied ${wins0}-${wins1}`}
                   </div>
@@ -4740,7 +4740,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
                         <a href={amazonLink(winnerKbd.name)} target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center gap-3 px-6 py-3 rounded-xl text-sm font-black transition-all hover:scale-[1.03] no-underline"
-                          style={{ background: winnerCol, color: "#f5f2ee", boxShadow: `0 0 20px ${winnerCol}30`, textDecoration: "none" }}>
+                          style={{ background: winnerCol, color: "#f5f3ea", boxShadow: `0 0 20px ${winnerCol}30`, textDecoration: "none" }}>
                           {getHeadphoneImage(winnerKbd.name) ? <img loading="lazy" src={getHeadphoneImage(winnerKbd.name)} alt={`${winnerKbd.name} gaming headphone`} className="h-6 object-contain" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.05))" }} /> : null}
                           {I.cart(14, "#fff")} 🏆 Get the Winner — {winnerKbd.name.split(" ").slice(-3).join(" ")} {"$"}{winnerKbd.price}
                         </a>
@@ -4754,19 +4754,19 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   })()}
                 </div>
 
-                <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e8e4df" }}>
+                <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e6e3d6" }}>
                   {specs.map((spec, i) => {
                     const v0 = compareList[0][spec.key];
                     const v1 = compareList[1][spec.key];
                     const isNum = typeof v0 === "number";
                     const winner = !isNum ? null : spec.lower ? (v0 < v1 ? 0 : v0 > v1 ? 1 : null) : (v0 > v1 ? 0 : v0 < v1 ? 1 : null);
                     return (
-                      <div key={i} className="grid grid-cols-3 items-center" style={{ background: i % 2 === 0 ? "#f5f0e8" : "#f5f2ee", borderBottom: "1px solid #00000008" }}>
-                        <div className="px-4 py-3 text-right font-bold text-sm" style={{ color: winner === 0 ? c0 : "#6b635b" }}>
+                      <div key={i} className="grid grid-cols-3 items-center" style={{ background: i % 2 === 0 ? "#f5f2e6" : "#f5f3ea", borderBottom: "1px solid #00000008" }}>
+                        <div className="px-4 py-3 text-right font-bold text-sm" style={{ color: winner === 0 ? c0 : "#7d6e1e" }}>
                           {spec.prefix}{v0}{typeof v0 === "number" ? spec.unit : ""} {winner === 0 && <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style={{display:"inline"}}><path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>}
                         </div>
                         <div className="px-4 py-3 text-center text-sm uppercase tracking-widest opacity-30">{spec.label}</div>
-                        <div className="px-4 py-3 text-left font-bold text-sm" style={{ color: winner === 1 ? c1 : "#6b635b" }}>
+                        <div className="px-4 py-3 text-left font-bold text-sm" style={{ color: winner === 1 ? c1 : "#7d6e1e" }}>
                           {winner === 1 && <><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style={{display:"inline",verticalAlign:"middle"}}><path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>{" "}</>}{spec.prefix}{v1}{typeof v1 === "number" ? spec.unit : ""}
                         </div>
                       </div>
@@ -4774,7 +4774,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   })}
                 </div>
 
-                <div className="mt-8 rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                <div className="mt-8 rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                   <div className="text-sm font-bold mb-4 opacity-60 text-center">Performance Radar Overlay</div>
                   <ResponsiveContainer width="100%" height={300}>
                     <RadarChart data={[
@@ -4785,8 +4785,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       { stat: "Rating", a: compareList[0].rating * 10, b: compareList[1].rating * 10 },
                       { stat: "Value", a: Math.max(0, 100 - (compareList[0].price / 2)), b: Math.max(0, 100 - (compareList[1].price / 2)) },
                     ]}>
-                      <PolarGrid stroke="#e8e4df" />
-                      <PolarAngleAxis dataKey="stat" tick={{ fill: "#6b635b", fontSize: 13 }} />
+                      <PolarGrid stroke="#e6e3d6" />
+                      <PolarAngleAxis dataKey="stat" tick={{ fill: "#7d6e1e", fontSize: 13 }} />
                       <PolarRadiusAxis tick={false} axisLine={false} domain={[0, 100]} />
                       <Radar name={compareList[0].name} dataKey="a" stroke={BRAND_COLORS[compareList[0].brand]} fill={BRAND_COLORS[compareList[0].brand]} fillOpacity={0.15} strokeWidth={2} />
                       <Radar name={compareList[1].name} dataKey="b" stroke={BRAND_COLORS[compareList[1].brand]} fill={BRAND_COLORS[compareList[1].brand]} fillOpacity={0.15} strokeWidth={2} />
@@ -4978,7 +4978,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           const maxScore = quizDone ? Math.max(...getResults().map(r => r.score)) : 0;
 
-          const accent = "#b8956a";
+          const accent = "#c9a227";
           const stepLabels = ["Welcome", "Hand Size", "Grip Style", "Games", "Priorities", "Weight", "Shape", "Connection", "Budget"];
           const totalSteps = 9;
 
@@ -4987,8 +4987,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               className={`rounded-xl text-left transition-all duration-100 ${large ? "p-4 sm:p-5" : "p-3 sm:p-4"}`}
               style={{
                 background: selected ? `${color || accent}15` : "#ffffff",
-                border: selected ? `2px solid ${color || accent}` : "1px solid #d4cfc8",
-                boxShadow: selected ? `0 2px 0 ${color || accent}60, 0 0 20px ${color || accent}15` : `0 2px 0 #d4cfc8`,
+                border: selected ? `2px solid ${color || accent}` : "1px solid #d4d0be",
+                boxShadow: selected ? `0 2px 0 ${color || accent}60, 0 0 20px ${color || accent}15` : `0 2px 0 #d4d0be`,
                 transform: selected ? "translateY(1px)" : "translateY(0)",
               }}>
               {children}
@@ -4997,7 +4997,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           return (
           <div>
-            <SectionTitle color="#b8956a" sub={`Unique tools to help you get the most out of your headphone — powered by data from ${allPlayers.length}+ pro players`}>The Lab</SectionTitle>
+            <SectionTitle color="#c9a227" sub={`Unique tools to help you get the most out of your headphone — powered by data from ${allPlayers.length}+ pro players`}>The Lab</SectionTitle>
 
             {!quizDone ? (
               <div className={quizStep === 0 ? "max-w-4xl mx-auto" : "max-w-2xl mx-auto"}>
@@ -5009,7 +5009,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <span className="text-sm opacity-30">{stepLabels[quizStep]}</span>
                     </div>
                     <div className="h-1 rounded-full overflow-hidden" style={{ background: "#00000008" }}>
-                      <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(quizStep / (totalSteps - 1)) * 100}%`, background: `linear-gradient(to right, #b8956a, #6b635b)` }} />
+                      <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(quizStep / (totalSteps - 1)) * 100}%`, background: `linear-gradient(to right, #c9a227, #7d6e1e)` }} />
                     </div>
                   </div>
                 )}
@@ -5017,7 +5017,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 {/* Step 0: Intro */}
                 {quizStep === 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="rounded-2xl p-8 sm:p-10 text-center flex flex-col relative overflow-hidden" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                    <div className="rounded-2xl p-8 sm:p-10 text-center flex flex-col relative overflow-hidden" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                       <div className="absolute top-0 left-0 right-0 h-2" style={{ background: accent }} />
                       <FlaskConical size={48} style={{ color: accent, margin: "0 auto 20px" }} />
                       <div className="text-xl sm:text-2xl font-black mb-4" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: accent }}>Find Your Perfect Headphone</div>
@@ -5047,13 +5047,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         Compare Headphones →
                       </button>
                     </div>
-                    <div className="rounded-2xl p-8 sm:p-10 text-center flex flex-col relative overflow-hidden" style={{ background: "#ffffff", border: "1px solid #b8956a15" }}>
-                      <div className="absolute top-0 left-0 right-0 h-2" style={{ background: "#b8956a" }} />
-                      <Layers size={48} style={{ color: "#6b635b", margin: "0 auto 20px" }} />
-                      <div className="text-xl sm:text-2xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#6b635b" }}>Shape Overlay</div>
+                    <div className="rounded-2xl p-8 sm:p-10 text-center flex flex-col relative overflow-hidden" style={{ background: "#ffffff", border: "1px solid #c9a22715" }}>
+                      <div className="absolute top-0 left-0 right-0 h-2" style={{ background: "#c9a227" }} />
+                      <Layers size={48} style={{ color: "#7d6e1e", margin: "0 auto 20px" }} />
+                      <div className="text-xl sm:text-2xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#7d6e1e" }}>Shape Overlay</div>
                       <div className="mb-4 flex flex-wrap gap-1.5 justify-center">
-                        <span className="text-sm font-bold px-2 py-0.5 rounded-full" style={{ background: "#b8956a15", color: "#6b635b", border: "1px solid #b8956a30", fontSize: 12 }}>BETA</span>
-                        <span className="text-sm font-bold px-2 py-0.5 rounded-full" style={{ background: "#b8956a18", color: "#b8956a", border: "1px solid #b8956a30", fontSize: 12 }}>🚧 UNDER CONSTRUCTION</span>
+                        <span className="text-sm font-bold px-2 py-0.5 rounded-full" style={{ background: "#c9a22715", color: "#7d6e1e", border: "1px solid #c9a22730", fontSize: 12 }}>BETA</span>
+                        <span className="text-sm font-bold px-2 py-0.5 rounded-full" style={{ background: "#c9a22718", color: "#c9a227", border: "1px solid #c9a22730", fontSize: 12 }}>🚧 UNDER CONSTRUCTION</span>
                       </div>
                       <p className="text-sm opacity-85 max-w-lg mx-auto leading-relaxed mb-2">
                         Overlay actual headphone images scaled to real dimensions — instantly see how any two headphones compare in size from all {headphones.filter(m => HEADPHONE_DIMS[m.name] && getHeadphoneImage(m.name)).length} headphones.
@@ -5061,35 +5061,35 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <p className="text-sm opacity-25 mb-4">See exactly how two headphones compare in shape.</p>
                       <div className="flex-1" />
                       <div className="px-8 py-3 rounded-xl font-black text-sm text-center"
-                        style={{ background: "#b8956a20", color: "#b8956a50", border: "1px solid #b8956a20", cursor: "not-allowed" }}>
+                        style={{ background: "#c9a22720", color: "#c9a22750", border: "1px solid #c9a22720", cursor: "not-allowed" }}>
                         🚧 Under Construction
                       </div>
-                      <div className="text-sm opacity-30 mt-2 text-center"><button onClick={() => setNewsletterPopup(true)} className="underline font-bold transition-all hover:opacity-100" style={{ color: "#b8956a", opacity: 1, cursor: "pointer" }}>Subscribe to our newsletter</button> for updates</div>
+                      <div className="text-sm opacity-30 mt-2 text-center"><button onClick={() => setNewsletterPopup(true)} className="underline font-bold transition-all hover:opacity-100" style={{ color: "#c9a227", opacity: 1, cursor: "pointer" }}>Subscribe to our newsletter</button> for updates</div>
                     </div>
                   </div>
                 )}
 
                 {/* Step 1: Hand Size */}
                 {quizStep === 1 && (
-                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-xl font-black mb-1" style={{ color: accent }}>What's your hand size?</div>
-                    <p className="text-sm mb-6" style={{ color: "#a09890" }}>Measure from the base of your palm to the tip of your middle finger (length), and across your knuckles (width).</p>
+                    <p className="text-sm mb-6" style={{ color: "#9e9578" }}>Measure from the base of your palm to the tip of your middle finger (length), and across your knuckles (width).</p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                       {/* Visual guide */}
-                      <div className="rounded-xl p-5 flex flex-col items-center" style={{ background: "#00000008", border: "1px solid #e8e4df" }}>
+                      <div className="rounded-xl p-5 flex flex-col items-center" style={{ background: "#00000008", border: "1px solid #e6e3d6" }}>
                         <svg width="140" height="200" viewBox="0 0 140 200" fill="none">
                           <path d="M70 10 C55 10, 30 20, 25 50 L20 90 C18 100, 25 105, 32 100 L35 80 M70 10 C60 10, 45 15, 40 35 L38 70 M70 10 C65 10, 55 12, 50 30 L48 75 M70 10 C75 10, 85 12, 90 30 L92 75 M70 10 C85 10, 105 20, 108 45 L108 65 C108 72, 104 73, 102 68 L100 55 M25 95 C22 110, 25 140, 35 160 L40 175 C50 190, 90 190, 100 175 L105 160 C115 140, 118 110, 108 80" stroke={accent} strokeWidth="2" strokeLinecap="round" opacity="0.6" />
                           {/* Length arrow */}
-                          <line x1="130" y1="15" x2="130" y2="185" stroke="#a09890" strokeWidth="1" strokeDasharray="3 3" />
-                          <polygon points="130,15 127,22 133,22" fill="#a09890" />
-                          <polygon points="130,185 127,178 133,178" fill="#a09890" />
-                          <text x="125" y="100" fill="#8a8078" fontSize="8" textAnchor="end" transform="rotate(-90, 125, 100)">LENGTH</text>
+                          <line x1="130" y1="15" x2="130" y2="185" stroke="#9e9578" strokeWidth="1" strokeDasharray="3 3" />
+                          <polygon points="130,15 127,22 133,22" fill="#9e9578" />
+                          <polygon points="130,185 127,178 133,178" fill="#9e9578" />
+                          <text x="125" y="100" fill="#8a8460" fontSize="8" textAnchor="end" transform="rotate(-90, 125, 100)">LENGTH</text>
                           {/* Width arrow */}
-                          <line x1="20" y1="195" x2="115" y2="195" stroke="#a09890" strokeWidth="1" strokeDasharray="3 3" />
-                          <polygon points="20,195 27,192 27,198" fill="#a09890" />
-                          <polygon points="115,195 108,192 108,198" fill="#a09890" />
-                          <text x="67" y="192" fill="#8a8078" fontSize="8" textAnchor="middle">WIDTH</text>
+                          <line x1="20" y1="195" x2="115" y2="195" stroke="#9e9578" strokeWidth="1" strokeDasharray="3 3" />
+                          <polygon points="20,195 27,192 27,198" fill="#9e9578" />
+                          <polygon points="115,195 108,192 108,198" fill="#9e9578" />
+                          <text x="67" y="192" fill="#8a8460" fontSize="8" textAnchor="middle">WIDTH</text>
                         </svg>
                       </div>
 
@@ -5128,9 +5128,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {/* Step 2: Grip Style */}
                 {quizStep === 2 && (
-                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-xl font-black mb-1" style={{ color: accent }}>What do you prioritize in a headphone?</div>
-                    <p className="text-sm mb-6" style={{ color: "#a09890" }}>Choose what matters most in your competitive headphone setup.</p>
+                    <p className="text-sm mb-6" style={{ color: "#9e9578" }}>Choose what matters most in your competitive headphone setup.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[
                         { id: "palm", label: "Comfort & Stability", desc: "A heavier, full-featured headphone with a complete layout. Stability during intense gameplay and no compromises on key access.", icon: "⌨️", tips: "Full layout · Heavier · All keys" },
@@ -5140,9 +5140,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <OptionButton key={g.id} selected={quizAnswers.grip === g.id} onClick={() => setAnswer("grip", g.id)} large>
                           <div className="text-center">
                             <div className="text-3xl mb-3">{g.icon}</div>
-                            <div className="text-sm font-black mb-2" style={{ color: quizAnswers.grip === g.id ? accent : "#6b635b" }}>{g.label}</div>
+                            <div className="text-sm font-black mb-2" style={{ color: quizAnswers.grip === g.id ? accent : "#7d6e1e" }}>{g.label}</div>
                             <div className="text-sm opacity-85 leading-relaxed mb-3">{g.desc}</div>
-                            <div className="text-sm px-2 py-1 rounded-lg inline-block" style={{ background: "#0000000a", color: "#a09890", fontSize: 12 }}>{g.tips}</div>
+                            <div className="text-sm px-2 py-1 rounded-lg inline-block" style={{ background: "#0000000a", color: "#9e9578", fontSize: 12 }}>{g.tips}</div>
                           </div>
                         </OptionButton>
                       ))}
@@ -5152,9 +5152,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {/* Step 3: Games */}
                 {quizStep === 3 && (
-                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-xl font-black mb-1" style={{ color: accent }}>What games do you play?</div>
-                    <p className="text-sm mb-6" style={{ color: "#a09890" }}>Select all that apply. This helps us match headphones that pros use in your games.</p>
+                    <p className="text-sm mb-6" style={{ color: "#9e9578" }}>Select all that apply. This helps us match headphones that pros use in your games.</p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {[
                         { id: "CS2", label: "Counter-Strike 2", color: "#c47000" },
@@ -5174,7 +5174,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           <div className="flex items-center gap-2">
                             {GAME_IMAGE_URLS[g.id] && <img loading="lazy" src={GAME_IMAGE_URLS[g.id]} alt={g.label} className="w-5 h-5 object-contain" />}
                             <div>
-                              <div className="text-sm font-bold" style={{ color: quizAnswers.games.includes(g.id) ? g.color : "#6b635b" }}>{g.label}</div>
+                              <div className="text-sm font-bold" style={{ color: quizAnswers.games.includes(g.id) ? g.color : "#7d6e1e" }}>{g.label}</div>
                             </div>
                           </div>
                         </OptionButton>
@@ -5188,9 +5188,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {/* Step 4: Priorities */}
                 {quizStep === 4 && (
-                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-xl font-black mb-1" style={{ color: accent }}>What matters most to you?</div>
-                    <p className="text-sm mb-6" style={{ color: "#a09890" }}>Select up to 3 priorities. This shapes how we rank your recommendations.</p>
+                    <p className="text-sm mb-6" style={{ color: "#9e9578" }}>Select up to 3 priorities. This shapes how we rank your recommendations.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
                         { id: "weight", label: "Lightweight", desc: "Lighter = faster flicks and less fatigue", icon: "⚡" },
@@ -5205,7 +5205,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           <div className="flex items-center gap-3">
                             <span className="text-xl">{p.icon}</span>
                             <div>
-                              <div className="text-sm font-bold" style={{ color: quizAnswers.priorities.includes(p.id) ? accent : "#6b635b" }}>{p.label}</div>
+                              <div className="text-sm font-bold" style={{ color: quizAnswers.priorities.includes(p.id) ? accent : "#7d6e1e" }}>{p.label}</div>
                               <div className="text-sm opacity-85">{p.desc}</div>
                             </div>
                           </div>
@@ -5218,9 +5218,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {/* Step 5: Weight */}
                 {quizStep === 5 && (
-                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-xl font-black mb-1" style={{ color: accent }}>Weight preference?</div>
-                    <p className="text-sm mb-6" style={{ color: "#a09890" }}>What weight range do you prefer?</p>
+                    <p className="text-sm mb-6" style={{ color: "#9e9578" }}>What weight range do you prefer?</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
                         { id: "ultralight", label: "Ultralight", range: "Under 250g", desc: "Barely noticeable on your head. Marathon gaming sessions.", example: "Logitech G435, HyperX Cloud Alpha" },
@@ -5229,7 +5229,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         { id: "heavy", label: "Heavy / Don't Care", range: "350g+", desc: "Maximum features and build quality, or weight isn't a factor.", example: "ASTRO A50, SteelSeries Arctis Nova Pro Wireless" },
                       ].map(w => (
                         <OptionButton key={w.id} selected={quizAnswers.weightPref === w.id} onClick={() => setAnswer("weightPref", w.id)} large>
-                          <div className="text-sm font-black mb-1" style={{ color: quizAnswers.weightPref === w.id ? accent : "#6b635b" }}>{w.label}</div>
+                          <div className="text-sm font-black mb-1" style={{ color: quizAnswers.weightPref === w.id ? accent : "#7d6e1e" }}>{w.label}</div>
                           <div className="text-sm font-bold mb-1" style={{ color: accent, opacity: 0.6 }}>{w.range}</div>
                           <div className="text-sm opacity-85 mb-2">{w.desc}</div>
                           <div className="text-sm opacity-20" style={{ fontSize: 12 }}>e.g. {w.example}</div>
@@ -5241,9 +5241,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {/* Step 6: Shape */}
                 {quizStep === 6 && (
-                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-xl font-black mb-1" style={{ color: accent }}>Shape preference?</div>
-                    <p className="text-sm mb-6" style={{ color: "#a09890" }}>Ergonomic headphones are contoured for your right hand. Symmetrical headphones work for any hand.</p>
+                    <p className="text-sm mb-6" style={{ color: "#9e9578" }}>Ergonomic headphones are contoured for your right hand. Symmetrical headphones work for any hand.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[
                         { id: "ergonomic", label: "Ergonomic", desc: "Right-hand contoured. Natural resting position. Great for palm grip and long sessions.", icon: "🤚" },
@@ -5253,7 +5253,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <OptionButton key={s.id} selected={quizAnswers.shape === s.id} onClick={() => setAnswer("shape", s.id)} large>
                           <div className="text-center">
                             <div className="text-2xl mb-2">{s.icon}</div>
-                            <div className="text-sm font-black mb-2" style={{ color: quizAnswers.shape === s.id ? accent : "#6b635b" }}>{s.label}</div>
+                            <div className="text-sm font-black mb-2" style={{ color: quizAnswers.shape === s.id ? accent : "#7d6e1e" }}>{s.label}</div>
                             <div className="text-sm opacity-85 leading-relaxed">{s.desc}</div>
                           </div>
                         </OptionButton>
@@ -5264,9 +5264,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {/* Step 7: Connectivity */}
                 {quizStep === 7 && (
-                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-xl font-black mb-1" style={{ color: accent }}>Wired or wireless?</div>
-                    <p className="text-sm mb-6" style={{ color: "#a09890" }}>Modern wireless headphones have zero perceptible latency difference vs wired. 98% of pros use wireless.</p>
+                    <p className="text-sm mb-6" style={{ color: "#9e9578" }}>Modern wireless headphones have zero perceptible latency difference vs wired. 98% of pros use wireless.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[
                         { id: "wireless", label: "Wireless Only", desc: "No cable drag. Freedom of movement. The pro standard.", icon: "📡" },
@@ -5276,7 +5276,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         <OptionButton key={c.id} selected={quizAnswers.connectivity === c.id} onClick={() => setAnswer("connectivity", c.id)} large>
                           <div className="text-center">
                             <div className="text-2xl mb-2">{c.icon}</div>
-                            <div className="text-sm font-black mb-2" style={{ color: quizAnswers.connectivity === c.id ? accent : "#6b635b" }}>{c.label}</div>
+                            <div className="text-sm font-black mb-2" style={{ color: quizAnswers.connectivity === c.id ? accent : "#7d6e1e" }}>{c.label}</div>
                             <div className="text-sm opacity-85 leading-relaxed">{c.desc}</div>
                           </div>
                         </OptionButton>
@@ -5287,19 +5287,19 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                 {/* Step 8: Budget */}
                 {quizStep === 8 && (
-                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                     <div className="text-xl font-black mb-1" style={{ color: accent }}>What's your budget?</div>
-                    <p className="text-sm mb-6" style={{ color: "#a09890" }}>There are excellent headphones at every price point.</p>
+                    <p className="text-sm mb-6" style={{ color: "#9e9578" }}>There are excellent headphones at every price point.</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {[
-                        { id: "under80", label: "Under $80", desc: "Budget-friendly", color: "#6b635b" },
-                        { id: "80to120", label: "$80 – $120", desc: "Mid-range", color: "#8a7460" },
-                        { id: "120to160", label: "$120 – $160", desc: "Premium", color: "#6b635b" },
-                        { id: "nolimit", label: "No Limit", desc: "Best regardless", color: "#b8956a" },
+                        { id: "under80", label: "Under $80", desc: "Budget-friendly", color: "#7d6e1e" },
+                        { id: "80to120", label: "$80 – $120", desc: "Mid-range", color: "#a68b1b" },
+                        { id: "120to160", label: "$120 – $160", desc: "Premium", color: "#7d6e1e" },
+                        { id: "nolimit", label: "No Limit", desc: "Best regardless", color: "#c9a227" },
                       ].map(b => (
                         <OptionButton key={b.id} selected={quizAnswers.budget === b.id} onClick={() => setAnswer("budget", b.id)} color={b.color} large>
                           <div className="text-center">
-                            <div className="text-sm font-black mb-1" style={{ color: quizAnswers.budget === b.id ? b.color : "#6b635b" }}>{b.label}</div>
+                            <div className="text-sm font-black mb-1" style={{ color: quizAnswers.budget === b.id ? b.color : "#7d6e1e" }}>{b.label}</div>
                             <div className="text-sm opacity-85">{b.desc}</div>
                           </div>
                         </OptionButton>
@@ -5313,12 +5313,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="flex justify-between mt-6">
                     <button onClick={() => setQuizStep(prev => prev - 1)}
                       className="px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:bg-stone-100"
-                      style={{ background: "#00000008", border: "1px solid #d4cfc8" }}>
+                      style={{ background: "#00000008", border: "1px solid #d4d0be" }}>
                       ← Back
                     </button>
                     <button onClick={nextStep} disabled={!canProceed()}
                       className="px-6 py-2.5 rounded-xl text-sm font-black transition-all hover:scale-105 disabled:opacity-20 disabled:hover:scale-100"
-                      style={{ background: canProceed() ? accent : "#00000010", color: canProceed() ? "#1a1614" : "#a09890" }}>
+                      style={{ background: canProceed() ? accent : "#00000010", color: canProceed() ? "#1a1614" : "#9e9578" }}>
                       {quizStep === 8 ? "See My Results →" : "Next →"}
                     </button>
                   </div>
@@ -5337,7 +5337,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="flex gap-2 flex-shrink-0">
                     <button onClick={() => { setQuizDone(false); setQuizStep(0); setQuizAnswers({ handLength: "", handWidth: "", grip: "", games: [], priorities: [], weightPref: "", connectivity: "", budget: "", shape: "" }); }}
                       className="px-4 py-2 rounded-lg text-sm font-bold transition-all hover:bg-stone-100"
-                      style={{ background: "#00000008", border: "1px solid #d4cfc8" }}>
+                      style={{ background: "#00000008", border: "1px solid #d4d0be" }}>
                       ↺ Retake Quiz
                     </button>
                     <button onClick={() => { setQuizDone(false); setQuizStep(0); window.scrollTo({ top: 0, behavior: "smooth" }); }}
@@ -5351,7 +5351,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 <div className="space-y-4">
                   {getResults().map((r, i) => {
                     const m = r.kbd;
-                    const brandCol = BRAND_COLORS[m.brand] || "#8a8078";
+                    const brandCol = BRAND_COLORS[m.brand] || "#8a8460";
                     const matchPct = Math.min(99, Math.max(40, Math.round((r.score / maxScore) * 98)));
                     const isTop = i === 0;
                     return (
@@ -5360,7 +5360,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         onClick={() => { navigateToHeadphone(m); }}
                         style={{
                           background: isTop ? `${brandCol}10` : "#ffffff",
-                          border: isTop ? `2px solid ${brandCol}40` : "1px solid #e8e4df",
+                          border: isTop ? `2px solid ${brandCol}40` : "1px solid #e6e3d6",
                           boxShadow: isTop ? `0 0 30px ${brandCol}10` : "none",
                         }}>
                         <div className="flex items-start gap-4">
@@ -5369,8 +5369,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             <div className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black"
                               style={{
                                 background: i === 0 ? "#fbbf2420" : i === 1 ? "#94a3b820" : i === 2 ? "#cd7f3220" : "#00000008",
-                                color: i === 0 ? "#fbbf24" : i === 1 ? "#94a3b8" : i === 2 ? "#cd7f32" : "#a09890",
-                                border: i < 3 ? `1px solid ${i === 0 ? "#fbbf24" : i === 1 ? "#94a3b8" : "#cd7f32"}30` : "1px solid #e8e4df",
+                                color: i === 0 ? "#fbbf24" : i === 1 ? "#94a3b8" : i === 2 ? "#cd7f32" : "#9e9578",
+                                border: i < 3 ? `1px solid ${i === 0 ? "#fbbf24" : i === 1 ? "#94a3b8" : "#cd7f32"}30` : "1px solid #e6e3d6",
                               }}>
                               #{i + 1}
                             </div>
@@ -5395,9 +5395,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                               </div>
                               <div className="flex-shrink-0 text-center">
                                 <div className="w-14 h-14 rounded-lg flex items-center justify-center font-black text-lg transition-all" style={{
-                                  background: matchPct >= 80 ? "#b8956a20" : matchPct >= 60 ? "#6b635b20" : "#b8956a20",
-                                  border: `2px solid ${matchPct >= 80 ? "#b8956a" : matchPct >= 60 ? "#6b635b" : "#b8956a"}`,
-                                  color: matchPct >= 80 ? "#b8956a" : matchPct >= 60 ? "#6b635b" : "#b8956a"
+                                  background: matchPct >= 80 ? "#c9a22720" : matchPct >= 60 ? "#7d6e1e20" : "#c9a22720",
+                                  border: `2px solid ${matchPct >= 80 ? "#c9a227" : matchPct >= 60 ? "#7d6e1e" : "#c9a227"}`,
+                                  color: matchPct >= 80 ? "#c9a227" : matchPct >= 60 ? "#7d6e1e" : "#c9a227"
                                 }}>{matchPct}%</div>
                                 <div className="text-xs opacity-25 mt-1">match</div>
                               </div>
@@ -5470,7 +5470,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── SHAPES TAB ── */}
         {activeTab === "shapes" && (
           <div>
-            <SectionTitle color="#b8956a" sub="Select two headphones and overlay their layouts — scaled to real dimensions for true size comparison">Headphone Layout Overlay</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Select two headphones and overlay their layouts — scaled to real dimensions for true size comparison">Headphone Layout Overlay</SectionTitle>
 
             {(() => {
                 const kbdsWithDims = headphones.filter(m => HEADPHONE_DIMS[m.name] && getHeadphoneImage(m.name));
@@ -5480,9 +5480,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 const dB = HEADPHONE_DIMS[mB?.name];
                 if (!dA || !dB) return null;
 
-                const colA = BRAND_COLORS[mA.brand] || "#b8956a";
+                const colA = BRAND_COLORS[mA.brand] || "#c9a227";
                 const colB_raw = BRAND_COLORS[mB.brand] || "#2d2824";
-                const altColors = ["#b8956a", "#2d2824", "#8a7460", "#a09890", "#6b635b"];
+                const altColors = ["#c9a227", "#2d2824", "#a68b1b", "#9e9578", "#7d6e1e"];
                 const colB = (mA.brand === mB.brand || colA === colB_raw) 
                   ? altColors.find(c => c !== colA) || "#2d2824"
                   : colB_raw;
@@ -5532,7 +5532,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                               <span>{kbd.formFactor}</span>
                             </div>
                           </div>
-                          <a href={amazonLink(kbd.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 mt-2 px-3 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#b8956a18", color: "#b8956a", border: "1px solid #b8956a30", textDecoration: "none" }}>
+                          <a href={amazonLink(kbd.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 mt-2 px-3 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline" style={{ background: "#c9a22718", color: "#c9a227", border: "1px solid #c9a22730", textDecoration: "none" }}>
                             {I.cart(10)} Buy on Amazon — ${kbd.price}
                           </a>
                         </div>
@@ -5547,14 +5547,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       ].map(v => (
                         <button key={v.id} onClick={() => setShapeView(v.id)}
                           className="px-4 py-2 rounded-lg text-sm font-bold transition-all"
-                          style={{ background: shapeView === v.id ? "#b8956a20" : "#0000000a", border: `1px solid ${shapeView === v.id ? "#b8956a" : "#00000010"}`, color: shapeView === v.id ? "#b8956a" : "#a09890" }}>
+                          style={{ background: shapeView === v.id ? "#c9a22720" : "#0000000a", border: `1px solid ${shapeView === v.id ? "#c9a227" : "#00000010"}`, color: shapeView === v.id ? "#c9a227" : "#9e9578" }}>
                           {v.label}
                         </button>
                       ))}
                     </div>
 
                     {/* Image Overlay Visualization */}
-                    <div className="rounded-2xl overflow-hidden relative" style={{ background: "#060606", border: "1px solid #e8e4df" }}>
+                    <div className="rounded-2xl overflow-hidden relative" style={{ background: "#060606", border: "1px solid #e6e3d6" }}>
                       {shapeView === "overlay" ? (
                         <div style={{ position: "relative", width: "100%", maxWidth: containerW, height: containerH, margin: "0 auto" }}>
                           {/* Grid background */}
@@ -5593,8 +5593,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           </div>
                           {/* Scale bar */}
                           <div style={{ position: "absolute", bottom: 10, left: 12, display: "flex", alignItems: "center", gap: 6 }}>
-                            <div style={{ width: 10 * pxPerMm, height: 2, background: "#a09890", borderRadius: 1 }} />
-                            <span style={{ fontSize: 11, fontFamily: "monospace", color: "#a09890" }}>10mm</span>
+                            <div style={{ width: 10 * pxPerMm, height: 2, background: "#9e9578", borderRadius: 1 }} />
+                            <span style={{ fontSize: 11, fontFamily: "monospace", color: "#9e9578" }}>10mm</span>
                           </div>
                         </div>
                       ) : (
@@ -5603,13 +5603,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             { m: mA, d: dA, col: colA },
                             { m: mB, d: dB, col: colB },
                           ].map(({ m, d, col }, idx) => (
-                            <div key={idx} style={{ position: "relative", height: containerH, borderRight: idx === 0 ? "1px solid #e8e4df" : "none", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                            <div key={idx} style={{ position: "relative", height: containerH, borderRight: idx === 0 ? "1px solid #e6e3d6" : "none", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                               <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(#0000000a 1px, transparent 1px), linear-gradient(90deg, #0000000a 1px, transparent 1px)", backgroundSize: `${10 * pxPerMm}px ${10 * pxPerMm}px` }} />
                               <img loading="lazy" src={getHeadphoneImage(m.name)} alt={m.name}
                                 style={{ maxWidth: "75%", maxHeight: containerH * 0.65, objectFit: "contain", position: "relative", zIndex: 1, filter: `drop-shadow(0 0 12px ${col}30)` }} />
                               <div style={{ position: "absolute", top: 10, left: 0, right: 0, textAlign: "center", zIndex: 2 }}>
                                 <div style={{ fontSize: 13, fontFamily: "monospace", fontWeight: "bold", color: col }}>{m.name.replace(m.brand + " ", "")}</div>
-                                <div style={{ fontSize: 11, fontFamily: "monospace", color: "#a09890", marginTop: 2 }}>{d[0]} × {d[1]} × {d[2]}mm · {m.weight}g</div>
+                                <div style={{ fontSize: 11, fontFamily: "monospace", color: "#9e9578", marginTop: 2 }}>{d[0]} × {d[1]} × {d[2]}mm · {m.weight}g</div>
                               </div>
                             </div>
                           ))}
@@ -5625,14 +5625,14 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         { label: "Height", valA: dA[2], valB: dB[2], unit: "mm", diff: diffH },
                         { label: "Weight", valA: mA.weight, valB: mB.weight, unit: "g", diff: diffWt },
                       ].map((s, i) => (
-                        <div key={i} className="rounded-xl p-4 text-center" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+                        <div key={i} className="rounded-xl p-4 text-center" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                           <div className="text-sm uppercase tracking-widest opacity-20 mb-2">{s.label}</div>
                           <div className="flex items-center justify-center gap-3 mb-1">
                             <span className="text-sm font-black" style={{ color: colA }}>{s.valA}{s.unit}</span>
                             <span className="text-xs" style={{ color: "#c4bfb8" }}>vs</span>
                             <span className="text-sm font-black" style={{ color: colB }}>{s.valB}{s.unit}</span>
                           </div>
-                          <div className="text-sm font-bold" style={{ color: s.diff > 0 ? "#b8956a" : "#8a7460" }}>
+                          <div className="text-sm font-bold" style={{ color: s.diff > 0 ? "#c9a227" : "#a68b1b" }}>
                             {s.diff > 0 ? `Δ ${s.diff}${s.unit}` : "Identical"}
                           </div>
                           <div className="flex items-center gap-1 mt-2">
@@ -5670,7 +5670,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </div>
 
                     {/* Quick size guide */}
-                    <div className="rounded-xl p-4 mt-6" style={{ background: "#b8956a06", border: "1px solid #b8956a10" }}>
+                    <div className="rounded-xl p-4 mt-6" style={{ background: "#c9a22706", border: "1px solid #c9a22710" }}>
                       <div className="text-sm uppercase tracking-widest opacity-30 mb-3 font-bold">Quick Size Reference</div>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
                         <div><span className="opacity-30">Small:</span> <span className="opacity-60">&lt;118mm L, &lt;60mm W</span></div>
@@ -5713,10 +5713,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           const inches360 = cm360 / 2.54;
 
           let speedLabel = "", speedColor = "";
-          if (cm360 > 80) { speedLabel = "Very Slow"; speedColor = "#8a7460"; }
-          else if (cm360 > 50) { speedLabel = "Slow"; speedColor = "#b8956a"; }
-          else if (cm360 > 30) { speedLabel = "Medium"; speedColor = "#8a7460"; }
-          else if (cm360 > 18) { speedLabel = "Fast"; speedColor = "#b8956a"; }
+          if (cm360 > 80) { speedLabel = "Very Slow"; speedColor = "#a68b1b"; }
+          else if (cm360 > 50) { speedLabel = "Slow"; speedColor = "#c9a227"; }
+          else if (cm360 > 30) { speedLabel = "Medium"; speedColor = "#a68b1b"; }
+          else if (cm360 > 18) { speedLabel = "Fast"; speedColor = "#c9a227"; }
           else if (cm360 > 10) { speedLabel = "Very Fast"; speedColor = "#ef4444"; }
           else { speedLabel = "Extreme"; speedColor = "#dc2626"; }
 
@@ -5738,9 +5738,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                         style={{
                           background: sensFromGame === g.id ? accentC : "#ffffff",
                           color: sensFromGame === g.id ?  "#ffffff" : "#1a1614",
-                          border: `1px solid ${sensFromGame === g.id ? accentC : "#d4cfc8"}`,
+                          border: `1px solid ${sensFromGame === g.id ? accentC : "#d4d0be"}`,
                           fontSize: 12,
-                          boxShadow: sensFromGame === g.id ? `0 2px 0 ${accentC}80` : "0 2px 0 #d4cfc8",
+                          boxShadow: sensFromGame === g.id ? `0 2px 0 ${accentC}80` : "0 2px 0 #d4d0be",
                           transform: sensFromGame === g.id ? "translateY(1px)" : "translateY(0)",
                         }}>
                         {g.img ? <img loading="lazy" src={g.img} alt={`${g.name} game icon`} className="inline-block mr-1 rounded-sm" style={{ width: 14, height: 14, objectFit: "contain", verticalAlign: "middle", marginTop: -1 }} /> : null}{g.name}
@@ -5759,7 +5759,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {[400, 800, 1600, 3200].map(d => (
                         <button key={d} onClick={() => setSensFromDpi(d)}
                           className="px-2 py-0.5 rounded text-sm cursor-pointer transition-all"
-                          style={{ background: sensFromDpi === d ? `${accentC}30` : "#0000000a", color: sensFromDpi === d ? accentC : "#6b635b", fontSize: 11 }}>
+                          style={{ background: sensFromDpi === d ? `${accentC}30` : "#0000000a", color: sensFromDpi === d ? accentC : "#7d6e1e", fontSize: 11 }}>
                           {d}
                         </button>
                       ))}
@@ -5786,7 +5786,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </div>
                     <div className="text-center">
                       <div className="text-sm opacity-60 mb-1">in/360°</div>
-                      <div className="text-xl sm:text-2xl font-black" style={{ color: "#8a7460" }}>{inches360.toFixed(1)}</div>
+                      <div className="text-xl sm:text-2xl font-black" style={{ color: "#a68b1b" }}>{inches360.toFixed(1)}</div>
                       <div className="text-sm opacity-50">inches</div>
                     </div>
                     <div className="text-center">
@@ -5796,7 +5796,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </div>
                     <div className="text-center">
                       <div className="text-sm opacity-60 mb-1">Mousepad</div>
-                      <div className="text-xl sm:text-2xl font-black" style={{ color: "#b8956a" }}>{cm360 > 50 ? "XL+" : cm360 > 30 ? "Large" : cm360 > 18 ? "Medium" : "Any"}</div>
+                      <div className="text-xl sm:text-2xl font-black" style={{ color: "#c9a227" }}>{cm360 > 50 ? "XL+" : cm360 > 30 ? "Large" : cm360 > 18 ? "Medium" : "Any"}</div>
                       <div className="text-sm opacity-50">recommended size</div>
                     </div>
                   </div>
@@ -5826,7 +5826,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
               {/* Converted Sensitivities */}
               {cm360 > 0 && cm360 < 10000 && (
-                <div className="p-4 sm:p-6" style={{ background: "#f5f0e8" }}>
+                <div className="p-4 sm:p-6" style={{ background: "#f5f2e6" }}>
                   <div className="text-sm uppercase tracking-widest opacity-60 mb-4">Equivalent Sensitivity in Every Game</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                     {SENS_GAMES.filter(g => g.id !== sensFromGame).map(g => {
@@ -5835,7 +5835,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       const formatted = targetSens < 0.01 ? targetSens.toFixed(4) : targetSens < 1 ? targetSens.toFixed(3) : targetSens < 10 ? targetSens.toFixed(2) : targetSens.toFixed(1);
                       return (
                         <div key={g.id} className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all group/sens"
-                          style={{ background: "#00000008", border: "1px solid #e8e4df" }}
+                          style={{ background: "#00000008", border: "1px solid #e6e3d6" }}
                           onMouseEnter={e => { e.currentTarget.style.background = `${accentC}08`; e.currentTarget.style.borderColor = `${accentC}20`; }}
                           onMouseLeave={e => { e.currentTarget.style.background = "#00000008"; e.currentTarget.style.borderColor = "#00000008"; }}>
                           {g.img ? <img loading="lazy" src={g.img} alt={`${g.name} game icon`} className="flex-shrink-0 rounded-sm" style={{ width: 20, height: 20, objectFit: "contain" }} /> : <span className="flex-shrink-0 w-5 h-5 rounded-sm flex items-center justify-center text-sm" style={{ background: "#00000008" }}>{g.name.charAt(0)}</span>}
@@ -5845,7 +5845,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                           </div>
                           <div className="text-right flex-shrink-0">
                             <div className="text-sm font-black" style={{ color: accentC }}>{formatted}</div>
-                            {isSameEngine && <div className="text-sm font-bold" style={{ color: "#6b635b", fontSize: 10 }}>Same engine</div>}
+                            {isSameEngine && <div className="text-sm font-bold" style={{ color: "#7d6e1e", fontSize: 10 }}>Same engine</div>}
                           </div>
                           <button onClick={() => { navigator.clipboard?.writeText(formatted); }}
                             className="opacity-0 group-hover/sens:opacity-85 hover:!opacity-100 transition-all cursor-pointer flex-shrink-0"
@@ -5862,7 +5862,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
               {/* Quick Reference */}
               {cm360 > 0 && cm360 < 10000 && (
-                <div className="p-4 sm:p-6" style={{ background: "#f5f0e8", borderTop: `1px solid ${accentC}10` }}>
+                <div className="p-4 sm:p-6" style={{ background: "#f5f2e6", borderTop: `1px solid ${accentC}10` }}>
                   <div className="text-sm uppercase tracking-widest opacity-30 mb-3">Sensitivity Ranges by Game Type</div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div className="rounded-lg p-3" style={{ background: "#00000008" }}>
@@ -5874,7 +5874,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       <div className="text-sm opacity-85 leading-relaxed">Apex, OW2, CoD, Fortnite — Pros typically use 18-40 cm/360. More tracking and flicking. Your {cm360.toFixed(0)}cm is {cm360 > 40 ? "slower than most" : cm360 > 18 ? "in the sweet spot" : "faster than most"} arena pros.</div>
                     </div>
                     <div className="rounded-lg p-3" style={{ background: "#00000008" }}>
-                      <div className="text-sm font-bold mb-2" style={{ color: "#6b635b" }}>📏 The Universal Range</div>
+                      <div className="text-sm font-bold mb-2" style={{ color: "#7d6e1e" }}>📏 The Universal Range</div>
                       <div className="text-sm opacity-85 leading-relaxed">Most FPS pros across all titles fall between 20-50 cm/360. If you're between 25-40cm, you're in the most popular zone. Experiment ±5cm from your current to find your sweet spot.</div>
                     </div>
                   </div>
@@ -5887,7 +5887,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
         {/* ── TEAMS TAB ── */}
         {activeTab === "teams" && (() => {
-          const teamColor = "#8a7460";
+          const teamColor = "#a68b1b";
           const teamMap = {};
           allPlayers.forEach(p => {
             if (!p.team || p.team === "Free Agent" || p.team === "Content Creator" || p.team === "Content" || p.team === "Retired" || p.team === "Streamer") return;
@@ -5938,33 +5938,33 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 padding: "5px 10px", borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer",
                 background: active ? (chipColor ? `${chipColor}18` : `${accentT}20`) : "#ffffff",
                 border: `1px solid ${active ? (chipColor ? `${chipColor}50` : `${accentT}50`) : "#0000000a"}`,
-                color: active ? (chipColor || accentT) : "#8a8078",
+                color: active ? (chipColor || accentT) : "#8a8460",
                 transition: "all 0.15s", whiteSpace: "nowrap",
               });
 
               return (
-                <div className="mb-5" style={{ background: "#f5f2ee", border: "1px solid #e8e4df", borderRadius: 12, padding: 10, position: "relative" }}>
+                <div className="mb-5" style={{ background: "#f5f3ea", border: "1px solid #e6e3d6", borderRadius: 12, padding: 10, position: "relative" }}>
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, borderRadius: "12px 12px 0 0", background: `linear-gradient(90deg, transparent, ${accentT}50, transparent)` }} />
 
                   <div className="flex gap-2.5 items-center" style={{ marginBottom: showTeamFilters ? 10 : 0, transition: "margin 0.3s" }}>
                     <div className="flex-1 relative" style={{ minWidth: 0 }}>
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", opacity: 0.25 }}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                       <input type="text" placeholder={`Search ${teamList.length} teams...`} value={teamSearch} onChange={e => setTeamSearch(e.target.value)}
-                        className="w-full outline-none" style={{ padding: "7px 12px 7px 34px", background: "#ffffff", border: "1px solid #e8e4df", borderRadius: 10, color: "#1a1614", fontFamily: "inherit", fontSize: 14 }} />
+                        className="w-full outline-none" style={{ padding: "7px 12px 7px 34px", background: "#ffffff", border: "1px solid #e6e3d6", borderRadius: 10, color: "#1a1614", fontFamily: "inherit", fontSize: 14 }} />
                     </div>
 
                     <div className="relative">
                       <button className="flex items-center gap-1.5" onClick={() => setShowTeamSortDrop(!showTeamSortDrop)}
                         style={{ padding: "7px 12px", background: "#ffffff", border: `1px solid ${showTeamSortDrop ? `${accentT}50` : "#0000000a"}`, borderRadius: 10, color: showTeamSortDrop ? accentT : "#3d3530", fontFamily: "inherit", fontSize: 13, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-                        <span style={{ color: "#8a8078", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5 }}>Sort</span>
+                        <span style={{ color: "#8a8460", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5 }}>Sort</span>
                         <span style={{ color: accentT, fontWeight: 700 }}>{teamSortLabel}</span>
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M6 9l6 6 6-6"/></svg>
                       </button>
                       {showTeamSortDrop && (
                         <>
                         <div style={{ position: "fixed", inset: 0, zIndex: 99 }} onClick={() => setShowTeamSortDrop(false)} />
-                        <div className="absolute" style={{ top: "calc(100% + 6px)", right: 0, background: "#f0ede8", border: "1px solid #d4cfc8", borderRadius: 10, padding: 4, minWidth: 180, zIndex: 100, boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}>
+                        <div className="absolute" style={{ top: "calc(100% + 6px)", right: 0, background: "#f0eee2", border: "1px solid #d4d0be", borderRadius: 10, padding: 4, minWidth: 180, zIndex: 100, boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}>
                           {TEAM_SORT_OPTIONS.map(o => (
                             <div key={o.value} className="flex items-center justify-between cursor-pointer"
                               style={{ padding: "8px 12px", borderRadius: 7, fontSize: 13, fontWeight: 600, color: teamSortBy === o.value ? accentT : "#3d3530", transition: "all 0.15s" }}
@@ -5991,7 +5991,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
                   <div style={{ maxHeight: showTeamFilters ? 500 : 0, overflow: "hidden", opacity: showTeamFilters ? 1 : 0, transition: "max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s" }}>
                     <div>
-                      <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8078", marginBottom: 5, paddingLeft: 2 }}>Game</div>
+                      <div style={{ fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#8a8460", marginBottom: 5, paddingLeft: 2 }}>Game</div>
                       <div className="flex flex-wrap gap-1">
                         <span style={chipStyleT(teamGameFilter === "All")} onClick={() => setTeamGameFilter("All")}>All</span>
                         {allTeamGames.filter(g => g !== "All").map(g => (
@@ -6002,7 +6002,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   </div>
 
                   {!showTeamFilters && teamGameFilter !== "All" && (
-                    <div className="flex flex-wrap gap-1.5" style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #e8e4df" }}>
+                    <div className="flex flex-wrap gap-1.5" style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #e6e3d6" }}>
                       <span className="inline-flex items-center gap-1.5" style={{ padding: "4px 10px", borderRadius: 20, fontSize: 12, fontWeight: 700, background: `${gameColors[teamGameFilter] || accentT}20`, color: gameColors[teamGameFilter] || accentT, border: `1px solid ${gameColors[teamGameFilter] || accentT}50` }}>
                         {teamGameFilter} <span className="cursor-pointer opacity-50 hover:opacity-100" style={{ fontSize: 11 }} onClick={() => setTeamGameFilter("All")}>✕</span>
                       </span>
@@ -6052,7 +6052,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {/* Game pills */}
                       <div className="flex flex-wrap gap-1 mb-3">
                         {team.games.slice(0, 3).map(g => (
-                          <span key={g} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: `${gameColors[g] || "#8a8078"}12`, color: gameColors[g] || "#8a8078" }}>
+                          <span key={g} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: `${gameColors[g] || "#8a8460"}12`, color: gameColors[g] || "#8a8460" }}>
                             {getGameImage(g) && <img loading="lazy" src={getGameImage(g)} alt={g} style={{ width: 10, height: 10, objectFit: "contain" }} />}{g}
                           </span>
                         ))}
@@ -6062,7 +6062,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                       {/* Top headphone + country flags */}
                       <div className="flex items-center justify-between gap-2 pt-2" style={{ borderTop: "1px solid #f0ece6" }}>
                         <div className="min-w-0 flex-1">
-                          <div className="text-[9px] uppercase tracking-wider font-bold" style={{ color: "#a09890" }}>Top Headphone</div>
+                          <div className="text-[9px] uppercase tracking-wider font-bold" style={{ color: "#9e9578" }}>Top Headphone</div>
                           <div className="text-[11px] font-bold truncate" style={{ color: "#3d3530" }}>{team.topKbd.replace(/(Razer |HyperX |Logitech |SteelSeries |Corsair |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
                         </div>
                         {team.countries.length > 0 && (
@@ -6089,7 +6089,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
         {/* ── TEAM DETAIL PAGE ── */}
         {activeTab === "teamDetail" && selectedTeam && (() => {
-          const tc = "#8a7460";
+          const tc = "#a68b1b";
           const teamPlayers = allPlayers.filter(p => p.team === selectedTeam);
           const seen = new Set();
           const uniquePlayers = teamPlayers.filter(p => {
@@ -6128,9 +6128,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           <div>
             <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm">
               <a href="/" className="opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>Home</a>
-              <span style={{ color: "#d4cfc8" }}>›</span>
+              <span style={{ color: "#d4d0be" }}>›</span>
               <a href="/teams" className="opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>Teams</a>
-              <span style={{ color: "#d4cfc8" }}>›</span>
+              <span style={{ color: "#d4d0be" }}>›</span>
               <span style={{ color: tc }} className="font-bold opacity-70">{selectedTeam}</span>
             </nav>
 
@@ -6145,7 +6145,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   <div className="flex flex-wrap gap-2 mt-2">
                     {gameEntries.map(([game]) => (
                       <span key={game} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all hover:scale-105 hover:bg-stone-50"
-                        style={{ background: `${gameColors[game] || "#8a8078"}20`, color: gameColors[game] || "#8a8078", border: `1px solid ${gameColors[game] || "#8a8078"}30` }}
+                        style={{ background: `${gameColors[game] || "#8a8460"}20`, color: gameColors[game] || "#8a8460", border: `1px solid ${gameColors[game] || "#8a8460"}30` }}
                         onClick={() => { setGameDetailSlug(game.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")); setActiveTab("games"); window.scrollTo({ top: 0, behavior: "smooth" }); }}>{getGameImage(game) && <img loading="lazy" src={getGameImage(game)} alt={game} className="w-3 h-3 object-contain" />}{game}</span>
                     ))}
                   </div>
@@ -6154,8 +6154,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
                 {[
                   { label: "Players Tracked", value: uniquePlayers.length, color: tc },
-                  { label: "Games", value: gameEntries.length, color: "#b8956a" },
-                  { label: "Nationalities", value: countries.length, color: "#8a7460" },
+                  { label: "Games", value: gameEntries.length, color: "#c9a227" },
+                  { label: "Nationalities", value: countries.length, color: "#a68b1b" },
                 ].map(s => (
                   <div key={s.label} className="rounded-xl p-3 text-center" style={{ background: "#ffffff", border: `1px solid ${s.color}15` }}>
                     <div className="text-lg sm:text-xl font-black" style={{ color: s.color }}>{s.value}</div>
@@ -6165,7 +6165,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               </div>
               {countries.length > 0 && (
                 <div className="mt-4 flex items-center gap-2">
-                  <span className="text-xs" style={{ color: "#a09890" }}>Nationalities:</span>
+                  <span className="text-xs" style={{ color: "#9e9578" }}>Nationalities:</span>
                   <div className="flex flex-wrap gap-1.5">{countries.map((c, i) => <Flag key={i} country={c} size={20} />)}</div>
                 </div>
               )}
@@ -6173,7 +6173,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* Team Bio & Achievements */}
             {TEAM_DESCRIPTIONS[selectedTeam] && (
-              <div className="mb-6 rounded-xl p-5 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
+              <div className="mb-6 rounded-xl p-5 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 {TEAM_DESCRIPTIONS[selectedTeam].bio && (
                   <div className="mb-4">
                     <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: tc }}>About</div>
@@ -6182,11 +6182,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 )}
                 {TEAM_DESCRIPTIONS[selectedTeam].achievements && (
                   <div>
-                    <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#b8956a" }}>Top Achievements</div>
+                    <div className="text-xs uppercase tracking-widest font-bold mb-3" style={{ color: "#c9a227" }}>Top Achievements</div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                       {TEAM_DESCRIPTIONS[selectedTeam].achievements.map((a, i) => (
                         <div key={i} className="flex items-start gap-2 text-sm">
-                          <span className="font-bold shrink-0" style={{ color: "#b8956a" }}>#{i + 1}</span>
+                          <span className="font-bold shrink-0" style={{ color: "#c9a227" }}>#{i + 1}</span>
                           <span className="opacity-60">{a}</span>
                         </div>
                       ))}
@@ -6204,7 +6204,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     const pct = Math.round((count / uniquePlayers.length) * 100);
                     return (
                       <div key={kbdName} className="rounded-xl p-3 relative overflow-hidden cursor-pointer transition-all hover:scale-[1.02] hover:bg-stone-50"
-                        style={{ background: "#ffffff", border: "1px solid #e8e4df" }}
+                        style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}
                         onClick={() => { const mm = headphones.find(mm => mm.name === kbdName || kbdName.includes(mm.name)); if (mm) { setSelectedHeadphone(mm); setActiveTab("headphoneDetail"); window.scrollTo({ top: 0, behavior: "smooth" }); } }}>
                         <div className="absolute bottom-0 left-0 h-1 rounded-full" style={{ width: `${pct}%`, background: tc, opacity: 0.5 }} />
                         <div className="text-sm font-bold truncate hover:underline" style={{ color: "#1a1614" }}>{kbdName}</div>
@@ -6227,7 +6227,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     const pct = Math.round((count / uniquePlayers.length) * 100);
                     return (
                       <div key={brand} className="rounded-lg px-3 py-2 flex items-center gap-2 cursor-pointer transition-all hover:scale-105 hover:bg-stone-50"
-                        style={{ background: "#ffffff", border: "1px solid #e8e4df" }}
+                        style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}
                         onClick={() => { setActiveTab("brands"); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
                         <span className="text-sm font-bold">{brand}</span>
                         <span className="text-xs px-1.5 py-0.5 rounded-full font-bold" style={{ background: `${tc}15`, color: tc }}>{pct}%</span>
@@ -6253,7 +6253,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <span className="text-sm transition-transform" style={{ color: gc, transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
                   </button>
                   {isOpen && (
-                  <div className="rounded-xl overflow-hidden mt-1" style={{ border: "1px solid #e8e4df" }}>
+                  <div className="rounded-xl overflow-hidden mt-1" style={{ border: "1px solid #e6e3d6" }}>
                     {(() => {
                       const hasRoles = players.some(p => p.role && p.role !== "—");
                       return (<>
@@ -6265,7 +6265,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     </div>
                     {players.map((p, i) => (
                       <div key={p.name + i} className="grid px-4 py-3 items-center transition-all hover:bg-white/[0.02]"
-                        style={{ borderTop: i > 0 ? "1px solid #e8e4df" : "none", gridTemplateColumns: hasRoles ? "20% 10% 40% 12%" : "22% 38% 12%" }}>
+                        style={{ borderTop: i > 0 ? "1px solid #e6e3d6" : "none", gridTemplateColumns: hasRoles ? "20% 10% 40% 12%" : "22% 38% 12%" }}>
                         <div className="flex items-center gap-2 min-w-0">
                           <Flag country={p.country} size={18} className="shrink-0" />
                           <span className="text-sm font-bold truncate cursor-pointer hover:underline" style={{ color: "#1a1614" }}
@@ -6295,17 +6295,17 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── Mini Newsletter CTA ── */}
         {activeTab !== "overview" && (
         <div className="flex justify-end mt-10 mb-2">
-        <div className="rounded-lg px-4 py-2.5 flex items-center gap-3 flex-wrap w-fit" style={{ background: "linear-gradient(135deg, #b8956a08, #8a746006)", border: "1px solid #b8956a12" }}>
+        <div className="rounded-lg px-4 py-2.5 flex items-center gap-3 flex-wrap w-fit" style={{ background: "linear-gradient(135deg, #c9a22708, #a68b1b06)", border: "1px solid #c9a22712" }}>
           <span className="text-sm font-black text-stone-900">Stay ahead of the meta</span>
           <span className="opacity-20 text-sm hidden sm:inline">·</span>
           <span style={{ fontSize: 12 }} className="opacity-30 hidden sm:inline">Pro gear changes & data insights</span>
           {newsletterStatus === "success" ? (
-            <span style={{ fontSize: 12, color: "#b8956a" }} className="font-bold">✓ Subscribed!</span>
+            <span style={{ fontSize: 12, color: "#c9a227" }} className="font-bold">✓ Subscribed!</span>
           ) : (
             <form className="flex gap-1.5" onSubmit={async e => { e.preventDefault(); setNewsletterStatus("sending"); try { const res = await fetch("https://formspree.io/f/xvzbwrzv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: newsletterEmail }) }); setNewsletterStatus(res.ok ? "success" : "error"); } catch { setNewsletterStatus("error"); } }}>
               <input type="email" required placeholder="your@email.com" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)}
-                className="w-36 px-2.5 py-1 rounded-md outline-none" style={{ background: "#ffffff", border: "1px solid #d4cfc8", color: "#1a1614", fontSize: 12 }} />
-              <button type="submit" disabled={newsletterStatus === "sending"} className="px-3 py-1 rounded-md font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "#b8956a", color: "#1a1614", fontSize: 12 }}>
+                className="w-36 px-2.5 py-1 rounded-md outline-none" style={{ background: "#ffffff", border: "1px solid #d4d0be", color: "#1a1614", fontSize: 12 }} />
+              <button type="submit" disabled={newsletterStatus === "sending"} className="px-3 py-1 rounded-md font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "#c9a227", color: "#1a1614", fontSize: 12 }}>
                 {newsletterStatus === "sending" ? "..." : "Subscribe"}
               </button>
             </form>
@@ -6320,15 +6320,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
       {showScrollTop && (
         <button aria-label="Scroll to top" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="fixed bottom-20 md:bottom-6 right-6 z-40 w-11 h-11 rounded-full flex items-center justify-center transition-all hover:scale-110"
-          style={{ background: "linear-gradient(135deg, #b8956a, #2d2824)", color: "#fff", boxShadow: "0 4px 20px #b8956a30" }}>
+          style={{ background: "linear-gradient(135deg, #c9a227, #2d2824)", color: "#fff", boxShadow: "0 4px 20px #c9a22730" }}>
           ▲
         </button>
       )}
 
       {/* ─── FOOTER ─── */}
-      <footer role="contentinfo" aria-label="Site footer" className="relative py-12 px-6 overflow-hidden" style={{ background: "#ece6db" }}>
+      <footer role="contentinfo" aria-label="Site footer" className="relative py-12 px-6 overflow-hidden" style={{ background: "#ece9d8" }}>
         {/* Gradient top border */}
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, #b8956a, #2d2824, transparent)" }} />
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, #c9a227, #2d2824, transparent)" }} />
         {/* Decorative headphone outline */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ opacity: 0.03 }}>
           <svg width="800" height="280" viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -6344,7 +6344,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <span className="inline-block">{I.headphone(24)}</span>
-                <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 15, letterSpacing: 4, color: "#b8956a" }}>ESPORTSHEADPHONES.COM</span>
+                <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 15, letterSpacing: 4, color: "#c9a227" }}>ESPORTSHEADPHONES.COM</span>
               </div>
               <p className="text-sm opacity-30 leading-relaxed">{`The definitive resource for professional esports headphones. Data from ${allPlayers.length}+ pro players across ${new Set(allPlayers.map(p=>p.game)).size} major competitive titles.`}</p>
               <p className="text-xs opacity-20 mt-2">Data last updated: February 2026</p>
@@ -6360,9 +6360,9 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   { label: "Best for LoL", href: "/best/lol", color: "#c89b3c" },
                   { label: "Best for R6 Siege", href: "/best/r6-siege", color: "#4a86c8" },
                   { label: "Best for OW2", href: "/best/overwatch-2", color: "#f99e1a" },
-                  { label: "Best Wireless", href: "/best/wireless", color: "#b8956a" },
-                  { label: "Best Lightweight", href: "/best/lightweight", color: "#6b635b" },
-                  { label: "Best Budget", href: "/best/budget", color: "#b8956a" },
+                  { label: "Best Wireless", href: "/best/wireless", color: "#c9a227" },
+                  { label: "Best Lightweight", href: "/best/lightweight", color: "#7d6e1e" },
+                  { label: "Best Budget", href: "/best/budget", color: "#c9a227" },
                 ].map(g => (
                   <a key={g.href} href={g.href} className="block hover:opacity-80 transition-all no-underline" style={{ color: g.color, textDecoration: "none" }}>{g.label}</a>
                 ))}
@@ -6390,7 +6390,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <div className="text-sm uppercase tracking-widest opacity-30 mb-3">Top Brands</div>
               <div className="space-y-2 text-sm">
                 {["Razer", "Logitech", "SteelSeries", "Corsair", "HyperX", "beyerdynamic", "Sennheiser", "ASTRO"].map(b => (
-                  <a key={b} href={`/brands/${b.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="block hover:opacity-80 transition-all no-underline" style={{ color: BRAND_COLORS[b] || "#8a8078", textDecoration: "none" }}>{b}</a>
+                  <a key={b} href={`/brands/${b.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="block hover:opacity-80 transition-all no-underline" style={{ color: BRAND_COLORS[b] || "#8a8460", textDecoration: "none" }}>{b}</a>
                 ))}
               </div>
             </div>
@@ -6429,22 +6429,22 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               ].map(c => {
                 const sa = c.a.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
                 const sb = c.b.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
-                return <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="text-xs px-2.5 py-1 rounded-full no-underline transition-all hover:opacity-80" style={{ background: "#0000000a", border: "1px solid #e8e4df", color: "#8a8078", textDecoration: "none" }}>{c.a.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")} vs {c.b.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</a>;
+                return <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="text-xs px-2.5 py-1 rounded-full no-underline transition-all hover:opacity-80" style={{ background: "#0000000a", border: "1px solid #e6e3d6", color: "#8a8460", textDecoration: "none" }}>{c.a.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")} vs {c.b.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</a>;
               })}
             </div>
           </div>
           {/* Newsletter */}
           <div className="flex items-center gap-3 mb-8 pb-6 border-b" style={{ borderColor: "#00000008" }}>
-            <span style={{ fontSize: 12, color: "#b8956a", letterSpacing: 2 }} className="font-black uppercase flex-shrink-0">Newsletter</span>
+            <span style={{ fontSize: 12, color: "#c9a227", letterSpacing: 2 }} className="font-black uppercase flex-shrink-0">Newsletter</span>
             <span style={{ fontSize: 12 }} className="opacity-20 hidden sm:inline">·</span>
             <span style={{ fontSize: 12 }} className="opacity-25 flex-shrink-0 hidden sm:inline">Pro gear updates & data insights</span>
             {newsletterStatus === "success" ? (
-              <span style={{ fontSize: 11, color: "#b8956a" }} className="font-black">✓ Subscribed</span>
+              <span style={{ fontSize: 11, color: "#c9a227" }} className="font-black">✓ Subscribed</span>
             ) : (
               <form className="flex gap-1.5" onSubmit={async e => { e.preventDefault(); setNewsletterStatus("sending"); try { const res = await fetch("https://formspree.io/f/xvzbwrzv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: newsletterEmail }) }); setNewsletterStatus(res.ok ? "success" : "error"); } catch { setNewsletterStatus("error"); } }}>
                 <input type="email" required placeholder="your@email.com" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)}
-                  className="w-36 sm:w-44 px-2.5 py-1.5 rounded-md outline-none" style={{ background: "#ffffff", border: "1px solid #d4cfc8", color: "#1a1614", fontSize: 12 }} />
-                <button type="submit" disabled={newsletterStatus === "sending"} className="px-3 py-1.5 rounded-md font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "#b8956a", color: "#1a1614", fontSize: 12 }}>
+                  className="w-36 sm:w-44 px-2.5 py-1.5 rounded-md outline-none" style={{ background: "#ffffff", border: "1px solid #d4d0be", color: "#1a1614", fontSize: 12 }} />
+                <button type="submit" disabled={newsletterStatus === "sending"} className="px-3 py-1.5 rounded-md font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "#c9a227", color: "#1a1614", fontSize: 12 }}>
                   {newsletterStatus === "sending" ? "..." : "Join"}
                 </button>
               </form>

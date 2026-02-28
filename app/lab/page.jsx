@@ -136,15 +136,15 @@ export default function LabPage() {
         <SSRTitle accent="Headphone">Finder Lab</SSRTitle>
         <SSRSub>Find your perfect esports headphone. Our quiz analyzes hand size, grip style, game, weight preference, and budget to recommend from {headphones.length} headphones.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Headphones" value={headphones.length} color="#b8956a" />
-          <SSRStat label="Symmetrical" value={symm.length} color="#b8956a" />
-          <SSRStat label="Ergonomic" value={ergo.length} color="#b8956a" />
-          <SSRStat label="Under $90" value={budget.length} color="#b8956a" />
+          <SSRStat label="Headphones" value={headphones.length} color="#c9a227" />
+          <SSRStat label="Symmetrical" value={symm.length} color="#c9a227" />
+          <SSRStat label="Ergonomic" value={ergo.length} color="#c9a227" />
+          <SSRStat label="Under $90" value={budget.length} color="#c9a227" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
-          <SSRLink href="/headphones" color="#b8956a">All Headphones</SSRLink>
-          <SSRLink href="/compare" color="#b8956a">Compare</SSRLink>
-          <SSRLink href="/shapes" color="#b8956a">Shapes</SSRLink>
+          <SSRLink href="/headphones" color="#c9a227">All Headphones</SSRLink>
+          <SSRLink href="/compare" color="#c9a227">Compare</SSRLink>
+          <SSRLink href="/shapes" color="#c9a227">Shapes</SSRLink>
         </div>
       </SSRSection>
 

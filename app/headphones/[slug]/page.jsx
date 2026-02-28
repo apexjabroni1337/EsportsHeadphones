@@ -29,7 +29,7 @@ export function generateMetadata({ params }) {
       description,
       url: `https://esportsheadphones.com/headphones/${params.slug}`,
       images: [{
-        url: `https://esportsheadphones.com/og?title=${encodeURIComponent(kb.name)}&subtitle=${encodeURIComponent(`${kb.brand} · ${kb.driverType}`)}&badge=${encodeURIComponent(kb.brand)}&accent=${encodeURIComponent(BRAND_COLORS[kb.brand] || '#b8956a')}&stat1=${encodeURIComponent(kb?.weight + 'g')}&s1Label=Weight&stat2=${encodeURIComponent(kb?.proUsage + '%')}&s2Label=Pro+Usage&stat3=${encodeURIComponent('$' + kb?.price)}&s3Label=Price`,
+        url: `https://esportsheadphones.com/og?title=${encodeURIComponent(kb.name)}&subtitle=${encodeURIComponent(`${kb.brand} · ${kb.driverType}`)}&badge=${encodeURIComponent(kb.brand)}&accent=${encodeURIComponent(BRAND_COLORS[kb.brand] || '#c9a227')}&stat1=${encodeURIComponent(kb?.weight + 'g')}&s1Label=Weight&stat2=${encodeURIComponent(kb?.proUsage + '%')}&s2Label=Pro+Usage&stat3=${encodeURIComponent('$' + kb?.price)}&s3Label=Price`,
         width: 1200, height: 630,
         alt: `${kb.name} by ${kb.brand} - esports gaming headphone`,
       }],
@@ -38,7 +38,7 @@ export function generateMetadata({ params }) {
       card: "summary_large_image",
       title: `${kb.name} — Pro Esports Headphone Review & Stats`,
       description,
-      images: [`https://esportsheadphones.com/og?title=${encodeURIComponent(kb.name)}&subtitle=${encodeURIComponent(`${kb.brand} · ${kb.driverType}`)}&badge=${encodeURIComponent(kb.brand)}&accent=${encodeURIComponent(BRAND_COLORS[kb.brand] || '#b8956a')}&stat1=${encodeURIComponent(kb?.weight + 'g')}&s1Label=Weight&stat2=${encodeURIComponent(kb?.proUsage + '%')}&s2Label=Pro+Usage&stat3=${encodeURIComponent('$' + kb?.price)}&s3Label=Price`],
+      images: [`https://esportsheadphones.com/og?title=${encodeURIComponent(kb.name)}&subtitle=${encodeURIComponent(`${kb.brand} · ${kb.driverType}`)}&badge=${encodeURIComponent(kb.brand)}&accent=${encodeURIComponent(BRAND_COLORS[kb.brand] || '#c9a227')}&stat1=${encodeURIComponent(kb?.weight + 'g')}&s1Label=Weight&stat2=${encodeURIComponent(kb?.proUsage + '%')}&s2Label=Pro+Usage&stat3=${encodeURIComponent('$' + kb?.price)}&s3Label=Price`],
     },
   };
 }
@@ -281,20 +281,20 @@ export default function MouseDetailPage({ params }) {
             width: "140px",
             height: "140px",
             borderRadius: "50%",
-            backgroundColor: BRAND_COLORS[kb.brand] || "#b8956a",
+            backgroundColor: BRAND_COLORS[kb.brand] || "#c9a227",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
           }}>
-            <div style={{ fontSize: "48px", fontWeight: "700", color: "#f5f0e8", lineHeight: "1" }}>
+            <div style={{ fontSize: "48px", fontWeight: "700", color: "#f5f2e6", lineHeight: "1" }}>
               {kb.rating}
             </div>
-            <div style={{ fontSize: "11px", fontWeight: "700", color: "#f5f0e8", marginTop: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+            <div style={{ fontSize: "11px", fontWeight: "700", color: "#f5f2e6", marginTop: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
               Editor's
             </div>
-            <div style={{ fontSize: "11px", fontWeight: "700", color: "#f5f0e8", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+            <div style={{ fontSize: "11px", fontWeight: "700", color: "#f5f2e6", textTransform: "uppercase", letterSpacing: "0.5px" }}>
               Rating
             </div>
           </div>
@@ -336,8 +336,8 @@ export default function MouseDetailPage({ params }) {
         {/* Verdict Section */}
         <div style={{
           padding: "1.5rem",
-          backgroundColor: "#f5f0e8",
-          borderLeft: `4px solid ${BRAND_COLORS[kb.brand] || "#b8956a"}`,
+          backgroundColor: "#f5f2e6",
+          borderLeft: `4px solid ${BRAND_COLORS[kb.brand] || "#c9a227"}`,
           marginBottom: "2rem",
           fontStyle: "italic",
           color: "#1a1614",
@@ -349,7 +349,7 @@ export default function MouseDetailPage({ params }) {
 
         {usedBy.length > 0 && (
           <>
-            <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "#a09890" }}>
+            <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "#9e9578" }}>
               Used by {usedBy.length}+ pros including
             </p>
             <div className="flex flex-wrap gap-2 mb-4">

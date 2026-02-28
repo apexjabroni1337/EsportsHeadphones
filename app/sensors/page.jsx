@@ -135,11 +135,11 @@ export default function SensorsPage() {
           ))}
         </SSRGrid>
         <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#a09890" }}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#9e9578" }}>
             Driver Rankings by Pro Usage
           </p>
           <div style={{
-            border: "1px solid #e8e4df",
+            border: "1px solid #e6e3d6",
             borderRadius: "8px",
             overflow: "hidden",
             fontSize: "14px"
@@ -147,9 +147,9 @@ export default function SensorsPage() {
             {switchData.slice(0, 6).map((s, i) => (
               <div key={s.switchName} style={{
                 padding: "12px 16px",
-                background: i % 2 === 0 ? "#ffffff" : "#f5f2ee",
+                background: i % 2 === 0 ? "#ffffff" : "#f5f3ea",
                 borderLeft: "4px solid #00d4ff",
-                borderBottom: i < 5 ? "1px solid #e8e4df" : "none",
+                borderBottom: i < 5 ? "1px solid #e6e3d6" : "none",
                 display: "flex",
                 alignItems: "center",
                 gap: "12px"

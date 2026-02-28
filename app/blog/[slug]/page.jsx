@@ -8,7 +8,7 @@ const ARTICLES = {
     title: "How to Choose the Right Gaming Headphone in 2026",
     date: "2026-02-23",
     tag: "Guide",
-    color: "#b8956a",
+    color: "#c9a227",
     content: (topHeadphones) => [
       { type: "p", text: "Choosing a gaming headphone can feel overwhelming with hundreds of options on the market. But professional esports players have already done the testing for you — and the data tells a clear story about what actually matters." },
       { type: "h2", text: "1. Shape Is Everything" },
@@ -47,7 +47,7 @@ const ARTICLES = {
     title: "The ANC Revolution: How Driver Tech Changed Competitive Gaming",
     date: "2026-02-23",
     tag: "Data",
-    color: "#b8956a",
+    color: "#c9a227",
     content: () => [
       { type: "p", text: "In 2018, active noise cancellation headphones didn't exist. By 2026, every major manufacturer offers some version of instant impedance. This is the story of how a single innovation changed the entire competitive landscape." },
       { type: "h2", text: "The Wooting Effect" },
@@ -123,9 +123,9 @@ export default function BlogArticlePage({ params }) {
   const article = ARTICLES[params.slug];
   if (!article) {
     return (
-      <div style={{ background: "#f5f0e8", minHeight: "100vh" }} className="text-stone-900 text-center py-20">
+      <div style={{ background: "#f5f2e6", minHeight: "100vh" }} className="text-stone-900 text-center py-20">
         <h1 className="text-2xl font-bold mb-4">Article not found</h1>
-        <Link href="/blog" className="text-sm underline" style={{ color: "#b8956a" }}>← Back to blog</Link>
+        <Link href="/blog" className="text-sm underline" style={{ color: "#c9a227" }}>← Back to blog</Link>
       </div>
     );
   }
@@ -144,7 +144,7 @@ export default function BlogArticlePage({ params }) {
   const blocks = article.content(topHeadphones);
 
   return (
-    <div style={{ background: "#f5f0e8", minHeight: "100vh" }}>
+    <div style={{ background: "#f5f2e6", minHeight: "100vh" }}>
       <div className="max-w-3xl mx-auto px-4 py-16">
         <Link href="/blog" className="text-sm opacity-40 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>
           ← Back to blog
@@ -172,14 +172,14 @@ export default function BlogArticlePage({ params }) {
               if (block.type === "headphones") return (
                 <div key={i} className="grid gap-3 my-6">
                   {block.data.map((m, j) => (
-                    <a key={j} href={m.headphone ? `/headphones/${slug(m.headphone.name)}` : "#"} className="flex items-center gap-4 p-4 rounded-lg border-l-4 no-underline transition-all hover:scale-[1.01]" style={{ background: "#ffffff", border: "1px solid #e8e4df", borderLeftColor: m.headphone ? BRAND_COLORS[m.headphone.brand] || article.color : article.color, borderLeftWidth: "4px", textDecoration: "none" }}>
+                    <a key={j} href={m.headphone ? `/headphones/${slug(m.headphone.name)}` : "#"} className="flex items-center gap-4 p-4 rounded-lg border-l-4 no-underline transition-all hover:scale-[1.01]" style={{ background: "#ffffff", border: "1px solid #e6e3d6", borderLeftColor: m.headphone ? BRAND_COLORS[m.headphone.brand] || article.color : article.color, borderLeftWidth: "4px", textDecoration: "none" }}>
                       <span className="text-lg font-black opacity-20 w-6 text-center" style={{ color: "#1a1614" }}>#{j + 1}</span>
                       {m.headphone && HEADPHONE_IMAGE_URLS[m.headphone.name] && <img src={HEADPHONE_IMAGE_URLS[m.headphone.name]} alt={m.name} className="h-10 w-16 object-contain" />}
                       <div className="flex-1">
                         <div className="font-bold text-sm" style={{ color: m.headphone ? (BRAND_COLORS[m.headphone.brand] || "#fff") : "#fff" }}>{m.name}</div>
                         <div className="text-xs opacity-40" style={{ color: "#1a1614" }}>{m.pct}% of pros · {m.count} players{m.headphone ? ` · ${m.headphone?.weight}g · $${m.headphone?.price}` : ""}</div>
                       </div>
-                      {m.headphone && <a href={amazonLink(m.name)} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg text-xs font-bold no-underline transition-all hover:scale-105" style={{ background: "#b8956a", color: "#1a1614", textDecoration: "none" }}>Buy</a>}
+                      {m.headphone && <a href={amazonLink(m.name)} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg text-xs font-bold no-underline transition-all hover:scale-105" style={{ background: "#c9a227", color: "#1a1614", textDecoration: "none" }}>Buy</a>}
                     </a>
                   ))}
                 </div>
@@ -190,13 +190,13 @@ export default function BlogArticlePage({ params }) {
         </article>
 
         {/* Related articles */}
-        <div className="mt-16 pt-8" style={{ borderTop: "1px solid #e8e4df" }}>
+        <div className="mt-16 pt-8" style={{ borderTop: "1px solid #e6e3d6" }}>
           <h3 className="text-sm font-bold uppercase tracking-widest opacity-30 mb-4" style={{ color: "#1a1614" }}>More Articles</h3>
           <div className="grid gap-3">
             {SLUGS.filter((s) => s !== params.slug).slice(0, 3).map((s) => {
               const a = ARTICLES[s];
               return (
-                <Link key={s} href={`/blog/${s}`} className="flex items-center gap-3 p-3 rounded-lg border-l-4 no-underline transition-all hover:scale-[1.01]" style={{ background: "#ffffff", border: "1px solid #e8e4df", borderLeftColor: a.color, borderLeftWidth: "4px", textDecoration: "none" }}>
+                <Link key={s} href={`/blog/${s}`} className="flex items-center gap-3 p-3 rounded-lg border-l-4 no-underline transition-all hover:scale-[1.01]" style={{ background: "#ffffff", border: "1px solid #e6e3d6", borderLeftColor: a.color, borderLeftWidth: "4px", textDecoration: "none" }}>
                   <span className="text-xs font-bold px-3 py-1 rounded-lg flex-shrink-0" style={{ background: `${a.color}20`, color: a.color, border: `1px solid ${a.color}40` }}>{a.tag}</span>
                   <span className="text-sm font-bold truncate" style={{ color: "#1a1614" }}>{a.title}</span>
                 </Link>

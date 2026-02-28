@@ -155,15 +155,15 @@ export default function GamesPage() {
         <SSRTitle accent="Games">Headphone DNA</SSRTitle>
         <SSRSub>Which headphones and brands dominate across {games.length} major competitive esports titles covering {totalPlayers.toLocaleString()} professionals.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Games" value={games.length} color="#b8956a" />
-          <SSRStat label="Total Players" value={totalPlayers.toLocaleString()} color="#b8956a" />
+          <SSRStat label="Games" value={games.length} color="#c9a227" />
+          <SSRStat label="Total Players" value={totalPlayers.toLocaleString()} color="#c9a227" />
         </SSRGrid>
         <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#a09890" }}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#9e9578" }}>
             Game Rankings by Player Count
           </p>
           <div style={{
-            border: "1px solid #e8e4df",
+            border: "1px solid #e6e3d6",
             borderRadius: "8px",
             overflow: "hidden",
             fontSize: "14px"
@@ -173,9 +173,9 @@ export default function GamesPage() {
               return (
                 <div key={g} style={{
                   padding: "12px 16px",
-                  background: i % 2 === 0 ? "#ffffff" : "#f5f2ee",
+                  background: i % 2 === 0 ? "#ffffff" : "#f5f3ea",
                   borderLeft: "4px solid " + (["#c02870", "#2a8a40", "#2874a6", "#c47000", "#b8960a", "#c43800", "#4a4340", "#b01040"][i % 8]),
-                  borderBottom: i < 7 ? "1px solid #e8e4df" : "none",
+                  borderBottom: i < 7 ? "1px solid #e6e3d6" : "none",
                   display: "flex",
                   alignItems: "center",
                   gap: "12px"
@@ -186,13 +186,13 @@ export default function GamesPage() {
                   }}>
                     {g}
                   </span>
-                  <span style={{ color: "#6b635b", marginLeft: "auto" }}>{gameCount} {gameCount === 1 ? "player" : "players"}</span>
+                  <span style={{ color: "#7d6e1e", marginLeft: "auto" }}>{gameCount} {gameCount === 1 ? "player" : "players"}</span>
                 </div>
               );
             })}
           </div>
         </div>
-        <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "#a09890" }}>Select a game</p>
+        <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "#9e9578" }}>Select a game</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {games.map((g) => (
             <SSRLink key={g} href={`/games/${slug(g)}`}>{g} ({allPlayers.filter((p) => p.game === g).length})</SSRLink>

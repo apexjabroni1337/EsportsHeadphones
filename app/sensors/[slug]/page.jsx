@@ -167,7 +167,7 @@ export default function SensorPage({ params }) {
           <h2 style={{ color: "#1a1614", marginTop: 0, marginBottom: "8px", fontSize: "16px", fontWeight: "bold" }}>
             {sensorName}
           </h2>
-          {desc && <p style={{ color: "#6b635b", margin: "0", fontSize: "14px" }}>{desc}</p>}
+          {desc && <p style={{ color: "#7d6e1e", margin: "0", fontSize: "14px" }}>{desc}</p>}
         </div>
         <SSRGrid>
           <SSRStat label="Headphones" value={switchKbds.length} color="#00d4ff" />
@@ -176,11 +176,11 @@ export default function SensorPage({ params }) {
           <SSRStat label="Max Hz" value={maxPolling >= 1000 ? `${maxPolling / 1000}K` : maxPolling} color="#00d4ff" />
         </SSRGrid>
         <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#a09890" }}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#9e9578" }}>
             Headphones Using This Driver
           </p>
           <div style={{
-            border: "1px solid #e8e4df",
+            border: "1px solid #e6e3d6",
             borderRadius: "8px",
             overflow: "hidden",
             fontSize: "14px"
@@ -188,8 +188,8 @@ export default function SensorPage({ params }) {
             {switchKbds.sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 5).map((m, i) => (
               <div key={m.id} style={{
                 padding: "12px 16px",
-                background: i % 2 === 0 ? "#ffffff" : "#f5f2ee",
-                borderBottom: i < 4 ? "1px solid #e8e4df" : "none",
+                background: i % 2 === 0 ? "#ffffff" : "#f5f3ea",
+                borderBottom: i < 4 ? "1px solid #e6e3d6" : "none",
                 display: "flex",
                 alignItems: "center",
                 gap: "12px"
@@ -201,7 +201,7 @@ export default function SensorPage({ params }) {
                 }}>
                   {m.name}
                 </span>
-                <span style={{ color: "#6b635b" }}>{m.proUsage}% pro</span>
+                <span style={{ color: "#7d6e1e" }}>{m.proUsage}% pro</span>
               </div>
             ))}
           </div>

@@ -119,10 +119,10 @@ export default function HomePage() {
           of {totalPlayers.toLocaleString()}+ professional players across {totalGames} major competitive titles.
         </SSRSub>
         <SSRGrid>
-          <SSRStat label="Pro Players" value={totalPlayers.toLocaleString() + "+"} color="#b8956a" />
-          <SSRStat label="Headphones" value={totalHeadphones} color="#b8956a" />
-          <SSRStat label="Games" value={totalGames} color="#b8956a" />
-          <SSRStat label="Profiles" value={proPlayers.length} color="#b8956a" />
+          <SSRStat label="Pro Players" value={totalPlayers.toLocaleString() + "+"} color="#c9a227" />
+          <SSRStat label="Headphones" value={totalHeadphones} color="#c9a227" />
+          <SSRStat label="Games" value={totalGames} color="#c9a227" />
+          <SSRStat label="Profiles" value={proPlayers.length} color="#c9a227" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>

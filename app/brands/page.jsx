@@ -163,11 +163,11 @@ export default function BrandsPage() {
           ))}
         </SSRGrid>
         <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#a09890" }}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#9e9578" }}>
             Brand Rankings by Pro Usage
           </p>
           <div style={{
-            border: "1px solid #e8e4df",
+            border: "1px solid #e6e3d6",
             borderRadius: "8px",
             overflow: "hidden",
             fontSize: "14px"
@@ -175,8 +175,8 @@ export default function BrandsPage() {
             {brandData.slice(0, 6).map((b, i) => (
               <div key={b.brand} style={{
                 padding: "12px 16px",
-                background: i % 2 === 0 ? "#ffffff" : "#f5f2ee",
-                borderBottom: i < 5 ? "1px solid #e8e4df" : "none",
+                background: i % 2 === 0 ? "#ffffff" : "#f5f3ea",
+                borderBottom: i < 5 ? "1px solid #e6e3d6" : "none",
                 display: "flex",
                 alignItems: "center",
                 gap: "12px"
@@ -185,7 +185,7 @@ export default function BrandsPage() {
                   width: 8,
                   height: 8,
                   borderRadius: "50%",
-                  background: BRAND_COLORS[b.brand] || "#b8956a"
+                  background: BRAND_COLORS[b.brand] || "#c9a227"
                 }} />
                 <span style={{
                   fontWeight: "bold",
@@ -196,7 +196,7 @@ export default function BrandsPage() {
                 </span>
                 <span style={{
                   fontWeight: "bold",
-                  color: BRAND_COLORS[b.brand] || "#b8956a"
+                  color: BRAND_COLORS[b.brand] || "#c9a227"
                 }}>
                   {b.totalProUsage}%
                 </span>

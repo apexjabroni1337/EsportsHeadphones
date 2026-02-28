@@ -201,12 +201,12 @@ export default function ComparisonPage({ params }) {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "2rem", marginBottom: "2rem", marginTop: "1rem" }}>
           <div style={{ textAlign: "center", flex: 1 }}>
             <div style={{ fontSize: "20px", fontWeight: "700", color: "#1a1614" }}>{a.name}</div>
-            <div style={{ fontSize: "12px", color: "#a09890", marginTop: "0.5rem" }}>{a.brand}</div>
+            <div style={{ fontSize: "12px", color: "#9e9578", marginTop: "0.5rem" }}>{a.brand}</div>
           </div>
           <div style={{
             fontSize: "32px",
             fontWeight: "700",
-            color: BRAND_COLORS[a.brand] || "#b8956a",
+            color: BRAND_COLORS[a.brand] || "#c9a227",
             textTransform: "uppercase",
             letterSpacing: "1px"
           }}>
@@ -214,7 +214,7 @@ export default function ComparisonPage({ params }) {
           </div>
           <div style={{ textAlign: "center", flex: 1 }}>
             <div style={{ fontSize: "20px", fontWeight: "700", color: "#1a1614" }}>{b.name}</div>
-            <div style={{ fontSize: "12px", color: "#a09890", marginTop: "0.5rem" }}>{b.brand}</div>
+            <div style={{ fontSize: "12px", color: "#9e9578", marginTop: "0.5rem" }}>{b.brand}</div>
           </div>
         </div>
 
@@ -231,12 +231,12 @@ export default function ComparisonPage({ params }) {
               borderBottom: idx < specs.length - 1 ? "1px solid #f0e9e0" : "none",
               alignItems: "center"
             }}>
-              <div style={{ fontSize: "12px", fontWeight: "700", color: "#a09890", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+              <div style={{ fontSize: "12px", fontWeight: "700", color: "#9e9578", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                 {spec.label}
               </div>
               <div style={{
                 padding: "0.75rem",
-                backgroundColor: spec.winner === "a" ? "rgba(184, 149, 106, 0.1)" : "#f5f0e8",
+                backgroundColor: spec.winner === "a" ? "rgba(184, 149, 106, 0.1)" : "#f5f2e6",
                 borderRadius: "4px",
                 textAlign: "center",
                 fontWeight: spec.winner === "a" ? "700" : "500",
@@ -244,11 +244,11 @@ export default function ComparisonPage({ params }) {
                 fontSize: "13px"
               }}>
                 {spec.aVal}
-                {spec.winner === "a" && <div style={{ fontSize: "11px", color: BRAND_COLORS[a.brand] || "#b8956a", marginTop: "4px" }}>★</div>}
+                {spec.winner === "a" && <div style={{ fontSize: "11px", color: BRAND_COLORS[a.brand] || "#c9a227", marginTop: "4px" }}>★</div>}
               </div>
               <div style={{
                 padding: "0.75rem",
-                backgroundColor: spec.winner === "b" ? "rgba(184, 149, 106, 0.1)" : "#f5f0e8",
+                backgroundColor: spec.winner === "b" ? "rgba(184, 149, 106, 0.1)" : "#f5f2e6",
                 borderRadius: "4px",
                 textAlign: "center",
                 fontWeight: spec.winner === "b" ? "700" : "500",
@@ -266,7 +266,7 @@ export default function ComparisonPage({ params }) {
         <div style={{
           padding: "1.5rem",
           backgroundColor: aWins > bWins ? "rgba(184, 149, 106, 0.08)" : bWins > aWins ? "rgba(107, 140, 173, 0.08)" : "rgba(160, 152, 144, 0.08)",
-          borderLeft: `4px solid ${aWins > bWins ? BRAND_COLORS[a.brand] || "#b8956a" : bWins > aWins ? BRAND_COLORS[b.brand] || "#6b8cad" : "#a09890"}`,
+          borderLeft: `4px solid ${aWins > bWins ? BRAND_COLORS[a.brand] || "#c9a227" : bWins > aWins ? BRAND_COLORS[b.brand] || "#6b8cad" : "#9e9578"}`,
           borderRadius: "0 4px 4px 0",
           marginBottom: "2rem"
         }}>

@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#f5f0e8" />
+        <meta name="theme-color" content="#f5f2e6" />
         <link rel="apple-touch-icon" href="/icon.png" />
         <link rel="preconnect" href="https://flagcdn.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://flagcdn.com" />

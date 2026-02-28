@@ -178,7 +178,7 @@ export default function TeamPage({ params }) {
 
         <h2>{teamName} Player Roster and Settings</h2>
         {gameEntries.map(([game, players]) => {
-          const gameColor = GAME_COLORS[game] || "#8a8078";
+          const gameColor = GAME_COLORS[game] || "#8a8460";
           return (
           <div key={game}>
             <h3 style={{ color: gameColor, borderLeftColor: gameColor, borderLeftWidth: "3px", paddingLeft: "12px" }}>{teamName} {game} Roster</h3>
@@ -187,7 +187,7 @@ export default function TeamPage({ params }) {
               <thead><tr style={{ borderBottomWidth: "2px", borderBottomColor: gameColor }}><th style={{ textAlign: "left", paddingBottom: "8px", color: gameColor, fontWeight: "700" }}>Player</th><th style={{ textAlign: "left", paddingBottom: "8px", color: gameColor, fontWeight: "700" }}>Role</th><th style={{ textAlign: "left", paddingBottom: "8px", color: gameColor, fontWeight: "700" }}>Headphone</th></tr></thead>
               <tbody>
                 {players.map((p, idx) => (
-                  <tr key={p.name + p.game} style={{ background: idx % 2 === 0 ? "transparent" : "#f5f2ee", borderBottomWidth: "1px", borderBottomColor: "#e8e4df" }}>
+                  <tr key={p.name + p.game} style={{ background: idx % 2 === 0 ? "transparent" : "#f5f3ea", borderBottomWidth: "1px", borderBottomColor: "#e6e3d6" }}>
                     <td style={{ paddingTop: "12px", paddingBottom: "12px" }}><a href={`/players/${slug(p.name)}`}>{p.name}</a></td>
                     <td style={{ paddingTop: "12px", paddingBottom: "12px" }}>{p.role}</td>
                     <td style={{ paddingTop: "12px", paddingBottom: "12px" }}><a href={`/headphones/${slug(p.headphone)}`}>{p.headphone}</a></td>

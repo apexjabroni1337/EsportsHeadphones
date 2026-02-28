@@ -19,7 +19,7 @@ const ARTICLES = [
     excerpt: "Shape, weight, switch, wireless vs wired — the complete guide to finding your perfect headphone based on what the pros actually use.",
     date: "2026-02-23",
     tag: "Guide",
-    color: "#b8956a",
+    color: "#c9a227",
   },
   {
     slug: "hall-effect-vs-mechanical-drivers",
@@ -35,7 +35,7 @@ const ARTICLES = [
     excerpt: "A data-driven look at how average headphone weight in esports has dropped 40% in just three years, and what it means for your next purchase.",
     date: "2026-02-23",
     tag: "Data",
-    color: "#b8956a",
+    color: "#c9a227",
   },
   {
     slug: "wireless-vs-wired-2026",
@@ -57,19 +57,19 @@ const ARTICLES = [
 
 export default function BlogPage() {
   return (
-    <div style={{ background: "#f5f0e8", minHeight: "100vh" }}>
+    <div style={{ background: "#f5f2e6", minHeight: "100vh" }}>
       <div className="max-w-4xl mx-auto px-4 py-16">
         <Link href="/" className="text-sm opacity-40 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>
           ← Back to EsportsHeadphones
         </Link>
         <div className="mt-6 mb-10">
-          <div className="text-3xl sm:text-5xl font-black" style={{ color: "#1a1614", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>The Headphone <span style={{ background: "linear-gradient(135deg, #b8956a, #1a1614)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Blog</span></div>
+          <div className="text-3xl sm:text-5xl font-black" style={{ color: "#1a1614", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>The Headphone <span style={{ background: "linear-gradient(135deg, #c9a227, #1a1614)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Blog</span></div>
           <p className="text-base opacity-40 mt-2">Esports headphone guides, pro gear analysis, and data-driven insights.</p>
         </div>
 
         <div className="space-y-6">
           {ARTICLES.map((a) => (
-            <Link key={a.slug} href={`/blog/${a.slug}`} className="block rounded-2xl p-6 transition-all hover:scale-[1.01] border-l-4 no-underline" style={{ background: "#ffffff", borderColor: a.color, border: `1px solid #e8e4df`, borderLeftWidth: "4px", textDecoration: "none" }}>
+            <Link key={a.slug} href={`/blog/${a.slug}`} className="block rounded-2xl p-6 transition-all hover:scale-[1.01] border-l-4 no-underline" style={{ background: "#ffffff", borderColor: a.color, border: `1px solid #e6e3d6`, borderLeftWidth: "4px", textDecoration: "none" }}>
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-xs font-bold px-3 py-1 rounded-lg" style={{ background: `${a.color}20`, color: a.color, border: `1px solid ${a.color}40` }}>{a.tag}</span>
                 <span className="text-xs opacity-30" style={{ color: "#1a1614" }}>{a.date}</span>
@@ -80,9 +80,9 @@ export default function BlogPage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-xl p-8 text-center" style={{ background: "#00000008", border: "1px solid #e8e4df" }}>
+        <div className="mt-16 rounded-xl p-8 text-center" style={{ background: "#00000008", border: "1px solid #e6e3d6" }}>
           <p className="text-sm opacity-30" style={{ color: "#1a1614" }}>More articles coming soon. Want to be notified?</p>
-          <Link href="/contact" className="inline-block mt-3 px-5 py-2 rounded-lg text-sm font-bold no-underline transition-all hover:scale-105" style={{ background: "#b8956a", color: "#1a1614", textDecoration: "none" }}>Get in Touch</Link>
+          <Link href="/contact" className="inline-block mt-3 px-5 py-2 rounded-lg text-sm font-bold no-underline transition-all hover:scale-105" style={{ background: "#c9a227", color: "#1a1614", textDecoration: "none" }}>Get in Touch</Link>
         </div>
       </div>
     </div>

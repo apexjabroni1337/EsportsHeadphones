@@ -12,26 +12,26 @@ export function SSRSection({ children }) {
 export function SSRTitle({ children, accent }) {
   return (
     <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-4" style={{ color: "#1a1614" }}>
-      {accent && <span style={{ color: "#b8956a" }}>{accent} </span>}
+      {accent && <span style={{ color: "#c9a227" }}>{accent} </span>}
       {children}
     </h1>
   );
 }
 
 export function SSRSub({ children }) {
-  return <p className="text-sm sm:text-base leading-relaxed mb-6" style={{ color: "#6b635b" }}>{children}</p>;
+  return <p className="text-sm sm:text-base leading-relaxed mb-6" style={{ color: "#7d6e1e" }}>{children}</p>;
 }
 
 export function SSRGrid({ children }) {
   return (
-    <div style={{ borderTopWidth: 1, borderTopColor: "#e8e4df" }} className="pt-6">
+    <div style={{ borderTopWidth: 1, borderTopColor: "#e6e3d6" }} className="pt-6">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-6">{children}</div>
     </div>
   );
 }
 
 export function SSRStat({ label, value, color }) {
-  const accentColor = color || "#b8956a";
+  const accentColor = color || "#c9a227";
   return (
     <div className="rounded-lg px-4 py-3 border-l-[3px] relative" style={{
       background: "#ffffff",
@@ -53,8 +53,8 @@ export function SSRStat({ label, value, color }) {
 }
 
 export function SSRLink({ href, children, color }) {
-  const accentColor = color || "#b8956a";
-  const shadowColor = color ? `${color}40` : "#b8956a40";
+  const accentColor = color || "#c9a227";
+  const shadowColor = color ? `${color}40` : "#c9a22740";
 
   return (
     <a href={href} className="inline-block text-xs sm:text-sm font-bold px-4 py-2 rounded-lg no-underline transition-all duration-150 hover:translate-y-px active:translate-y-1"
@@ -74,7 +74,7 @@ export function SSRDivider() {
     <div className="my-6" style={{
       height: 2,
       borderRadius: "1px",
-      background: "linear-gradient(to right, transparent 0%, #00d4ff 25%, #b8956a 50%, #d946ef 75%, transparent 100%)",
+      background: "linear-gradient(to right, transparent 0%, #00d4ff 25%, #c9a227 50%, #d946ef 75%, transparent 100%)",
       boxShadow: "0 2px 4px rgba(0,0,0,0.08)",
       margin: "24px 0"
     }} />

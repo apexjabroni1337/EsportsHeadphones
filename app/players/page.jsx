@@ -221,9 +221,9 @@ export default function PlayersPage() {
         <SSRTitle accent="Pro">Players</SSRTitle>
         <SSRSub>Headphone settings and gear for {allPlayers.length.toLocaleString()}+ professional esports players across {games.length} competitive titles.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Total Players" value={allPlayers.length.toLocaleString() + "+"} color="#b8956a" />
-          <SSRStat label="Full Profiles" value={proPlayers.length} color="#b8956a" />
-          <SSRStat label="Games" value={games.length} color="#b8956a" />
+          <SSRStat label="Total Players" value={allPlayers.length.toLocaleString() + "+"} color="#c9a227" />
+          <SSRStat label="Full Profiles" value={proPlayers.length} color="#c9a227" />
+          <SSRStat label="Games" value={games.length} color="#c9a227" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>

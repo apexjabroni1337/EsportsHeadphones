@@ -72,9 +72,9 @@ export default function TeamsPage() {
         <SSRTitle accent="Pro">Teams</SSRTitle>
         <SSRSub>Headphone and gear choices across {teamCount} professional esports organizations in {gameCount} major titles.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Organizations" value={teamCount} color="#8a7460" />
-          <SSRStat label="Games" value={gameCount} color="#b8956a" />
-          <SSRStat label="Players Tracked" value={allPlayers.length} color="#b8956a" />
+          <SSRStat label="Organizations" value={teamCount} color="#a68b1b" />
+          <SSRStat label="Games" value={gameCount} color="#c9a227" />
+          <SSRStat label="Players Tracked" value={allPlayers.length} color="#c9a227" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/players">Pro Settings</SSRLink>

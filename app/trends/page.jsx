@@ -124,10 +124,10 @@ export default function TrendsPage() {
         <SSRTitle accent="Industry">Trends</SSRTitle>
         <SSRSub>How professional esports headphones have evolved from 2019 to 2025 — weight, frequency response, wireless adoption, and pricing data.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Under 50g" value={`${under50.length} headphones`} color="#b8956a" />
-          <SSRStat label="8KHz Polling" value={`${over8k.length} headphones`} color="#b8956a" />
-          <SSRStat label="Wireless" value={`${Math.round(wireless.length/headphones.length*100)}%`} color="#b8956a" />
-          <SSRStat label="Under $100" value={`${under100.length} headphones`} color="#b8956a" />
+          <SSRStat label="Under 50g" value={`${under50.length} headphones`} color="#c9a227" />
+          <SSRStat label="8KHz Polling" value={`${over8k.length} headphones`} color="#c9a227" />
+          <SSRStat label="Wireless" value={`${Math.round(wireless.length/headphones.length*100)}%`} color="#c9a227" />
+          <SSRStat label="Under $100" value={`${under100.length} headphones`} color="#c9a227" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>

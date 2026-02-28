@@ -8,7 +8,7 @@ export const Flag = ({ country, size = 20, className = "" }) => {
   return <img loading="lazy" src={url} alt={country} width={size} height={Math.round(size * 0.75)} className={className} style={{ display: "inline-block", verticalAlign: "middle", borderRadius: 2, objectFit: "cover" }} />;
 };
 
-export const GlowText = ({ children, color = "#b8956a", size = "text-5xl", className = "" }) => (
+export const GlowText = ({ children, color = "#c9a227", size = "text-5xl", className = "" }) => (
   <span
     className={`${size} font-black tracking-tight ${className}`}
     style={{
@@ -21,7 +21,7 @@ export const GlowText = ({ children, color = "#b8956a", size = "text-5xl", class
   </span>
 );
 
-export const StatBox = ({ label, value, unit = "", color = "#b8956a" }) => (
+export const StatBox = ({ label, value, unit = "", color = "#c9a227" }) => (
   <div
     className="glass-card flex flex-col items-center justify-center text-center p-3 sm:p-5"
     style={{
@@ -35,29 +35,29 @@ export const StatBox = ({ label, value, unit = "", color = "#b8956a" }) => (
     <div className="text-2xl sm:text-3xl font-black" style={{ color, fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
       {value}<span className="text-sm sm:text-lg opacity-60">{unit}</span>
     </div>
-    <div className="text-xs uppercase tracking-widest mt-1.5 font-semibold" style={{ color: "#a09890" }}>{label}</div>
+    <div className="text-xs uppercase tracking-widest mt-1.5 font-semibold" style={{ color: "#9e9578" }}>{label}</div>
   </div>
 );
 
-export const SectionTitle = ({ children, sub, color = "#b8956a" }) => (
+export const SectionTitle = ({ children, sub, color = "#c9a227" }) => (
   <div className="mb-6 sm:mb-10 mt-10 sm:mt-20">
     <div className="flex items-center gap-3 sm:gap-4 mb-2">
-      <div className="h-px flex-1" style={{ background: `linear-gradient(to right, #b8956a40, #d4cfc840, transparent)` }} />
+      <div className="h-px flex-1" style={{ background: `linear-gradient(to right, #c9a22740, #d4d0be40, transparent)` }} />
       <h2
         className="text-lg sm:text-2xl lg:text-3xl tracking-tight text-center font-bold"
         style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}
       >
         {children}
       </h2>
-      <div className="h-px flex-1" style={{ background: `linear-gradient(to left, #b8956a40, #d4cfc840, transparent)` }} />
+      <div className="h-px flex-1" style={{ background: `linear-gradient(to left, #c9a22740, #d4d0be40, transparent)` }} />
     </div>
-    {sub && <p className="text-center text-sm tracking-wide px-2" style={{ color: "#a09890" }}>{sub}</p>}
+    {sub && <p className="text-center text-sm tracking-wide px-2" style={{ color: "#9e9578" }}>{sub}</p>}
   </div>
 );
 
 export const HeadphoneCard = ({ headphone, onClick, isSelected, rank }) => {
   const k = headphone;
-  const brandCol = BRAND_COLORS[k.brand] || "#a09890";
+  const brandCol = BRAND_COLORS[k.brand] || "#9e9578";
   const [isHovered, setIsHovered] = React.useState(false);
   const pollDisplay = k.frequencyResponse >= 1000 ? `${k.frequencyResponse / 1000}K` : k.frequencyResponse;
   return (
@@ -78,14 +78,14 @@ export const HeadphoneCard = ({ headphone, onClick, isSelected, rank }) => {
       }}
     >
       {/* ── Top Panel: Image Area ── */}
-      <div className="relative flex items-center justify-center overflow-hidden" style={{ height: 160, background: "linear-gradient(135deg, #f5f0e8, #ede8df)" }}>
+      <div className="relative flex items-center justify-center overflow-hidden" style={{ height: 160, background: "linear-gradient(135deg, #f5f2e6, #ede8df)" }}>
         {getHeadphoneImage(k.name) ? (
           <img loading="lazy" src={getHeadphoneImage(k.name)}
             alt={`${k.name} ${k.brand} esports gaming headphone`}
             className="w-full h-full object-contain object-center p-4"
             style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.08))" }} />
         ) : (
-          <span className="text-sm italic" style={{ color: "#a09890" }}>{k.name}</span>
+          <span className="text-sm italic" style={{ color: "#9e9578" }}>{k.name}</span>
         )}
         {/* Brand accent bar at bottom of image panel */}
         <div className="absolute bottom-0 left-0 right-0" style={{ height: 4, background: brandCol }} />
@@ -118,21 +118,21 @@ export const HeadphoneCard = ({ headphone, onClick, isSelected, rank }) => {
             { label: "Pro %", value: `${k.proUsage}%` },
           ].map((s, i) => (
             <div key={i} className="flex-1 text-center">
-              <div className="font-bold uppercase tracking-wider mb-0.5" style={{ fontSize: 9, color: "#a09890", letterSpacing: "0.3px" }}>{s.label}</div>
+              <div className="font-bold uppercase tracking-wider mb-0.5" style={{ fontSize: 9, color: "#9e9578", letterSpacing: "0.3px" }}>{s.label}</div>
               <div className="font-bold" style={{ fontSize: 12, color: i === 3 ? brandCol : "#1a1614" }}>{s.value}</div>
             </div>
           ))}
         </div>
         {/* Rating Display */}
         <div className="flex justify-between items-center px-3 py-2.5 rounded-md mb-3" style={{ background: "#fff", border: "1px solid #ede8df" }}>
-          <span className="font-bold uppercase tracking-wider" style={{ fontSize: 10, color: "#a09890", letterSpacing: "0.3px" }}>Rating</span>
+          <span className="font-bold uppercase tracking-wider" style={{ fontSize: 10, color: "#9e9578", letterSpacing: "0.3px" }}>Rating</span>
           <span className="font-bold" style={{ fontSize: 14, color: brandCol }}>{k.rating}/10</span>
         </div>
         {/* Buy Button */}
         <a href={amazonLink(k.name)} target="_blank" rel="noopener noreferrer"
           onClick={e => e.stopPropagation()}
           className="mt-auto flex items-center justify-center gap-1.5 py-2.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all no-underline"
-          style={{ background: "#1a1614", color: "#f5f0e8", textDecoration: "none", letterSpacing: "0.5px" }}
+          style={{ background: "#1a1614", color: "#f5f2e6", textDecoration: "none", letterSpacing: "0.5px" }}
           onMouseEnter={e => { e.currentTarget.style.background = "#2d2520"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(26,22,20,0.3)"; }}
           onMouseLeave={e => { e.currentTarget.style.background = "#1a1614"; e.currentTarget.style.boxShadow = "none"; }}>
           {I.cart(12)} ${k.price} — Buy Now
@@ -151,16 +151,16 @@ export const CustomTooltip = ({ active, payload, label }) => {
         background: "rgba(255,255,255,0.85)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
-        border: "1px solid #b8956a20",
-        borderLeft: "3px solid #b8956a",
-        boxShadow: "0 0 16px #b8956a10, 0 8px 32px #00000008",
+        border: "1px solid #c9a22720",
+        borderLeft: "3px solid #c9a227",
+        boxShadow: "0 0 16px #c9a22710, 0 8px 32px #00000008",
       }}
     >
-      <div className="font-bold mb-1" style={{ color: "#6b635b", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{label}</div>
+      <div className="font-bold mb-1" style={{ color: "#7d6e1e", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{label}</div>
       {payload.map((p, i) => (
         <div key={i} className="flex gap-2 items-center">
           <div className="w-2 h-2 rounded-full" style={{ background: p.color }} />
-          <span style={{ color: "#a09890" }}>{p.name}:</span>
+          <span style={{ color: "#9e9578" }}>{p.name}:</span>
           <span className="font-bold" style={{ color: p.color }}>{typeof p.value === 'number' && p.name?.toLowerCase().includes('usage') ? `${p.value}%` : p.value}</span>
         </div>
       ))}
@@ -175,15 +175,15 @@ export const GradientButton = ({ children, onClick, className = "", size = "md" 
       onClick={onClick}
       className={`${sizeClasses} font-bold rounded-xl transition-all duration-300 ${className}`}
       style={{
-        background: "linear-gradient(135deg, #b8956a, #8a7460)",
+        background: "linear-gradient(135deg, #c9a227, #a68b1b)",
         color: "#fff",
         border: "none",
-        boxShadow: "0 2px 12px #b8956a25",
+        boxShadow: "0 2px 12px #c9a22725",
         fontFamily: "'Space Grotesk', system-ui, sans-serif",
         cursor: "pointer",
       }}
-      onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 24px #b8956a40, 0 0 20px #8a746020"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-      onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 12px #b8956a25"; e.currentTarget.style.transform = "translateY(0)"; }}
+      onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 24px #c9a22740, 0 0 20px #a68b1b20"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+      onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 12px #c9a22725"; e.currentTarget.style.transform = "translateY(0)"; }}
     >
       {children}
     </button>

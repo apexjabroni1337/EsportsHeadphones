@@ -117,8 +117,8 @@ export default function ComparePage() {
         <SSRTitle accent="Compare">Headphones</SSRTitle>
         <SSRSub>Select any two esports headphones to compare head-to-head. Full specs, pro usage, pricing, and ratings side by side across {headphones.length} headphones.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Total Headphones" value={headphones.length} color="#b8956a" />
-          <SSRStat label="Comparisons" value={`${headphones.length * (headphones.length - 1) / 2}+`} color="#b8956a" />
+          <SSRStat label="Total Headphones" value={headphones.length} color="#c9a227" />
+          <SSRStat label="Comparisons" value={`${headphones.length * (headphones.length - 1) / 2}+`} color="#c9a227" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/headphones">All Headphones</SSRLink>

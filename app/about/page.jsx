@@ -65,10 +65,10 @@ export default function AboutPage() {
         <SSRTitle accent="About">Our Data & Methodology</SSRTitle>
         <SSRSub>How we collect, verify, and maintain the most comprehensive pro esports headphone database on the web.</SSRSub>
         <SSRGrid>
-          <SSRStat label="Pro Players" value={totalPlayers.toString()} color="#b8956a" />
+          <SSRStat label="Pro Players" value={totalPlayers.toString()} color="#c9a227" />
           <SSRStat label="Gaming Headphones" value={totalHeadphones.toString()} color="#6b8cad" />
-          <SSRStat label="Esports Titles" value={totalGames.toString()} color="#b8956a" />
-          <SSRStat label="Pro Teams" value={totalTeams.toString()} color="#a09890" />
+          <SSRStat label="Esports Titles" value={totalGames.toString()} color="#c9a227" />
+          <SSRStat label="Pro Teams" value={totalTeams.toString()} color="#9e9578" />
         </SSRGrid>
         <div className="flex flex-wrap gap-2">
           <SSRLink href="/contact">Submit a Correction</SSRLink>

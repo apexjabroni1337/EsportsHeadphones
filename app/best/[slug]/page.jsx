@@ -129,10 +129,10 @@ export default function BestForPage({ params }) {
   const otherPages = ALL_SLUGS.filter(s => s !== params.slug).slice(0, 8);
 
   const tierData = [
-    { tier: "S", label: "S-Tier — The Best", color: "#b8956a", headphones: topHeadphonesForPage.slice(0, 1) },
-    { tier: "A", label: "A-Tier — Excellent", color: "#8a7460", headphones: topHeadphonesForPage.slice(1, 3) },
-    { tier: "B", label: "B-Tier — Great", color: "#6b635b", headphones: topHeadphonesForPage.slice(3, 6) },
-    { tier: "C", label: "C-Tier — Solid", color: "#a09890", headphones: topHeadphonesForPage.slice(6, 10) },
+    { tier: "S", label: "S-Tier — The Best", color: "#c9a227", headphones: topHeadphonesForPage.slice(0, 1) },
+    { tier: "A", label: "A-Tier — Excellent", color: "#a68b1b", headphones: topHeadphonesForPage.slice(1, 3) },
+    { tier: "B", label: "B-Tier — Great", color: "#7d6e1e", headphones: topHeadphonesForPage.slice(3, 6) },
+    { tier: "C", label: "C-Tier — Solid", color: "#9e9578", headphones: topHeadphonesForPage.slice(6, 10) },
   ];
 
   return (
@@ -164,26 +164,26 @@ export default function BestForPage({ params }) {
       }) }} />
 
       {/* ── VISIBLE ARTICLE CONTENT ── */}
-      <div style={{ background: "#f5f0e8", minHeight: "100vh" }}>
+      <div style={{ background: "#f5f2e6", minHeight: "100vh" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "40px 20px 60px" }}>
 
           {/* Breadcrumb */}
-          <nav style={{ marginBottom: 24, fontSize: 13, color: "#a09890" }}>
-            <Link href="/" style={{ color: "#a09890", textDecoration: "none" }}>Home</Link>
+          <nav style={{ marginBottom: 24, fontSize: 13, color: "#9e9578" }}>
+            <Link href="/" style={{ color: "#9e9578", textDecoration: "none" }}>Home</Link>
             <span style={{ margin: "0 6px" }}>›</span>
-            <Link href="/best" style={{ color: "#a09890", textDecoration: "none" }}>Best Headphones</Link>
+            <Link href="/best" style={{ color: "#9e9578", textDecoration: "none" }}>Best Headphones</Link>
             <span style={{ margin: "0 6px" }}>›</span>
-            <span style={{ color: "#6b635b", fontWeight: 700 }}>{isGame ? page.full : page.full}</span>
+            <span style={{ color: "#7d6e1e", fontWeight: 700 }}>{isGame ? page.full : page.full}</span>
           </nav>
 
           {/* Title */}
           <h1 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 800, color: "#1a1614", marginBottom: 8, lineHeight: 1.15 }}>
-            {isGame ? <>Best Headphone for <span style={{ color: "#b8956a" }}>{page.full}</span></> : isCollection ? <>{page.full}</> : <>Best <span style={{ color: "#b8956a" }}>{page.full}</span> Headphones</>}
+            {isGame ? <>Best Headphone for <span style={{ color: "#c9a227" }}>{page.full}</span></> : isCollection ? <>{page.full}</> : <>Best <span style={{ color: "#c9a227" }}>{page.full}</span> Headphones</>}
           </h1>
 
           {/* Category tag */}
           {isCollection && page.category && (
-            <span style={{ display: "inline-block", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, padding: "4px 12px", borderRadius: 99, background: "#b8956a12", color: "#b8956a", border: "1px solid #b8956a20", marginBottom: 16 }}>{page.category}</span>
+            <span style={{ display: "inline-block", fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, padding: "4px 12px", borderRadius: 99, background: "#c9a22712", color: "#c9a227", border: "1px solid #c9a22720", marginBottom: 16 }}>{page.category}</span>
           )}
 
           {/* Intro paragraph */}
@@ -191,16 +191,16 @@ export default function BestForPage({ params }) {
 
           {/* Stats bar */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 40 }}>
-            <div style={{ background: "#fff", borderRadius: 12, padding: "12px 20px", border: "1px solid #e8e4df", flex: "1 1 120px", textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890", marginBottom: 4 }}>Headphones Ranked</div>
-              <div style={{ fontSize: 22, fontWeight: 900, color: "#b8956a" }}>{topHeadphonesForPage.length}</div>
+            <div style={{ background: "#fff", borderRadius: 12, padding: "12px 20px", border: "1px solid #e6e3d6", flex: "1 1 120px", textAlign: "center" }}>
+              <div style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578", marginBottom: 4 }}>Headphones Ranked</div>
+              <div style={{ fontSize: 22, fontWeight: 900, color: "#c9a227" }}>{topHeadphonesForPage.length}</div>
             </div>
-            <div style={{ background: "#fff", borderRadius: 12, padding: "12px 20px", border: "1px solid #e8e4df", flex: "1 1 120px", textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890", marginBottom: 4 }}>Pro Players</div>
+            <div style={{ background: "#fff", borderRadius: 12, padding: "12px 20px", border: "1px solid #e6e3d6", flex: "1 1 120px", textAlign: "center" }}>
+              <div style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578", marginBottom: 4 }}>Pro Players</div>
               <div style={{ fontSize: 22, fontWeight: 900, color: "#1a1614" }}>{(players?.length || allPlayers.length).toLocaleString()}+</div>
             </div>
-            <div style={{ background: "#fff", borderRadius: 12, padding: "12px 20px", border: "1px solid #e8e4df", flex: "1 1 120px", textAlign: "center" }}>
-              <div style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#a09890", marginBottom: 4 }}>#1 Pick</div>
+            <div style={{ background: "#fff", borderRadius: 12, padding: "12px 20px", border: "1px solid #e6e3d6", flex: "1 1 120px", textAlign: "center" }}>
+              <div style={{ fontSize: 11, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: "#9e9578", marginBottom: 4 }}>#1 Pick</div>
               <div style={{ fontSize: 14, fontWeight: 900, color: "#1a1614" }}>{topHeadphonesForPage[0]?.name?.replace(topHeadphonesForPage[0]?.brand + " ", "") || "—"}</div>
             </div>
           </div>
@@ -214,33 +214,33 @@ export default function BestForPage({ params }) {
             tg.headphones.length > 0 && (
               <div key={tg.tier} style={{ marginBottom: 24 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-                  <div style={{ width: 40, height: 40, borderRadius: 6, background: tg.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 800, color: "#f5f0e8" }}>{tg.tier}</div>
+                  <div style={{ width: 40, height: 40, borderRadius: 6, background: tg.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 800, color: "#f5f2e6" }}>{tg.tier}</div>
                   <div style={{ fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: tg.color }}>{tg.label}</div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {tg.headphones.map((hp) => (
-                    <div key={hp.name} style={{ background: "#fff", borderRadius: 12, padding: "14px 18px", border: "1px solid #e8e4df", borderLeft: `4px solid ${tg.color}`, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+                    <div key={hp.name} style={{ background: "#fff", borderRadius: 12, padding: "14px 18px", border: "1px solid #e6e3d6", borderLeft: `4px solid ${tg.color}`, display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
                       {getHeadphoneImage(hp.name) && (
                         <img loading="lazy" src={getHeadphoneImage(hp.name)} alt={hp.name} style={{ height: 48, objectFit: "contain", flexShrink: 0 }} />
                       )}
                       <div style={{ flex: "1 1 200px", minWidth: 0 }}>
                         <div style={{ fontWeight: 800, fontSize: 14, color: "#1a1614" }}>{hp.name}</div>
-                        <div style={{ fontSize: 12, color: "#a09890", marginTop: 2 }}>{hp.brand} · {hp.driverType} · {hp.connectivity}</div>
+                        <div style={{ fontSize: 12, color: "#9e9578", marginTop: 2 }}>{hp.brand} · {hp.driverType} · {hp.connectivity}</div>
                       </div>
                       <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "center" }}>
                         <div style={{ textAlign: "center" }}>
-                          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", color: "#a09890" }}>Usage</div>
-                          <div style={{ fontSize: 14, fontWeight: 800, color: "#b8956a" }}>{hp.gamePercent}%</div>
+                          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", color: "#9e9578" }}>Usage</div>
+                          <div style={{ fontSize: 14, fontWeight: 800, color: "#c9a227" }}>{hp.gamePercent}%</div>
                         </div>
                         <div style={{ textAlign: "center" }}>
-                          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", color: "#a09890" }}>Weight</div>
+                          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", color: "#9e9578" }}>Weight</div>
                           <div style={{ fontSize: 14, fontWeight: 800, color: "#1a1614" }}>{hp.weight}g</div>
                         </div>
                         <div style={{ textAlign: "center" }}>
-                          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", color: "#a09890" }}>Price</div>
+                          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", color: "#9e9578" }}>Price</div>
                           <div style={{ fontSize: 14, fontWeight: 800, color: "#1a1614" }}>${hp.price}</div>
                         </div>
-                        <a href={amazonLink(hp.name)} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "6px 14px", borderRadius: 8, background: "#b8956a", color: "#fff", fontSize: 12, fontWeight: 800, textDecoration: "none", whiteSpace: "nowrap" }}>
+                        <a href={amazonLink(hp.name)} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "6px 14px", borderRadius: 8, background: "#c9a227", color: "#fff", fontSize: 12, fontWeight: 800, textDecoration: "none", whiteSpace: "nowrap" }}>
                           Buy ${hp.price}
                         </a>
                       </div>
@@ -252,7 +252,7 @@ export default function BestForPage({ params }) {
           ))}
 
           {/* ── TIPS SECTION ── */}
-          <div style={{ background: "#fff", borderRadius: 16, padding: 24, border: "1px solid #e8e4df", marginTop: 40, marginBottom: 40 }}>
+          <div style={{ background: "#fff", borderRadius: 16, padding: 24, border: "1px solid #e6e3d6", marginTop: 40, marginBottom: 40 }}>
             <h2 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 18, fontWeight: 800, color: "#1a1614", marginBottom: 12 }}>
               {isGame ? `${page.game} Audio Tips` : "Expert Tips"}
             </h2>
@@ -263,9 +263,9 @@ export default function BestForPage({ params }) {
           <div style={{ marginBottom: 40 }}>
             <h2 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 18, fontWeight: 800, color: "#1a1614", marginBottom: 16 }}>Frequently Asked Questions</h2>
             {faq.map((f, i) => (
-              <div key={i} style={{ background: "#fff", borderRadius: 12, padding: "16px 20px", border: "1px solid #e8e4df", marginBottom: 10 }}>
+              <div key={i} style={{ background: "#fff", borderRadius: 12, padding: "16px 20px", border: "1px solid #e6e3d6", marginBottom: 10 }}>
                 <h3 style={{ fontSize: 14, fontWeight: 800, color: "#1a1614", marginBottom: 6 }}>{f.q}</h3>
-                <p style={{ fontSize: 13, lineHeight: 1.65, color: "#6b635b", margin: 0 }}>{f.a}</p>
+                <p style={{ fontSize: 13, lineHeight: 1.65, color: "#7d6e1e", margin: 0 }}>{f.a}</p>
               </div>
             ))}
           </div>
@@ -275,7 +275,7 @@ export default function BestForPage({ params }) {
             <h2 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 18, fontWeight: 800, color: "#1a1614", marginBottom: 16 }}>More Headphone Guides</h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {otherPages.map(s => (
-                <Link key={s} href={`/best/${s}`} style={{ display: "inline-block", padding: "8px 16px", borderRadius: 10, background: "#fff", border: "1px solid #e8e4df", color: "#6b635b", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
+                <Link key={s} href={`/best/${s}`} style={{ display: "inline-block", padding: "8px 16px", borderRadius: 10, background: "#fff", border: "1px solid #e6e3d6", color: "#7d6e1e", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
                   {BEST_PAGES[s].full}
                 </Link>
               ))}
@@ -283,8 +283,8 @@ export default function BestForPage({ params }) {
           </div>
 
           {/* Back to home */}
-          <div style={{ textAlign: "center", paddingTop: 20, borderTop: "1px solid #e8e4df" }}>
-            <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 24px", borderRadius: 12, background: "#b8956a", color: "#fff", fontSize: 14, fontWeight: 800, textDecoration: "none" }}>
+          <div style={{ textAlign: "center", paddingTop: 20, borderTop: "1px solid #e6e3d6" }}>
+            <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 24px", borderRadius: 12, background: "#c9a227", color: "#fff", fontSize: 14, fontWeight: 800, textDecoration: "none" }}>
               ← Back to EsportsHeadphones
             </Link>
           </div>

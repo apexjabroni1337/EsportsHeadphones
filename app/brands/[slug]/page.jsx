@@ -213,7 +213,7 @@ export default function BrandDetailPage({ params }) {
             width: 16,
             height: 16,
             borderRadius: "2px",
-            background: BRAND_COLORS[brand] || "#b8956a"
+            background: BRAND_COLORS[brand] || "#c9a227"
           }} />
           <SSRTitle accent="Headphones">{brand}</SSRTitle>
         </div>
@@ -227,19 +227,19 @@ export default function BrandDetailPage({ params }) {
           <SSRStat label="Most Popular" value={mostPopular.name} />
         </SSRGrid>
         <div style={{ marginTop: "20px", marginBottom: "20px" }}>
-          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#a09890" }}>
+          <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#9e9578" }}>
             Headphone Lineup
           </p>
           <div style={{
-            border: "1px solid #e8e4df",
+            border: "1px solid #e6e3d6",
             borderRadius: "8px",
             overflow: "hidden",
             fontSize: "14px"
           }}>
             <div style={{
               padding: "12px 16px",
-              background: BRAND_COLORS[brand] ? `${BRAND_COLORS[brand]}14` : "#f5f2ee",
-              borderBottom: "1px solid #e8e4df",
+              background: BRAND_COLORS[brand] ? `${BRAND_COLORS[brand]}14` : "#f5f3ea",
+              borderBottom: "1px solid #e6e3d6",
               fontWeight: "bold",
               color: BRAND_COLORS[brand] || "#1a1614"
             }}>
@@ -248,19 +248,19 @@ export default function BrandDetailPage({ params }) {
             {[...brandHeadphones].sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 4).map((m, i) => (
               <div key={m.id} style={{
                 padding: "12px 16px",
-                background: i % 2 === 0 ? "#ffffff" : "#f5f2ee",
-                borderBottom: i < 3 ? "1px solid #e8e4df" : "none",
+                background: i % 2 === 0 ? "#ffffff" : "#f5f3ea",
+                borderBottom: i < 3 ? "1px solid #e6e3d6" : "none",
                 display: "flex",
                 alignItems: "center",
                 gap: "12px"
               }}>
                 <span style={{
                   fontWeight: "bold",
-                  color: BRAND_COLORS[brand] || "#b8956a"
+                  color: BRAND_COLORS[brand] || "#c9a227"
                 }}>
                   {m.name}
                 </span>
-                <span style={{ color: "#6b635b", marginLeft: "auto" }}>{m.proUsage}% pro</span>
+                <span style={{ color: "#7d6e1e", marginLeft: "auto" }}>{m.proUsage}% pro</span>
               </div>
             ))}
           </div>

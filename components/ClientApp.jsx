@@ -852,32 +852,29 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </nav>
 
             {/* Right side: stats + search + subscribe */}
-            <div className="flex items-center gap-2 ml-auto flex-shrink-0">
-              {/* Stats badges */}
-              <div className="hidden xl:flex items-center gap-2 text-[10px] font-semibold mr-1" style={{ color: "#a09890" }}>
-                <span className="px-2 py-1 rounded-md" style={{ background: "rgba(0,0,0,0.03)" }}>{allPlayers.length}+ Pros</span>
-                <span className="px-2 py-1 rounded-md" style={{ background: "rgba(0,0,0,0.03)" }}>{headphones.length} Headphones</span>
-              </div>
+            <div className="flex items-center gap-2.5 ml-auto flex-shrink-0">
               {/* Search trigger */}
               <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
-                aria-label="Search (Ctrl+K)" className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-all duration-200 hover:shadow-sm"
-                style={{ background: "rgba(0,0,0,0.04)", border: "1px solid rgba(0,0,0,0.06)", color: "#8a8078", minWidth: 180 }}>
-                <Search size={13} style={{ color: "#b0a89e" }} />
-                <span style={{ fontSize: 12 }}>Search...</span>
-                <kbd className="ml-auto px-1.5 py-0.5 rounded text-[10px] font-mono" style={{ background: "rgba(0,0,0,0.04)", color: "#b0a89e", border: "1px solid rgba(0,0,0,0.06)" }}>⌘K</kbd>
+                aria-label="Search" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-xs transition-all duration-300 hover:shadow-md"
+                style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)", border: "1px solid rgba(184,149,106,0.15)", color: "#8a8078", minWidth: 160 }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.95)"; e.currentTarget.style.borderColor = "rgba(184,149,106,0.35)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.7)"; e.currentTarget.style.borderColor = "rgba(184,149,106,0.15)"; }}>
+                <Search size={14} style={{ color: "#b8956a" }} />
+                <span style={{ fontSize: 13, color: "#a09890" }}>Search...</span>
               </button>
               {/* Mobile search */}
               <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
-                aria-label="Search" className="sm:hidden p-2 rounded-lg" style={{ background: "rgba(0,0,0,0.04)" }}>
-                <Search size={16} style={{ color: "#8a8078" }} />
+                aria-label="Search" className="sm:hidden p-2 rounded-full" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(184,149,106,0.15)" }}>
+                <Search size={16} style={{ color: "#b8956a" }} />
               </button>
               {/* Subscribe */}
               {newsletterStatus === "success" ? (
-                <span style={{ fontSize: 11, color: "#6b635b" }} className="font-bold hidden sm:inline">✓ Subscribed</span>
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold" style={{ background: "#b8956a15", color: "#b8956a", border: "1px solid #b8956a30" }}>✓ Subscribed</span>
               ) : (
                 <button onClick={() => setNewsletterPopup(true)}
-                  className="hidden lg:inline-flex px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all hover:shadow-sm"
-                  style={{ background: "#1a1614", color: "#f5f0e8", letterSpacing: 0.5 }}>
+                  className="hidden lg:inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-[11px] transition-all duration-300 hover:shadow-lg hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, #b8956a, #9a7a54)", color: "#ffffff", letterSpacing: 0.5, boxShadow: "0 2px 8px rgba(184,149,106,0.3)" }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                   Subscribe
                 </button>
               )}

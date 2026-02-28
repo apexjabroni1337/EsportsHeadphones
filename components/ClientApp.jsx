@@ -1406,49 +1406,86 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               );
             })()}
 
-            {/* Popular Comparisons */}
-            <div className="mb-4">
-              <div className="text-xs uppercase tracking-widest opacity-25 mb-3 font-bold">Popular Comparisons</div>
-              <div className="flex flex-wrap gap-2">
+            {/* ══ Popular Comparisons — dark themed matchup cards ══ */}
+            <div className="rounded-2xl p-6 mb-6" style={{ background: "linear-gradient(160deg, #0f0e0c 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: "#c9a227" }}>Popular Comparisons</div>
+                <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, #c9a22730, transparent)" }} />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {[
                   { a: "Razer BlackShark V2 Pro", b: "SteelSeries Arctis Nova Pro Wireless" },
                   { a: "Logitech G Pro X 2 Lightspeed", b: "Razer BlackShark V2 Pro" },
                   { a: "HyperX Cloud III Wireless", b: "SteelSeries Arctis Nova 7" },
                   { a: "Corsair HS80 RGB Wireless", b: "Logitech G Pro X 2 Lightspeed" },
                   { a: "beyerdynamic DT 990 Pro", b: "Sennheiser HD 560S" },
-                ].map(c => {
+                ].map((c, ci) => {
                   const sa = c.a.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
                   const sb = c.b.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
-                  return <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="text-xs px-3 py-1.5 rounded-full no-underline transition-all hover:scale-105" style={{ background: "#0000000a", border: "1px solid #d4d0be", color: "#8a8460", textDecoration: "none" }}>{c.a.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "")} vs {c.b.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "")}</a>;
+                  const brandA = c.a.split(" ")[0];
+                  const brandB = c.b.split(" ")[0];
+                  const colA = BRAND_COLORS[brandA] || "#c9a227";
+                  const colB = BRAND_COLORS[brandB] || "#c9a227";
+                  const nameA = c.a.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "");
+                  const nameB = c.b.replace(/(Razer |SteelSeries |Logitech |HyperX |Corsair |beyerdynamic |Sennheiser )/, "");
+                  const imgA = getHeadphoneImage(c.a);
+                  const imgB = getHeadphoneImage(c.b);
+                  return (
+                    <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="group rounded-xl p-4 no-underline block transition-all duration-300 hover:scale-[1.02]"
+                      style={{ background: "linear-gradient(135deg, #ffffff06, #ffffff03)", border: "1px solid #ffffff10", textDecoration: "none" }}>
+                      <div className="flex items-center gap-3">
+                        {/* Left headphone */}
+                        <div className="flex-1 text-center">
+                          {imgA && <img loading="lazy" src={imgA} alt={nameA} className="h-10 mx-auto object-contain mb-1.5" style={{ filter: `drop-shadow(0 2px 6px ${colA}30)` }} />}
+                          <div className="text-[10px] font-bold truncate" style={{ color: colA }}>{nameA}</div>
+                        </div>
+                        {/* VS badge */}
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg, #c9a22730, #c9a22710)", border: "1px solid #c9a22730" }}>
+                          <span className="text-[9px] font-black" style={{ color: "#c9a227" }}>VS</span>
+                        </div>
+                        {/* Right headphone */}
+                        <div className="flex-1 text-center">
+                          {imgB && <img loading="lazy" src={imgB} alt={nameB} className="h-10 mx-auto object-contain mb-1.5" style={{ filter: `drop-shadow(0 2px 6px ${colB}30)` }} />}
+                          <div className="text-[10px] font-bold truncate" style={{ color: colB }}>{nameB}</div>
+                        </div>
+                      </div>
+                      <div className="text-center mt-2 text-[9px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: "#c9a227" }}>Compare →</div>
+                    </a>
+                  );
                 })}
               </div>
             </div>
 
-            {/* ── EDITORIAL COLLECTIONS ── */}
-            <div className="mt-10 sm:mt-16 mb-8">
+            {/* ══ Curated Collections — dark themed category cards ══ */}
+            <div className="rounded-2xl p-6 sm:p-8 mb-8" style={{ background: "linear-gradient(160deg, #0f0e0c 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
               <div className="text-center mb-8">
-                <h2 className="text-2xl sm:text-3xl mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, color: "#1a1614" }}>Curated Collections</h2>
-                <p className="text-sm" style={{ color: "#9e9578" }}>Hand-picked guides for competitive players</p>
+                <div className="text-[10px] uppercase tracking-[0.3em] font-bold mb-2" style={{ color: "#c9a227" }}>Curated Collections</div>
+                <h2 className="text-2xl sm:text-3xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#f5f2e6" }}>Hand-picked guides for competitive players</h2>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
-                  { title: "Tournament Favorites", sub: "The headphones winning major championships", href: "/best/tournament-favorites", accent: "#c9a227", tag: "Most Popular" },
-                  { title: "Best ANC Headsets", sub: "Active noise cancellation for noisy LAN events", href: "/best/anc", accent: "#c02870", tag: "Trending" },
-                  { title: "Best for Valorant", sub: "Top picks from professional Valorant players", href: "/best/valorant", accent: "#c43848", tag: "FPS" },
-                  { title: "Budget Champions", sub: "Pro-grade audio performance under $100", href: "/best/budget", accent: "#0a8060", tag: "Value" },
-                  { title: "Wireless Freedom", sub: "Cutting the cord without cutting performance", href: "/best/wireless", accent: "#2874a6", tag: "Wireless" },
-                  { title: "Audiophile Grade", sub: "Open-back headphones for pristine sound staging", href: "/best/audiophile", accent: "#6d40c4", tag: "Hi-Fi" },
+                  { title: "Tournament Favorites", sub: "The headphones winning major championships", href: "/best/tournament-favorites", accent: "#c9a227", tag: "Most Popular", icon: "🏆" },
+                  { title: "Best ANC Headsets", sub: "Active noise cancellation for noisy LAN events", href: "/best/anc", accent: "#c02870", tag: "Trending", icon: "🔇" },
+                  { title: "Best for Valorant", sub: "Top picks from professional Valorant players", href: "/best/valorant", accent: "#c43848", tag: "FPS", icon: "🎯" },
+                  { title: "Budget Champions", sub: "Pro-grade audio performance under $100", href: "/best/budget", accent: "#0a8060", tag: "Value", icon: "💰" },
+                  { title: "Wireless Freedom", sub: "Cutting the cord without cutting performance", href: "/best/wireless", accent: "#2874a6", tag: "Wireless", icon: "📡" },
+                  { title: "Audiophile Grade", sub: "Open-back headphones for pristine sound staging", href: "/best/audiophile", accent: "#6d40c4", tag: "Hi-Fi", icon: "🎵" },
                 ].map((c, i) => (
-                  <a key={i} href={c.href} className="group relative rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:shadow-lg no-underline block"
-                    style={{ background: "#ffffff", border: "1px solid #e6e3d6", textDecoration: "none" }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = `${c.accent}30`; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = "#e6e3d6"; e.currentTarget.style.transform = "translateY(0)"; }}>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ background: `${c.accent}0a`, color: c.accent, border: `1px solid ${c.accent}18` }}>{c.tag}</span>
-                      <span className="text-xs opacity-0 group-hover:opacity-60 transition-opacity" style={{ color: c.accent }}>→</span>
+                  <a key={i} href={c.href} className="group relative rounded-xl overflow-hidden no-underline block transition-all duration-300 hover:scale-[1.03]"
+                    style={{ background: `linear-gradient(145deg, ${c.accent}12, ${c.accent}05)`, border: `1px solid ${c.accent}20`, textDecoration: "none" }}>
+                    {/* Top accent bar */}
+                    <div className="h-1" style={{ background: `linear-gradient(90deg, ${c.accent}, ${c.accent}60)` }} />
+                    <div className="p-5 sm:p-6">
+                      {/* Watermark icon */}
+                      <div className="absolute -right-2 -bottom-2 text-5xl opacity-[0.06] pointer-events-none">{c.icon}</div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-lg">{c.icon}</span>
+                        <span className="text-[9px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-full" style={{ background: `${c.accent}20`, color: c.accent }}>{c.tag}</span>
+                        <span className="ml-auto text-xs opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-0 -translate-x-2" style={{ color: c.accent }}>→</span>
+                      </div>
+                      <h3 className="text-base sm:text-lg font-black mb-1.5" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#f5f2e6" }}>{c.title}</h3>
+                      <p className="text-xs leading-relaxed" style={{ color: "#9e9578" }}>{c.sub}</p>
                     </div>
-                    <h3 className="text-base sm:text-lg font-bold mb-1" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}>{c.title}</h3>
-                    <p className="text-xs" style={{ color: "#9e9578" }}>{c.sub}</p>
                   </a>
                 ))}
               </div>

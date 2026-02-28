@@ -1197,7 +1197,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               </div>
             </div>
 
-            {/* ── QUICK INSIGHTS ── */}
+            {/* ── QUICK INSIGHTS — Horizontal Stat Strip ── */}
             {(() => {
               const headphoneCounts = {};
               allPlayers.forEach(p => { if (p.headphone) headphoneCounts[p.headphone] = (headphoneCounts[p.headphone] || 0) + 1; });
@@ -1208,48 +1208,66 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const avgProWeight = playerWeights.length ? Math.round(playerWeights.reduce((a,b) => a+b, 0) / playerWeights.length) : 0;
               const rtCount = headphones.filter(m => m.anc).length;
               const rtPct = Math.round((rtCount / headphones.length) * 100);
+              const topPct = Math.round(topHeadphoneEntry[1]/allPlayers.length*100);
+              const topName = topHeadphoneEntry[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "");
+              const lightName = lightest.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "");
+              const topImg = getHeadphoneImage(topHeadphoneEntry[0]);
+              const lightImg = getHeadphoneImage(lightest.name);
               return (
-              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 my-4 sm:my-6 text-center">
-                {[
-                  { label: "Most Used Headphone", value: topHeadphoneEntry[0].replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, ""), sub: `${Math.round(topHeadphoneEntry[1]/allPlayers.length*100)}% of pros`, color: "#c9a227", icon: "crown", numeric: false },
-                  { label: "Brands in Pro Use", value: uniqueBrands.size, sub: "competing for pros", color: "#a68b1b", icon: "signal", numeric: true, numVal: uniqueBrands.size, numSuffix: "" },
-                  { label: "Lightest Headphone", value: `${lightest.weight}g`, sub: lightest.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, ""), color: "#4a4340", icon: "wind", numeric: true, numVal: lightest.weight, numSuffix: "g" },
-                  { label: "Avg Headphone Weight", value: `${avgProWeight}g`, sub: "across all pros", color: "#c9a227", icon: "gear", numeric: true, numVal: avgProWeight, numSuffix: "g" },
-                  { label: "ANC", value: `${rtPct}%`, sub: `${rtCount} of ${headphones.length} headphones`, color: "#9060c4", icon: "bolt", numeric: true, numVal: rtPct, numSuffix: "%" },
-                ].map((card, i) => (
-                  <div key={i} className="rounded-[10px] p-2 sm:p-4 text-center transition-all duration-200 hover:-translate-y-0.5" style={{
-                    background: `linear-gradient(180deg, #ffffff 0%, ${card.color}04 100%)`,
-                    border: `1px solid ${card.color}15`,
-                    boxShadow: `0 3px 0 ${card.color}35, 0 4px 8px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)`,
-                    cursor: "pointer"
-                  }}
-                  onMouseDown={(e) => e.currentTarget.style.boxShadow = `0 1px 0 ${card.color}35, inset 0 2px 4px rgba(0,0,0,0.08)`}
-                  onMouseUp={(e) => e.currentTarget.style.boxShadow = `0 3px 0 ${card.color}35, 0 4px 8px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)`}
-                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = `0 3px 0 ${card.color}35, 0 4px 8px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)`}>
-                    <div className="mb-1.5 flex items-center justify-center" style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: "50%",
-                      background: `${card.color}14`,
-                      margin: "0 auto 0.5rem",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center"
-                    }}>
-                      {icon(card.icon, 20)}
-                    </div>
-                    <div className="text-sm sm:text-lg font-black leading-tight" style={{ color: card.color }}>
-                      {card.numeric
-                        ? <AnimatedCounter value={card.numVal} suffix={card.numSuffix || ""} color={card.color} duration={1400 + i * 200} />
-                        : card.value
-                      }
-                    </div>
-                    <div className="text-xs font-semibold uppercase tracking-wider mt-0.5" style={{ color: "#9e9578" }}>{card.label}</div>
-                    <div style={{ fontSize: 11, color: "#c4bfb8" }} className="mt-1">{card.sub}</div>
-                    {i === 0 && <a href={amazonLink(topHeadphoneEntry[0])} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#c9a22718", color: "#c9a227", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
-                    {i === 3 && <a href={amazonLink(lightest.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "#c9a22718", color: "#c9a227", textDecoration: "none", fontSize: 10 }}>{I.cart(9)} Buy</a>}
+              <div className="my-4 sm:my-6 rounded-2xl overflow-hidden" style={{ background: "#faf8f5", border: "1px solid #e8e4db" }}>
+                {/* Top row — featured stat with image */}
+                <div className="flex items-center gap-4 p-4 sm:p-5" style={{ borderBottom: "1px solid #e8e4db" }}>
+                  <div className="flex items-center justify-center rounded-xl shrink-0" style={{ width: 64, height: 64, background: "#fff", border: "1px solid #e8e4db" }}>
+                    {topImg ? <img src={topImg} alt={topHeadphoneEntry[0]} className="h-12 object-contain" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }} /> : <span style={{ opacity: 0.3 }}>{icon("headphone", 28)}</span>}
                   </div>
-                ))}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ background: "#c9a22715", color: "#a68b1b" }}>Most Used</span>
+                    </div>
+                    <div className="text-base sm:text-lg font-black truncate" style={{ color: "#1a1614" }}>{topName}</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "#e8e4db" }}>
+                        <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${topPct}%`, background: "linear-gradient(90deg, #c9a227, #e6c44a)" }} />
+                      </div>
+                      <span className="text-xs font-bold shrink-0" style={{ color: "#c9a227" }}>{topPct}% of pros</span>
+                    </div>
+                  </div>
+                  <a href={amazonLink(topHeadphoneEntry[0])} target="_blank" rel="noopener noreferrer" className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold no-underline hover:scale-105 transition-all" style={{ background: "linear-gradient(135deg, #c9a227, #a68b1b)", color: "#fff", textDecoration: "none", boxShadow: "0 2px 8px #c9a22730" }}>{I.cart(12)} Buy</a>
+                </div>
+
+                {/* Bottom row — 4 compact stat cells */}
+                <div className="grid grid-cols-2 sm:grid-cols-4">
+                  {[
+                    { label: "Brands", value: uniqueBrands.size, suffix: "", sub: "competing for pros", color: "#a68b1b", pct: Math.min(100, uniqueBrands.size * 8), iconEl: icon("signal", 16) },
+                    { label: "Lightest", value: lightest.weight, suffix: "g", sub: lightName, color: "#4a8c3f", pct: Math.round((1 - lightest.weight / 500) * 100), iconEl: icon("wind", 16), buyLink: amazonLink(lightest.name) },
+                    { label: "Avg Weight", value: avgProWeight, suffix: "g", sub: "across all pros", color: "#c9a227", pct: Math.round(avgProWeight / 5), iconEl: icon("gear", 16) },
+                    { label: "ANC Rate", value: rtPct, suffix: "%", sub: `${rtCount} of ${headphones.length}`, color: "#9060c4", pct: rtPct, iconEl: icon("bolt", 16) },
+                  ].map((s, si) => (
+                    <div key={si} className="flex items-center gap-3 p-3 sm:p-4 transition-colors duration-200 hover:bg-white" style={{ borderRight: si < 3 ? "1px solid #e8e4db" : "none", borderTop: "none" }}>
+                      <div className="shrink-0 relative" style={{ width: 40, height: 40 }}>
+                        {/* Mini circular progress */}
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                          <circle cx="20" cy="20" r="16" fill="none" stroke="#e8e4db" strokeWidth="3" />
+                          <circle cx="20" cy="20" r="16" fill="none" stroke={s.color} strokeWidth="3" strokeLinecap="round"
+                            strokeDasharray={`${s.pct * 1.005} 100.5`}
+                            transform="rotate(-90 20 20)"
+                            style={{ transition: "stroke-dasharray 1.2s ease" }} />
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center" style={{ color: s.color, opacity: 0.8 }}>{s.iconEl}</div>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#9e9578", fontSize: 10, letterSpacing: "0.08em" }}>{s.label}</div>
+                        <div className="flex items-baseline gap-0.5">
+                          <span className="text-lg sm:text-xl font-black" style={{ color: "#1a1614", lineHeight: 1.1 }}>
+                            <AnimatedCounter value={s.value} suffix={s.suffix} color="#1a1614" duration={1200 + si * 200} />
+                          </span>
+                        </div>
+                        <div className="truncate" style={{ fontSize: 10, color: "#b5ae9e", lineHeight: 1.3 }}>{s.sub}</div>
+                      </div>
+                      {s.buyLink && <a href={s.buyLink} target="_blank" rel="noopener noreferrer" className="shrink-0 flex items-center gap-1 px-2 py-1 rounded text-[10px] font-bold no-underline hover:scale-105 transition-all" style={{ background: "#c9a22712", color: "#c9a227", textDecoration: "none" }}>{I.cart(9)} Buy</a>}
+                    </div>
+                  ))}
+                </div>
               </div>
               );
             })()}

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" fill="none">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a1714"/>
+      <stop offset="50%" stop-color="#2d2520"/>
+      <stop offset="100%" stop-color="#1a1714"/>
+    </linearGradient>
+    <radialGradient id="center-glow" cx="50%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#b8956a" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#b8956a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold-line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b8956a" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#d4af37" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#b8956a" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="200" fill="url(#bg-grad)"/>
+  <rect width="800" height="200" fill="url(#center-glow)"/>
+
+  <!-- Decorative driver cross-section (left) -->
+  <g transform="translate(120, 100)" opacity="0.3">
+    <circle r="70" fill="none" stroke="#b8956a" stroke-width="1.5"/>
+    <circle r="55" fill="none" stroke="#b8956a" stroke-width="0.5" opacity="0.5"/>
+    <circle r="40" fill="none" stroke="#b8956a" stroke-width="0.5" opacity="0.4"/>
+    <circle r="20" fill="none" stroke="#b8956a" stroke-width="1"/>
+    <line x1="-70" y1="0" x2="70" y2="0" stroke="#b8956a" stroke-width="0.3" opacity="0.3"/>
+    <line x1="0" y1="-70" x2="0" y2="70" stroke="#b8956a" stroke-width="0.3" opacity="0.3"/>
+  </g>
+
+  <!-- Sound wave patterns -->
+  <g opacity="0.15">
+    <path d="M0 100 Q50 60 100 100 Q150 140 200 100 Q250 60 300 100 Q350 140 400 100 Q450 60 500 100 Q550 140 600 100 Q650 60 700 100 Q750 140 800 100" fill="none" stroke="#d4af37" stroke-width="1"/>
+    <path d="M0 100 Q50 80 100 100 Q150 120 200 100 Q250 80 300 100 Q350 120 400 100 Q450 80 500 100 Q550 120 600 100 Q650 80 700 100 Q750 120 800 100" fill="none" stroke="#b8956a" stroke-width="0.5"/>
+  </g>
+
+  <!-- Decorative driver cross-section (right) -->
+  <g transform="translate(680, 100)" opacity="0.25">
+    <circle r="65" fill="none" stroke="#b8956a" stroke-width="1.5"/>
+    <circle r="50" fill="none" stroke="#b8956a" stroke-width="0.5" opacity="0.5"/>
+    <!-- TriForce-style sections -->
+    <line x1="0" y1="-65" x2="0" y2="65" stroke="#b8956a" stroke-width="0.5" opacity="0.4"/>
+    <line x1="-56" y1="32" x2="56" y2="-32" stroke="#b8956a" stroke-width="0.5" opacity="0.4"/>
+    <line x1="-56" y1="-32" x2="56" y2="32" stroke="#b8956a" stroke-width="0.5" opacity="0.4"/>
+    <circle r="18" fill="none" stroke="#b8956a" stroke-width="1"/>
+  </g>
+
+  <!-- Frequency spectrum bars (decorative) -->
+  <g transform="translate(300, 160)" opacity="0.2">
+    <rect x="0" y="-20" width="3" height="20" rx="1" fill="#b8956a"/>
+    <rect x="6" y="-35" width="3" height="35" rx="1" fill="#b8956a"/>
+    <rect x="12" y="-50" width="3" height="50" rx="1" fill="#d4af37"/>
+    <rect x="18" y="-65" width="3" height="65" rx="1" fill="#d4af37"/>
+    <rect x="24" y="-55" width="3" height="55" rx="1" fill="#d4af37"/>
+    <rect x="30" y="-70" width="3" height="70" rx="1" fill="#b8956a"/>
+    <rect x="36" y="-45" width="3" height="45" rx="1" fill="#b8956a"/>
+    <rect x="42" y="-60" width="3" height="60" rx="1" fill="#d4af37"/>
+    <rect x="48" y="-40" width="3" height="40" rx="1" fill="#b8956a"/>
+    <rect x="54" y="-55" width="3" height="55" rx="1" fill="#d4af37"/>
+    <rect x="60" y="-30" width="3" height="30" rx="1" fill="#b8956a"/>
+    <rect x="66" y="-45" width="3" height="45" rx="1" fill="#b8956a"/>
+    <rect x="72" y="-60" width="3" height="60" rx="1" fill="#d4af37"/>
+    <rect x="78" y="-35" width="3" height="35" rx="1" fill="#b8956a"/>
+    <rect x="84" y="-50" width="3" height="50" rx="1" fill="#b8956a"/>
+    <rect x="90" y="-65" width="3" height="65" rx="1" fill="#d4af37"/>
+    <rect x="96" y="-40" width="3" height="40" rx="1" fill="#b8956a"/>
+    <rect x="102" y="-55" width="3" height="55" rx="1" fill="#d4af37"/>
+    <rect x="108" y="-30" width="3" height="30" rx="1" fill="#b8956a"/>
+    <rect x="114" y="-50" width="3" height="50" rx="1" fill="#b8956a"/>
+    <rect x="120" y="-25" width="3" height="25" rx="1" fill="#b8956a"/>
+    <rect x="126" y="-40" width="3" height="40" rx="1" fill="#d4af37"/>
+    <rect x="132" y="-55" width="3" height="55" rx="1" fill="#b8956a"/>
+    <rect x="138" y="-35" width="3" height="35" rx="1" fill="#b8956a"/>
+    <rect x="144" y="-20" width="3" height="20" rx="1" fill="#b8956a"/>
+  </g>
+
+  <!-- Gold accent lines -->
+  <line x1="0" y1="1" x2="800" y2="1" stroke="url(#gold-line)" stroke-width="2"/>
+  <line x1="0" y1="199" x2="800" y2="199" stroke="url(#gold-line)" stroke-width="2"/>
+
+  <!-- Subtle grid overlay -->
+  <g opacity="0.03">
+    <line x1="200" y1="0" x2="200" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="66" x2="800" y2="66" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="133" x2="800" y2="133" stroke="#fff" stroke-width="0.5"/>
+  </g>
+</svg>

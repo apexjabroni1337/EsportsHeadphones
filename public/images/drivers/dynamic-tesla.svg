@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c0a060" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#c0a060" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tesla-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4af37"/>
+      <stop offset="50%" stop-color="#b8956a"/>
+      <stop offset="100%" stop-color="#8a7460"/>
+    </linearGradient>
+    <linearGradient id="magnet-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#cc0000"/>
+      <stop offset="50%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#0044cc"/>
+    </linearGradient>
+    <filter id="gold-glow">
+      <feDropShadow dx="0" dy="2" stdDeviation="10" flood-color="#d4af37" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="190" fill="url(#glow)"/>
+  <!-- Premium outer housing -->
+  <circle cx="200" cy="200" r="165" fill="#1a1a1a" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.3"/>
+  <circle cx="200" cy="200" r="160" fill="#1e1e1e" stroke="url(#tesla-grad)" stroke-width="3" filter="url(#gold-glow)"/>
+  <!-- Powerful magnet structure (cross-section view) -->
+  <circle cx="200" cy="200" r="155" fill="none" stroke="#d4af37" stroke-width="1" stroke-opacity="0.1"/>
+  <!-- Voice coil gap visualization -->
+  <circle cx="200" cy="200" r="90" fill="none" stroke="#d4af37" stroke-width="10" stroke-opacity="0.08"/>
+  <!-- Diaphragm -->
+  <circle cx="200" cy="200" r="140" fill="#222"/>
+  <!-- Tesla magnetic field lines -->
+  <ellipse cx="200" cy="200" rx="140" ry="60" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.15" transform="rotate(0 200 200)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="60" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.15" transform="rotate(45 200 200)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="60" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.15" transform="rotate(90 200 200)"/>
+  <ellipse cx="200" cy="200" rx="140" ry="60" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.15" transform="rotate(135 200 200)"/>
+  <!-- Surround -->
+  <circle cx="200" cy="200" r="145" fill="none" stroke="#444" stroke-width="5"/>
+  <circle cx="200" cy="200" r="145" fill="none" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.2"/>
+  <!-- Center magnet assembly -->
+  <circle cx="200" cy="200" r="50" fill="#1a1a1a" stroke="#d4af37" stroke-width="2.5" filter="url(#gold-glow)"/>
+  <circle cx="200" cy="200" r="38" fill="#151515" stroke="#d4af37" stroke-width="1" stroke-opacity="0.4"/>
+  <!-- Tesla lightning bolt icon -->
+  <path d="M196 180 L204 180 L200 195 L208 195 L195 218 L198 205 L192 205 Z" fill="#d4af37" opacity="0.6"/>
+  <!-- Magnetic pole indicators -->
+  <text x="60" y="204" font-family="'Space Grotesk', system-ui" font-size="14" fill="#cc4444" text-anchor="middle" font-weight="bold" opacity="0.4">N</text>
+  <text x="340" y="204" font-family="'Space Grotesk', system-ui" font-size="14" fill="#4466cc" text-anchor="middle" font-weight="bold" opacity="0.4">S</text>
+  <!-- Tesla measurement -->
+  <text x="200" y="160" font-family="'Space Grotesk', system-ui" font-size="9" fill="#d4af37" text-anchor="middle" opacity="0.5" letter-spacing="1">HIGH-FLUX TESLA</text>
+  <text x="200" y="375" font-family="'Space Grotesk', system-ui" font-size="13" fill="#666" text-anchor="middle" font-weight="bold">Dynamic Tesla Driver</text>
+</svg>

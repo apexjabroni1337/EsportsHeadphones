@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff6600" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ff6600" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cone-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="50%" stop-color="#222"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <filter id="orange-glow">
+      <feDropShadow dx="0" dy="2" stdDeviation="8" flood-color="#ff6600" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="190" fill="url(#glow)"/>
+  <!-- Outer frame (slightly smaller for 40mm) -->
+  <circle cx="200" cy="200" r="150" fill="#1e1e1e" stroke="#ff6600" stroke-width="2" stroke-opacity="0.35" filter="url(#orange-glow)"/>
+  <!-- Surround -->
+  <circle cx="200" cy="200" r="140" fill="none" stroke="#333" stroke-width="8"/>
+  <!-- Driver cone -->
+  <circle cx="200" cy="200" r="130" fill="url(#cone-grad)"/>
+  <!-- Radial lines on cone -->
+  <line x1="200" y1="70" x2="200" y2="330" stroke="#ff6600" stroke-width="0.3" opacity="0.15"/>
+  <line x1="70" y1="200" x2="330" y2="200" stroke="#ff6600" stroke-width="0.3" opacity="0.15"/>
+  <line x1="108" y1="108" x2="292" y2="292" stroke="#ff6600" stroke-width="0.3" opacity="0.15"/>
+  <line x1="292" y1="108" x2="108" y2="292" stroke="#ff6600" stroke-width="0.3" opacity="0.15"/>
+  <!-- Concentric rings for cone shape -->
+  <circle cx="200" cy="200" r="120" fill="none" stroke="#ff6600" stroke-width="0.4" opacity="0.12"/>
+  <circle cx="200" cy="200" r="100" fill="none" stroke="#ff6600" stroke-width="0.4" opacity="0.15"/>
+  <circle cx="200" cy="200" r="80" fill="none" stroke="#ff6600" stroke-width="0.4" opacity="0.18"/>
+  <circle cx="200" cy="200" r="60" fill="none" stroke="#ff6600" stroke-width="0.4" opacity="0.2"/>
+  <!-- Dust cap -->
+  <circle cx="200" cy="200" r="35" fill="#1a1a1a" stroke="#ff6600" stroke-width="2" filter="url(#orange-glow)"/>
+  <circle cx="200" cy="200" r="22" fill="#151515" stroke="#ff6600" stroke-width="0.8" stroke-opacity="0.5"/>
+  <!-- 40mm size indicator -->
+  <line x1="60" y1="200" x2="58" y2="190" stroke="#ff6600" stroke-width="1" opacity="0.4"/>
+  <line x1="60" y1="200" x2="58" y2="210" stroke="#ff6600" stroke-width="1" opacity="0.4"/>
+  <line x1="340" y1="200" x2="342" y2="190" stroke="#ff6600" stroke-width="1" opacity="0.4"/>
+  <line x1="340" y1="200" x2="342" y2="210" stroke="#ff6600" stroke-width="1" opacity="0.4"/>
+  <line x1="60" y1="200" x2="65" y2="200" stroke="#ff6600" stroke-width="0.8" opacity="0.3"/>
+  <line x1="335" y1="200" x2="340" y2="200" stroke="#ff6600" stroke-width="0.8" opacity="0.3"/>
+  <text x="200" y="204" font-family="'Space Grotesk', system-ui" font-size="11" fill="#ff6600" text-anchor="middle" font-weight="bold" opacity="0.7">40mm</text>
+  <!-- Sound wave arcs -->
+  <path d="M345 170 Q360 200 345 230" fill="none" stroke="#ff6600" stroke-width="1" opacity="0.2"/>
+  <path d="M355 160 Q375 200 355 240" fill="none" stroke="#ff6600" stroke-width="0.8" opacity="0.15"/>
+  <text x="200" y="375" font-family="'Space Grotesk', system-ui" font-size="13" fill="#666" text-anchor="middle" font-weight="bold">40mm Custom Dynamic</text>
+</svg>

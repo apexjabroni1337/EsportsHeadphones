@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="graphene-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0088cc" stop-opacity="0.05"/>
+    </linearGradient>
+    <pattern id="hex-pattern" x="0" y="0" width="30" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+      <!-- Hexagonal graphene molecular structure -->
+      <polygon points="15,0 27,7.5 27,18.5 15,26 3,18.5 3,7.5" fill="none" stroke="#00d4ff" stroke-width="0.6" opacity="0.2"/>
+      <circle cx="15" cy="0" r="1.5" fill="#00d4ff" opacity="0.3"/>
+      <circle cx="27" cy="7.5" r="1.5" fill="#00d4ff" opacity="0.3"/>
+      <circle cx="27" cy="18.5" r="1.5" fill="#00d4ff" opacity="0.3"/>
+      <circle cx="15" cy="26" r="1.5" fill="#00d4ff" opacity="0.3"/>
+      <circle cx="3" cy="18.5" r="1.5" fill="#00d4ff" opacity="0.3"/>
+      <circle cx="3" cy="7.5" r="1.5" fill="#00d4ff" opacity="0.3"/>
+    </pattern>
+    <filter id="cyan-glow">
+      <feDropShadow dx="0" dy="2" stdDeviation="10" flood-color="#00d4ff" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <circle cx="200" cy="200" r="190" fill="url(#glow)"/>
+  <!-- Outer housing -->
+  <circle cx="200" cy="200" r="165" fill="#1a1a1a" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.2"/>
+  <circle cx="200" cy="200" r="160" fill="#1e1e1e" stroke="#00d4ff" stroke-width="2.5" stroke-opacity="0.5" filter="url(#cyan-glow)"/>
+  <!-- Graphene coated diaphragm -->
+  <circle cx="200" cy="200" r="140" fill="#222"/>
+  <circle cx="200" cy="200" r="140" fill="url(#hex-pattern)"/>
+  <circle cx="200" cy="200" r="140" fill="url(#graphene-grad)"/>
+  <!-- Suspension -->
+  <circle cx="200" cy="200" r="147" fill="none" stroke="#333" stroke-width="8"/>
+  <circle cx="200" cy="200" r="147" fill="none" stroke="#00d4ff" stroke-width="0.8" stroke-opacity="0.15"/>
+  <!-- Spider/surround -->
+  <circle cx="200" cy="200" r="130" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.15"/>
+  <!-- Center dome with graphene coating -->
+  <circle cx="200" cy="200" r="45" fill="#1a1a1a" stroke="#00d4ff" stroke-width="2.5" filter="url(#cyan-glow)"/>
+  <circle cx="200" cy="200" r="45" fill="url(#hex-pattern)" opacity="0.5"/>
+  <circle cx="200" cy="200" r="28" fill="#111" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.6"/>
+  <!-- Graphene molecular icon in center -->
+  <polygon points="200,185 210,192 207,203 193,203 190,192" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.7"/>
+  <circle cx="200" cy="185" r="2" fill="#00d4ff" opacity="0.8"/>
+  <circle cx="210" cy="192" r="2" fill="#00d4ff" opacity="0.8"/>
+  <circle cx="207" cy="203" r="2" fill="#00d4ff" opacity="0.8"/>
+  <circle cx="193" cy="203" r="2" fill="#00d4ff" opacity="0.8"/>
+  <circle cx="190" cy="192" r="2" fill="#00d4ff" opacity="0.8"/>
+  <!-- GRAPHENE badge -->
+  <rect x="152" y="215" width="96" height="16" rx="3" fill="#00d4ff" opacity="0.1"/>
+  <text x="200" y="227" font-family="'Space Grotesk', system-ui" font-size="9" fill="#00d4ff" text-anchor="middle" font-weight="bold" letter-spacing="2" opacity="0.7">GRAPHENE</text>
+  <text x="200" y="375" font-family="'Space Grotesk', system-ui" font-size="13" fill="#666" text-anchor="middle" font-weight="bold">50mm PRO-G Graphene</text>
+</svg>

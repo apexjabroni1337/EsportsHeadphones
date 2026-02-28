@@ -521,7 +521,6 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
     { id: "teams", label: "Teams", icon: Shield, color: "#8a7460" },
     { id: "trends", label: "Trends", icon: TrendingUp, color: "#4a4340" },
     { id: "compare", label: "Compare", icon: GitCompare, color: "#b8956a" },
-    { id: "shapes", label: "Layouts", icon: Layers, color: "#6b635b" },
   ];
 
   const allBrands = ["All", ...new Set(headphones.map(m => m.brand))];
@@ -545,7 +544,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-thumb { background: #b8956a40; border-radius: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        .ek-topnav-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+        .ek-topnav-tabs { display: flex; gap: 2px; overflow: visible; scrollbar-width: none; -ms-overflow-style: none; }
         .ek-topnav-tabs::-webkit-scrollbar { display: none; }
         .ek-topnav-tab { white-space: nowrap; transition: all 0.2s ease; position: relative; }
         .ek-topnav-tab::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; border-radius: 1px; transition: width 0.2s ease; }
@@ -788,13 +787,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         <div style={{ height: 2, background: "linear-gradient(90deg, #d4cfc8, #b8956a, #2d2824, #b8956a, #d4cfc8)", backgroundSize: "200% 100%", animation: "gradient-shift 6s ease infinite" }} />
         {/* Main nav row */}
         <div style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 flex items-center gap-4" style={{ height: 56 }}>
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 flex items-center gap-4" style={{ height: 64 }}>
             {/* Logo */}
             <div className="flex items-center gap-2 cursor-pointer group flex-shrink-0" onClick={() => { setActiveTab("overview"); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
-              <span className="inline-flex transition-transform duration-300 group-hover:scale-110">{I.headphone(22)}</span>
+              <span className="inline-flex transition-transform duration-300 group-hover:scale-110">{I.headphone(26)}</span>
               <div className="hidden sm:flex flex-col">
-                <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 13, fontWeight: 700, letterSpacing: 2.5, color: "#1a1614", lineHeight: 1 }}>ESPORTSHEADPHONES</span>
-                <span style={{ fontSize: 8, letterSpacing: 2, color: "#a09890", fontWeight: 600, textTransform: "uppercase" }}>Pro Headphone Data</span>
+                <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 15, fontWeight: 700, letterSpacing: 2.5, color: "#1a1614", lineHeight: 1 }}>ESPORTSHEADPHONES</span>
+                <span style={{ fontSize: 10, letterSpacing: 2, color: "#a09890", fontWeight: 600, textTransform: "uppercase" }}>Pro Headphone Data</span>
               </div>
             </div>
 
@@ -809,12 +808,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 return (
                   <button key={t.id} onClick={() => { setActiveTab(t.id); if (t.id === "players") setSelectedPlayer(null); if (t.id === "lab") { setQuizStep(0); setQuizDone(false); } window.scrollTo({ top: 0, behavior: "smooth" }); }}
                     role="tab" aria-selected={isActive} aria-controls="main-content"
-                    className={`ek-topnav-tab flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-[11px] font-semibold${isActive ? " active" : ""}`}
+                    className={`ek-topnav-tab flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold${isActive ? " active" : ""}`}
                     style={{
                       color: isActive ? t.color : "#6b635b",
                       background: isActive ? `${t.color}10` : "transparent",
                     }}>
-                    <Icon size={14} strokeWidth={2} style={{ color: isActive ? t.color : "#b0a89e", flexShrink: 0 }} />
+                    <Icon size={16} strokeWidth={2} style={{ color: isActive ? t.color : "#b0a89e", flexShrink: 0 }} />
                     <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{t.label === "All Headphones" ? "Headphones" : t.label}</span>
                     {isActive && <style>{`.ek-topnav-tab.active[aria-selected="true"]::after { background: ${t.color}; }`}</style>}
                   </button>
@@ -823,25 +822,25 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               {/* More dropdown for Trends & Compare */}
               <div ref={moreDropdownRef} className="relative">
                 <button onClick={() => setMoreDropdownOpen(prev => !prev)}
-                  className={`ek-topnav-tab flex items-center gap-1 px-2.5 py-2 rounded-lg text-[11px] font-semibold${activeTab === "trends" || activeTab === "compare" ? " active" : ""}`}
+                  className={`ek-topnav-tab flex items-center gap-1 px-3 py-2 rounded-lg text-[13px] font-semibold${activeTab === "trends" || activeTab === "compare" ? " active" : ""}`}
                   style={{
                     color: (activeTab === "trends" || activeTab === "compare") ? "#4a4340" : "#6b635b",
                     background: (activeTab === "trends" || activeTab === "compare") ? "#4a434010" : "transparent",
                   }}>
                   <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>More</span>
-                  <ChevronDown size={12} style={{ color: "#b0a89e", transition: "transform 0.2s", transform: moreDropdownOpen ? "rotate(180deg)" : "rotate(0)" }} />
+                  <ChevronDown size={14} style={{ color: "#b0a89e", transition: "transform 0.2s", transform: moreDropdownOpen ? "rotate(180deg)" : "rotate(0)" }} />
                   {(activeTab === "trends" || activeTab === "compare") && <style>{`.ek-topnav-tab.active[aria-selected="true"]::after { background: #4a4340; }`}</style>}
                 </button>
                 {moreDropdownOpen && (
-                  <div className="absolute top-full left-0 mt-1 rounded-xl overflow-hidden z-50" style={{ background: "#ffffff", border: "1px solid #e8e4df", boxShadow: "0 8px 24px rgba(0,0,0,0.1)", minWidth: 160 }}>
+                  <div className="absolute top-full left-0 mt-1 rounded-xl overflow-hidden z-50" style={{ background: "#ffffff", border: "1px solid #e8e4df", boxShadow: "0 8px 24px rgba(0,0,0,0.1)", minWidth: 180 }}>
                     {tabs.filter(t => t.id === "trends" || t.id === "compare").map(t => {
                       const isActive = activeTab === t.id;
                       const Icon = t.icon;
                       return (
                         <button key={t.id} onClick={() => { setActiveTab(t.id); setMoreDropdownOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                          className="w-full flex items-center gap-2 px-4 py-2.5 text-left text-[12px] font-semibold transition-all hover:bg-stone-50"
+                          className="w-full flex items-center gap-2 px-4 py-3 text-left text-[14px] font-semibold transition-all hover:bg-stone-50"
                           style={{ color: isActive ? t.color : "#6b635b", background: isActive ? `${t.color}08` : "transparent" }}>
-                          <Icon size={14} strokeWidth={2} style={{ color: isActive ? t.color : "#b0a89e" }} />
+                          <Icon size={16} strokeWidth={2} style={{ color: isActive ? t.color : "#b0a89e" }} />
                           <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{t.label}</span>
                         </button>
                       );
@@ -855,26 +854,26 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <div className="flex items-center gap-2.5 ml-auto flex-shrink-0">
               {/* Search trigger */}
               <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
-                aria-label="Search" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-xs transition-all duration-300 hover:shadow-md"
-                style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)", border: "1px solid rgba(184,149,106,0.15)", color: "#8a8078", minWidth: 160 }}
+                aria-label="Search" className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full text-xs transition-all duration-300 hover:shadow-md"
+                style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)", border: "1px solid rgba(184,149,106,0.15)", color: "#8a8078", minWidth: 170 }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.95)"; e.currentTarget.style.borderColor = "rgba(184,149,106,0.35)"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.7)"; e.currentTarget.style.borderColor = "rgba(184,149,106,0.15)"; }}>
-                <Search size={14} style={{ color: "#b8956a" }} />
-                <span style={{ fontSize: 13, color: "#a09890" }}>Search...</span>
+                <Search size={16} style={{ color: "#b8956a" }} />
+                <span style={{ fontSize: 14, color: "#a09890" }}>Search...</span>
               </button>
               {/* Mobile search */}
               <button onClick={() => { setGlobalSearchOpen(true); setTimeout(() => globalSearchInputRef.current?.focus(), 50); }}
                 aria-label="Search" className="sm:hidden p-2 rounded-full" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(184,149,106,0.15)" }}>
-                <Search size={16} style={{ color: "#b8956a" }} />
+                <Search size={18} style={{ color: "#b8956a" }} />
               </button>
               {/* Subscribe */}
               {newsletterStatus === "success" ? (
-                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold" style={{ background: "#b8956a15", color: "#b8956a", border: "1px solid #b8956a30" }}>✓ Subscribed</span>
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[13px] font-bold" style={{ background: "#b8956a15", color: "#b8956a", border: "1px solid #b8956a30" }}>✓ Subscribed</span>
               ) : (
                 <button onClick={() => setNewsletterPopup(true)}
-                  className="hidden lg:inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-[11px] transition-all duration-300 hover:shadow-lg hover:scale-105"
+                  className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full font-bold text-[13px] transition-all duration-300 hover:shadow-lg hover:scale-105"
                   style={{ background: "linear-gradient(135deg, #b8956a, #9a7a54)", color: "#ffffff", letterSpacing: 0.5, boxShadow: "0 2px 8px rgba(184,149,106,0.3)" }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                   Subscribe
                 </button>
               )}
@@ -4096,9 +4095,20 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           return (
           <div>
-            <SectionTitle color="#8a7460" sub="Comprehensive breakdown of every switch powering pro esports headphones">Headphone Driver Analytics</SectionTitle>
+            <SectionTitle color="#8a7460" sub="Comprehensive breakdown of every driver powering pro esports headphones">Headphone Driver Analytics</SectionTitle>
 
-            {/* Top switch highlight */}
+            {/* Hero banner */}
+            <div className="rounded-2xl overflow-hidden mb-5 relative" style={{ border: "1px solid #6b635b15" }}>
+              <img src="/images/drivers/driver-hero.svg" alt="Driver Analytics" className="w-full h-auto" style={{ minHeight: 120 }} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-black" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#d4af37", textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}>Inside the Sound</div>
+                  <div className="text-xs sm:text-sm mt-1" style={{ color: "#c4b5a0", textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}>The technology behind every click, callout, and clutch</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Top driver highlight */}
             <div className="rounded-2xl p-5 mb-5" style={{ background: "#6b635b08", border: "1px solid #6b635b15" }}>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "#6b635b0a" }}>
@@ -4117,7 +4127,13 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               {sensorProfiles.sort((a, b) => b.totalUsage - a.totalUsage).slice(0, 4).map((s, i) => {
                 const colors = ["#b8956a", "#2d2824", "#8a7460", "#a09890"];
                 const sensorImageMap = {
-                  // Driver images not yet available — placeholder
+                  "50mm TriForce Titanium": "/images/drivers/triforce-titanium.svg",
+                  "50mm TriForce Titanium Pro": "/images/drivers/triforce-titanium-pro.svg",
+                  "50mm PRO-G": "/images/drivers/pro-g.svg",
+                  "50mm PRO-G Graphene": "/images/drivers/pro-g-graphene.svg",
+                  "40mm Custom": "/images/drivers/40mm-custom.svg",
+                  "Dynamic Tesla": "/images/drivers/dynamic-tesla.svg",
+                  "Custom Transducers": "/images/drivers/custom-transducers.svg",
                 };
                 const sensorDescs = {
                   "50mm TriForce Titanium": "Razer's proprietary TriForce Titanium 50mm drivers divide the driver into three parts — highs, mids, and lows — allowing each frequency range to be individually tuned for clarity. This design eliminates the muddiness common in single-diaphragm drivers, delivering crisp footsteps and gunshots in competitive FPS titles. Found in the BlackShark V2 series, these drivers made Razer the dominant brand in esports audio.",

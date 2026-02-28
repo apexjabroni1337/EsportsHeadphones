@@ -3635,63 +3635,69 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 const totalProUsage = brandKbds.reduce((s, m) => s + m.proUsage, 0);
                 const proCount = allPlayers.filter(p => brandKbds.some(m => m.name === p.headphone)).length;
                 return (
-                  <div key={brand.name} className="rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg group"
-                    style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
-                    {/* Header bar */}
-                    <div className="px-5 sm:px-6 pt-5 sm:pt-6 pb-4 relative overflow-hidden">
-                      <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${col}06, transparent)` }} />
-                      <div className="relative flex items-start justify-between gap-3">
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            {getBrandLogo(brand.name) && <img loading="lazy" src={getBrandLogo(brand.name)} alt={brand.name} className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />}
-                            <h3 className="text-xl sm:text-2xl" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, color: "#1a1614" }}>{brand.name}</h3>
-                            <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ background: `${col}0a`, color: col, border: `1px solid ${col}18` }}>{brandKbds.length} models</span>
-                          </div>
-                          <div className="text-xs font-semibold tracking-wide" style={{ color: col }}>{brand.tagline}</div>
+                  <div key={brand.name} className="group rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer"
+                    style={{ background: "#ffffff", border: `1px solid ${col}15`, boxShadow: `0 2px 8px ${col}06` }}
+                    onClick={() => { window.location.href = `/brands/${brand.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`; }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = `0 16px 40px ${col}15, 0 0 0 1px ${col}30`; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 2px 8px ${col}06`; }}>
+                    {/* Banner with brand color + flagship product */}
+                    <div className="relative h-36 overflow-hidden" style={{ background: `linear-gradient(135deg, ${col}18 0%, ${col}06 100%)` }}>
+                      {/* Large faded brand logo bg */}
+                      {getBrandLogo(brand.name) && <div className="absolute -right-6 -top-6 opacity-[0.05]" style={{ transform: "rotate(12deg)" }}><img loading="lazy" src={getBrandLogo(brand.name)} alt="" className="w-40 h-40 object-contain" /></div>}
+                      {/* Brand identity */}
+                      <div className="absolute top-4 left-5 flex items-center gap-3">
+                        <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: "rgba(255,255,255,0.92)", boxShadow: `0 2px 8px ${col}20` }}>
+                          {getBrandLogo(brand.name) ? <img loading="lazy" src={getBrandLogo(brand.name)} alt={brand.name} className="w-7 h-7 object-contain" /> : <Building2 size={20} style={{ color: col }} />}
                         </div>
-                        <div className="text-right flex-shrink-0">
-                          <div className="text-lg font-bold" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: col }}>{proCount}</div>
-                          <div className="text-[10px] uppercase tracking-widest" style={{ color: "#a09890" }}>Pro Users</div>
+                        <div>
+                          <h3 className="text-xl font-black leading-tight" style={{ color: col }}>{brand.name}</h3>
+                          <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: `${col}90` }}>{brand.tagline}</div>
                         </div>
+                      </div>
+                      {/* Flagship headphone image floating right */}
+                      {brandKbds[0] && getHeadphoneImage(brandKbds[0].name) && (
+                        <div className="absolute right-3 bottom-0 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1">
+                          <img loading="lazy" src={getHeadphoneImage(brandKbds[0].name)} alt={brandKbds[0].name} className="h-24 object-contain" style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))" }} />
+                        </div>
+                      )}
+                      {/* Stats badges at bottom-left of banner */}
+                      <div className="absolute bottom-3 left-5 flex gap-2">
+                        <span className="px-2 py-1 rounded-md text-[10px] font-bold" style={{ background: "rgba(255,255,255,0.85)", color: col, backdropFilter: "blur(4px)" }}>{brandKbds.length} models</span>
+                        <span className="px-2 py-1 rounded-md text-[10px] font-bold" style={{ background: "rgba(255,255,255,0.85)", color: col, backdropFilter: "blur(4px)" }}>{proCount} pros</span>
+                        <span className="px-2 py-1 rounded-md text-[10px] font-bold" style={{ background: "rgba(255,255,255,0.85)", color: "#2d2824", backdropFilter: "blur(4px)" }}>{totalProUsage.toFixed(1)}% share</span>
                       </div>
                     </div>
 
-                    <div className="px-5 sm:px-6 pb-5 sm:pb-6">
-                      {/* Description */}
-                      <p className="text-xs leading-relaxed mb-4" style={{ color: "#6b635b" }}>{brand.desc}</p>
+                    <div className="px-5 py-4">
+                      {/* Description - truncated */}
+                      <p className="text-xs leading-relaxed mb-3" style={{ color: "#6b635b", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{brand.desc}</p>
 
-                      {/* Achievements */}
-                      <div className="space-y-1.5 mb-4">
-                        {brand.achievements.map((a, ai) => (
-                          <div key={ai} className="flex items-start gap-2 text-xs">
-                            <span style={{ color: col, fontSize: 8, marginTop: 4 }}>●</span>
-                            <span style={{ color: "#2d2824" }}>{a}</span>
-                          </div>
-                        ))}
+                      {/* Flagship products with images */}
+                      <div className="mb-3">
+                        <div className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: "#a09890" }}>Flagship Models</div>
+                        <div className="flex gap-2">
+                          {brand.flagships.slice(0, 3).map((f, fi) => {
+                            const kbd = headphones.find(m => m.name === f || m.name.includes(f));
+                            const fImg = getHeadphoneImage(f) || (kbd ? getHeadphoneImage(kbd.name) : null);
+                            return (
+                              <a key={fi} href={kbd ? amazonLink(kbd.name) : "#"} target="_blank" rel="noopener noreferrer"
+                                onClick={e => e.stopPropagation()}
+                                className="flex-1 flex flex-col items-center p-2 rounded-lg text-center transition-all hover:scale-105 no-underline"
+                                style={{ background: `${col}06`, border: `1px solid ${col}10`, textDecoration: "none" }}>
+                                {fImg ? <img loading="lazy" src={fImg} alt={f} className="h-10 object-contain mb-1" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }} /> : <div className="h-10 flex items-center justify-center opacity-20">{icon("headphone", 20)}</div>}
+                                <div className="text-[9px] font-bold truncate w-full" style={{ color: col }}>{f.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
+                                {kbd && <div className="text-[9px]" style={{ color: "#a09890" }}>${kbd.price}</div>}
+                              </a>
+                            );
+                          })}
+                        </div>
                       </div>
 
-                      {/* Flagship products */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {brand.flagships.map((f, fi) => {
-                          const kbd = headphones.find(m => m.name === f || m.name.includes(f));
-                          return (
-                            <a key={fi} href={kbd ? amazonLink(kbd.name) : "#"} target="_blank" rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-bold transition-all hover:scale-105 no-underline"
-                              style={{ background: `${col}08`, color: col, border: `1px solid ${col}15`, textDecoration: "none" }}>
-                              {getHeadphoneImage(f) && <img loading="lazy" src={getHeadphoneImage(f)} alt={f} className="h-4 w-5 object-contain" />}
-                              {f.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}
-                              {kbd && <span style={{ color: "#a09890" }}>${kbd.price}</span>}
-                            </a>
-                          );
-                        })}
+                      {/* Explore button */}
+                      <div className="w-full py-2 rounded-lg text-center text-[11px] font-bold uppercase tracking-wider transition-all"
+                        style={{ background: `${col}08`, color: col, border: `1px solid ${col}15` }}>
+                        Explore {brand.name} →
                       </div>
-
-                      {/* View full page */}
-                      <button onClick={() => { window.location.href = `/brands/${brand.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`; }}
-                        className="text-xs font-semibold transition-all hover:gap-3 flex items-center gap-1.5"
-                        style={{ color: col }}>
-                        View full {brand.name} profile <span className="transition-transform group-hover:translate-x-1">→</span>
-                      </button>
                     </div>
                   </div>
                 );
@@ -5903,35 +5909,64 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             <div className="text-sm opacity-40 mb-4">{filteredTeams.length} {filteredTeams.length === 1 ? "team" : "teams"} found</div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredTeams.map(team => {
                 const primaryGame = team.games[0];
                 const gc = gameColors[primaryGame] || teamColor;
+                const topHpImg = getHeadphoneImage(team.topKbd);
                 return (
                   <div key={team.name}
                     onClick={() => { window.location.href = `/teams/${team.name.toLowerCase().replace(/\+/g, "-plus").replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "")}`; }}
-                    className="rounded-xl p-4 cursor-pointer transition-all duration-200 group hover:scale-[1.02] flex flex-col relative overflow-hidden"
-                    style={{ background: "linear-gradient(135deg, #ffffff, #faf8f5)", border: `1px solid ${gc}15`, borderTopWidth: "4px", borderTopColor: gc }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = `${gc}50`; e.currentTarget.style.boxShadow = `0 0 20px ${gc}15`; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = `${gc}15`; e.currentTarget.style.boxShadow = "none"; }}>
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center mb-3 mx-auto overflow-hidden flex-shrink-0" style={{ background: `linear-gradient(135deg, ${gc}20, ${gc}10)`, border: `2px solid ${gc}25` }}>
-                      {TEAM_LOGOS[team.name] ? <img loading="lazy" src={TEAM_LOGOS[team.name]} alt={team.name} className="w-12 h-12 object-contain" onError={e => { e.target.style.display = "none"; e.target.parentElement.querySelector('.team-fallback').style.display = "block"; }} /> : null}
-                      <Shield size={28} className="team-fallback" style={{ color: gc, display: TEAM_LOGOS[team.name] ? "none" : "block" }} />
+                    className="group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300"
+                    style={{ background: "#ffffff", border: `1px solid ${gc}15`, boxShadow: `0 2px 8px ${gc}06` }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = `0 16px 40px ${gc}18, 0 0 0 1px ${gc}30`; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 2px 8px ${gc}06`; }}>
+                    {/* Top banner */}
+                    <div className="relative h-24 overflow-hidden" style={{ background: `linear-gradient(135deg, ${gc}15 0%, ${gc}06 100%)` }}>
+                      {/* Faded logo bg */}
+                      {TEAM_LOGOS[team.name] && <div className="absolute -right-4 -bottom-4 opacity-[0.06]"><img loading="lazy" src={TEAM_LOGOS[team.name]} alt="" className="w-28 h-28 object-contain" /></div>}
+                      {/* Team logo */}
+                      <div className="absolute top-3 left-4 flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: "rgba(255,255,255,0.9)", boxShadow: `0 2px 8px ${gc}20` }}>
+                          {TEAM_LOGOS[team.name] ? <img loading="lazy" src={TEAM_LOGOS[team.name]} alt={team.name} className="w-8 h-8 object-contain" /> : <Shield size={22} style={{ color: gc }} />}
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-sm font-black leading-tight truncate" style={{ color: gc }}>{team.name}</div>
+                          <div className="text-[10px] font-bold" style={{ color: `${gc}80` }}>{team.playerCount} {team.playerCount === 1 ? "player" : "players"}</div>
+                        </div>
+                      </div>
+                      {/* Top headphone image */}
+                      {topHpImg && (
+                        <div className="absolute right-2 bottom-0 transition-transform duration-300 group-hover:scale-110">
+                          <img loading="lazy" src={topHpImg} alt="" className="h-16 object-contain" style={{ filter: "drop-shadow(0 3px 8px rgba(0,0,0,0.12))" }} />
+                        </div>
+                      )}
                     </div>
-                    <div className="text-sm font-bold text-center mb-2 leading-tight" style={{ color: gc, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{team.name}</div>
-                    <div className="text-center mb-3">
-                      <span className="text-2xl font-black" style={{ color: gc }}>{team.playerCount}</span>
-                      <span className="text-xs opacity-40 ml-1 block">{team.playerCount === 1 ? "player" : "players"}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1 justify-center mb-2">
-                      {team.games.slice(0, 3).map(g => (
-                        <span key={g} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-center text-xs font-bold" style={{ background: `${gameColors[g] || "#8a8078"}18`, color: gameColors[g] || "#8a8078", fontSize: 10, border: `1px solid ${gameColors[g] || "#8a8078"}30`, boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}>{getGameImage(g) && <img loading="lazy" src={getGameImage(g)} alt={g} style={{ width: 10, height: 10, objectFit: "contain" }} />}{g}</span>
-                      ))}
-                      {team.games.length > 3 && <span className="px-1.5 py-0.5 rounded text-center opacity-40" style={{ fontSize: 10 }}>+{team.games.length - 3}</span>}
-                    </div>
-                    <div className="mt-auto pt-2" style={{ borderTop: "1px solid #e8e4df" }}>
-                      <div className="text-center opacity-40" style={{ fontSize: 10 }}>TOP HEADPHONE</div>
-                      <div className="text-center font-bold truncate" style={{ fontSize: 11, color: "#3d3530" }}>{team.topKbd}</div>
+
+                    <div className="px-4 py-3">
+                      {/* Game pills */}
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {team.games.slice(0, 3).map(g => (
+                          <span key={g} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: `${gameColors[g] || "#8a8078"}12`, color: gameColors[g] || "#8a8078" }}>
+                            {getGameImage(g) && <img loading="lazy" src={getGameImage(g)} alt={g} style={{ width: 10, height: 10, objectFit: "contain" }} />}{g}
+                          </span>
+                        ))}
+                        {team.games.length > 3 && <span className="px-1.5 py-0.5 rounded text-[10px] opacity-40">+{team.games.length - 3}</span>}
+                      </div>
+
+                      {/* Top headphone + country flags */}
+                      <div className="flex items-center justify-between gap-2 pt-2" style={{ borderTop: "1px solid #f0ece6" }}>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-[9px] uppercase tracking-wider font-bold" style={{ color: "#a09890" }}>Top Headphone</div>
+                          <div className="text-[11px] font-bold truncate" style={{ color: "#3d3530" }}>{team.topKbd.replace(/(Razer |HyperX |Logitech |SteelSeries |Corsair |beyerdynamic |Sennheiser |ASTRO |Sony |ASUS |JBL |Audeze |Turtle Beach |EPOS )/, "")}</div>
+                        </div>
+                        {team.countries.length > 0 && (
+                          <div className="flex -space-x-1 flex-shrink-0">
+                            {team.countries.slice(0, 4).map(c => <span key={c} className="inline-block"><Flag country={c} size={14} /></span>)}
+                            {team.countries.length > 4 && <span className="text-[9px] opacity-30 ml-1.5">+{team.countries.length - 4}</span>}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );

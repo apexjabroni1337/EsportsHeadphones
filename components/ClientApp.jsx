@@ -1491,27 +1491,42 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               </div>
             </div>
 
-            {/* Newsletter CTA */}
-            <div className="glass-card rounded-2xl p-5 sm:p-8 mt-8 mb-2 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(184,149,106,0.05), rgba(26,22,20,0.03))", border: "1px solid #c9a22715" }}>
-              <div className="relative z-10">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  {I.headphone(20)}
-                  <span className="text-sm font-black uppercase tracking-widest" style={{ color: "#c9a227", fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Newsletter</span>
+            {/* ══ Newsletter CTA — dark immersive ══ */}
+            <div className="rounded-2xl overflow-hidden mb-2 relative" style={{ background: "linear-gradient(160deg, #0f0e0c 0%, #1a1814 50%, #0f0e0c 100%)", border: "1px solid #c9a22720" }}>
+              {/* Decorative glow */}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center top, #c9a22712 0%, transparent 60%)" }} />
+              {/* Top accent line */}
+              <div className="h-0.5" style={{ background: "linear-gradient(90deg, transparent, #c9a227, transparent)" }} />
+              <div className="relative z-10 p-6 sm:p-10 text-center">
+                {/* Icon + badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style={{ background: "#c9a22712", border: "1px solid #c9a22725" }}>
+                  <span className="text-base">📬</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#c9a227" }}>Newsletter</span>
                 </div>
-                <div className="text-base sm:text-lg font-black text-stone-900 mb-1" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Stay ahead of the meta</div>
-                <div className="text-sm opacity-30 mb-4 max-w-md mx-auto">Pro gear changes, new headphone releases, and data-driven insights delivered to your inbox. No spam.</div>
+                <h3 className="text-xl sm:text-2xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#f5f2e6" }}>Stay ahead of the meta</h3>
+                <p className="text-sm max-w-md mx-auto mb-6" style={{ color: "#9e9578" }}>Pro gear changes, new headphone releases, and data-driven insights delivered to your inbox. No spam.</p>
                 {newsletterStatus === "success" ? (
-                  <div className="text-sm font-black" style={{ color: "#c9a227" }}>✓ You're subscribed!</div>
+                  <div className="inline-flex items-center gap-2 px-5 py-3 rounded-xl" style={{ background: "#22c55e15", border: "1px solid #22c55e30" }}>
+                    <span className="text-lg">✓</span>
+                    <span className="text-sm font-black" style={{ color: "#22c55e" }}>You're subscribed!</span>
+                  </div>
                 ) : (
-                  <form className="flex gap-2 max-w-sm mx-auto" onSubmit={async e => { e.preventDefault(); setNewsletterStatus("sending"); try { const res = await fetch("https://formspree.io/f/xvzbwrzv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: newsletterEmail }) }); setNewsletterStatus(res.ok ? "success" : "error"); } catch { setNewsletterStatus("error"); } }}>
+                  <form className="flex gap-2 max-w-md mx-auto" onSubmit={async e => { e.preventDefault(); setNewsletterStatus("sending"); try { const res = await fetch("https://formspree.io/f/xvzbwrzv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: newsletterEmail }) }); setNewsletterStatus(res.ok ? "success" : "error"); } catch { setNewsletterStatus("error"); } }}>
                     <input type="email" required placeholder="your@email.com" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)}
-                      className="flex-1 px-4 py-2.5 rounded-xl text-sm outline-none" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid #c9a22720", color: "#1a1614" }} />
-                    <button type="submit" disabled={newsletterStatus === "sending"} className="px-5 py-2.5 rounded-xl text-sm font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "linear-gradient(135deg, #c9a227, #2d2824)", color: "#fff" }}>
-                      {newsletterStatus === "sending" ? "..." : "Subscribe"}
+                      className="flex-1 px-4 py-3 rounded-xl text-sm outline-none" style={{ background: "#ffffff08", border: "1px solid #ffffff15", color: "#f5f2e6" }} />
+                    <button type="submit" disabled={newsletterStatus === "sending"} className="px-6 py-3 rounded-xl text-sm font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "linear-gradient(135deg, #c9a227, #a68b1b)", color: "#0f0e0c", boxShadow: "0 4px 20px #c9a22740" }}>
+                      {newsletterStatus === "sending" ? "..." : "Subscribe →"}
                     </button>
                   </form>
                 )}
-                {newsletterStatus === "error" && <div className="text-sm mt-2" style={{ color: "#c44040" }}>Something went wrong. Try again.</div>}
+                {newsletterStatus === "error" && <div className="text-sm mt-3" style={{ color: "#ef4444" }}>Something went wrong. Try again.</div>}
+                <div className="flex items-center justify-center gap-4 mt-5">
+                  {["No spam ever", "Unsubscribe anytime", "Weekly digest"].map((t, i) => (
+                    <span key={i} className="text-[10px] flex items-center gap-1" style={{ color: "#9e9578" }}>
+                      <span style={{ color: "#c9a227" }}>✓</span> {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 

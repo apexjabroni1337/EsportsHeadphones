@@ -78,7 +78,7 @@ function AnimatedCounter({ value, duration = 1800, color, suffix = "", prefix = 
 const TAB_ROUTES = {
   overview: "/",
   headphones: "/headphones",
-  rankings: "/headphones",
+  rankings: "/rankings",
   sensors: "/sensors",
   players: "/players",
   games: "/games",
@@ -6424,7 +6424,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <div className="space-y-2 text-sm">
                 {[
                   { label: "All Headphones", href: "/headphones" },
-                  { label: "Headphone Rankings", href: "/headphones" },
+                  { label: "Headphone Rankings", href: "/rankings" },
                   { label: "Pro Player Settings", href: "/players" },
                   { label: "Compare Headphones", href: "/compare" },
                   { label: "Driver Database", href: "/sensors" },

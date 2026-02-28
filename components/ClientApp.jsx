@@ -2820,99 +2820,162 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               );
             })()}
 
-            <div className="overflow-x-auto rounded-2xl" style={{ border: "1px solid #e8e4df" }}>
-              <table className="w-full text-sm">
-                <thead>
-                  <tr style={{ background: "#ffffff" }}>
-                    {[
-                      { key: null, label: "#" },
-                      { key: "name", label: "Headphone" },
-                      { key: "brand", label: "Brand" },
-                      { key: "weight", label: "Weight" },
-                      { key: "driverType", label: "Driver" },
-                      { key: "frequencyResponse", label: "Freq. Response" },
-                      { key: "formFactor", label: "Layout" },
-                      { key: "price", label: "Price" },
-                      { key: "proUsage", label: "Pro %" },
-                      { key: "rating", label: "Rating" },
-                      { key: null, label: "Buy" },
-                    ].map(h => (
-                      <th key={h.label} className={`px-4 py-3 text-left text-sm uppercase tracking-wider font-bold ${h.key ? "cursor-pointer select-none hover:opacity-80" : ""}`}
-                        style={{ color: rankingSort.key === h.key ? "#b8956a" : "#a09890" }}
-                        onClick={() => { if (h.key) setRankingSort(prev => prev.key === h.key ? { key: h.key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key: h.key, dir: ["name","brand","driverType","formFactor"].includes(h.key) ? "asc" : "desc" }); }}>
-                        {h.label}{rankingSort.key === h.key ? (rankingSort.dir === "asc" ? " ▲" : " ▼") : ""}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {(() => {
-                    const filtered = headphones
-                      .filter(m => filterBrand === "All" || m.brand === filterBrand)
-                      .filter(m => {
-                        if (filterWeight === "All") return true;
-                        if (filterWeight === "Ultralight") return m.weight < 250;
-                        if (filterWeight === "Light") return m.weight >= 250 && m.weight < 300;
-                        if (filterWeight === "Medium") return m.weight >= 300 && m.weight < 350;
-                        if (filterWeight === "Heavy") return m.weight >= 350;
-                        return true;
-                      })
-                      .filter(m => {
-                        if (filterPrice === "All") return true;
-                        if (filterPrice === "Budget") return m.price < 60;
-                        if (filterPrice === "Mid") return m.price >= 60 && m.price < 120;
-                        if (filterPrice === "Premium") return m.price >= 120;
-                        return true;
-                      })
-                      .filter(m => filterConn === "All" || (filterConn === "Wireless" ? m.wireless : !m.wireless))
-                      .filter(m => filterLayout === "All" || m.formFactor === filterLayout)
-                      .filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase()) || m.brand.toLowerCase().includes(searchQuery.toLowerCase()));
-                    const k = rankingSort.key || "proUsage";
-                    const dir = rankingSort.dir || "desc";
-                    const sorted = [...filtered].sort((a, b) => {
-                      let av = a[k], bv = b[k];
-                      if (typeof av === "string") return dir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
-                      if (av !== bv) return dir === "asc" ? av - bv : bv - av;
-                      return a.id - b.id;
-                    });
-                    return sorted.map((m, i) => {
-                      const col = BRAND_COLORS[m.brand] || "#8a8078";
-                      return (
-                        <tr key={`rank-${m.id}`} className="cursor-pointer transition-colors hover:bg-stone-50" onClick={() => { navigateToHeadphone(m); }}
-                          style={{ borderBottom: "1px solid #00000008", background: i % 2 === 0 ? "#f5f0e8" : "#f5f2ee" }}>
-                          <td className="px-4 py-3 font-black opacity-20">{i + 1}</td>
-                          <td className="px-4 py-3 font-bold" style={{ color: col }}>{getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={`${m.name}`} className="inline h-5 mr-2 object-contain" />}{m.name}</td>
-                          <td className="px-4 py-3 opacity-50">{getBrandLogo(m.brand) && <img loading="lazy" src={getBrandLogo(m.brand)} alt={m.brand} className="inline w-4 h-4 object-contain mr-1.5" style={{ verticalAlign: "middle" }} />}{m.brand}</td>
-                          <td className="px-4 py-3 font-bold">{m.weight}g</td>
-                          <td className="px-4 py-3 opacity-50 text-sm">{m.driverType}</td>
-                          <td className="px-4 py-3">{m.frequencyResponse >= 1000 ? `${m.frequencyResponse / 1000}K` : m.frequencyResponse}Hz</td>
-                          <td className="px-4 py-3 opacity-50">{m.formFactor}</td>
-                          <td className="px-4 py-3 font-bold"><a href={amazonLink(m.name)} target="_blank" rel="noopener noreferrer" className="no-underline hover:underline" style={{ color: "#b8956a", textDecoration: "none" }}>{"$"}{m.price}</a></td>
-                          <td className="px-4 py-3 font-black" style={{ color: col }}>{m.proUsage}%</td>
-                          <td className="px-4 py-3">
-                            <div className="flex items-center gap-2">
-                              <div className="w-12 h-1.5 rounded-full overflow-hidden" style={{ background: "#00000008" }}>
-                                <div className="h-full rounded-full" style={{ width: `${m.rating * 10}%`, background: col }} />
+            {/* Redesigned Rankings Table */}
+            {(() => {
+              const filtered = headphones
+                .filter(m => filterBrand === "All" || m.brand === filterBrand)
+                .filter(m => {
+                  if (filterWeight === "All") return true;
+                  if (filterWeight === "Ultralight") return m.weight < 250;
+                  if (filterWeight === "Light") return m.weight >= 250 && m.weight < 300;
+                  if (filterWeight === "Medium") return m.weight >= 300 && m.weight < 350;
+                  if (filterWeight === "Heavy") return m.weight >= 350;
+                  return true;
+                })
+                .filter(m => {
+                  if (filterPrice === "All") return true;
+                  if (filterPrice === "Budget") return m.price < 60;
+                  if (filterPrice === "Mid") return m.price >= 60 && m.price < 120;
+                  if (filterPrice === "Premium") return m.price >= 120;
+                  return true;
+                })
+                .filter(m => filterConn === "All" || (filterConn === "Wireless" ? m.wireless : !m.wireless))
+                .filter(m => filterLayout === "All" || m.formFactor === filterLayout)
+                .filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase()) || m.brand.toLowerCase().includes(searchQuery.toLowerCase()));
+              const k = rankingSort.key || "proUsage";
+              const dir = rankingSort.dir || "desc";
+              const sorted = [...filtered].sort((a, b) => {
+                let av = a[k], bv = b[k];
+                if (typeof av === "string") return dir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+                if (av !== bv) return dir === "asc" ? av - bv : bv - av;
+                return a.id - b.id;
+              });
+              const maxUsage = Math.max(...sorted.map(m => m.proUsage), 1);
+              const rankHeaders = [
+                { key: "name", label: "Headphone" },
+                { key: "brand", label: "Brand" },
+                { key: "weight", label: "Weight" },
+                { key: "driverType", label: "Driver" },
+                { key: "price", label: "Price" },
+                { key: "proUsage", label: "Pro Usage" },
+                { key: "rating", label: "Rating" },
+              ];
+              return (
+              <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #e8e4df" }}>
+                {/* Sortable header bar */}
+                <div className="hidden md:flex items-center gap-1 px-3 py-2.5" style={{ background: "#f5f2ee", borderBottom: "1px solid #e8e4df" }}>
+                  <div style={{ width: 52, flexShrink: 0 }} />
+                  <div style={{ width: 72, flexShrink: 0 }} />
+                  {rankHeaders.map(h => (
+                    <div key={h.key} className="flex-1 flex items-center gap-1 cursor-pointer select-none group" style={{ minWidth: 0 }}
+                      onClick={() => setRankingSort(prev => prev.key === h.key ? { key: h.key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key: h.key, dir: ["name","brand","driverType","formFactor"].includes(h.key) ? "asc" : "desc" })}>
+                      <span className="text-[10px] font-bold uppercase tracking-wider transition-colors" style={{ color: rankingSort.key === h.key ? "#b8956a" : "#a09890" }}>{h.label}</span>
+                      {rankingSort.key === h.key && <span style={{ fontSize: 9, color: "#b8956a" }}>{rankingSort.dir === "asc" ? "▲" : "▼"}</span>}
+                    </div>
+                  ))}
+                  <div style={{ width: 90, flexShrink: 0 }} />
+                </div>
+
+                {/* Rows */}
+                <div style={{ background: "#faf8f5" }}>
+                  {sorted.map((m, i) => {
+                    const col = BRAND_COLORS[m.brand] || "#8a8078";
+                    const img = getHeadphoneImage(m.name);
+                    const isTop3 = i < 3;
+                    const medalColors = ["#d4af37", "#a8a8a8", "#cd7f32"];
+                    const medalLabels = ["1st", "2nd", "3rd"];
+                    return (
+                      <div key={`rank-${m.id}`} className="group cursor-pointer transition-all duration-200"
+                        onClick={() => { navigateToHeadphone(m); }}
+                        style={{ borderBottom: "1px solid #e8e4df08", background: i % 2 === 0 ? "transparent" : "#00000003" }}
+                        onMouseEnter={e => { e.currentTarget.style.background = `${col}08`; e.currentTarget.style.transform = "translateX(4px)"; e.currentTarget.style.boxShadow = `inset 3px 0 0 ${col}`; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = i % 2 === 0 ? "transparent" : "#00000003"; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}>
+                        <div className="flex items-center gap-1 px-3 py-2.5 md:py-2">
+                          {/* Rank badge */}
+                          <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 44 }}>
+                            {isTop3 ? (
+                              <div className="flex items-center justify-center rounded-lg font-black text-xs" style={{ width: 36, height: 36, background: `${medalColors[i]}18`, color: medalColors[i], border: `2px solid ${medalColors[i]}40`, fontFamily: "'Space Grotesk', system-ui" }}>
+                                {medalLabels[i]}
                               </div>
-                              <span className="text-sm opacity-50">{m.rating}</span>
+                            ) : (
+                              <span className="text-sm font-bold" style={{ color: "#c4bfb8", fontFamily: "'Space Grotesk', system-ui" }}>{i + 1}</span>
+                            )}
+                          </div>
+
+                          {/* Headphone image */}
+                          <div className="flex-shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style={{ width: 64, height: 52 }}>
+                            {img ? <img loading="lazy" src={img} alt={m.name} className="max-w-full max-h-full object-contain" style={{ filter: `drop-shadow(0 2px 6px ${col}25)` }} /> : <Headphones size={24} style={{ color: "#d4cfc8" }} />}
+                          </div>
+
+                          {/* Name + brand (mobile: stacked, desktop: separate columns) */}
+                          <div className="flex-1 md:flex md:items-center md:gap-1" style={{ minWidth: 0 }}>
+                            {/* Headphone name */}
+                            <div className="flex-1" style={{ minWidth: 0 }}>
+                              <div className="font-bold text-sm truncate transition-colors" style={{ color: "#1a1614", fontFamily: "'Space Grotesk', system-ui" }}>{m.name.replace(m.brand + " ", "")}</div>
+                              <div className="md:hidden text-xs mt-0.5" style={{ color: "#a09890" }}>{m.brand} · {m.weight}g · ${m.price}</div>
                             </div>
-                          </td>
-                          <td className="px-4 py-3" onClick={e => e.stopPropagation()}>
+                            {/* Brand */}
+                            <div className="hidden md:flex flex-1 items-center gap-1.5" style={{ minWidth: 0 }}>
+                              {getBrandLogo(m.brand) && <img loading="lazy" src={getBrandLogo(m.brand)} alt={m.brand} className="w-4 h-4 object-contain" />}
+                              <span className="text-xs font-semibold truncate" style={{ color: col }}>{m.brand}</span>
+                            </div>
+                            {/* Weight */}
+                            <div className="hidden md:flex flex-1 items-center gap-1" style={{ minWidth: 0 }}>
+                              <span className="text-xs font-bold" style={{ color: m.weight < 270 ? "#22c55e" : m.weight < 320 ? "#1a1614" : "#e67e22" }}>{m.weight}g</span>
+                              {m.weight < 270 && <span className="text-[9px] px-1.5 py-0.5 rounded font-bold" style={{ background: "#22c55e15", color: "#22c55e" }}>Light</span>}
+                            </div>
+                            {/* Driver */}
+                            <div className="hidden md:block flex-1 truncate text-xs" style={{ color: "#8a8078", minWidth: 0 }}>{m.driverType}</div>
+                            {/* Price */}
+                            <div className="hidden md:block flex-1" style={{ minWidth: 0 }}>
+                              <span className="text-xs font-bold" style={{ color: "#1a1614" }}>${m.price}</span>
+                            </div>
+                            {/* Pro Usage bar */}
+                            <div className="hidden md:flex flex-1 items-center gap-2" style={{ minWidth: 0 }}>
+                              <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "#0000000a", maxWidth: 80 }}>
+                                <div className="h-full rounded-full transition-all" style={{ width: `${Math.max((m.proUsage / maxUsage) * 100, 3)}%`, background: `linear-gradient(90deg, ${col}80, ${col})` }} />
+                              </div>
+                              <span className="text-xs font-black" style={{ color: col, minWidth: 36 }}>{m.proUsage}%</span>
+                            </div>
+                            {/* Rating */}
+                            <div className="hidden md:flex flex-1 items-center gap-1.5" style={{ minWidth: 0 }}>
+                              <div className="flex gap-0.5">
+                                {[1,2,3,4,5].map(star => (
+                                  <div key={star} className="rounded-sm" style={{ width: 14, height: 6, background: star <= Math.round(m.rating / 2) ? col : "#0000000a", borderRadius: 2 }} />
+                                ))}
+                              </div>
+                              <span className="text-[11px] font-semibold" style={{ color: "#a09890" }}>{m.rating}</span>
+                            </div>
+                          </div>
+
+                          {/* Mobile: pro usage pill */}
+                          <div className="md:hidden flex-shrink-0">
+                            <div className="px-2 py-1 rounded-lg text-xs font-black" style={{ background: `${col}15`, color: col }}>{m.proUsage}%</div>
+                          </div>
+
+                          {/* Buy button */}
+                          <div className="flex-shrink-0 hidden sm:block" style={{ width: 85 }} onClick={e => e.stopPropagation()}>
                             <a href={amazonLink(m.name)} target="_blank" rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold transition-all whitespace-nowrap"
-                              style={{ background: `${col}15`, color: col, border: `1px solid ${col}25` }}
-                              onMouseEnter={e => { e.currentTarget.style.background = col; e.currentTarget.style.color = "#1a1614"; }}
-                              onMouseLeave={e => { e.currentTarget.style.background = `${col}15`; e.currentTarget.style.color = col; }}>
-                              {I.cart(12)} {"$"}{m.price}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap no-underline"
+                              style={{ background: `${col}12`, color: col, border: `1px solid ${col}20`, textDecoration: "none" }}
+                              onMouseEnter={e => { e.currentTarget.style.background = col; e.currentTarget.style.color = "#fff"; }}
+                              onMouseLeave={e => { e.currentTarget.style.background = `${col}12`; e.currentTarget.style.color = col; }}>
+                              {I.cart(11)} ${m.price}
                             </a>
-                          </td>
-                        </tr>
-                      );
-                    });
-                  })()}
-                </tbody>
-              </table>
-            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Results count footer */}
+                <div className="px-4 py-2.5 text-center" style={{ background: "#f5f2ee", borderTop: "1px solid #e8e4df" }}>
+                  <span className="text-xs font-semibold" style={{ color: "#a09890" }}>Showing {sorted.length} of {headphones.length} headphones</span>
+                </div>
+              </div>
+              );
+            })()}
             {/* Gear Check Callout */}
             {(() => {
               const topKbd = headphones.sort((a, b) => b.proUsage - a.proUsage)[0];

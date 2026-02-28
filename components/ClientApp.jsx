@@ -1406,8 +1406,8 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               );
             })()}
 
-            {/* ══ Popular Comparisons — dark themed matchup cards ══ */}
-            <div className="rounded-2xl p-6 mb-6" style={{ background: "linear-gradient(160deg, #0f0e0c 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+            {/* ══ Popular Comparisons — light themed matchup cards ══ */}
+            <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: "#c9a227" }}>Popular Comparisons</div>
                 <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, #c9a22730, transparent)" }} />
@@ -1432,18 +1432,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   const imgB = getHeadphoneImage(c.b);
                   return (
                     <a key={sa+sb} href={`/compare/${sa}-vs-${sb}`} className="group rounded-xl p-4 no-underline block transition-all duration-300 hover:scale-[1.02]"
-                      style={{ background: "linear-gradient(135deg, #ffffff06, #ffffff03)", border: "1px solid #ffffff10", textDecoration: "none" }}>
+                      style={{ background: "#f9f7f2", border: "1px solid #e6e3d6", textDecoration: "none" }}>
                       <div className="flex items-center gap-3">
-                        {/* Left headphone */}
                         <div className="flex-1 text-center">
                           {imgA && <img loading="lazy" src={imgA} alt={nameA} className="h-10 mx-auto object-contain mb-1.5" style={{ filter: `drop-shadow(0 2px 6px ${colA}30)` }} />}
                           <div className="text-[10px] font-bold truncate" style={{ color: colA }}>{nameA}</div>
                         </div>
-                        {/* VS badge */}
-                        <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg, #c9a22730, #c9a22710)", border: "1px solid #c9a22730" }}>
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "#c9a22715", border: "1px solid #c9a22730" }}>
                           <span className="text-[9px] font-black" style={{ color: "#c9a227" }}>VS</span>
                         </div>
-                        {/* Right headphone */}
                         <div className="flex-1 text-center">
                           {imgB && <img loading="lazy" src={imgB} alt={nameB} className="h-10 mx-auto object-contain mb-1.5" style={{ filter: `drop-shadow(0 2px 6px ${colB}30)` }} />}
                           <div className="text-[10px] font-bold truncate" style={{ color: colB }}>{nameB}</div>
@@ -1456,11 +1453,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               </div>
             </div>
 
-            {/* ══ Curated Collections — dark themed category cards ══ */}
-            <div className="rounded-2xl p-6 sm:p-8 mb-8" style={{ background: "linear-gradient(160deg, #0f0e0c 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+            {/* ══ Curated Collections — light themed category cards ══ */}
+            <div className="rounded-2xl p-6 sm:p-8 mb-8" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
               <div className="text-center mb-8">
                 <div className="text-[10px] uppercase tracking-[0.3em] font-bold mb-2" style={{ color: "#c9a227" }}>Curated Collections</div>
-                <h2 className="text-2xl sm:text-3xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#f5f2e6" }}>Hand-picked guides for competitive players</h2>
+                <h2 className="text-2xl sm:text-3xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}>Hand-picked guides for competitive players</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
@@ -1472,49 +1469,47 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   { title: "Audiophile Grade", sub: "Open-back headphones for pristine sound staging", href: "/best/audiophile", accent: "#6d40c4", tag: "Hi-Fi", icon: "🎵" },
                 ].map((c, i) => (
                   <a key={i} href={c.href} className="group relative rounded-xl overflow-hidden no-underline block transition-all duration-300 hover:scale-[1.03]"
-                    style={{ background: `linear-gradient(145deg, ${c.accent}12, ${c.accent}05)`, border: `1px solid ${c.accent}20`, textDecoration: "none" }}>
+                    style={{ background: `${c.accent}06`, border: `1px solid ${c.accent}18`, textDecoration: "none" }}>
                     {/* Top accent bar */}
                     <div className="h-1" style={{ background: `linear-gradient(90deg, ${c.accent}, ${c.accent}60)` }} />
                     <div className="p-5 sm:p-6">
-                      {/* Watermark icon */}
-                      <div className="absolute -right-2 -bottom-2 text-5xl opacity-[0.06] pointer-events-none">{c.icon}</div>
+                      <div className="absolute -right-2 -bottom-2 text-5xl opacity-[0.04] pointer-events-none">{c.icon}</div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="text-lg">{c.icon}</span>
-                        <span className="text-[9px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-full" style={{ background: `${c.accent}20`, color: c.accent }}>{c.tag}</span>
+                        <span className="text-[9px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-full" style={{ background: `${c.accent}12`, color: c.accent, border: `1px solid ${c.accent}20` }}>{c.tag}</span>
                         <span className="ml-auto text-xs opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-0 -translate-x-2" style={{ color: c.accent }}>→</span>
                       </div>
-                      <h3 className="text-base sm:text-lg font-black mb-1.5" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#f5f2e6" }}>{c.title}</h3>
-                      <p className="text-xs leading-relaxed" style={{ color: "#9e9578" }}>{c.sub}</p>
+                      <h3 className="text-base sm:text-lg font-black mb-1.5" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}>{c.title}</h3>
+                      <p className="text-xs leading-relaxed" style={{ color: "#7d6e1e" }}>{c.sub}</p>
                     </div>
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* ══ Newsletter CTA — dark immersive ══ */}
-            <div className="rounded-2xl overflow-hidden mb-2 relative" style={{ background: "linear-gradient(160deg, #0f0e0c 0%, #1a1814 50%, #0f0e0c 100%)", border: "1px solid #c9a22720" }}>
+            {/* ══ Newsletter CTA — light themed ══ */}
+            <div className="rounded-2xl overflow-hidden mb-2 relative" style={{ background: "#ffffff", border: "1px solid #c9a22725" }}>
               {/* Decorative glow */}
-              <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center top, #c9a22712 0%, transparent 60%)" }} />
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center top, #c9a22708 0%, transparent 60%)" }} />
               {/* Top accent line */}
               <div className="h-0.5" style={{ background: "linear-gradient(90deg, transparent, #c9a227, transparent)" }} />
               <div className="relative z-10 p-6 sm:p-10 text-center">
-                {/* Icon + badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style={{ background: "#c9a22712", border: "1px solid #c9a22725" }}>
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4" style={{ background: "#c9a22710", border: "1px solid #c9a22720" }}>
                   <span className="text-base">📬</span>
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#c9a227" }}>Newsletter</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#f5f2e6" }}>Stay ahead of the meta</h3>
-                <p className="text-sm max-w-md mx-auto mb-6" style={{ color: "#9e9578" }}>Pro gear changes, new headphone releases, and data-driven insights delivered to your inbox. No spam.</p>
+                <h3 className="text-xl sm:text-2xl font-black mb-2" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}>Stay ahead of the meta</h3>
+                <p className="text-sm max-w-md mx-auto mb-6" style={{ color: "#7d6e1e" }}>Pro gear changes, new headphone releases, and data-driven insights delivered to your inbox. No spam.</p>
                 {newsletterStatus === "success" ? (
-                  <div className="inline-flex items-center gap-2 px-5 py-3 rounded-xl" style={{ background: "#22c55e15", border: "1px solid #22c55e30" }}>
+                  <div className="inline-flex items-center gap-2 px-5 py-3 rounded-xl" style={{ background: "#22c55e10", border: "1px solid #22c55e25" }}>
                     <span className="text-lg">✓</span>
                     <span className="text-sm font-black" style={{ color: "#22c55e" }}>You're subscribed!</span>
                   </div>
                 ) : (
                   <form className="flex gap-2 max-w-md mx-auto" onSubmit={async e => { e.preventDefault(); setNewsletterStatus("sending"); try { const res = await fetch("https://formspree.io/f/xvzbwrzv", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: newsletterEmail }) }); setNewsletterStatus(res.ok ? "success" : "error"); } catch { setNewsletterStatus("error"); } }}>
                     <input type="email" required placeholder="your@email.com" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)}
-                      className="flex-1 px-4 py-3 rounded-xl text-sm outline-none" style={{ background: "#ffffff08", border: "1px solid #ffffff15", color: "#f5f2e6" }} />
-                    <button type="submit" disabled={newsletterStatus === "sending"} className="px-6 py-3 rounded-xl text-sm font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "linear-gradient(135deg, #c9a227, #a68b1b)", color: "#0f0e0c", boxShadow: "0 4px 20px #c9a22740" }}>
+                      className="flex-1 px-4 py-3 rounded-xl text-sm outline-none" style={{ background: "#f5f2e6", border: "1px solid #e6e3d6", color: "#1a1614" }} />
+                    <button type="submit" disabled={newsletterStatus === "sending"} className="px-6 py-3 rounded-xl text-sm font-black transition-all hover:scale-105 disabled:opacity-50" style={{ background: "linear-gradient(135deg, #c9a227, #a68b1b)", color: "#fff", boxShadow: "0 4px 20px #c9a22730" }}>
                       {newsletterStatus === "sending" ? "..." : "Subscribe →"}
                     </button>
                   </form>
@@ -1522,7 +1517,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 {newsletterStatus === "error" && <div className="text-sm mt-3" style={{ color: "#ef4444" }}>Something went wrong. Try again.</div>}
                 <div className="flex items-center justify-center gap-4 mt-5">
                   {["No spam ever", "Unsubscribe anytime", "Weekly digest"].map((t, i) => (
-                    <span key={i} className="text-[10px] flex items-center gap-1" style={{ color: "#9e9578" }}>
+                    <span key={i} className="text-[10px] flex items-center gap-1" style={{ color: "#7d6e1e" }}>
                       <span style={{ color: "#c9a227" }}>✓</span> {t}
                     </span>
                   ))}

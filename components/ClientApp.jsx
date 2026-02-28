@@ -1296,267 +1296,87 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                   const imgUrl = getHeadphoneImage(selectedHeadphone.name);
                   return (
                   <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {/* Left: Headphone image */}
-                    <div className="flex flex-col items-center justify-center rounded-xl p-4" style={{ background: `${brandCol}06`, border: `1px solid ${brandCol}12` }}>
-                      {imgUrl && !spotlightImgError ? (
-                        <img loading="lazy" src={imgUrl} alt={`${selectedHeadphone.name} by ${selectedHeadphone.brand} - ${selectedHeadphone.weight}g wireless esports gaming headphone`} className="w-full max-h-32 sm:max-h-48 object-contain object-center mb-3 rounded-lg" style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.08))" }}
-                          onError={() => setSpotlightImgError(true)} />
-                      ) : (
-                      <div className="flex" style={{ width: 180, height: 160, alignItems: "center", justifyContent: "center", background: `${brandCol}10`, borderRadius: 16 }}>
-                        <span className="inline-block">{icon("headphone", 80)}</span>
+                  {/* Compact dark preview card */}
+                  <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(160deg, #0f0e0c 0%, #1a1814 100%)", border: `1px solid ${brandCol}20` }}>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+                      {/* Left: Image + name */}
+                      <div className="flex flex-col items-center justify-center p-6 relative">
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                          <div style={{ width: 180, height: 180, borderRadius: "50%", background: `radial-gradient(circle, ${brandCol}20 0%, transparent 70%)`, filter: "blur(30px)" }} />
+                        </div>
+                        {imgUrl && !spotlightImgError ? (
+                          <img loading="lazy" src={imgUrl} alt={`${selectedHeadphone.name}`} className="relative z-10 w-full max-h-40 object-contain object-center mb-3" style={{ filter: `drop-shadow(0 12px 24px ${brandCol}30)` }}
+                            onError={() => setSpotlightImgError(true)} />
+                        ) : (
+                          <div className="relative z-10 flex items-center justify-center" style={{ width: 150, height: 130, background: `${brandCol}15`, borderRadius: 16 }}>
+                            <span>{icon("headphone", 70)}</span>
+                          </div>
+                        )}
+                        <div className="relative z-10 text-lg font-black mt-2 text-center cursor-pointer hover:opacity-80 transition-all" style={{ color: "#f5f2e6" }} onClick={() => navigateToHeadphone(selectedHeadphone)}>{selectedHeadphone.name}</div>
+                        <div className="text-xs mt-1" style={{ color: "#9e9578" }}>{selectedHeadphone.brand} · {selectedHeadphone.formFactor} · {selectedHeadphone.connectivity}</div>
                       </div>
-                      )}
-                      <div className="text-xl font-black mt-2 text-center cursor-pointer hover:underline" style={{ color: brandCol }} onClick={() => navigateToHeadphone(selectedHeadphone)}>{selectedHeadphone.name}</div>
-                      <div className="text-sm opacity-85 text-center">{selectedHeadphone.brand} · {selectedHeadphone.formFactor} · {selectedHeadphone.connectivity}</div>
-                    </div>
 
-                    {/* Center: Radar chart */}
-                    <div className="flex flex-col items-center justify-center md:col-span-2 lg:col-span-1">
-                      <ResponsiveContainer width="100%" height={200}>
-                        <RadarChart data={radarData}>
-                          <PolarGrid stroke="#e6e3d6" />
-                          <PolarAngleAxis dataKey="stat" tick={{ fill: "#7d6e1e", fontSize: 13 }} />
-                          <PolarRadiusAxis tick={false} axisLine={false} domain={[0, 100]} />
-                          <Radar name={selectedHeadphone.name} dataKey="value" stroke={brandCol} fill={brandCol} fillOpacity={0.2} strokeWidth={2.5} dot={{ r: 3, fill: brandCol, strokeWidth: 0 }} />
-                        </RadarChart>
-                      </ResponsiveContainer>
-                      <div className="grid grid-cols-4 gap-1.5 sm:gap-2 w-full mt-2">
-                        <StatBox label="Weight" value={selectedHeadphone.weight} unit="g" color={brandCol} />
-                        <StatBox label="Driver" value={selectedHeadphone.driverType?.split(" ")[0] || "50mm"} unit="" color={brandCol} />
-                        <StatBox label="Freq. Response" value={selectedHeadphone.frequencyResponse >= 1000 ? `${selectedHeadphone.frequencyResponse / 1000}K` : selectedHeadphone.frequencyResponse} unit="kHz" color={brandCol} />
-                        <StatBox label="Price" value={`$${selectedHeadphone.price}`} color={brandCol} />
-                      </div>
-                      <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-sm font-black transition-all mt-2"
-                        style={{ background: brandCol, color: "#fff" }}>
-                        {I.cart(16, "#fff")} Buy on Amazon
-                      </a>
-                    </div>
-
-                    {/* Right: Pro users */}
-                    <div>
-                      <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Notable Pro Users</div>
-                      {usedByPros.length > 0 ? (
-                        <div className="space-y-2">
-                          {usedByPros.slice(0, 3).map((p, i) => {
-                            const gameColors = GAME_COLORS;
-                            const gc = gameColors[p.game] || "#8a8460";
+                      {/* Center: Performance bars */}
+                      <div className="p-5" style={{ borderLeft: "1px solid #ffffff08", borderRight: "1px solid #ffffff08" }}>
+                        <div className="text-[9px] uppercase tracking-[0.2em] font-bold mb-3" style={{ color: brandCol }}>Performance</div>
+                        <div className="space-y-2.5">
+                          {radarData.map((rd, ri) => {
+                            const barColors = { Comfort: "#22c55e", Sound: "#3b82f6", Isolation: "#8b5cf6", "Pro Pick": "#f59e0b", Rating: "#ef4444", Value: "#06b6d4" };
+                            const bc = barColors[rd.stat] || brandCol;
+                            const pct = Math.round(rd.value);
                             return (
-                              <button key={i} onClick={() => { const pp = proPlayers.find(pp => pp.name === p.name); if (pp) { navigateToPlayer(pp); } else { setActiveTab("players"); } }}
-                                className="w-full flex items-center gap-3 p-2.5 rounded-xl cursor-pointer transition-all hover:scale-[1.02] text-left"
-                                style={{ background: `${gc}08`, border: `1px solid ${gc}15` }}>
-                                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg flex-shrink-0" style={{ background: `${gc}15` }}>
-                                  <Flag country={p.country} size={16} />
+                              <div key={ri}>
+                                <div className="flex items-center justify-between mb-0.5">
+                                  <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#9e9578" }}>{rd.stat}</span>
+                                  <span className="text-xs font-black tabular-nums" style={{ color: bc }}>{pct}</span>
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="text-sm font-black">{p.name}</div>
-                                  <div className="text-sm" style={{ color: "#7d6e1e" }}>{p.team} · <span style={{ color: gc }}>{p.game}</span> · {p.role}</div>
+                                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "#ffffff08" }}>
+                                  <div className="h-full rounded-full" style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${bc}80, ${bc})` }} />
                                 </div>
-                                <div className="text-right flex-shrink-0">
-                                  <div className="text-sm font-bold" style={{ color: gc }}>{p.game}</div>
-                                  <div className="text-xs opacity-60">{p.role}</div>
-                                </div>
-                              </button>
+                              </div>
                             );
                           })}
                         </div>
-                      ) : (
-                        <div className="text-sm opacity-20 py-8 text-center">No tracked pros currently using this headphone</div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* ── Headphone Description ── */}
-                  {HEADPHONE_DESCRIPTIONS[selectedHeadphone.name] && (() => {
-                    const desc = HEADPHONE_DESCRIPTIONS[selectedHeadphone.name];
-                    const brandCol = BRAND_COLORS[selectedHeadphone.brand];
-                    const parts = [];
-                    
-                    if (desc.highlights && desc.highlights.length > 0) {
-                      // Sort highlights by position in text
-                      const sorted = [...desc.highlights]
-                        .map(h => ({ h, idx: desc.text.indexOf(h) }))
-                        .filter(x => x.idx !== -1)
-                        .sort((a, b) => a.idx - b.idx);
-                      
-                      let cursor = 0;
-                      sorted.forEach(({ h, idx }) => {
-                        if (idx > cursor) parts.push({ text: desc.text.slice(cursor, idx), highlight: false });
-                        parts.push({ text: h, highlight: true });
-                        cursor = idx + h.length;
-                      });
-                      if (cursor < desc.text.length) parts.push({ text: desc.text.slice(cursor), highlight: false });
-                    } else {
-                      parts.push({ text: desc.text, highlight: false });
-                    }
-
-                    return (
-                      <div className="rounded-xl p-5 mt-4" style={{ background: `${brandCol}05`, border: `1px solid ${brandCol}10` }}>
-                        <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#9e9578" }}>About this headphone</div>
-                        <p className="text-sm leading-relaxed opacity-60">
-                          {parts.map((p, i) => p.highlight ? (
-                            <span key={i} className="font-bold opacity-100" style={{ color: brandCol }}>{p.text}</span>
-                          ) : (
-                            <span key={i}>{p.text}</span>
-                          ))}
-                        </p>
-                      </div>
-                    );
-                  })()}
-
-                  {/* ── Magazine Spread Editorial Design ── */}
-                  {(() => {
-                    const headphonePlayers = allPlayers.filter(p => p.headphone && (p.headphone === selectedHeadphone.name || p.headphone.includes(selectedHeadphone.name.split(" ").slice(-2).join(" "))));
-                    const totalTracked = allPlayers.length;
-                    const marketShare = totalTracked > 0 ? ((headphonePlayers.length / totalTracked) * 100).toFixed(1) : 0;
-
-                    const gameDistro = {};
-                    headphonePlayers.forEach(p => { gameDistro[p.game] = (gameDistro[p.game] || 0) + 1; });
-                    const topGames = Object.entries(gameDistro).sort((a, b) => b[1] - a[1]);
-                    const gcols = { CS2: "#c47000", Valorant: "#c43848", LoL: "#c89b3c", Fortnite: "#3a60b0", "Overwatch 2": "#c48018", Apex: "#a82020", "Dota 2": "#b83c30", "R6 Siege": "#3a6ca0", "Rocket League": "#1478c4", "Call of Duty": "#3a8a3a", "Marvel Rivals": "#b81820", PUBG: "#c48a00", Deadlock: "#6d40c4", "Quake Champions": "#a83c00" };
-
-                    const countryCounts = {};
-                    headphonePlayers.forEach(p => { if (p.country) countryCounts[p.country] = (countryCounts[p.country] || 0) + 1; });
-                    const topCountries = Object.entries(countryCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
-
-                    const teamCounts = {};
-                    headphonePlayers.forEach(p => { if (p.team && p.team !== "Content" && p.team !== "Inactive") teamCounts[p.team] = (teamCounts[p.team] || 0) + 1; });
-                    const topTeams = Object.entries(teamCounts).sort((a, b) => b[1] - a[1]).slice(0, 3);
-
-                    const allHeadphoneCounts = {};
-                    allPlayers.forEach(p => { if (p.headphone) allHeadphoneCounts[p.headphone] = (allHeadphoneCounts[p.headphone] || 0) + 1; });
-                    const ranked = Object.entries(allHeadphoneCounts).sort((a, b) => b[1] - a[1]);
-                    const rank = ranked.findIndex(([name]) => name === selectedHeadphone.name || name.includes(selectedHeadphone.name.split(" ").slice(-2).join(" "))) + 1;
-
-                    const competitors = headphones.filter(m => m.id !== selectedHeadphone.id && m.formFactor === selectedHeadphone.formFactor && m.connectivity === selectedHeadphone.connectivity)
-                      .sort((a, b) => b.proUsage - a.proUsage).slice(0, 3);
-
-                    if (headphonePlayers.length === 0) return <div className="mt-4 rounded-lg p-6 text-center text-sm opacity-20" style={{ background: "#00000008" }}>No tracked players found for this headphone in our database</div>;
-
-                    return (
-                      <div className="mt-5 rounded-xl overflow-hidden" style={{ border: `1px solid ${brandCol}12` }}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-0" style={{ background: "#ffffff" }}>
-                          {/* LEFT COLUMN: Headphone Dossier */}
-                          <div className="p-6 border-b md:border-b-0 md:border-r" style={{ borderColor: `${brandCol}12` }}>
-                            <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Headphone Dossier</div>
-                            <h2 className="text-4xl font-black mb-6" style={{ color: brandCol }}>
-                              {selectedHeadphone.name.replace(selectedHeadphone.brand + " ", "")}
-                            </h2>
-
-                            {/* Hero stats row */}
-                            <div className="grid grid-cols-3 gap-3 mb-6">
-                              <div>
-                                <div className="text-2xl font-black" style={{ color: brandCol }}>{headphonePlayers.length}</div>
-                                <div className="text-xs opacity-60">Pro Users</div>
-                              </div>
-                              <div>
-                                <div className="text-2xl font-black" style={{ color: brandCol }}>{marketShare}%</div>
-                                <div className="text-xs opacity-60">Market Share</div>
-                              </div>
-                              <div>
-                                <div className="text-2xl font-black" style={{ color: brandCol }}>#{rank}</div>
-                                <div className="text-xs opacity-60">Popularity</div>
-                              </div>
-                            </div>
-
-                            {/* Pull quote */}
-                            <div className="pl-4 py-4 mb-6" style={{ borderLeft: `3px solid ${brandCol}` }}>
-                              <p className="text-sm font-bold opacity-85">
-                                A {selectedHeadphone.connectivity === "Wireless" ? "wireless" : "wired"} {selectedHeadphone.formFactor} with {selectedHeadphone.driverType} drivers at {selectedHeadphone.frequencyResponse}Hz frequency response. {selectedHeadphone.anc ? "ANC enabled." : ""} Chosen by {headphonePlayers.length} tracked esports professionals across {topGames.length} competitive titles.
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* RIGHT COLUMN: Details */}
-                          <div className="p-6 space-y-5">
-                            {/* Where It's Used - Game Pills */}
-                            {topGames.length > 0 && (
-                              <div>
-                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Where It's Used</div>
-                                <div className="flex flex-wrap gap-2">
-                                  {topGames.slice(0, 4).map(([game, count]) => (
-                                    <div key={game} className="px-3 py-1.5 rounded-full text-xs font-bold" style={{ background: `${gcols[game] || "#8a8460"}20`, color: gcols[game] || "#8a8460" }}>
-                                      {game} ({((count / headphonePlayers.length) * 100).toFixed(0)}%)
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Specs DNA */}
-                            <div>
-                              <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Specs DNA</div>
-                              <div className="space-y-2 text-sm">
-                                <div className="flex justify-between">
-                                  <span className="opacity-60">Freq. Response</span>
-                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.frequencyResponse}Hz</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="opacity-60">Driver</span>
-                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.driverType}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="opacity-60">Impedance</span>
-                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.driverType}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="opacity-60">ANC</span>
-                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.anc ? "Yes" : "No"}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="opacity-60">Form Factor</span>
-                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.formFactor}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="opacity-60">Connectivity</span>
-                                  <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.connectivity}</span>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Global Reach */}
-                            {topCountries.length > 0 && (
-                              <div>
-                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Global Reach</div>
-                                <div className="flex flex-wrap gap-2">
-                                  {topCountries.map(([flag, count]) => (
-                                    <span key={flag} className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs" style={{ background: `${brandCol}10` }}>
-                                      <Flag country={flag} size={14} />
-                                      <span className="font-bold" style={{ color: brandCol }}>{count}</span>
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Rivals */}
-                            {competitors.length > 0 && (
-                              <div>
-                                <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Rivals</div>
-                                <div className="space-y-2">
-                                  {competitors.map(c => {
-                                    const cc = BRAND_COLORS[c.brand] || "#8a8460";
-                                    return (
-                                      <button key={c.id} onClick={() => { navigateToHeadphone(c); }}
-                                        className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-all hover:scale-105 justify-between"
-                                        style={{ background: `${cc}08`, border: `1px solid ${cc}15` }}>
-                                        <div className="flex items-center gap-2">
-                                          {getHeadphoneImage(c.name) && <img loading="lazy" src={getHeadphoneImage(c.name)} alt={c.name} className="h-5 object-contain" />}
-                                          <span className="font-bold" style={{ color: cc }}>{c.name.replace(c.brand + " ", "")}</span>
-                                        </div>
-                                        <span className="opacity-60">{c.driverType}</span>
-                                      </button>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            )}
-                          </div>
+                        <div className="flex items-center gap-2 mt-3 pt-3" style={{ borderTop: "1px solid #ffffff08" }}>
+                          <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-black transition-all hover:scale-105 no-underline"
+                            style={{ background: brandCol, color: "#0f0e0c", textDecoration: "none" }}>
+                            {I.cart(14, "#0f0e0c")} ${selectedHeadphone.price}
+                          </a>
+                          <button onClick={() => navigateToHeadphone(selectedHeadphone)} className="px-4 py-2 rounded-lg text-xs font-bold transition-all hover:scale-105" style={{ background: "#ffffff08", border: "1px solid #ffffff15", color: "#f5f2e6" }}>Full Page →</button>
                         </div>
                       </div>
-                    );
-                  })()}
+
+                      {/* Right: Pro users */}
+                      <div className="p-5">
+                        <div className="text-[9px] uppercase tracking-[0.2em] font-bold mb-3" style={{ color: brandCol }}>Notable Pros</div>
+                        {usedByPros.length > 0 ? (
+                          <div className="space-y-2">
+                            {usedByPros.slice(0, 4).map((p, i) => {
+                              const gameColors = GAME_COLORS;
+                              const gc = gameColors[p.game] || "#8a8460";
+                              return (
+                                <button key={i} onClick={() => { const pp = proPlayers.find(pp => pp.name === p.name); if (pp) { navigateToPlayer(pp); } else { setActiveTab("players"); } }}
+                                  className="w-full flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-all hover:scale-[1.02] text-left"
+                                  style={{ background: `${gc}08`, border: `1px solid ${gc}12` }}>
+                                  <div className="w-7 h-7 rounded flex items-center justify-center flex-shrink-0" style={{ background: `${gc}15` }}>
+                                    <Flag country={p.country} size={12} />
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="text-xs font-black" style={{ color: "#f5f2e6" }}>{p.name}</div>
+                                    <div className="text-[10px]" style={{ color: "#9e9578" }}>{p.team}</div>
+                                  </div>
+                                  <span className="text-[9px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ background: `${gc}20`, color: gc }}>{p.game}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <div className="text-xs py-6 text-center" style={{ color: "#9e9578" }}>No tracked pros</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                   </>
                   );
                 })()}
@@ -1685,78 +1505,149 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               <a href={`/contact?subject=correction&headphone=${encodeURIComponent(selectedHeadphone.name)}`} className="px-2.5 py-1 rounded-lg text-xs font-bold transition-all hover:scale-105 no-underline ml-auto" style={{ background: "#0000000a", border: "1px solid #d4d0be", color: "#8a8460", textDecoration: "none" }}>⚠️ Suggest Correction</a>
             </div>
 
-            {/* Hero Section */}
-            <div className="rounded-2xl p-6 sm:p-8 mb-6" style={{ background: "#ffffff", border: `1px solid ${brandCol}15` }}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Left: Headphone image */}
-                <div className="flex flex-col items-center justify-center rounded-xl p-6" style={{ background: `${brandCol}06`, border: `1px solid ${brandCol}12` }}>
+            {/* ══ HERO: Dark Immersive Banner ══ */}
+            <div className="rounded-2xl overflow-hidden mb-6" style={{ background: "linear-gradient(160deg, #0f0e0c 0%, #1a1814 40%, #1f1c16 100%)", border: `1px solid ${brandCol}20` }}>
+              {/* Top: Headphone showcase + Performance gauges side by side */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                {/* Left: Large hero image with glow */}
+                <div className="lg:col-span-5 relative flex flex-col items-center justify-center p-8 pb-4" style={{ minHeight: 320 }}>
+                  {/* Radial glow behind headphone */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div style={{ width: 280, height: 280, borderRadius: "50%", background: `radial-gradient(circle, ${brandCol}25 0%, transparent 70%)`, filter: "blur(40px)" }} />
+                  </div>
                   {imgUrl && !spotlightImgError ? (
-                    <img loading="lazy" src={imgUrl} alt={`${selectedHeadphone.name} by ${selectedHeadphone.brand} - professional esports gaming headphone review`} className="w-full max-h-48 sm:max-h-64 object-contain object-center mb-4 rounded-lg" style={{ filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.08))" }}
+                    <img loading="lazy" src={imgUrl} alt={`${selectedHeadphone.name} by ${selectedHeadphone.brand}`} className="relative z-10 w-full max-h-56 sm:max-h-72 object-contain object-center" style={{ filter: `drop-shadow(0 20px 40px ${brandCol}40)` }}
                       onError={() => setSpotlightImgError(true)} />
                   ) : (
-                  <div className="flex" style={{ width: 200, height: 180, alignItems: "center", justifyContent: "center", background: `${brandCol}10`, borderRadius: 16 }}>
-                    <span className="inline-block">{icon("headphone", 100)}</span>
-                  </div>
-                  )}
-                  <div className="text-2xl font-black mt-3 text-center" style={{ color: brandCol }}>{selectedHeadphone.name}</div>
-                  <div className="text-sm opacity-85 text-center mt-1">{selectedHeadphone.brand} · {selectedHeadphone.formFactor} · {selectedHeadphone.connectivity}</div>
-                </div>
-
-                {/* Center: Radar chart + specs */}
-                <div className="flex flex-col items-center justify-center md:col-span-2 lg:col-span-1">
-                  <ResponsiveContainer width="100%" height={220}>
-                    <RadarChart data={radarData}>
-                      <PolarGrid stroke="#e6e3d6" />
-                      <PolarAngleAxis dataKey="stat" tick={{ fill: "#7d6e1e", fontSize: 13 }} />
-                      <PolarRadiusAxis tick={false} axisLine={false} domain={[0, 100]} />
-                      <Radar name={selectedHeadphone.name} dataKey="value" stroke={brandCol} fill={brandCol} fillOpacity={0.2} strokeWidth={2.5} dot={{ r: 3, fill: brandCol, strokeWidth: 0 }} />
-                    </RadarChart>
-                  </ResponsiveContainer>
-                  <div className="grid grid-cols-4 gap-2 w-full mt-2">
-                    <StatBox label="Weight" value={selectedHeadphone.weight} unit="g" color={brandCol} />
-                    <StatBox label="Driver" value={selectedHeadphone.driverType?.split(" ")[0] || "50mm"} unit="" color={brandCol} />
-                    <StatBox label="Freq. Response" value={selectedHeadphone.frequencyResponse >= 1000 ? `${selectedHeadphone.frequencyResponse / 1000}K` : selectedHeadphone.frequencyResponse} unit="kHz" color={brandCol} />
-                    <StatBox label="Price" value={`$${selectedHeadphone.price}`} color={brandCol} />
-                  </div>
-                  <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl text-sm font-black transition-all mt-3"
-                    style={{ background: brandCol, color: "#1a1614" }}>
-                    {I.cart(16, "#1a1614")} Buy on Amazon
-                  </a>
-                </div>
-
-                {/* Right: Pro users */}
-                <div>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Notable Pro Users</div>
-                  {usedByPros.length > 0 ? (
-                    <div className="space-y-2">
-                      {usedByPros.slice(0, 5).map((p, i) => {
-                        const gameColors = GAME_COLORS;
-                        const gc = gameColors[p.game] || "#8a8460";
-                        return (
-                          <button key={i} onClick={() => { const pp = proPlayers.find(pp => pp.name === p.name); if (pp) { navigateToPlayer(pp); } else { setActiveTab("players"); } }}
-                            className="w-full flex items-center gap-3 p-2.5 rounded-xl cursor-pointer transition-all hover:scale-[1.02] text-left"
-                            style={{ background: `${gc}08`, border: `1px solid ${gc}15` }}>
-                            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg flex-shrink-0" style={{ background: `${gc}15` }}>
-                              <Flag country={p.country} size={16} />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="text-sm font-black">{p.name}</div>
-                              <div className="text-sm opacity-85">{p.team} · <span style={{ color: gc }}>{p.game}</span> · {p.role}</div>
-                            </div>
-                            <div className="text-right flex-shrink-0">
-                              <div className="text-sm font-bold" style={{ color: gc }}>{p.game}</div>
-                              <div className="text-xs opacity-60">{p.role}</div>
-                            </div>
-                          </button>
-                        );
-                      })}
+                    <div className="relative z-10 flex items-center justify-center" style={{ width: 200, height: 180, background: `${brandCol}15`, borderRadius: 16 }}>
+                      <span>{icon("headphone", 100)}</span>
                     </div>
-                  ) : (
-                    <div className="text-sm opacity-20 py-8 text-center">No tracked pros currently using this headphone</div>
                   )}
+                  <div className="relative z-10 mt-4 text-center">
+                    <div className="text-2xl sm:text-3xl font-black" style={{ color: "#f5f2e6" }}>{selectedHeadphone.name}</div>
+                    <div className="text-sm mt-1" style={{ color: "#9e9578" }}>{selectedHeadphone.brand} · {selectedHeadphone.formFactor} · {selectedHeadphone.connectivity}</div>
+                  </div>
+                  {/* Price + Buy */}
+                  <div className="relative z-10 flex items-center gap-3 mt-5 w-full max-w-xs">
+                    <div className="text-3xl font-black" style={{ color: brandCol }}>${selectedHeadphone.price}</div>
+                    <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-black transition-all hover:scale-105 no-underline"
+                      style={{ background: brandCol, color: "#0f0e0c", textDecoration: "none", boxShadow: `0 4px 20px ${brandCol}50` }}>
+                      {I.cart(16, "#0f0e0c")} Buy on Amazon
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right: Performance Dashboard — animated horizontal gauges */}
+                <div className="lg:col-span-7 p-6 sm:p-8">
+                  <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-5" style={{ color: brandCol }}>Performance Analysis</div>
+                  <div className="space-y-4">
+                    {radarData.map((rd, ri) => {
+                      const barIcons = { Comfort: "☁️", Sound: "🔊", Isolation: "🛡️", "Pro Pick": "🏆", Rating: "⭐", Value: "💎" };
+                      const barColors = { Comfort: "#22c55e", Sound: "#3b82f6", Isolation: "#8b5cf6", "Pro Pick": "#f59e0b", Rating: "#ef4444", Value: "#06b6d4" };
+                      const bc = barColors[rd.stat] || brandCol;
+                      const pct = Math.round(rd.value);
+                      return (
+                        <div key={ri}>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <div className="flex items-center gap-2">
+                              <span className="text-base">{barIcons[rd.stat] || "📊"}</span>
+                              <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#d4c47a" }}>{rd.stat}</span>
+                            </div>
+                            <span className="text-lg font-black tabular-nums" style={{ color: bc }}>{pct}</span>
+                          </div>
+                          <div className="relative h-3 rounded-full overflow-hidden" style={{ background: "#ffffff08" }}>
+                            {/* Track marks */}
+                            {[25, 50, 75].map(m => (
+                              <div key={m} className="absolute top-0 bottom-0 w-px" style={{ left: `${m}%`, background: "#ffffff10" }} />
+                            ))}
+                            {/* Fill bar */}
+                            <div className="absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out" style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${bc}90, ${bc})`, boxShadow: `0 0 12px ${bc}60` }} />
+                            {/* Glow dot at end */}
+                            <div className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full" style={{ left: `calc(${pct}% - 4px)`, background: bc, boxShadow: `0 0 8px ${bc}` }} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Overall Score ring */}
+                  {(() => {
+                    const overall = Math.round(radarData.reduce((s, d) => s + d.value, 0) / radarData.length);
+                    return (
+                      <div className="flex items-center gap-5 mt-6 pt-5" style={{ borderTop: "1px solid #ffffff10" }}>
+                        <div className="relative flex-shrink-0" style={{ width: 72, height: 72 }}>
+                          <svg viewBox="0 0 72 72" className="w-full h-full" style={{ transform: "rotate(-90deg)" }}>
+                            <circle cx="36" cy="36" r="30" fill="none" stroke="#ffffff08" strokeWidth="5" />
+                            <circle cx="36" cy="36" r="30" fill="none" stroke={brandCol} strokeWidth="5" strokeLinecap="round"
+                              strokeDasharray={`${(overall / 100) * 188.5} 188.5`} style={{ filter: `drop-shadow(0 0 6px ${brandCol}80)` }} />
+                          </svg>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-lg font-black" style={{ color: brandCol }}>{overall}</span>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-sm font-black" style={{ color: "#f5f2e6" }}>Overall Score</div>
+                          <div className="text-xs mt-0.5" style={{ color: "#9e9578" }}>
+                            {overall >= 80 ? "Elite tier — top-performing headphone" : overall >= 60 ? "Strong performer across key metrics" : "Solid choice with room for improvement"}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
                 </div>
               </div>
+
+              {/* Bottom: Quick spec pills */}
+              <div className="flex flex-wrap items-center gap-2 px-6 sm:px-8 pb-6">
+                {[
+                  { label: "Weight", val: `${selectedHeadphone.weight}g`, icon: "⚖️" },
+                  { label: "Driver", val: selectedHeadphone.driverType, icon: "🔈" },
+                  { label: "Freq", val: `${selectedHeadphone.frequencyResponse >= 1000 ? `${selectedHeadphone.frequencyResponse / 1000}K` : selectedHeadphone.frequencyResponse}Hz`, icon: "〰️" },
+                  { label: "Impedance", val: `${selectedHeadphone.impedance || 32}Ω`, icon: "⚡" },
+                  { label: "ANC", val: selectedHeadphone.anc ? "Yes" : "No", icon: "🔇" },
+                  { label: "Rating", val: `${selectedHeadphone.rating}/10`, icon: "📊" },
+                ].map((s, si) => (
+                  <div key={si} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs" style={{ background: "#ffffff08", border: "1px solid #ffffff10" }}>
+                    <span>{s.icon}</span>
+                    <span style={{ color: "#9e9578" }}>{s.label}</span>
+                    <span className="font-bold" style={{ color: "#f5f2e6" }}>{s.val}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ══ Notable Pro Users — horizontal scrolling cards ══ */}
+            <div className="rounded-2xl p-6 mb-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: brandCol }}>Notable Pro Users</div>
+                <div className="text-xs" style={{ color: "#9e9578" }}>{usedByPros.length} pros tracked</div>
+              </div>
+              {usedByPros.length > 0 ? (
+                <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: "thin", scrollbarColor: `${brandCol}30 transparent` }}>
+                  {usedByPros.slice(0, 8).map((p, i) => {
+                    const gameColors = GAME_COLORS;
+                    const gc = gameColors[p.game] || "#8a8460";
+                    return (
+                      <button key={i} onClick={() => { const pp = proPlayers.find(pp => pp.name === p.name); if (pp) { navigateToPlayer(pp); } else { setActiveTab("players"); } }}
+                        className="flex-shrink-0 w-44 rounded-xl p-4 cursor-pointer transition-all hover:scale-[1.03] text-left"
+                        style={{ background: `linear-gradient(145deg, ${gc}12, ${gc}06)`, border: `1px solid ${gc}20` }}>
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${gc}20` }}>
+                            <Flag country={p.country} size={14} />
+                          </div>
+                          <div className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase" style={{ background: `${gc}25`, color: gc }}>{p.game}</div>
+                        </div>
+                        <div className="text-sm font-black" style={{ color: "#f5f2e6" }}>{p.name}</div>
+                        <div className="text-[11px] mt-0.5" style={{ color: "#9e9578" }}>{p.team}</div>
+                        <div className="text-[10px] mt-1" style={{ color: gc }}>{p.role}</div>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="text-sm py-8 text-center" style={{ color: "#9e9578" }}>No tracked pros currently using this headphone</div>
+              )}
             </div>
 
             {/* ── Headphone Description ── */}
@@ -1779,11 +1670,11 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                 parts.push({ text: desc.text, highlight: false });
               }
               return (
-                <div className="rounded-2xl p-6 mb-6" style={{ background: `${brandCol}05`, border: `1px solid ${brandCol}10` }}>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>About this headphone</div>
-                  <p className="text-sm leading-relaxed opacity-60">
+                <div className="rounded-2xl p-6 mb-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: `1px solid ${brandCol}15` }}>
+                  <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-3" style={{ color: brandCol }}>About This Headphone</div>
+                  <p className="text-sm leading-relaxed" style={{ color: "#b0a89e" }}>
                     {parts.map((p, i) => p.highlight ? (
-                      <span key={i} className="font-bold opacity-100" style={{ color: brandCol }}>{p.text}</span>
+                      <span key={i} className="font-bold" style={{ color: brandCol }}>{p.text}</span>
                     ) : (
                       <span key={i}>{p.text}</span>
                     ))}
@@ -1792,31 +1683,37 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               );
             })()}
 
-            {/* ── Full Spec Table ── */}
-            <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
-              <div className="text-sm uppercase tracking-widest opacity-30 mb-4">Full Specifications</div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {/* ── Full Specifications — dark grid with visual bars ── */}
+            <div className="rounded-2xl p-6 mb-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+              <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-5" style={{ color: brandCol }}>Full Specifications</div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                 {[
-                  { label: "Brand", value: selectedHeadphone.brand },
-                  { label: "Shape", value: selectedHeadphone.formFactor },
-                  { label: "Connectivity", value: selectedHeadphone.connectivity },
-                  { label: "Weight", value: `${selectedHeadphone.weight}g` },
-                  { label: "Driver", value: selectedHeadphone.driverType },
-                  { label: "Impedance", value: `${selectedHeadphone.impedance || 32}Ω` },
-                  { label: "Freq. Response", value: `${selectedHeadphone.frequencyResponse >= 1000 ? `${selectedHeadphone.frequencyResponse / 1000}K` : selectedHeadphone.frequencyResponse}Hz` },
-                  { label: "Price", value: `$${selectedHeadphone.price}` },
-                  { label: "Pro Usage", value: `${selectedHeadphone.proUsage}%` },
-                  { label: "Rating", value: `${selectedHeadphone.rating}/10` },
+                  { label: "Brand", value: selectedHeadphone.brand, icon: "🏷️" },
+                  { label: "Form Factor", value: selectedHeadphone.formFactor, icon: "🎧" },
+                  { label: "Connectivity", value: selectedHeadphone.connectivity, icon: "📡" },
+                  { label: "Weight", value: `${selectedHeadphone.weight}g`, icon: "⚖️", bar: Math.min(100, (selectedHeadphone.weight / 400) * 100) },
+                  { label: "Driver", value: selectedHeadphone.driverType, icon: "🔈" },
+                  { label: "Impedance", value: `${selectedHeadphone.impedance || 32}Ω`, icon: "⚡", bar: Math.min(100, ((selectedHeadphone.impedance || 32) / 300) * 100) },
+                  { label: "Freq. Response", value: `${selectedHeadphone.frequencyResponse >= 1000 ? `${selectedHeadphone.frequencyResponse / 1000}K` : selectedHeadphone.frequencyResponse}Hz`, icon: "〰️", bar: Math.min(100, (selectedHeadphone.frequencyResponse / 50000) * 100) },
+                  { label: "Price", value: `$${selectedHeadphone.price}`, icon: "💲", bar: Math.min(100, (selectedHeadphone.price / 400) * 100) },
+                  { label: "Pro Usage", value: `${selectedHeadphone.proUsage}%`, icon: "🏆", bar: selectedHeadphone.proUsage },
+                  { label: "Rating", value: `${selectedHeadphone.rating}/10`, icon: "⭐", bar: selectedHeadphone.rating * 10 },
                 ].map((spec, idx) => (
-                  <div key={idx} className="rounded-lg p-3" style={{ background: "#00000008" }}>
-                    <div className="text-sm opacity-30 mb-1">{spec.label}</div>
-                    <div className="text-sm font-bold" style={{ color: brandCol }}>{spec.value}</div>
+                  <div key={idx} className="rounded-xl p-3 relative overflow-hidden" style={{ background: "#ffffff06", border: "1px solid #ffffff08" }}>
+                    <div className="text-base mb-1">{spec.icon}</div>
+                    <div className="text-[10px] uppercase tracking-wider mb-1" style={{ color: "#9e9578" }}>{spec.label}</div>
+                    <div className="text-sm font-black" style={{ color: "#f5f2e6" }}>{spec.value}</div>
+                    {spec.bar !== undefined && (
+                      <div className="mt-2 h-1 rounded-full" style={{ background: "#ffffff08" }}>
+                        <div className="h-full rounded-full" style={{ width: `${spec.bar}%`, background: `linear-gradient(90deg, ${brandCol}80, ${brandCol})` }} />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* ── Magazine Spread Editorial Design ── */}
+            {/* ── Intelligence Report — dark themed dossier ── */}
             {(() => {
               const headphonePlayers = allPlayers.filter(p => p.headphone && (p.headphone === selectedHeadphone.name || p.headphone.includes(selectedHeadphone.name.split(" ").slice(-2).join(" "))));
               const totalTracked = allPlayers.length;
@@ -1827,10 +1724,10 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const gcols = { CS2: "#c47000", Valorant: "#c43848", LoL: "#c89b3c", Fortnite: "#3a60b0", "Overwatch 2": "#c48018", Apex: "#a82020", "Dota 2": "#b83c30", "R6 Siege": "#3a6ca0", "Rocket League": "#1478c4", "Call of Duty": "#3a8a3a", "Marvel Rivals": "#b81820", PUBG: "#c48a00", Deadlock: "#6d40c4", "Quake Champions": "#a83c00" };
               const countryCounts = {};
               headphonePlayers.forEach(p => { if (p.country) countryCounts[p.country] = (countryCounts[p.country] || 0) + 1; });
-              const topCountries = Object.entries(countryCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+              const topCountries = Object.entries(countryCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
               const teamCounts = {};
               headphonePlayers.forEach(p => { if (p.team && p.team !== "Content" && p.team !== "Inactive") teamCounts[p.team] = (teamCounts[p.team] || 0) + 1; });
-              const topTeams = Object.entries(teamCounts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+              const topTeams = Object.entries(teamCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
               const allHeadphoneCounts = {};
               allPlayers.forEach(p => { if (p.headphone) allHeadphoneCounts[p.headphone] = (allHeadphoneCounts[p.headphone] || 0) + 1; });
               const ranked = Object.entries(allHeadphoneCounts).sort((a, b) => b[1] - a[1]);
@@ -1838,150 +1735,189 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const competitors = headphones.filter(m => m.id !== selectedHeadphone.id && m.formFactor === selectedHeadphone.formFactor && m.connectivity === selectedHeadphone.connectivity)
                 .sort((a, b) => b.proUsage - a.proUsage).slice(0, 4);
 
-              if (headphonePlayers.length === 0) return <div className="rounded-2xl p-6 text-center text-sm opacity-20 mb-6" style={{ background: "#00000008" }}>No tracked players found for this headphone in our database</div>;
+              if (headphonePlayers.length === 0) return <div className="rounded-2xl p-8 text-center text-sm mb-6" style={{ background: "#141210", color: "#9e9578", border: "1px solid #ffffff08" }}>No tracked players found for this headphone in our database</div>;
 
               return (
-                <div className="rounded-2xl overflow-hidden mb-6" style={{ border: `1px solid ${brandCol}12` }}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-0" style={{ background: "#ffffff" }}>
-                    {/* LEFT COLUMN: Headphone Dossier */}
-                    <div className="p-6 border-b md:border-b-0 md:border-r" style={{ borderColor: `${brandCol}12` }}>
-                      <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Headphone Dossier</div>
-                      <h2 className="text-4xl font-black mb-6" style={{ color: brandCol }}>
-                        {selectedHeadphone.name.replace(selectedHeadphone.brand + " ", "")}
-                      </h2>
-
-                      {/* Hero stats row */}
-                      <div className="grid grid-cols-3 gap-3 mb-6">
-                        <div>
-                          <div className="text-2xl font-black" style={{ color: brandCol }}>{headphonePlayers.length}</div>
-                          <div className="text-xs opacity-60">Pro Users</div>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-black" style={{ color: brandCol }}>{marketShare}%</div>
-                          <div className="text-xs opacity-60">Market Share</div>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-black" style={{ color: brandCol }}>#{rank}</div>
-                          <div className="text-xs opacity-60">Popularity</div>
-                        </div>
-                      </div>
-
-                      {/* Pull quote */}
-                      <div className="pl-4 py-4 mb-6" style={{ borderLeft: `3px solid ${brandCol}` }}>
-                        <p className="text-sm font-bold opacity-85">
-                          A {selectedHeadphone.connectivity === "Wireless" ? "wireless" : "wired"} {selectedHeadphone.formFactor} with {selectedHeadphone.driverType} drivers at {selectedHeadphone.frequencyResponse}Hz frequency response. {selectedHeadphone.anc ? "ANC enabled." : ""} Chosen by {headphonePlayers.length} tracked esports professionals across {topGames.length} competitive titles.
-                        </p>
-                      </div>
+                <div className="space-y-4 mb-6">
+                  {/* Hero Stats Banner */}
+                  <div className="rounded-2xl p-6 sm:p-8" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: `1px solid ${brandCol}15` }}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: brandCol }}>Intelligence Report</div>
+                      <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, ${brandCol}30, transparent)` }} />
+                    </div>
+                    <h2 className="text-3xl sm:text-4xl font-black mb-2" style={{ color: "#f5f2e6" }}>
+                      {selectedHeadphone.name.replace(selectedHeadphone.brand + " ", "")}
+                    </h2>
+                    <div className="text-sm mb-6" style={{ color: "#9e9578" }}>
+                      A {selectedHeadphone.connectivity === "Wireless" ? "wireless" : "wired"} {selectedHeadphone.formFactor} with {selectedHeadphone.driverType} drivers. Chosen by {headphonePlayers.length} tracked esports professionals across {topGames.length} competitive titles.
                     </div>
 
-                    {/* RIGHT COLUMN: Details */}
-                    <div className="p-6 space-y-5">
-                      {/* Where It's Used - Game Pills */}
-                      {topGames.length > 0 && (
-                        <div>
-                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Where It's Used</div>
-                          <div className="flex flex-wrap gap-2">
-                            {topGames.slice(0, 4).map(([game, count]) => (
-                              <div key={game} className="px-3 py-1.5 rounded-full text-xs font-bold" style={{ background: `${gcols[game] || "#8a8460"}20`, color: gcols[game] || "#8a8460" }}>
-                                {game} ({((count / headphonePlayers.length) * 100).toFixed(0)}%)
-                              </div>
-                            ))}
-                          </div>
+                    {/* Big stat cards */}
+                    <div className="grid grid-cols-3 gap-3">
+                      {[
+                        { label: "Pro Users", value: headphonePlayers.length, icon: "👥", color: "#22c55e" },
+                        { label: "Market Share", value: `${marketShare}%`, icon: "📊", color: "#3b82f6" },
+                        { label: "Popularity Rank", value: `#${rank}`, icon: "🏅", color: "#f59e0b" },
+                      ].map((st, si) => (
+                        <div key={si} className="rounded-xl p-4 text-center relative overflow-hidden" style={{ background: `${st.color}08`, border: `1px solid ${st.color}15` }}>
+                          <div className="absolute top-2 right-3 text-2xl opacity-20">{st.icon}</div>
+                          <div className="text-2xl sm:text-3xl font-black" style={{ color: st.color }}>{st.value}</div>
+                          <div className="text-[10px] uppercase tracking-wider mt-1" style={{ color: "#9e9578" }}>{st.label}</div>
                         </div>
-                      )}
-
-                      {/* Specs DNA */}
-                      <div>
-                        <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Specs DNA</div>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="opacity-60">Freq. Response</span>
-                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.frequencyResponse}Hz</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="opacity-60">Driver</span>
-                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.driverType}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="opacity-60">Impedance</span>
-                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.driverType}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="opacity-60">ANC</span>
-                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.anc ? "Yes" : "No"}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="opacity-60">Layout</span>
-                            <span className="font-bold" style={{ color: brandCol }}>{selectedHeadphone.formFactor}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Global Reach */}
-                      {topCountries.length > 0 && (
-                        <div>
-                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Global Reach</div>
-                          <div className="flex flex-wrap gap-2">
-                            {topCountries.map(([flag, count]) => (
-                              <span key={flag} className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs" style={{ background: `${brandCol}10` }}>
-                                <Flag country={flag} size={14} />
-                                <span className="font-bold" style={{ color: brandCol }}>{count}</span>
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Rivals */}
-                      {competitors.length > 0 && (
-                        <div>
-                          <div className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: "#9e9578" }}>Rivals</div>
-                          <div className="space-y-2">
-                            {competitors.map(c => {
-                              const cc = BRAND_COLORS[c.brand] || "#8a8460";
-                              return (
-                                <button key={c.id} onClick={() => { setSelectedHeadphone(c); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                                  className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-all hover:scale-105 justify-between"
-                                  style={{ background: `${cc}08`, border: `1px solid ${cc}15` }}>
-                                  <div className="flex items-center gap-2">
-                                    {getHeadphoneImage(c.name) && <img loading="lazy" src={getHeadphoneImage(c.name)} alt={c.name} className="h-5 object-contain" />}
-                                    <span className="font-bold" style={{ color: cc }}>{c.name.replace(c.brand + " ", "")}</span>
-                                  </div>
-                                  <span className="opacity-60">{c.driverType}</span>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
+                      ))}
                     </div>
                   </div>
+
+                  {/* Game Usage — visual bar breakdown */}
+                  {topGames.length > 0 && (
+                    <div className="rounded-2xl p-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+                      <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-5" style={{ color: brandCol }}>Game Distribution</div>
+                      <div className="space-y-3">
+                        {topGames.slice(0, 6).map(([game, count]) => {
+                          const gc = gcols[game] || "#8a8460";
+                          const pct = ((count / headphonePlayers.length) * 100).toFixed(0);
+                          return (
+                            <div key={game}>
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex items-center gap-2">
+                                  {GAME_IMAGE_URLS[game] && <img loading="lazy" src={GAME_IMAGE_URLS[game]} alt={game} className="w-5 h-5 rounded object-cover" />}
+                                  <span className="text-xs font-bold" style={{ color: "#f5f2e6" }}>{game}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-bold tabular-nums" style={{ color: gc }}>{pct}%</span>
+                                  <span className="text-[10px]" style={{ color: "#9e9578" }}>({count} pros)</span>
+                                </div>
+                              </div>
+                              <div className="h-2 rounded-full overflow-hidden" style={{ background: "#ffffff08" }}>
+                                <div className="h-full rounded-full transition-all duration-700" style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${gc}80, ${gc})`, boxShadow: `0 0 8px ${gc}40` }} />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Global Reach + Top Teams side by side */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Global Reach */}
+                    {topCountries.length > 0 && (
+                      <div className="rounded-2xl p-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+                        <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-4" style={{ color: brandCol }}>Global Reach</div>
+                        <div className="space-y-2">
+                          {topCountries.map(([flag, count]) => {
+                            const pct = ((count / headphonePlayers.length) * 100).toFixed(0);
+                            return (
+                              <div key={flag} className="flex items-center gap-3">
+                                <div className="w-8 h-6 flex items-center justify-center rounded" style={{ background: "#ffffff08" }}>
+                                  <Flag country={flag} size={18} />
+                                </div>
+                                <div className="flex-1">
+                                  <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "#ffffff08" }}>
+                                    <div className="h-full rounded-full" style={{ width: `${pct}%`, background: brandCol }} />
+                                  </div>
+                                </div>
+                                <span className="text-xs font-bold tabular-nums" style={{ color: "#f5f2e6", minWidth: 24, textAlign: "right" }}>{count}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Top Teams */}
+                    {topTeams.length > 0 && (
+                      <div className="rounded-2xl p-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+                        <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-4" style={{ color: brandCol }}>Top Teams</div>
+                        <div className="space-y-2">
+                          {topTeams.map(([team, count], ti) => {
+                            const medals = ["🥇", "🥈", "🥉"];
+                            return (
+                              <div key={team} className="flex items-center gap-3 p-2.5 rounded-lg" style={{ background: "#ffffff06", border: "1px solid #ffffff08" }}>
+                                <span className="text-lg">{medals[ti] || `${ti + 1}.`}</span>
+                                <div className="flex items-center gap-2 flex-1 min-w-0">
+                                  {getTeamLogo(team) && <img loading="lazy" src={getTeamLogo(team)} alt={team} className="w-5 h-5 rounded object-contain" />}
+                                  <span className="text-xs font-bold truncate" style={{ color: "#f5f2e6" }}>{team}</span>
+                                </div>
+                                <span className="text-xs font-bold" style={{ color: brandCol }}>{count} players</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Rivals — head-to-head comparison cards */}
+                  {competitors.length > 0 && (
+                    <div className="rounded-2xl p-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+                      <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-5" style={{ color: brandCol }}>Rivals & Alternatives</div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {competitors.map(c => {
+                          const cc = BRAND_COLORS[c.brand] || "#8a8460";
+                          const cImg = getHeadphoneImage(c.name);
+                          return (
+                            <button key={c.id} onClick={() => { setSelectedHeadphone(c); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                              className="rounded-xl p-4 text-left transition-all hover:scale-[1.02] cursor-pointer"
+                              style={{ background: `linear-gradient(145deg, ${cc}10, ${cc}05)`, border: `1px solid ${cc}20` }}>
+                              <div className="flex items-center gap-3">
+                                {cImg && <img loading="lazy" src={cImg} alt={c.name} className="h-12 w-12 object-contain flex-shrink-0" style={{ filter: `drop-shadow(0 4px 8px ${cc}30)` }} />}
+                                <div className="flex-1 min-w-0">
+                                  <div className="text-sm font-black truncate" style={{ color: "#f5f2e6" }}>{c.name.replace(c.brand + " ", "")}</div>
+                                  <div className="text-[10px] mt-0.5" style={{ color: cc }}>{c.brand}</div>
+                                </div>
+                              </div>
+                              <div className="grid grid-cols-3 gap-2 mt-3">
+                                <div className="text-center rounded-lg py-1" style={{ background: "#ffffff06" }}>
+                                  <div className="text-xs font-bold" style={{ color: "#f5f2e6" }}>{c.weight}g</div>
+                                  <div className="text-[9px]" style={{ color: "#9e9578" }}>Weight</div>
+                                </div>
+                                <div className="text-center rounded-lg py-1" style={{ background: "#ffffff06" }}>
+                                  <div className="text-xs font-bold" style={{ color: "#f5f2e6" }}>${c.price}</div>
+                                  <div className="text-[9px]" style={{ color: "#9e9578" }}>Price</div>
+                                </div>
+                                <div className="text-center rounded-lg py-1" style={{ background: "#ffffff06" }}>
+                                  <div className="text-xs font-bold" style={{ color: "#f5f2e6" }}>{c.proUsage}%</div>
+                                  <div className="text-[9px]" style={{ color: "#9e9578" }}>Pro Use</div>
+                                </div>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })()}
 
             {/* ── All Pro Players Using This Headphone ── */}
-            {usedByPros.length > 5 && (
-              <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
-                <div className="text-sm uppercase tracking-widest opacity-30 mb-4">All Pro Players Using {selectedHeadphone.name}</div>
+            {usedByPros.length > 8 && (
+              <div className="rounded-2xl p-6 mb-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-[10px] uppercase tracking-[0.2em] font-bold" style={{ color: brandCol }}>All Pro Players</div>
+                  <div className="text-xs" style={{ color: "#9e9578" }}>{usedByPros.length} total</div>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-                  {usedByPros.slice(5).map((p, i) => {
+                  {usedByPros.slice(8).map((p, i) => {
                     const gameColors = GAME_COLORS;
                     const gc = gameColors[p.game] || "#8a8460";
                     return (
                       <button key={i} onClick={() => { const pp = proPlayers.find(pp => pp.name === p.name); if (pp) { navigateToPlayer(pp); } }}
-                        className="flex items-center gap-2 p-2 rounded-lg text-left text-sm transition-all hover:scale-[1.01]"
-                        style={{ background: `${gc}06`, border: `1px solid ${gc}10` }}>
-                        <Flag country={p.country} size={16} />
-                        <span className="font-bold">{p.name}</span>
-                        <span className="opacity-30">·</span>
-                        <span style={{ color: gc }}>{p.game}</span>
+                        className="flex items-center gap-2 p-2.5 rounded-lg text-left text-sm transition-all hover:scale-[1.01] cursor-pointer"
+                        style={{ background: `${gc}08`, border: `1px solid ${gc}12` }}>
+                        <div className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0" style={{ background: `${gc}15` }}>
+                          <Flag country={p.country} size={12} />
+                        </div>
+                        <span className="font-bold truncate" style={{ color: "#f5f2e6" }}>{p.name}</span>
+                        <span className="ml-auto text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ background: `${gc}20`, color: gc }}>{p.game}</span>
                       </button>
                     );
                   })}
                 </div>
               </div>
             )}
+
           {/* Recently Viewed */}
           {(() => {
             try {
@@ -1990,16 +1926,16 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const recentHeadphones = recent.map(n => headphones.find(m => m.name === n)).filter(Boolean).slice(0, 4);
               if (recentHeadphones.length === 0) return null;
               return (
-                <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
-                  <div className="text-sm uppercase tracking-widest opacity-30 mb-4">Recently Viewed</div>
+                <div className="rounded-2xl p-6 mb-6" style={{ background: "linear-gradient(160deg, #141210 0%, #1a1814 100%)", border: "1px solid #ffffff08" }}>
+                  <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-4" style={{ color: brandCol }}>Recently Viewed</div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {recentHeadphones.map((m, i) => {
                       const bc = BRAND_COLORS[m.brand] || "#8a8460";
                       return (
-                        <button key={i} onClick={() => navigateToHeadphone(m)} className="rounded-xl p-3 text-center transition-all hover:scale-[1.03]" style={{ background: `${bc}06`, border: `1px solid ${bc}12` }}>
-                          {getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={m.name} className="h-10 mx-auto object-contain mb-2" />}
-                          <div className="text-xs font-bold truncate" style={{ color: bc }}>{m.name.replace(m.brand + " ", "")}</div>
-                          <div style={{ fontSize: 10 }} className="opacity-30">{m.weight}g · ${m.price}</div>
+                        <button key={i} onClick={() => navigateToHeadphone(m)} className="rounded-xl p-4 text-center transition-all hover:scale-[1.03] cursor-pointer" style={{ background: `${bc}08`, border: `1px solid ${bc}15` }}>
+                          {getHeadphoneImage(m.name) && <img loading="lazy" src={getHeadphoneImage(m.name)} alt={m.name} className="h-12 mx-auto object-contain mb-2" style={{ filter: `drop-shadow(0 4px 8px ${bc}30)` }} />}
+                          <div className="text-xs font-bold truncate" style={{ color: "#f5f2e6" }}>{m.name.replace(m.brand + " ", "")}</div>
+                          <div className="mt-0.5" style={{ fontSize: 10, color: "#9e9578" }}>{m.weight}g · ${m.price}</div>
                         </button>
                       );
                     })}
@@ -2009,27 +1945,27 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             } catch { return null; }
           })()}
 
-          {/* Sticky buy bar */}
-          <div className="fixed bottom-0 left-0 right-0 z-[80] md:hidden" style={{ background: "#fffffff0", borderTop: "1px solid #d4d0be", backdropFilter: "blur(20px)" }}>
+          {/* Sticky buy bar — dark theme */}
+          <div className="fixed bottom-0 left-0 right-0 z-[80] md:hidden" style={{ background: "#0f0e0cf0", borderTop: `1px solid ${brandCol}30`, backdropFilter: "blur(20px)" }}>
             <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <div className="text-xs font-black truncate" style={{ color: brandCol }}>{selectedHeadphone.name}</div>
+                <div className="text-xs font-black truncate" style={{ color: "#f5f2e6" }}>{selectedHeadphone.name}</div>
                 <div style={{ fontSize: 11, color: "#9e9578" }}>{selectedHeadphone.weight}g · {selectedHeadphone.driverType}</div>
               </div>
-              <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-black text-sm transition-all no-underline flex-shrink-0" style={{ background: "#c9a227", color: "#1a1614", textDecoration: "none" }}>
-                {I.cart(14, "#1a1614")} ${selectedHeadphone.price}
+              <a href={amazonLink(selectedHeadphone.name)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-black text-sm transition-all no-underline flex-shrink-0" style={{ background: brandCol, color: "#0f0e0c", textDecoration: "none", boxShadow: `0 2px 12px ${brandCol}50` }}>
+                {I.cart(14, "#0f0e0c")} ${selectedHeadphone.price}
               </a>
             </div>
 
             {/* Suggest correction + best-of links */}
-            <div className="flex flex-wrap items-center gap-3 mt-4 mb-2">
-              <a href="/contact" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#1a1614", textDecoration: "none" }}>📝 Suggest a correction</a>
-              <span className="opacity-10">·</span>
-              <a href="/best/cs2" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#c47000", textDecoration: "none" }}>Best for CS2</a>
-              <a href="/best/valorant" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#2d2824", textDecoration: "none" }}>Best for Valorant</a>
-              <a href="/best/fortnite" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#4c7bd9", textDecoration: "none" }}>Best for Fortnite</a>
-              <a href="/best/wireless" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#c9a227", textDecoration: "none" }}>Best Wireless</a>
-              <a href="/best/lightweight" className="text-xs opacity-30 hover:opacity-60 transition-all no-underline" style={{ color: "#7d6e1e", textDecoration: "none" }}>Best Lightweight</a>
+            <div className="flex flex-wrap items-center gap-3 px-4 mt-1 mb-2">
+              <a href="/contact" className="text-xs hover:opacity-80 transition-all no-underline" style={{ color: "#9e9578", textDecoration: "none" }}>📝 Suggest a correction</a>
+              <span style={{ color: "#ffffff10" }}>·</span>
+              <a href="/best/cs2" className="text-xs hover:opacity-80 transition-all no-underline" style={{ color: "#c47000", textDecoration: "none" }}>Best for CS2</a>
+              <a href="/best/valorant" className="text-xs hover:opacity-80 transition-all no-underline" style={{ color: "#c43848", textDecoration: "none" }}>Best for Valorant</a>
+              <a href="/best/fortnite" className="text-xs hover:opacity-80 transition-all no-underline" style={{ color: "#4c7bd9", textDecoration: "none" }}>Best for Fortnite</a>
+              <a href="/best/wireless" className="text-xs hover:opacity-80 transition-all no-underline" style={{ color: "#c9a227", textDecoration: "none" }}>Best Wireless</a>
+              <a href="/best/lightweight" className="text-xs hover:opacity-80 transition-all no-underline" style={{ color: "#7d6e1e", textDecoration: "none" }}>Best Lightweight</a>
             </div>
           </div>
           </div>

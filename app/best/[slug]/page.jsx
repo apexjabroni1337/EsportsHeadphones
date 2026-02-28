@@ -17,9 +17,12 @@ const BEST_PAGES = {
   "rocket-league": { game: "Rocket League", full: "Rocket League", tab: "rocket-league", intro: "While Rocket League is primarily a controller game, some PC players use headphone and mouse. The game's fast aerial mechanics and precise car control mean responsiveness is key for the small percentage of pro players who opt for M&K.", tips: "Most Rocket League pros use controllers, but M&K players benefit from responsive headphones with comfortable shapes for the game's fast-paced aerial gameplay." },
   "call-of-duty": { game: "Call of Duty", full: "Call of Duty", tab: "call-of-duty", intro: "Call of Duty's fast-paced arcade shooter gameplay rewards quick target acquisition and snap aim. The game's fast time-to-kill means getting on target first is crucial, making lightweight headphones with fast click response essential for competitive play.", tips: "CoD PC pros use moderate sensitivity for fast target acquisition. The fast pace rewards quick reactions over precision. Lightweight wireless headphones are the standard for competitive CoD on PC." },
   "marvel-rivals": { game: "Marvel Rivals", full: "Marvel Rivals", tab: "marvel-rivals", intro: "Marvel Rivals is a newer hero shooter that combines fast movement with varied aiming styles depending on the character. Like Overwatch, different heroes demand different aiming mechanics, but fast-tracking and flick aim are both important.", tips: "Marvel Rivals plays similarly to Overwatch in terms of aim requirements. Pros tend to use similar setups to OW2 players — lightweight wireless headphones with responsive sensors." },
-  "wireless": { game: null, full: "Wireless Gaming", tab: null, intro: "Wireless gaming headphones have completely taken over the esports scene. In 2025, the vast majority of professional players across all games use wireless headphones. Modern wireless technology has eliminated any latency disadvantage, while the freedom of no cable drag has made wireless the clear choice for competitive play.", tips: "All top wireless headphones now feature sub-1ms latency. The key differentiators are weight, battery life, and shape. Look for headphones with 4000Hz frequency response support for the absolute lowest latency." },
   "lightweight": { game: null, full: "Lightweight & Ultralight", tab: null, intro: "The ultralight headphone revolution has transformed competitive gaming. Lighter headphones allow faster flicks, reduce fatigue during long sessions, and give players more control during rapid movements. The sweet spot for most pros is 45-60g, balancing minimal weight with solid build quality.", tips: "Under 50g is considered ultralight, 50-60g is lightweight. Most pros prefer the 50-58g range as it offers the best balance of speed and control. Very light headphones (under 45g) can feel too fast for some players." },
-  "budget": { game: null, full: "Budget Esports", tab: null, intro: "You don't need to spend $150+ to get a tournament-capable gaming headphone. Several excellent esports headphones are available under $60, offering the same sensors and similar shapes to their premium counterparts. Budget headphones in 2025 offer incredible value for competitive gamers.", tips: "Look for headphones with PAW3395 or equivalent sensors — even budget headphones now include top-tier drivers. The main tradeoffs at lower prices are typically in build quality, weight, and battery life rather than performance." },
+  "tournament-favorites": { collection: true, full: "Tournament Favorites", category: "Tournament Winners", intro: "The headphones dominating major esports championships worldwide. These are the trusted choices of the world's best professional players, proven in the highest-pressure competitive environments. Tournament favorites combine proven reliability, lightweight design, and superior audio clarity that gives pros a competitive edge when millions of dollars are on the line. Every headphone on this list has been chosen by championship-winning teams and top-tier esports organizations.", tips: "Tournament-winning headphones share common traits: sub-80g weight, wireless connectivity, proven reliability under pressure, and industry-leading sensors. These headphones have been battle-tested at multiple international LANs and consistently deliver when it matters most. Pros trust these because they've proven themselves at the highest levels of competitive play." },
+  "anc": { collection: true, full: "Best ANC Headsets", category: "Noise Cancellation", intro: "Active noise cancellation transforms the competitive gaming experience at noisy LAN events. When tournament crowds, venue sound systems, and ambient noise threaten to distract from precision gameplay, ANC headphones create a bubble of focus. The best gaming ANC headsets deliver noise cancellation without the latency penalty, combining active isolation with responsive sensors for tournament-level performance. Whether you're grinding ranked at home or competing at a major LAN, quality ANC gives you the audio environment control essential for peak performance.", tips: "Top ANC gaming headphones use passive isolation combined with active cancellation to eliminate low-frequency rumble without introducing perceptible latency. Look for headphones that allow toggling ANC on/off, as some pros prefer it only during practice sessions. Battery life becomes critical with ANC enabled — ensure you have backup power for tournament days." },
+  "budget": { collection: true, full: "Budget Champions", category: "Value Kings", intro: "Professional-grade gaming performance doesn't require premium pricing. The budget esports headphones in our database prove that excellent competitive gaming audio is achievable under $100. These are the headphones chosen by rising competitive players, content creators, and esports organizations looking for exceptional value. Budget champions feature the same quality sensors found in expensive headphones, reliable wireless connectivity, and proven track records in competitive play. Whether you're breaking into esports or upgrading from basic gaming audio, these headphones deliver tournament-ready performance at accessible prices.", tips: "Budget gaming headphones have undergone massive improvements in recent years. Modern sub-$100 headphones often include top-tier sensor technology that rivals headphones costing twice as much. The real differences at lower price points are typically in build materials, weight, and battery life — not core performance. Look for headphones with proven pro usage stats, even if they're budget-priced." },
+  "wireless": { collection: true, full: "Wireless Freedom", category: "Cordless Champions", intro: "The wireless revolution in esports gaming has been complete — the vast majority of professional players now compete on wireless headphones. Modern wireless technology has eliminated any latency concerns, while the freedom of movement offered by cordless audio provides a tangible competitive advantage. No cable drag, no caught headphone cables, no physical constraints — just pure focus on your game. Wireless gaming headphones have gone from curiosity to standard in professional esports, and the best options rival or exceed wired alternatives in every meaningful way.", tips: "Top wireless gaming headphones operate at 2.4GHz or better with sub-1ms latency, making them indistinguishable from wired alternatives in competitive contexts. Battery life varies significantly — tournament headphones should offer 30+ hours of gaming on a single charge. Look for headphones with quick charge capability (full charge in under 3 hours) for tournament day convenience. Most pros keep backup batteries or charging cables in their tournament bags." },
+  "audiophile": { collection: true, full: "Audiophile Grade", category: "High-Fidelity Audio", intro: "For competitive players who refuse to compromise on audio quality, audiophile-grade open-back headphones deliver pristine, revealing sound that exposes competitive audio cues invisible to other headphones. Open-back design creates a spacious soundstage that makes positional audio more intuitive and rewarding. Professional studio headphones like the beyerdynamic DT 990 Pro and Sennheiser HD 600 have discovered a second life in esports, beloved by players who value audio accuracy as much as gaming performance. These headphones demand more: better amplification, careful impedance matching, and discipline in listening environments. But for players who want the ultimate audio experience, audiophile headphones transform gaming into an art form.", tips: "Open-back headphones excel at soundstage and clarity but require careful setup. High-impedance variants (especially the 250-ohm DT 990 Pro) need a dedicated amplifier for proper performance. Open-back design means audio leakage — great for solo practice, challenging for shared environments. Many audiophile players use these for home practice and isolated training but switch to closed-back headphones for shared LANs. The detail these headphones reveal can actually improve competitive performance through better spatial awareness." },
 };
 
 const ALL_SLUGS = Object.keys(BEST_PAGES);
@@ -61,6 +64,7 @@ export default function BestForPage({ params }) {
   if (!page) return <EsportsHeadphones initialTab="rankings" />;
 
   const isGame = !!page.game;
+  const isCollection = page.collection;
 
   // Get headphones sorted by usage for this game, or all headphones for category pages
   let topHeadphonesForPage;
@@ -81,14 +85,33 @@ export default function BestForPage({ params }) {
         if (!m) return null;
         return { ...m, gameUsage: count, gamePercent: ((count / players.length) * 100).toFixed(1) };
       }).filter(Boolean);
-  } else if (params.slug === "wireless") {
-    topHeadphonesForPage = [...headphones].filter(m => m.wireless !== false).sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
+  } else if (params.slug === "tournament-favorites") {
+    // Top 10 headphones by pro usage
+    topHeadphonesForPage = [...headphones].sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
     players = allPlayers;
-  } else if (params.slug === "lightweight") {
-    topHeadphonesForPage = [...headphones].filter(m => m?.weight < 60).sort((a, b) => a?.weight - b?.weight).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
+  } else if (params.slug === "anc") {
+    // Headphones with ANC enabled, sorted by pro usage
+    topHeadphonesForPage = [...headphones].filter(m => m.anc === true).sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
+    players = allPlayers;
+  } else if (params.slug === "wireless") {
+    // Wireless headphones sorted by pro usage
+    topHeadphonesForPage = [...headphones].filter(m => m.connectivity === "Wireless").sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
     players = allPlayers;
   } else if (params.slug === "budget") {
-    topHeadphonesForPage = [...headphones].filter(m => m?.price < 80).sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
+    // Headphones under $100, sorted by pro usage
+    topHeadphonesForPage = [...headphones].filter(m => m?.price <= 100).sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
+    players = allPlayers;
+  } else if (params.slug === "audiophile") {
+    // Open-back headphones (beyerdynamic DT 990, DT 900, Sennheiser HD series, etc)
+    const audiophileNames = ["beyerdynamic DT 990 Pro", "beyerdynamic DT 900 Pro X", "Sennheiser HD 600", "Sennheiser HD800 S", "Sennheiser HD 560S", "Sennheiser GAME ONE"];
+    topHeadphonesForPage = headphones
+      .filter(m => audiophileNames.some(name => m.name.toLowerCase().includes(name.toLowerCase())))
+      .sort((a, b) => b?.proUsage - a?.proUsage)
+      .map(m => ({ ...m, gamePercent: m.proUsage }));
+    players = allPlayers;
+  } else if (params.slug === "lightweight") {
+    // Lightweight headphones under 60g, sorted by weight
+    topHeadphonesForPage = [...headphones].filter(m => m?.weight < 60).sort((a, b) => a?.weight - b?.weight).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
     players = allPlayers;
   } else {
     topHeadphonesForPage = [...headphones].sort((a, b) => b?.proUsage - a?.proUsage).slice(0, 10).map(m => ({ ...m, gamePercent: m.proUsage }));
@@ -98,12 +121,16 @@ export default function BestForPage({ params }) {
 
   const pageTitle = isGame
     ? `Best Headphone for ${page.full} (2026)`
+    : isCollection
+    ? `${page.full} (2026)`
     : `Best ${page.full} Gaming Headphone (2026)`;
 
   // FAQ schema
   const faq = isGame ? [
     { q: `What is the best headphone for ${page.full}?`, a: `The most popular headphone among ${page.game} pros is the ${topHeadphonesForPage[0]?.name || "Wooting 60HE"}, used by ${topHeadphonesForPage[0]?.gamePercent || "N/A"}% of tracked players. The top 3 are: ${topHeadphonesForPage.slice(0, 3).map(m => m.name).join(", ")}.` },
     { q: `Do ${page.game} pros use wireless headphones?`, a: `Yes — the vast majority of ${page.game} pros now use wireless headphones. Modern wireless headphones from Razer, Logitech, and others have sub-1ms latency, making them equal to or better than wired alternatives.` },
+  ] : isCollection ? [
+    { q: `What are the best ${page.full.toLowerCase()} headphones?`, a: `The top ${page.full.toLowerCase()} headphones based on professional esports usage are: ${topHeadphonesForPage.slice(0, 5).map(m => m.name).join(", ")}. These headphones are ranked by adoption rate among ${allPlayers.length}+ professional esports players competing at the highest levels.` },
   ] : [
     { q: `What is the best ${page.full.toLowerCase()} gaming headphone?`, a: `The top ${page.full.toLowerCase()} gaming headphones based on pro usage are: ${topHeadphonesForPage.slice(0, 5).map(m => m.name).join(", ")}. These are ranked by adoption rate among ${allPlayers.length}+ professional esports players.` },
   ];
@@ -195,7 +222,7 @@ export default function BestForPage({ params }) {
       </article>
 
       <SSRSection>
-        <SSRTitle accent={isGame ? page.full : page.full}>Best Headphone{isGame ? ` for ${page.full}` : ` — ${page.full}`}</SSRTitle>
+        <SSRTitle accent={isGame ? page.full : page.full}>{isGame ? `Best Headphone for ${page.full}` : isCollection ? page.full : `Best ${page.full} Headphones`}</SSRTitle>
         <SSRSub>{page.intro.slice(0, 200)}...</SSRSub>
 
         {/* Tier List */}

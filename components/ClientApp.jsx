@@ -1442,7 +1442,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {[
-                  { title: "Tournament Favorites", sub: "The headphones winning major championships", href: "/best/cs2", accent: "#b8956a", tag: "Most Popular" },
+                  { title: "Tournament Favorites", sub: "The headphones winning major championships", href: "/best/tournament-favorites", accent: "#b8956a", tag: "Most Popular" },
                   { title: "Best ANC Headsets", sub: "Active noise cancellation for noisy LAN events", href: "/best/anc", accent: "#c02870", tag: "Trending" },
                   { title: "Best for Valorant", sub: "Top picks from professional Valorant players", href: "/best/valorant", accent: "#c43848", tag: "FPS" },
                   { title: "Budget Champions", sub: "Pro-grade audio performance under $100", href: "/best/budget", accent: "#0a8060", tag: "Value" },
@@ -3101,8 +3101,6 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             { key: "game", label: "Game" },
             { key: "team", label: "Team" },
             { key: "headphone", label: "Headphone" },
-            { key: "hz", label: "Hz" },
-            { key: "impedance", label: "Impedance" },
             { key: "role", label: "Role" },
           ];
           return (
@@ -3280,7 +3278,6 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                             <span className="text-sm truncate" style={{ color: brandCol, maxWidth: 140 }}>{p.headphone}</span>
                           </div>
                         </td>
-                        <td className="px-2 py-2.5 text-sm opacity-40">{p.hz ? `${p.hz >= 1000 ? `${p.hz/1000}K` : p.hz}` : " - "}</td>
                         <td className="px-2 py-2.5 text-sm">
                           <span className="opacity-40">{p.role}</span>
                         </td>

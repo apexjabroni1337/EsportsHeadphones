@@ -18,6 +18,13 @@ export const metadata = {
 };
 
 const GUIDES = [
+  // Curated Collections
+  { slug: "tournament-favorites", label: "Tournament Favorites", sub: "The headphones winning major championships", collection: true },
+  { slug: "anc", label: "Best ANC Headsets", sub: "Active noise cancellation for noisy LAN events", collection: true },
+  { slug: "budget", label: "Budget Champions", sub: "Pro-grade audio performance under $100", collection: true },
+  { slug: "wireless", label: "Wireless Freedom", sub: "Cutting the cord without cutting performance", collection: true },
+  { slug: "audiophile", label: "Audiophile Grade", sub: "Open-back headphones for pristine sound staging", collection: true },
+  // Game Guides
   { slug: "cs2", label: "Best Headphone for CS2", sub: "Counter-Strike 2 pro picks" },
   { slug: "valorant", label: "Best Headphone for Valorant", sub: "Tactical FPS pro picks" },
   { slug: "fortnite", label: "Best Headphone for Fortnite", sub: "Build & aim pro picks" },
@@ -30,9 +37,7 @@ const GUIDES = [
   { slug: "dota-2", label: "Best Headphone for Dota 2", sub: "MOBA pro picks" },
   { slug: "marvel-rivals", label: "Best Headphone for Marvel Rivals", sub: "Hero shooter pro picks" },
   { slug: "rocket-league", label: "Best Headphone for Rocket League", sub: "Vehicular soccer picks" },
-  { slug: "wireless", label: "Best Wireless Gaming Headphone", sub: "Top wireless picks" },
   { slug: "lightweight", label: "Best Lightweight Gaming Headphone", sub: "Ultralight under 60g" },
-  { slug: "budget", label: "Best Budget Gaming Headphone", sub: "Top picks under $80" },
 ];
 
 export default function BestIndexPage() {
@@ -62,16 +67,23 @@ export default function BestIndexPage() {
         <h1>Best Gaming Headphone Guides (2026)</h1>
         <p>Data-driven guides to the best esports gaming headphones, broken down by game, weight class, and budget. Every recommendation is backed by real pro player usage data from {allPlayers.length}+ tracked professionals.</p>
 
-        <h2>Best Headphone by Game</h2>
+        <h2>Curated Collections</h2>
         <ul>
-          {GUIDES.filter(g => !["wireless", "lightweight", "budget"].includes(g.slug)).map(g => (
+          {GUIDES.filter(g => g.collection).map(g => (
             <li key={g.slug}><a href={`/best/${g.slug}`}>{g.label}</a> — {g.sub}</li>
           ))}
         </ul>
 
-        <h2>Best Headphone by Category</h2>
+        <h2>Best Headphone by Game</h2>
         <ul>
-          {GUIDES.filter(g => ["wireless", "lightweight", "budget"].includes(g.slug)).map(g => (
+          {GUIDES.filter(g => !g.collection && !["lightweight"].includes(g.slug)).map(g => (
+            <li key={g.slug}><a href={`/best/${g.slug}`}>{g.label}</a> — {g.sub}</li>
+          ))}
+        </ul>
+
+        <h2>By Weight Class</h2>
+        <ul>
+          {GUIDES.filter(g => ["lightweight"].includes(g.slug)).map(g => (
             <li key={g.slug}><a href={`/best/${g.slug}`}>{g.label}</a> — {g.sub}</li>
           ))}
         </ul>

@@ -1128,7 +1128,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── OVERVIEW TAB ── */}
         {activeTab === "overview" && (
           <div>
-            <SectionTitle color="#c9a227" sub={`Based on data from ${allPlayers.length} professional esports players across ${new Set(allPlayers.map(p=>p.game)).size} major titles`}>Headphone Usage by Professional Players</SectionTitle>
+            <SectionTitle color="#c9a227" sub={`Tracking ${allPlayers.length} pros across ${new Set(allPlayers.map(p=>p.game)).size} competitive titles`}>What the Pros Are Wearing</SectionTitle>
             {/* ── Podium + Grid ── */}
             <div>
               {/* Top 3 Podium */}
@@ -1272,7 +1272,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               );
             })()}
 
-            <SectionTitle color="#c9a227" sub="Select any headphone to explore specs, pro users, and performance data">Featured Headphone Spotlight</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Pick a headphone to dive into specs, pro adoption, and performance metrics">Headphone Deep Dive</SectionTitle>
               <div className="rounded-2xl p-3 sm:p-5 mb-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 {/* ── Headphone Picker: Top 20 headphones by pro usage ── */}
                 <div className="grid gap-1.5 mb-4" style={{ gridTemplateColumns: "repeat(8, 1fr)" }}>
@@ -2055,7 +2055,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── GAMES TAB ── */}
         {activeTab === "games" && !gameDetailSlug && (
           <div>
-            <SectionTitle color="#c44040" sub="Click any game to see full headphone usage data, player settings, brand splits, and sensitivity analysis">Game Profiles</SectionTitle>
+            <SectionTitle color="#c44040" sub="Tap into any title for gear breakdowns, player configs, brand preferences, and sens data">Browse by Game</SectionTitle>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {gameBreakdown.map((g, i) => {
                 const gameColors = GAME_COLORS;
@@ -2290,7 +2290,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             )}
 
             {/* ── HEADPHONE USAGE RANKINGS ── */}
-            <SectionTitle color={col} sub={`Which headphones ${gameName} professionals trust to compete at the highest level`} style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Headphone Usage Rankings</SectionTitle>
+            <SectionTitle color={col} sub={`The headphones ${gameName} pros rely on when it matters most`}>Gear Leaderboard</SectionTitle>
             {/* #1 Headphone highlight CTA */}
             {headphoneRanking[0] && (() => {
               const topName = headphoneRanking[0][0];
@@ -2360,7 +2360,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* ── BRAND MARKET SHARE ── */}
-            <SectionTitle color={col} sub={`Brand loyalty and market share among ${gameName} professionals`}>Brand Dominance</SectionTitle>
+            <SectionTitle color={col} sub={`Market share and brand allegiance across ${gameName} pros`}>Who Owns the Scene</SectionTitle>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Brand bars */}
               <div className="rounded-2xl p-4 sm:p-6" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
@@ -2423,7 +2423,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
 
             {/* ── GEAR DEEP DIVE ── */}
-            <SectionTitle color={col} sub={`Weight, layout, connectivity, and frequency response breakdown`}>Gear Deep Dive</SectionTitle>
+            <SectionTitle color={col} sub={`Exploring weight, form factor, wireless vs wired, and frequency specs`}>Under the Hood</SectionTitle>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
               {/* Weight breakdown */}
               <div className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
@@ -2535,7 +2535,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {/* ── TOP FEATURED PROS ── */}
             {featuredPlayers.length > 0 && (
               <>
-                <SectionTitle color={col} sub="Star players and their complete headphone configurations">Featured Pro Players</SectionTitle>
+                <SectionTitle color={col} sub="Notable competitors and their full gear setups">Standout Players</SectionTitle>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
                   {featuredPlayers.slice(0, 12).map((p, i) => {
                     const m = headphones.find(mm => mm.name === p.headphone || (p.headphone && p.headphone.includes(mm.name)));
@@ -2568,7 +2568,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             {/* ── TOP TEAMS ── */}
             {topTeams.length > 0 && (
               <>
-                <SectionTitle color={col} sub={`Organizations with the most tracked ${gameName} professionals`}>Top Teams</SectionTitle>
+                <SectionTitle color={col} sub={`The orgs fielding the most tracked ${gameName} competitors`}>Leading Organizations</SectionTitle>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mb-8">
                   {topTeams.map(([team, count], i) => {
                     const teamPlayers = gamePlayers.filter(p => p.team === team);
@@ -2615,7 +2615,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             )}
 
             {/* ── FULL PLAYER ROSTER ── */}
-            <SectionTitle color={col} sub={`Complete settings database for every tracked ${gameName} professional`}>Full Player Roster</SectionTitle>
+            <SectionTitle color={col} sub={`Every tracked ${gameName} pro and their gear configurations`}>All Players</SectionTitle>
             <div className="rounded-2xl overflow-hidden mb-8" style={{ border: "1px solid #e6e3d6" }}>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs" style={{ background: "#ffffff" }}>
@@ -2700,7 +2700,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── RANKINGS TAB ── */}
         {activeTab === "rankings" && (
           <div>
-            <SectionTitle color="#c9a227" sub="Sort and filter to find the perfect competitive headphone">Complete Headphone Rankings</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Filter, sort, and discover your next competitive edge">The Full Lineup</SectionTitle>
             {/* ── UNIFIED FILTER BAR ── */}
             {(() => {
               const SORT_OPTIONS_R = [
@@ -3015,7 +3015,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── ALL HEADPHONES TAB ── */}
         {activeTab === "headphones" && (
           <div>
-            <SectionTitle color="#9060c4" sub="Click any headphone for detailed breakdown">Headphone Showcase Gallery</SectionTitle>
+            <SectionTitle color="#9060c4" sub="Tap any model for a full spec breakdown">The Showcase</SectionTitle>
             {/* ── TABBED CATEGORIES GALLERY ── */}
             {(() => {
               const SORT_OPTIONS = [
@@ -3400,7 +3400,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
           ];
           return (
           <div>
-            <SectionTitle color="#a68b1b" sub={`${allPlayers.length} players across ${new Set(allPlayers.map(p=>p.game)).size} games  -  click starred players for full profiles`}>Pro Player Settings Database</SectionTitle>
+            <SectionTitle color="#a68b1b" sub={`${allPlayers.length} competitors spanning ${new Set(allPlayers.map(p=>p.game)).size} titles — star a player to see their full profile`}>Pro Gear & Settings</SectionTitle>
             {/* Player quick stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
               {(() => {
@@ -3678,7 +3678,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── BRANDS TAB ── */}
         {activeTab === "brands" && (
           <div>
-            <SectionTitle color="#c9a227" sub="The companies defining competitive headphone performance">Headphone Manufacturers</SectionTitle>
+            <SectionTitle color="#c9a227" sub="The brands shaping the competitive audio landscape">Manufacturer Directory</SectionTitle>
 
             {/* Brand Portfolio Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -3814,7 +3814,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
         {activeTab === "trends" && (
           <div>
-            <SectionTitle color="#c9a227" sub="How esports headphones have evolved over the years">Industry Trends & Evolution</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Charting the evolution of pro gaming audio gear over time">Trends Over Time</SectionTitle>
 
             {/* ── Hero stat cards ── */}
             {(() => {
@@ -3941,7 +3941,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* ── Form Factor + Tech Snapshot - horizontal cards ── */}
-            <SectionTitle color="#c9a227" sub="Form factors, drivers, weight classes, and frequency tiers">Technology Breakdown</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Dissecting form factors, driver types, weight tiers, and frequency ranges">Tech Anatomy</SectionTitle>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
               {/* Form Factor */}
               <div className="rounded-2xl p-5" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
@@ -4033,7 +4033,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* ── Brand Scorecard - Card rows ── */}
-            <SectionTitle color="#c9a227" sub="How the top brands stack up across every major metric">Brand Performance Scorecard</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Comparing the biggest names head-to-head on every key metric">Brand Showdown</SectionTitle>
             {(() => {
               const topBrandNames = ["Razer", "Logitech", "SteelSeries", "Corsair", "HyperX", "beyerdynamic", "Sennheiser", "ASTRO", "Sony", "ASUS"];
               const brandStats = topBrandNames.map(brand => {
@@ -4176,7 +4176,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           return (
           <div>
-            <SectionTitle color="#a68b1b" sub="Comprehensive breakdown of every driver powering pro esports headphones">Headphone Driver Analytics</SectionTitle>
+            <SectionTitle color="#a68b1b" sub="A full rundown of every driver type found in competitive headphones">Driver Intelligence</SectionTitle>
 
             {/* Hero banner */}
             <div className="rounded-2xl overflow-hidden mb-5 relative" style={{ border: "1px solid #7d6e1e15" }}>
@@ -4425,7 +4425,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* Which headphones use each sensor */}
-            <SectionTitle color="#a68b1b" sub="Every headphone in our database grouped by switch">Headphones by Driver</SectionTitle>
+            <SectionTitle color="#a68b1b" sub="All headphones organized by their driver technology">Sorted by Driver Type</SectionTitle>
             <div className="space-y-4 mb-8">
               {sensorProfiles.sort((a, b) => b.totalUsage - a.totalUsage).map((s, si) => (
                 <div key={s.driverType} id={`sensor-group-${s.driverType.replace(/\s+/g, "-").toLowerCase()}`} className="rounded-xl p-4" style={{ background: "#ffffff", border: "1px solid #e6e3d6", scrollMarginTop: 70 }}>
@@ -4455,7 +4455,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* Sensor popularity by game */}
-            <SectionTitle color="#c9a227" sub="Which mechanical drivers are favored by professionals across competitive titles">Driver Popularity by Game</SectionTitle>
+            <SectionTitle color="#c9a227" sub="How driver preferences shift from title to title among the pros">Game-by-Game Driver Trends</SectionTitle>
             <div className="flex flex-wrap gap-1.5 mb-4">
               {allGamesForSensor.map(g => (
                 <button key={g} onClick={() => setSensorGameFilter(g)}
@@ -4495,7 +4495,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* Sensor specs comparison */}
-            <SectionTitle color="#9060c4" sub="Technical specifications compared across all drivers">Driver Spec Comparison</SectionTitle>
+            <SectionTitle color="#9060c4" sub="Side-by-side technical specs for every driver in the database">Driver Spec Matrix</SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="rounded-xl p-5" style={{ background: "#ffffff", border: "1px solid #e6e3d6" }}>
                 <div className="text-sm uppercase tracking-widest opacity-30 mb-4">Impedance by Driver Type</div>
@@ -4532,7 +4532,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
 
             {/* Sensor Comparison Tool */}
-            <SectionTitle color="#c9a227" sub="Select two drivers to compare specs, usage, and popularity head-to-head">Driver vs Driver Comparison</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Choose any two drivers to stack up their specs, adoption, and popularity">Driver Face-Off</SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <div>
                 <div className="text-sm uppercase tracking-widest opacity-30 mb-2">Driver A</div>
@@ -4655,7 +4655,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── COMPARE TAB ── */}
         {activeTab === "compare" && (
           <div>
-            <SectionTitle color="#6366f1" sub="Select two headphones to compare specs side-by-side">Headphone Comparison Tool</SectionTitle>
+            <SectionTitle color="#6366f1" sub="Pick any two headphones and see how they measure up across every stat">Head-to-Head Compare</SectionTitle>
 
             {/* ── Headphone selectors with large product images ── */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -5022,7 +5022,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           return (
           <div>
-            <SectionTitle color="#c9a227" sub={`Unique tools to help you get the most out of your headphone — powered by data from ${allPlayers.length}+ pro players`}>The Lab</SectionTitle>
+            <SectionTitle color="#c9a227" sub={`Experimental tools built on data from ${allPlayers.length}+ pro setups to optimize your gear`}>The Lab</SectionTitle>
 
             {!quizDone ? (
               <div className={quizStep === 0 ? "max-w-4xl mx-auto" : "max-w-2xl mx-auto"}>
@@ -5470,7 +5470,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
             {/* Coming Soon Teasers */}
             <div className="mt-10">
-              <SectionTitle color={accent} sub="New lab experiments dropping soon">Coming Soon</SectionTitle>
+              <SectionTitle color={accent} sub="Fresh experiments in the pipeline">On the Horizon</SectionTitle>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   { icon: I.crosshair(32), title: "Aim Style Analyzer", desc: "Answer questions about how you aim — tracking, flicking, micro-adjustments — and we'll profile your style and suggest optimal sensitivity ranges and headphones." },
@@ -5495,7 +5495,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
         {/* ── SHAPES TAB ── */}
         {activeTab === "shapes" && (
           <div>
-            <SectionTitle color="#c9a227" sub="Select two headphones and overlay their layouts — scaled to real dimensions for true size comparison">Headphone Layout Overlay</SectionTitle>
+            <SectionTitle color="#c9a227" sub="Layer two headphones on top of each other at true scale to compare form factors">Shape Comparison Tool</SectionTitle>
 
             {(() => {
                 const kbdsWithDims = headphones.filter(m => HEADPHONE_DIMS[m.name] && getHeadphoneImage(m.name));
@@ -5747,7 +5747,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           return (
           <div>
-            <SectionTitle color={accentC} sub="Convert your sensitivity between any game — supporting 17 titles with cm/360 as the universal reference">Sensitivity Converter</SectionTitle>
+            <SectionTitle color={accentC} sub="Translate your sens across 17 games using cm/360 as the universal baseline">Sens Translator</SectionTitle>
 
             <div className="rounded-2xl overflow-hidden" style={{ border: `1px solid ${accentC}15` }}>
               {/* Input Section */}
@@ -5947,7 +5947,7 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
 
           return (
           <div>
-            <SectionTitle color={teamColor} sub={`${teamList.length} organizations across ${allTeamGames.length - 1} games — click any team for details`}>Pro Teams</SectionTitle>
+            <SectionTitle color={teamColor} sub={`${teamList.length} orgs spanning ${allTeamGames.length - 1} titles — select any team to explore their roster`}>Team Directory</SectionTitle>
 
             {/* ── UNIFIED FILTER BAR ── */}
             {(() => {

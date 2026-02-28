@@ -41,17 +41,18 @@ export const StatBox = ({ label, value, unit = "", color = "#c9a227" }) => (
 
 export const SectionTitle = ({ children, sub, color = "#c9a227" }) => (
   <div className="mb-6 sm:mb-10 mt-10 sm:mt-20">
-    <div className="flex items-center gap-3 sm:gap-4 mb-2">
-      <div className="h-px flex-1" style={{ background: `linear-gradient(to right, #c9a22740, #d4d0be40, transparent)` }} />
+    <div className="flex flex-col items-start gap-1 mb-1.5">
+      <div className="flex items-center gap-2 mb-0.5">
+        <div style={{ width: 3, height: 18, borderRadius: 2, background: color }} />
+        <span className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color }}>{sub || ""}</span>
+      </div>
       <h2
-        className="text-lg sm:text-2xl lg:text-3xl tracking-tight text-center font-bold"
-        style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}
+        className="text-xl sm:text-2xl lg:text-3xl tracking-tight font-black"
+        style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614", lineHeight: 1.15 }}
       >
         {children}
       </h2>
-      <div className="h-px flex-1" style={{ background: `linear-gradient(to left, #c9a22740, #d4d0be40, transparent)` }} />
     </div>
-    {sub && <p className="text-center text-sm tracking-wide px-2" style={{ color: "#9e9578" }}>{sub}</p>}
   </div>
 );
 

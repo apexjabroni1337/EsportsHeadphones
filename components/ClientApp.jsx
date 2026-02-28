@@ -961,74 +961,77 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
            ═══════════════════════════════════════════════════════ */}
       {activeTab === "overview" && (
       <header className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f5f0e8 0%, #ece6db 100%)" }}>
-        {/* Decorative earpad grid pattern */}
-        <div className="absolute inset-0 overflow-hidden" style={{ opacity: 0.04 }}>
-          <div className="absolute top-8 left-8 grid grid-cols-5 gap-2" style={{ transform: "rotate(-8deg)" }}>
-            {Array.from({ length: 15 }).map((_, i) => (
-              <div key={i} className="w-10 h-10 rounded-lg" style={{ background: "#b8956a", boxShadow: "0 0 8px #b8956a20" }} />
-            ))}
-          </div>
-          <div className="absolute bottom-8 right-8 flex gap-3" style={{ transform: "rotate(5deg)", opacity: 0.15 }}>
-            <div className="w-10 h-10 rounded-full" style={{ background: "#2d2824", boxShadow: "0 0 12px #2d282440" }} />
-            <div className="w-6 h-1 rounded-full mt-4" style={{ background: "#2d2824" }} />
-            <div className="w-10 h-10 rounded-full" style={{ background: "#2d2824", boxShadow: "0 0 12px #2d282440" }} />
-          </div>
+        {/* Decorative sound wave pattern */}
+        <div className="absolute inset-0 overflow-hidden" style={{ opacity: 0.035 }}>
+          <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 1200 400" preserveAspectRatio="none" fill="none">
+            {/* Sound wave lines */}
+            <path d="M0 200 Q150 120 300 200 Q450 280 600 200 Q750 120 900 200 Q1050 280 1200 200" stroke="#b8956a" strokeWidth="2" opacity="0.6"/>
+            <path d="M0 200 Q150 150 300 200 Q450 250 600 200 Q750 150 900 200 Q1050 250 1200 200" stroke="#b8956a" strokeWidth="1.5" opacity="0.4"/>
+            <path d="M0 200 Q150 170 300 200 Q450 230 600 200 Q750 170 900 200 Q1050 230 1200 200" stroke="#b8956a" strokeWidth="1" opacity="0.3"/>
+            {/* Frequency spectrum bars */}
+            {Array.from({ length: 40 }).map((_, i) => {
+              const x = 30 + i * 30;
+              const h = 20 + Math.sin(i * 0.7) * 40 + Math.cos(i * 1.3) * 25;
+              return <rect key={i} x={x} y={320 - h} width="4" height={h} rx="2" fill="#b8956a" opacity={0.15 + Math.sin(i * 0.5) * 0.1} />;
+            })}
+            {/* Driver circles */}
+            <circle cx="100" cy="80" r="50" stroke="#2d2824" strokeWidth="1.5" opacity="0.3" fill="none"/>
+            <circle cx="100" cy="80" r="35" stroke="#2d2824" strokeWidth="1" opacity="0.2" fill="none"/>
+            <circle cx="100" cy="80" r="15" stroke="#b8956a" strokeWidth="1" opacity="0.3" fill="none"/>
+            <circle cx="1100" cy="100" r="45" stroke="#2d2824" strokeWidth="1.5" opacity="0.25" fill="none"/>
+            <circle cx="1100" cy="100" r="28" stroke="#2d2824" strokeWidth="1" opacity="0.15" fill="none"/>
+          </svg>
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-            {/* Left: Decorative headphone visual */}
+            {/* Left: Hero headphone showcase */}
             <div className="hidden md:flex justify-center items-center" style={{ transition: "all 1s ease 0.2s", opacity: heroAnim ? 1 : 0, transform: heroAnim ? "translateX(0)" : "translateX(-20px)" }}>
-              <div className="relative" style={{ width: 320, height: 300 }}>
-                {/* Main headphone SVG */}
-                <svg viewBox="0 0 320 300" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
-                  {/* Headband */}
-                  <path d="M80 150 Q80 50 160 40 Q240 50 240 150" stroke="#2d2824" strokeWidth="8" strokeLinecap="round" fill="none" opacity="0.6" />
-                  <path d="M80 150 Q80 55 160 45 Q240 55 240 150" stroke="#b8956a" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.3" />
-                  {/* Left ear cup */}
-                  <ellipse cx="72" cy="175" rx="48" ry="58" fill="#2d2824" opacity="0.12" />
-                  <ellipse cx="72" cy="175" rx="44" ry="54" fill="url(#hpGrad1)" stroke="#2d282430" strokeWidth="2" />
-                  <ellipse cx="72" cy="175" rx="30" ry="38" fill="#2d2824" opacity="0.08" />
-                  <ellipse cx="72" cy="175" rx="20" ry="26" fill="none" stroke="#b8956a" strokeWidth="1.5" opacity="0.25" />
-                  {/* Right ear cup */}
-                  <ellipse cx="248" cy="175" rx="48" ry="58" fill="#2d2824" opacity="0.12" />
-                  <ellipse cx="248" cy="175" rx="44" ry="54" fill="url(#hpGrad2)" stroke="#2d282430" strokeWidth="2" />
-                  <ellipse cx="248" cy="175" rx="30" ry="38" fill="#2d2824" opacity="0.08" />
-                  <ellipse cx="248" cy="175" rx="20" ry="26" fill="none" stroke="#b8956a" strokeWidth="1.5" opacity="0.25" />
-                  {/* Mic boom */}
-                  <path d="M52 200 Q40 230 35 255" stroke="#8a7460" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.5" />
-                  <circle cx="35" cy="260" r="5" fill="#b8956a" opacity="0.4" />
-                  {/* Gradients */}
-                  <defs>
-                    <radialGradient id="hpGrad1" cx="0.4" cy="0.35">
-                      <stop offset="0%" stopColor="#f5f0e8" />
-                      <stop offset="70%" stopColor="#e8e0d4" />
-                      <stop offset="100%" stopColor="#d4ccc0" />
-                    </radialGradient>
-                    <radialGradient id="hpGrad2" cx="0.6" cy="0.35">
-                      <stop offset="0%" stopColor="#f5f0e8" />
-                      <stop offset="70%" stopColor="#e8e0d4" />
-                      <stop offset="100%" stopColor="#d4ccc0" />
-                    </radialGradient>
-                  </defs>
-                </svg>
-                {/* Floating brand badges */}
-                {[
-                  { name: "Razer", x: 10, y: 40, delay: 0 },
-                  { name: "Logitech", x: 220, y: 20, delay: 200 },
-                  { name: "SteelSeries", x: 190, y: 260, delay: 400 },
-                ].map((b, i) => (
-                  <div key={b.name} className="absolute px-2.5 py-1 rounded-full text-[10px] font-bold"
-                    style={{
-                      left: b.x, top: b.y,
-                      background: `${BRAND_COLORS[b.name] || "#8a8078"}12`,
-                      color: BRAND_COLORS[b.name] || "#8a8078",
-                      border: `1px solid ${BRAND_COLORS[b.name] || "#8a8078"}25`,
-                      animation: `float 3s ease-in-out ${b.delay}ms infinite alternate`,
-                    }}>
-                    {b.name}
-                  </div>
-                ))}
+              <div className="relative" style={{ width: 380, height: 340 }}>
+                {/* Glowing backdrop circle */}
+                <div className="absolute" style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, #b8956a12 0%, #b8956a06 50%, transparent 70%)", filter: "blur(20px)" }} />
+                {/* Main featured headphone - #1 most popular */}
+                {(() => {
+                  const topHP = [...headphones].sort((a, b) => b.proUsage - a.proUsage);
+                  const mainImg = getHeadphoneImage(topHP[0]?.name);
+                  const secondImg = getHeadphoneImage(topHP[1]?.name);
+                  const thirdImg = getHeadphoneImage(topHP[2]?.name);
+                  return (<>
+                    {/* Background headphones - slightly faded */}
+                    {secondImg && <div className="absolute" style={{ right: -10, top: 20, width: 160, height: 160, opacity: 0.3, transform: "rotate(8deg)", animation: "float 4s ease-in-out 600ms infinite alternate" }}>
+                      <img src={secondImg} alt={topHP[1]?.name} className="w-full h-full object-contain" style={{ filter: "drop-shadow(0 4px 20px rgba(0,0,0,0.1))" }} />
+                    </div>}
+                    {thirdImg && <div className="absolute" style={{ left: -10, bottom: 30, width: 140, height: 140, opacity: 0.25, transform: "rotate(-10deg)", animation: "float 4s ease-in-out 1200ms infinite alternate" }}>
+                      <img src={thirdImg} alt={topHP[2]?.name} className="w-full h-full object-contain" style={{ filter: "drop-shadow(0 4px 20px rgba(0,0,0,0.1))" }} />
+                    </div>}
+                    {/* Main headphone - large and centered */}
+                    {mainImg && <div className="relative flex justify-center items-center" style={{ width: "100%", height: "100%", animation: "float 3s ease-in-out infinite alternate" }}>
+                      <img src={mainImg} alt={topHP[0]?.name} className="object-contain" style={{ width: 260, height: 260, filter: "drop-shadow(0 12px 40px rgba(45,40,36,0.25)) drop-shadow(0 4px 12px rgba(184,149,106,0.2))" }} />
+                    </div>}
+                    {/* #1 badge */}
+                    <div className="absolute px-3 py-1.5 rounded-xl text-xs font-black" style={{ top: 10, right: 30, background: "linear-gradient(135deg, #b8956a, #9a7a54)", color: "#fff", boxShadow: "0 4px 16px rgba(184,149,106,0.4)", animation: "float 3s ease-in-out 300ms infinite alternate" }}>
+                      #1 in Esports
+                    </div>
+                    {/* Brand badges floating */}
+                    {[
+                      { name: topHP[0]?.brand, x: 15, y: 60, delay: 0 },
+                      { name: topHP[1]?.brand, x: 280, y: 100, delay: 400 },
+                      { name: topHP[2]?.brand, x: 260, y: 270, delay: 800 },
+                    ].filter(b => b.name).map((b, i) => (
+                      <div key={i} className="absolute px-2.5 py-1 rounded-full text-[11px] font-bold"
+                        style={{
+                          left: b.x, top: b.y,
+                          background: `${BRAND_COLORS[b.name] || "#8a8078"}15`,
+                          color: BRAND_COLORS[b.name] || "#8a8078",
+                          border: `1px solid ${BRAND_COLORS[b.name] || "#8a8078"}30`,
+                          backdropFilter: "blur(8px)",
+                          animation: `float 3s ease-in-out ${b.delay}ms infinite alternate`,
+                        }}>
+                        {b.name}
+                      </div>
+                    ))}
+                  </>);
+                })()}
               </div>
             </div>
 
@@ -1063,26 +1066,52 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             </div>
           </div>
 
-          {/* Stats strip - headphone-themed with top borders */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 mt-10 sm:mt-14" style={{ transition: "all 0.8s ease 0.3s", opacity: heroAnim ? 1 : 0 }}>
-            {[
-              { val: allPlayers.length, label: "Pro Players", suffix: "", prefix: "", color: "#b8956a" },
-              { val: headphones.length, label: "Headphones", suffix: "", prefix: "", color: "#2d2824" },
-              { val: new Set(allPlayers.map(p=>p.game)).size, label: "Games", suffix: "", prefix: "", color: "#f59e0b" },
-              { val: Math.max(...headphones.map(m => m.proUsage)), label: "Top Share", suffix: "%", prefix: "", color: "#8a7460" },
-            ].map((s, i) => (
-              <div key={i} className="glass-card text-center p-4 transition-all duration-300 hover:-translate-y-0.5" style={{
-                boxShadow: `0 0 12px ${s.color}08, inset 0 2px 0 ${s.color}20`,
-                borderTop: `3px solid ${s.color}`,
-                borderRadius: "0.75rem"
-              }}>
-                <div className="text-2xl sm:text-4xl font-black" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: "#1a1614" }}>
-                  <AnimatedCounter value={s.val} suffix={s.suffix} prefix={s.prefix} color={s.color} duration={1600 + i * 200} />
+          {/* Stats strip - redesigned with icons and gradients */}
+          {(() => {
+            const topBrand = [...headphones].sort((a, b) => b.proUsage - a.proUsage)[0];
+            const statItems = [
+              { val: allPlayers.length, label: "Pro Players", suffix: "", prefix: "", color: "#b8956a", icon: Users, sub: "tracked worldwide" },
+              { val: headphones.length, label: "Headphones", suffix: "", prefix: "", color: "#2d2824", icon: Headphones, sub: "in database" },
+              { val: new Set(allPlayers.map(p=>p.game)).size, label: "Games", suffix: "", prefix: "", color: "#d97706", icon: Gamepad2, sub: "esports titles" },
+              { val: Math.max(...headphones.map(m => m.proUsage)), label: "Top Share", suffix: "%", prefix: "", color: "#8a7460", icon: Trophy, sub: topBrand?.brand || "" },
+            ];
+            return (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-10 sm:mt-14" style={{ transition: "all 0.8s ease 0.3s", opacity: heroAnim ? 1 : 0 }}>
+              {statItems.map((s, i) => {
+                const Icon = s.icon;
+                return (
+                <div key={i} className="relative group cursor-default overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  style={{
+                    background: "rgba(255,255,255,0.7)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid rgba(0,0,0,0.06)",
+                    borderRadius: "1rem",
+                    padding: "1.25rem 1rem",
+                  }}>
+                  {/* Colored accent bar at top */}
+                  <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-300" style={{ background: `linear-gradient(90deg, ${s.color}, ${s.color}80)`, opacity: 0.7 }} />
+                  {/* Background icon watermark */}
+                  <div className="absolute -right-2 -top-2 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6" style={{ opacity: 0.04 }}>
+                    <Icon size={80} strokeWidth={1.5} />
+                  </div>
+                  {/* Icon circle */}
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: `${s.color}12` }}>
+                      <Icon size={18} strokeWidth={2.5} style={{ color: s.color }} />
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#a09890" }}>{s.label}</span>
+                  </div>
+                  {/* Value */}
+                  <div className="text-3xl sm:text-4xl font-black" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: s.color }}>
+                    <AnimatedCounter value={s.val} suffix={s.suffix} prefix={s.prefix} color={s.color} duration={1600 + i * 200} />
+                  </div>
+                  {/* Sub label */}
+                  <div className="text-xs mt-1.5 font-medium" style={{ color: "#b0a89e" }}>{s.sub}</div>
                 </div>
-                <div className="text-xs sm:text-sm mt-2 font-semibold" style={{ color: "#a09890", letterSpacing: 0.5 }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
+              );})}
+            </div>
+            );
+          })()}
         </div>
 
         {/* Bottom decorative line - cyan to violet gradient */}

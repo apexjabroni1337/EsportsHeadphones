@@ -1232,19 +1232,38 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
             <SectionTitle color="#b8956a" sub="Select any headphone to explore specs, pro users, and performance data">Featured Headphone Spotlight</SectionTitle>
               <div className="rounded-2xl p-3 sm:p-5 mb-6" style={{ background: "#ffffff", border: "1px solid #e8e4df" }}>
                 {/* ── Headphone Picker: Top 20 headphones by pro usage ── */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {[...headphones].sort((a, b) => b.proUsage - a.proUsage).slice(0, 20).map(m => (
-                    <button key={m.id} onClick={() => { setSpotlightImgError(false); setSelectedHeadphone(m); }}
-                      className="px-2.5 py-1.5 rounded-lg text-sm font-bold transition-all whitespace-nowrap hover:scale-[1.03] cursor-pointer"
-                      style={{
-                        background: selectedHeadphone?.id === m.id ? `${BRAND_COLORS[m.brand]}15` : "#f5f2ee",
-                        color: selectedHeadphone?.id === m.id ? BRAND_COLORS[m.brand] : "#6b635b",
-                        border: selectedHeadphone?.id === m.id ? `1px solid ${BRAND_COLORS[m.brand]}40` : "1px solid #e8e4df",
-                        fontSize: 12,
-                      }}>
-                      {m.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |Sony |JBL |ASUS |Audio-Technica |Turtle Beach |Audeze |EPOS |Cooler Master )/, "")}
-                    </button>
-                  ))}
+                <div className="grid gap-1.5 mb-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))" }}>
+                  {[...headphones].sort((a, b) => b.proUsage - a.proUsage).slice(0, 20).map(m => {
+                    const bc = BRAND_COLORS[m.brand] || "#8a8078";
+                    const isSelected = selectedHeadphone?.id === m.id;
+                    const imgUrl = getHeadphoneImage(m.name);
+                    return (
+                      <button key={m.id} onClick={() => { setSpotlightImgError(false); setSelectedHeadphone(m); }}
+                        className="group relative flex flex-col items-center p-2 rounded-xl transition-all duration-200 cursor-pointer"
+                        style={{
+                          background: isSelected ? `${bc}12` : "#faf8f5",
+                          border: isSelected ? `2px solid ${bc}` : "2px solid transparent",
+                          boxShadow: isSelected ? `0 4px 12px ${bc}20` : "0 1px 3px rgba(0,0,0,0.04)",
+                        }}>
+                        <div className="w-full h-16 flex items-center justify-center mb-1.5 rounded-lg overflow-hidden"
+                          style={{ background: isSelected ? "#ffffff" : "#f0ece6" }}>
+                          {imgUrl ? (
+                            <img loading="lazy" src={imgUrl} alt={m.name} className="h-14 object-contain transition-transform duration-200 group-hover:scale-110"
+                              style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }} />
+                          ) : (
+                            <span style={{ opacity: 0.2 }}>{icon("headphone", 28)}</span>
+                          )}
+                        </div>
+                        <div className="text-center w-full">
+                          <div className="text-[10px] font-black leading-tight truncate" style={{ color: isSelected ? bc : "#4a4340" }}>
+                            {m.name.replace(/(Razer |Logitech |SteelSeries |Corsair |HyperX |beyerdynamic |Sennheiser |Sony |JBL |ASUS |Audio-Technica |Turtle Beach |Audeze |EPOS |Cooler Master )/, "")}
+                          </div>
+                          <div className="text-[9px] mt-0.5" style={{ color: "#a09890" }}>{m.proUsage}% pro use</div>
+                        </div>
+                        {isSelected && <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full" style={{ background: bc, boxShadow: `0 0 0 2px #ffffff` }} />}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {selectedHeadphone && (() => {

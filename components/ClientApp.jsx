@@ -1389,19 +1389,35 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
               const hotGame = gameBreakdown[1]?.game || "Valorant";
               const hotPct = gameBreakdown[1]?.topHeadphones[0]?.pct || 30;
               const hm = headphones.find(m => m.name === hotHeadphone);
+              const hmBrand = hm ? BRAND_COLORS[hm.brand] || "#c9a227" : "#c9a227";
+              const hmImg = getHeadphoneImage(hotHeadphone);
               return (
-                <div className="rounded-xl p-4 my-6 flex flex-col sm:flex-row items-center gap-4" style={{ background: "linear-gradient(135deg, #c9a22708, #c9a22703)", border: "1px solid #c9a22725" }}>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">🔥</span>
-                    <div>
-                      <div className="text-xs uppercase tracking-widest font-bold" style={{ color: "#c9a227" }}>Trending Now</div>
-                      <div className="text-sm font-bold" style={{ color: "#1a1614" }}>{hotHeadphone} — used by {hotPct}% of {hotGame} pros</div>
-                      {hm && <div style={{ fontSize: 11, color: "#9e9578" }}>{hm.weight}g · {hm.driverType} · {hm.connectivity}</div>}
+                <div className="rounded-2xl p-5 my-6 relative overflow-hidden" style={{ background: "#ffffff", border: `1px solid ${hmBrand}20`, boxShadow: `0 2px 12px ${hmBrand}08` }}>
+                  {/* Accent stripe */}
+                  <div className="absolute top-0 left-0 right-0 h-1" style={{ background: `linear-gradient(90deg, ${hmBrand}, ${hmBrand}50, transparent)` }} />
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                    {/* Headphone image */}
+                    {hmImg && (
+                      <div className="flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center" style={{ background: `${hmBrand}08` }}>
+                        <img loading="lazy" src={hmImg} alt={hotHeadphone} className="h-12 w-12 object-contain" style={{ filter: `drop-shadow(0 2px 6px ${hmBrand}25)` }} />
+                      </div>
+                    )}
+                    {/* Info */}
+                    <div className="flex-1 min-w-0 text-center sm:text-left">
+                      <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
+                        <span className="text-sm">🔥</span>
+                        <span className="text-[9px] uppercase tracking-[0.2em] font-bold px-2 py-0.5 rounded-full" style={{ background: `${hmBrand}12`, color: hmBrand, border: `1px solid ${hmBrand}20` }}>Trending Now</span>
+                      </div>
+                      <div className="text-sm font-black" style={{ color: "#1a1614" }}>{hotHeadphone}</div>
+                      <div className="text-xs mt-0.5" style={{ color: "#7d6e1e" }}>Used by <span className="font-bold" style={{ color: hmBrand }}>{hotPct}%</span> of {hotGame} pros{hm ? ` · ${hm.weight}g · ${hm.driverType} · ${hm.connectivity}` : ""}</div>
                     </div>
+                    {/* Buy button */}
+                    <a href={amazonLink(hotHeadphone)} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-sm transition-all hover:scale-105 no-underline flex-shrink-0"
+                      style={{ background: `linear-gradient(135deg, ${hmBrand}, ${hmBrand}cc)`, color: "#fff", textDecoration: "none", boxShadow: `0 3px 12px ${hmBrand}30` }}>
+                      {I.cart(14, "#fff")} {hm ? `$${hm.price}` : "Buy"} on Amazon
+                    </a>
                   </div>
-                  <a href={amazonLink(hotHeadphone)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all hover:scale-105 no-underline flex-shrink-0" style={{ background: "#c9a227", color: "#1a1614", textDecoration: "none" }}>
-                    {I.cart(14, "#1a1614")} Buy on Amazon{hm ? ` — $${hm.price}` : ""}
-                  </a>
                 </div>
               );
             })()}

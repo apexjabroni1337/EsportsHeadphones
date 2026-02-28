@@ -22,13 +22,6 @@ function AnimatedCounter({ value, duration = 1800, color, suffix = "", prefix = 
   useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    if (!moreDropdownOpen) return;
-    const handler = (e) => { if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target)) setMoreDropdownOpen(false); };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [moreDropdownOpen]);
-
-  useEffect(() => {
     if (!mounted || hasAnimated || !ref.current) return;
     // Check if already in view immediately
     const rect = ref.current.getBoundingClientRect();
@@ -210,6 +203,12 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
   const [brandScoreSort, setBrandScoreSort] = useState({ key: "proShare", dir: "desc" });
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
   const moreDropdownRef = useRef(null);
+  useEffect(() => {
+    if (!moreDropdownOpen) return;
+    const handler = (e) => { if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target)) setMoreDropdownOpen(false); };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [moreDropdownOpen]);
   const [sensorGameFilter, setSensorGameFilter] = useState("All");
   const [compareSensor1, setCompareSensor1] = useState(null);
   const [compareSensor2, setCompareSensor2] = useState(null);

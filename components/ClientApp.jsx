@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, LineChart, Line, CartesianGrid, Legend, AreaChart, Area } from "recharts";
 import { Home, Headphones, Trophy, Cpu, Users, Gamepad2, Building2, TrendingUp, GitCompare, Search, X, FlaskConical, Crosshair, Layers, Shield, ChevronDown } from "lucide-react";
-import { AMAZON_TAG, amazonLink, BRAND_COLORS, HEADPHONE_DIMS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, BRAND_IMAGE_URLS, GAME_IMAGE_URLS, GAME_DESCRIPTIONS, TEAM_DESCRIPTIONS, TEAM_LOGOS, I, icon, headphones, proPlayers, extendedPlayers, allPlayers, brandMarketShare, gameBreakdown, weightTrend, frequencyTrend, wirelessTrend, priceTrend, countryName, getHeadphoneImage, getTeamLogo, getBrandLogo, getGameImage } from "@/data";
+import { AMAZON_TAG, amazonLink, BRAND_COLORS, HEADPHONE_DIMS, HEADPHONE_IMAGE_URLS, HEADPHONE_DESCRIPTIONS, PLAYER_BIOS, BRAND_IMAGE_URLS, GAME_IMAGE_URLS, GAME_DESCRIPTIONS, TEAM_DESCRIPTIONS, TEAM_LOGOS, I, icon, headphones, proPlayers, extendedPlayers, allPlayers, brandMarketShare, gameBreakdown, weightTrend, frequencyTrend, wirelessTrend, priceTrend, countryName, getHeadphoneImage, getTeamLogo, getBrandLogo, getGameImage } from "@/data";
 import { GlowText, StatBox, SectionTitle, HeadphoneCard, CustomTooltip, Flag } from "@/components/ui";
 
 const TOP250 = new Set(["s1mple","ZywOo","NiKo","donk","m0NESY","TenZ","Scump","shroud","ImperialHal","Puppey","Faker","aspas","device","coldzera","Bugha","Shotzzy","Chovy","ropz","Proper","Beaulo","yay","Simp","electronic","Crimsix","N0tail","Twistzz","Demon1","Showmaker","EliGE","FalleN","Caps","MrSavage","rain","Profit","ScreaM","Karma","Shaiiko","olofmeister","Keria","f0rest","GeT_RiGhT","Yatoro","aceu","Clix","cNed","sh1ro","Clayster","Dendi","Zeus","TGLTN","broky","Alfajer","Jjonak","Cellium","b1t","Genburten","TaySon","gla1ve","Gumayusi","Paluh","karrigan","Derke","aBeZy","Mongraal","dupreeh","Collapse","Spoit","SP9RK1E","Oner","arT","crashies","Peterbot","KuroKy","huNter","Ras","Viper","Dashy","Fleta","Boaster","EpikWhale","jstn","Xyp9x","Magisk","Pengu","ana","Leave","f0rsakeN","Ax1Le","Jeemzz","Albralelie","Brollan","Deft","Formal","shox","Jinggg","Topson","Shrimzy","Hardecki","Kaydop","Canadian","Jimpphat","Less","Jankos","Ceb","HusKerrs","aqua","CTZN","blameF","stax","Rekkles","Carpe","Pred","Kickstart","stavn","Nisha","Queasy","Dropped","Super","njr","MaKo","NAF","Ruler","fer","nAts","Kenny","iNSaNiA","Squishy","Khanada","hwinn","YEKINDAR","SpiriTz","Nesk","Stewie2K","Zekken","CoreJJ","iceiceice","nyhrox","Vadeal","HisWattson","kscerato","SlasheR","something","Gustav","Kevster","Frozen","Arcitys","dafran","GarrettG","BrokenBlade","flameZ","Sacy","Envoy","Chapix","supr","tabseN","cr1t-","Mande","Elyoya","Fexx","Perfecto","Shao","Fairy Peak","Noahreyli","Doki","Hydra","nitr0","abed","Knight","Reps","Chronicle","Pio","woxic","Attach","Bucke","Alem4o","XANTARES","leaf","miCKe","Bin","xQc","Selly","Insight","iLLeY","jawgemo","Andilex","Brehze","cameram4n","Hans Sama","Kinstaar","Skyz","mxey","KRIMZ","saadhak","emongg","Stompy","Cyber","autimatic","Crylix","Ninja","Malibuca","cadiaN","sinatraa","Suygetsu","Upset","Larssen","TimTheTatman","ibiza","Muz","Yuzus","Jame","Lou","bogur","ZmjjKK","hampus","luke12","Tfue","soulz1","BuZz","HooXi","Hiko","9impulse","Japko","jabbi","Asuna","Aleksib","aLOW","BriD","Viol2t","Subroza","benjyfishy","Necros","Seagull","lyr1c","Boombl4","pollofn","Solotov","lionkk","mezii","Spinx","t3xture","kyxsan","n0thing","mL7","Kenzo","WARDELL","Veno","Primmie","Bestoloch","ShahZaM","YukaF","rapha","vengeurR","toxjq","k1llsen","cYpheR","RAISY","Cooller","clawz","DaHanG","Av3k","serious","Xron","maxter"]);
@@ -3176,14 +3176,15 @@ export default function EsportsHeadphones({ initialTab = "overview", initialHead
                     <div className="text-sm uppercase tracking-widest opacity-30 mb-1">{p.role} · {p.team}</div>
                     <h2 className="text-2xl sm:text-4xl font-black mb-1" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: gc }}>{p.name}</h2>
                     <div className="text-sm sm:text-sm opacity-50 mb-2 sm:mb-3">{p.fullName} · Age {p.age}</div>
-                    <p className="text-sm sm:text-sm opacity-50 leading-relaxed max-w-2xl">{(() => {
-                      const headphoneName = p.headphone;
-                      const desc = `${p.fullName || p.name} is a professional ${p.game} ${p.role || "player"} for ${p.team}, currently using the `;
-                      return <>{desc}<a href={amazonLink(headphoneName)} target="_blank" rel="noopener noreferrer"
-                        className="font-bold underline decoration-dotted underline-offset-2 transition-all hover:opacity-100"
-                        style={{ color: brandCol, opacity: 0.85 }}
-                        onClick={e => e.stopPropagation()}>{headphoneName}</a>{`.`}</>;
-                    })()}</p>
+                    <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "#5a5448" }}>{PLAYER_BIOS[p.name] || `${p.fullName || p.name} is a professional ${p.game} ${p.role || "player"} for ${p.team}, currently using the ${p.headphone}.`}</p>
+                    {p.headphone && (
+                      <p className="text-xs mt-2" style={{ color: "#9e9578" }}>
+                        Currently playing with the <a href={amazonLink(p.headphone)} target="_blank" rel="noopener noreferrer"
+                          className="font-bold underline decoration-dotted underline-offset-2 transition-all hover:opacity-100"
+                          style={{ color: brandCol }}
+                          onClick={e => e.stopPropagation()}>{p.headphone}</a>
+                      </p>
+                    )}
                     <div className="flex flex-wrap gap-2 sm:gap-3 mt-3 sm:mt-4">
                       <span className="px-3 py-1 rounded-lg text-sm font-bold" style={{ background: `${gc}20`, color: gc }}>{p.game}</span>
                       <span className="px-3 py-1 rounded-lg text-sm font-bold" style={{ background: "#00000008", color: "#1a1614" }}>{p.team}</span>
